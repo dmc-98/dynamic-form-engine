@@ -27,8 +27,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -88,8 +86,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -128,8 +124,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -141,4 +135,4 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Core smoke check
-        run: pnpm --filter @dmc-98/dfe-core build
+        run: pnpm --filter @sn-arjun/dfe-core build
