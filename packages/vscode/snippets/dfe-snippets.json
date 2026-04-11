@@ -1,0 +1,306 @@
+{
+  "DFE Form": {
+    "prefix": "dfe-form",
+    "body": [
+      "{",
+      "\t\"title\": \"${1:Form Title}\",",
+      "\t\"description\": \"${2:Form description}\",",
+      "\t\"id\": \"${3:form-id}\",",
+      "\t\"slug\": \"${4:form-slug}\",",
+      "\t\"fields\": [",
+      "\t\t{",
+      "\t\t\t\"id\": \"${5:field-1}\",",
+      "\t\t\t\"key\": \"${6:field_1}\",",
+      "\t\t\t\"type\": \"SHORT_TEXT\",",
+      "\t\t\t\"label\": \"${7:Field Label}\",",
+      "\t\t\t\"required\": true,",
+      "\t\t\t\"order\": 1",
+      "\t\t}",
+      "\t],",
+      "\t\"steps\": [",
+      "\t\t{",
+      "\t\t\t\"id\": \"step-1\",",
+      "\t\t\t\"title\": \"${8:Step 1}\",",
+      "\t\t\t\"order\": 1,",
+      "\t\t\t\"fieldIds\": [\"${5:field-1}\"]",
+      "\t\t}",
+      "\t]",
+      "}"
+    ],
+    "description": "Create a new DFE form configuration"
+  },
+  "DFE Field": {
+    "prefix": "dfe-field",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:field-id}\",",
+      "\t\"key\": \"${2:field_key}\",",
+      "\t\"type\": \"${3|SHORT_TEXT,LONG_TEXT,EMAIL,NUMBER,DATE,SELECT,CHECKBOX,FILE_UPLOAD,RATING,SIGNATURE,ADDRESS|}\",",
+      "\t\"label\": \"${4:Field Label}\",",
+      "\t\"required\": ${5:false},",
+      "\t\"order\": ${6:1},",
+      "\t\"config\": {",
+      "\t\t\"placeholder\": \"${7:Enter value...}\",",
+      "\t\t\"helpText\": \"${8:Help text}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a single form field"
+  },
+  "DFE Step": {
+    "prefix": "dfe-step",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:step-id}\",",
+      "\t\"title\": \"${2:Step Title}\",",
+      "\t\"order\": ${3:1},",
+      "\t\"fieldIds\": [${4:\"field-1\"}],",
+      "\t\"config\": {",
+      "\t\t\"allowSkip\": ${5:false},",
+      "\t\t\"allowBack\": ${6:true},",
+      "\t\t\"submitLabel\": \"${7:Next}\",",
+      "\t\t\"review\": {",
+      "\t\t\t\"enabled\": ${8:false}",
+      "\t\t}",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a form step"
+  },
+  "DFE Condition": {
+    "prefix": "dfe-condition",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:condition-id}\",",
+      "\t\"action\": \"${2|show,hide,enable,disable,require,optional|}\",",
+      "\t\"operator\": \"${3|and,or|}\",",
+      "\t\"targetFieldId\": \"${4:target-field-id}\",",
+      "\t\"rules\": [",
+      "\t\t{",
+      "\t\t\t\"fieldId\": \"${5:source-field-id}\",",
+      "\t\t\t\"operator\": \"${6|equals,contains,greaterThan,isEmpty|}\",",
+      "\t\t\t\"value\": \"${7:value}\"",
+      "\t\t}",
+      "\t]",
+      "}"
+    ],
+    "description": "Create a conditional display/behavior rule"
+  },
+  "DFE API Contract": {
+    "prefix": "dfe-contract",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:contract-id}\",",
+      "\t\"resourceName\": \"${2:Resource Name}\",",
+      "\t\"endpoint\": \"${3:/api/resource}\",",
+      "\t\"method\": \"${4|GET,POST,PUT,PATCH,DELETE|}\",",
+      "\t\"fieldMapping\": {",
+      "\t\t\"${5:formField}\": \"${6:apiField}\"",
+      "\t},",
+      "\t\"trigger\": \"${7|onStepEntry,onStepExit,onFieldChange,onSubmit|}\",",
+      "\t\"timeout\": ${8:5000},",
+      "\t\"cache\": {",
+      "\t\t\"enabled\": ${9:false}",
+      "\t}",
+      "}"
+    ],
+    "description": "Create an API contract configuration"
+  },
+  "DFE Short Text Field": {
+    "prefix": "dfe-short-text",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:short-text-id}\",",
+      "\t\"key\": \"${2:short_text_key}\",",
+      "\t\"type\": \"SHORT_TEXT\",",
+      "\t\"label\": \"${3:Field Label}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"placeholder\": \"${5:Enter text}\",",
+      "\t\t\"minLength\": ${6:0},",
+      "\t\t\"maxLength\": ${7:255},",
+      "\t\t\"helpText\": \"${8:Help text}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a SHORT_TEXT field"
+  },
+  "DFE Email Field": {
+    "prefix": "dfe-email",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:email-id}\",",
+      "\t\"key\": \"${2:email_key}\",",
+      "\t\"type\": \"EMAIL\",",
+      "\t\"label\": \"${3:Email Address}\",",
+      "\t\"required\": ${4:true},",
+      "\t\"config\": {",
+      "\t\t\"placeholder\": \"${5:example@domain.com}\",",
+      "\t\t\"helpText\": \"${6:We'll never share your email}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create an EMAIL field"
+  },
+  "DFE Select Field": {
+    "prefix": "dfe-select",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:select-id}\",",
+      "\t\"key\": \"${2:select_key}\",",
+      "\t\"type\": \"SELECT\",",
+      "\t\"label\": \"${3:Choose an option}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"options\": [",
+      "\t\t\t{",
+      "\t\t\t\t\"value\": \"${5:option1}\",",
+      "\t\t\t\t\"label\": \"${6:Option 1}\"",
+      "\t\t\t},",
+      "\t\t\t{",
+      "\t\t\t\t\"value\": \"${7:option2}\",",
+      "\t\t\t\t\"label\": \"${8:Option 2}\"",
+      "\t\t\t}",
+      "\t\t],",
+      "\t\t\"placeholder\": \"${9:Select...}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a SELECT field with options"
+  },
+  "DFE Number Field": {
+    "prefix": "dfe-number",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:number-id}\",",
+      "\t\"key\": \"${2:number_key}\",",
+      "\t\"type\": \"NUMBER\",",
+      "\t\"label\": \"${3:Number}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"min\": ${5:0},",
+      "\t\t\"max\": ${6:100},",
+      "\t\t\"step\": ${7:1},",
+      "\t\t\"format\": \"${8|integer,decimal,currency,percentage|}\",",
+      "\t\t\"placeholder\": \"${9:Enter number}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a NUMBER field"
+  },
+  "DFE Date Field": {
+    "prefix": "dfe-date",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:date-id}\",",
+      "\t\"key\": \"${2:date_key}\",",
+      "\t\"type\": \"DATE\",",
+      "\t\"label\": \"${3:Select a date}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"placeholder\": \"${5:MM/DD/YYYY}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a DATE field"
+  },
+  "DFE Checkbox Field": {
+    "prefix": "dfe-checkbox",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:checkbox-id}\",",
+      "\t\"key\": \"${2:checkbox_key}\",",
+      "\t\"type\": \"CHECKBOX\",",
+      "\t\"label\": \"${3:Agree to terms}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"defaultValue\": false,",
+      "\t\t\"helpText\": \"${5:Please confirm}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a CHECKBOX field"
+  },
+  "DFE File Upload Field": {
+    "prefix": "dfe-file-upload",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:file-upload-id}\",",
+      "\t\"key\": \"${2:file_upload_key}\",",
+      "\t\"type\": \"FILE_UPLOAD\",",
+      "\t\"label\": \"${3:Upload a file}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"accept\": \"${5:.pdf,.doc,.docx}\",",
+      "\t\t\"maxFileSize\": ${6:5242880},",
+      "\t\t\"maxFiles\": ${7:1},",
+      "\t\t\"helpText\": \"${8:Max 5MB}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a FILE_UPLOAD field"
+  },
+  "DFE Rating Field": {
+    "prefix": "dfe-rating",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:rating-id}\",",
+      "\t\"key\": \"${2:rating_key}\",",
+      "\t\"type\": \"RATING\",",
+      "\t\"label\": \"${3:Rate your experience}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"minRating\": ${5:1},",
+      "\t\t\"maxRating\": ${6:5},",
+      "\t\t\"ratingLabel\": \"${7:stars}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a RATING field"
+  },
+  "DFE Address Field": {
+    "prefix": "dfe-address",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:address-id}\",",
+      "\t\"key\": \"${2:address_key}\",",
+      "\t\"type\": \"ADDRESS\",",
+      "\t\"label\": \"${3:Address}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"countryFilter\": [\"${5:US}\", \"${6:CA}\"]",
+      "\t}",
+      "}"
+    ],
+    "description": "Create an ADDRESS field"
+  },
+  "DFE Signature Field": {
+    "prefix": "dfe-signature",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:signature-id}\",",
+      "\t\"key\": \"${2:signature_key}\",",
+      "\t\"type\": \"SIGNATURE\",",
+      "\t\"label\": \"${3:Sign here}\",",
+      "\t\"required\": ${4:true}",
+      "}"
+    ],
+    "description": "Create a SIGNATURE field"
+  },
+  "DFE Rich Text Field": {
+    "prefix": "dfe-rich-text",
+    "body": [
+      "{",
+      "\t\"id\": \"${1:rich-text-id}\",",
+      "\t\"key\": \"${2:rich_text_key}\",",
+      "\t\"type\": \"RICH_TEXT\",",
+      "\t\"label\": \"${3:Formatted text}\",",
+      "\t\"required\": ${4:false},",
+      "\t\"config\": {",
+      "\t\t\"placeholder\": \"${5:Enter formatted text...}\"",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a RICH_TEXT field"
+  }
+}

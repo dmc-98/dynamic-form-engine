@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+*.tsbuildinfo
+.turbo/
+
+# VitePress
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+ehthumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Prisma
+packages/prisma/prisma/*.db
+packages/prisma/prisma/migrations/
+
+# Drizzle
+packages/drizzle/drizzle/
+
+# Docker
+examples/fullstack/pgdata/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lock files from other package managers (we use pnpm)
+package-lock.json
+yarn.lock
+
+# Changesets
+!.changeset/
+!.changeset/*.json
+!.changeset/*.md
+
+# Debug
+.cache/
+output/playwright/
+output/
+storybook-static/
+.claude/
+
+# Internal planning notes
+CODE_REVIEW.md
+FEATURE_COMPLETION_PLAN.md
+FEATURE_EXECUTION_CHECKLIST.md
+IMPLEMENTATION_ROADMAP.md
+PHASE_0_EXECUTION_CHECKLIST.md
+PHASE_9_QUICK_START.md
+PHASE_9_SUMMARY.md

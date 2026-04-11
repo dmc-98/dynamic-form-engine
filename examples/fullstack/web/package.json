@@ -1,0 +1,29 @@
+{
+  "name": "dfe-example-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "dev:e2e": "vite --host 127.0.0.1 --port 5173",
+    "dev:e2e:playground": "vite --host 127.0.0.1 --port 5173",
+    "dev:e2e:serverless": "vite --host 127.0.0.1 --port 5174",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5173",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dmc-98/dfe-core": "workspace:*",
+    "@dmc-98/dfe-playground": "workspace:*",
+    "@dmc-98/dfe-react": "workspace:*",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "^5.4.0",
+    "vite": "^5.0.0"
+  }
+}

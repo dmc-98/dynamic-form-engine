@@ -1,0 +1,55 @@
+{
+  "name": "@dmc-98/dfe-trpc",
+  "version": "0.1.0",
+  "description": "tRPC integration for Dynamic Form Engine",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dmc-98/dfe-core": "workspace:*",
+    "@dmc-98/dfe-server": "workspace:*",
+    "zod": "^3.22.0"
+  },
+  "peerDependencies": {
+    "@trpc/server": "^10.0.0 || ^11.0.0"
+  },
+  "devDependencies": {
+    "@trpc/server": "^10.45.0",
+    "typescript": "^5.4.0",
+    "tsup": "^8.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "dts": true,
+    "clean": true,
+    "sourcemap": true,
+    "external": [
+      "@trpc/server"
+    ]
+  }
+}

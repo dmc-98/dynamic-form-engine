@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="24" fill="url(#grad)"/>
+  <g transform="translate(24, 24)" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Form outline -->
+    <rect x="8" y="4" width="64" height="72" rx="6" fill="white" fill-opacity="0.15"/>
+    <!-- Field lines -->
+    <line x1="18" y1="20" x2="62" y2="20"/>
+    <line x1="18" y1="32" x2="52" y2="32"/>
+    <line x1="18" y1="44" x2="58" y2="44"/>
+    <line x1="18" y1="56" x2="44" y2="56"/>
+    <!-- DAG nodes -->
+    <circle cx="68" cy="56" r="6" fill="white" fill-opacity="0.3"/>
+    <circle cx="56" cy="68" r="5" fill="white" fill-opacity="0.3"/>
+    <!-- Connection lines -->
+    <line x1="62" y1="56" x2="44" y2="56" stroke-dasharray="3,2"/>
+    <line x1="64" y1="62" x2="58" y2="66" stroke-dasharray="3,2"/>
+  </g>
+</svg>

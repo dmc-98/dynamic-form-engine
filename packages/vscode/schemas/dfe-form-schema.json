@@ -1,0 +1,519 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dynamic Form Engine Configuration Schema",
+  "description": "JSON Schema for DFE form configuration files",
+  "type": "object",
+  "required": ["fields"],
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the form"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the form"
+    },
+    "fields": {
+      "type": "array",
+      "description": "Array of form fields",
+      "items": { "$ref": "#/definitions/Field" }
+    },
+    "steps": {
+      "type": "array",
+      "description": "Array of form steps (for multi-step forms)",
+      "items": { "$ref": "#/definitions/Step" }
+    },
+    "version": {
+      "type": "string",
+      "description": "Schema version"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the form"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly identifier for the form"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for the form",
+      "additionalProperties": true
+    }
+  },
+  "definitions": {
+    "Field": {
+      "type": "object",
+      "required": ["id", "key", "type", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique field identifier"
+        },
+        "versionId": {
+          "type": "string",
+          "description": "Version identifier for the field"
+        },
+        "key": {
+          "type": "string",
+          "description": "Machine-readable key for field data binding"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable label"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "SHORT_TEXT",
+            "LONG_TEXT",
+            "NUMBER",
+            "EMAIL",
+            "PHONE",
+            "DATE",
+            "DATE_RANGE",
+            "TIME",
+            "DATE_TIME",
+            "SELECT",
+            "MULTI_SELECT",
+            "RADIO",
+            "CHECKBOX",
+            "FILE_UPLOAD",
+            "RATING",
+            "SCALE",
+            "URL",
+            "PASSWORD",
+            "HIDDEN",
+            "SECTION_BREAK",
+            "FIELD_GROUP",
+            "RICH_TEXT",
+            "SIGNATURE",
+            "ADDRESS"
+          ],
+          "description": "Type of field"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the field is required",
+          "default": false
+        },
+        "order": {
+          "type": "integer",
+          "description": "Display order of the field"
+        },
+        "config": {
+          "type": "object",
+          "description": "Field-type-specific configuration",
+          "additionalProperties": true,
+          "properties": {
+            "placeholder": { "type": "string" },
+            "defaultValue": {},
+            "helpText": { "type": "string" },
+            "width": {
+              "type": "string",
+              "enum": ["full", "half", "third"]
+            },
+            "minLength": { "type": "integer" },
+            "maxLength": { "type": "integer" },
+            "pattern": { "type": "string" },
+            "inputMode": {
+              "type": "string",
+              "enum": ["text", "url", "search"]
+            },
+            "min": { "type": "number" },
+            "max": { "type": "number" },
+            "step": { "type": "number" },
+            "format": {
+              "type": "string",
+              "enum": ["integer", "decimal", "currency", "percentage"]
+            },
+            "prefix": { "type": "string" },
+            "suffix": { "type": "string" },
+            "options": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/SelectOption" }
+            },
+            "multiple": { "type": "boolean" },
+            "allowCustom": { "type": "boolean" },
+            "accept": { "type": "string" },
+            "maxFileSize": { "type": "integer" },
+            "maxFiles": { "type": "integer" },
+            "minRating": { "type": "integer" },
+            "maxRating": { "type": "integer" },
+            "ratingLabel": { "type": "string" },
+            "minScale": { "type": "integer" },
+            "maxScale": { "type": "integer" },
+            "scaleLeftLabel": { "type": "string" },
+            "scaleRightLabel": { "type": "string" },
+            "enabled": { "type": "boolean" },
+            "fields": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Field" }
+            },
+            "countryFilter": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Conditional display/behavior rules",
+          "items": { "$ref": "#/definitions/Condition" }
+        },
+        "computed": {
+          "type": "object",
+          "description": "Computed field configuration",
+          "additionalProperties": true,
+          "properties": {
+            "expression": { "type": "string" },
+            "type": { "type": "string" }
+          }
+        },
+        "permissions": {
+          "type": "object",
+          "description": "Field-level permissions",
+          "additionalProperties": true,
+          "properties": {
+            "canRead": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "canWrite": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "description": "Custom validation rules",
+          "additionalProperties": true,
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string" },
+                  "message": { "type": "string" },
+                  "params": { "type": "object" }
+                }
+              }
+            }
+          }
+        },
+        "searchable": {
+          "type": "boolean",
+          "description": "Whether field is searchable"
+        },
+        "sortable": {
+          "type": "boolean",
+          "description": "Whether field can be sorted"
+        },
+        "hidden": {
+          "type": "boolean",
+          "description": "Whether field is hidden from display"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Whether field is read-only"
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional field description"
+        }
+      }
+    },
+    "SelectOption": {
+      "type": "object",
+      "required": ["value", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Option value"
+        },
+        "label": {
+          "type": "string",
+          "description": "Option display label"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of the option"
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether option is disabled"
+        },
+        "group": {
+          "type": "string",
+          "description": "Group name for option grouping"
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "required": ["id", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique step identifier"
+        },
+        "versionId": {
+          "type": "string",
+          "description": "Version identifier for the step"
+        },
+        "title": {
+          "type": "string",
+          "description": "Step title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Step description"
+        },
+        "order": {
+          "type": "integer",
+          "description": "Display order of the step"
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Conditions for step display/progression",
+          "items": { "$ref": "#/definitions/Condition" }
+        },
+        "config": {
+          "type": "object",
+          "description": "Step configuration",
+          "additionalProperties": true,
+          "properties": {
+            "apiContracts": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ApiContract" }
+            },
+            "review": {
+              "type": "object",
+              "description": "Review configuration for step",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "fields": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            },
+            "allowSkip": { "type": "boolean" },
+            "allowBack": { "type": "boolean" },
+            "submitLabel": { "type": "string" },
+            "nextLabel": { "type": "string" },
+            "previousLabel": { "type": "string" }
+          }
+        },
+        "branches": {
+          "type": "array",
+          "description": "Branching logic for multi-path flows",
+          "items": { "$ref": "#/definitions/Branch" }
+        },
+        "fieldIds": {
+          "type": "array",
+          "description": "IDs of fields to include in this step",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "required": ["action", "rules"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique condition identifier"
+        },
+        "action": {
+          "type": "string",
+          "enum": ["show", "hide", "enable", "disable", "require", "optional"],
+          "description": "Action to perform when condition is met"
+        },
+        "operator": {
+          "type": "string",
+          "enum": ["and", "or"],
+          "description": "Logical operator for combining rules",
+          "default": "and"
+        },
+        "rules": {
+          "type": "array",
+          "description": "Array of condition rules",
+          "items": { "$ref": "#/definitions/ConditionRule" }
+        },
+        "targetFieldId": {
+          "type": "string",
+          "description": "ID of the field this condition applies to"
+        },
+        "targetStepId": {
+          "type": "string",
+          "description": "ID of the step this condition applies to"
+        }
+      }
+    },
+    "ConditionRule": {
+      "type": "object",
+      "required": ["fieldId", "operator", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "fieldId": {
+          "type": "string",
+          "description": "ID of the field to evaluate"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "equals",
+            "notEquals",
+            "contains",
+            "notContains",
+            "startsWith",
+            "endsWith",
+            "greaterThan",
+            "lessThan",
+            "greaterThanOrEqual",
+            "lessThanOrEqual",
+            "isEmpty",
+            "isNotEmpty",
+            "isChecked",
+            "isNotChecked",
+            "isSelected",
+            "isNotSelected",
+            "matches",
+            "doesNotMatch"
+          ],
+          "description": "Comparison operator"
+        },
+        "value": {
+          "description": "Value to compare against"
+        },
+        "caseSensitive": {
+          "type": "boolean",
+          "description": "Whether string comparison is case-sensitive"
+        }
+      }
+    },
+    "ApiContract": {
+      "type": "object",
+      "required": ["resourceName", "endpoint", "method"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique contract identifier"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Name of the resource being accessed"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "API endpoint URL"
+        },
+        "method": {
+          "type": "string",
+          "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"],
+          "description": "HTTP method"
+        },
+        "fieldMapping": {
+          "type": "object",
+          "description": "Mapping from form fields to API request/response fields",
+          "additionalProperties": { "type": "string" }
+        },
+        "headers": {
+          "type": "object",
+          "description": "Custom headers for API request",
+          "additionalProperties": { "type": "string" }
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Authentication configuration",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["none", "bearer", "basic", "apiKey"]
+            },
+            "token": { "type": "string" },
+            "apiKeyHeader": { "type": "string" }
+          }
+        },
+        "queryParams": {
+          "type": "object",
+          "description": "Query parameters for the API request",
+          "additionalProperties": { "type": "string" }
+        },
+        "requestBody": {
+          "type": "object",
+          "description": "Request body template",
+          "additionalProperties": true
+        },
+        "responseMapping": {
+          "type": "object",
+          "description": "Mapping from API response to form fields",
+          "additionalProperties": { "type": "string" }
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "Request timeout in milliseconds"
+        },
+        "retryCount": {
+          "type": "integer",
+          "description": "Number of retries on failure"
+        },
+        "onSuccess": {
+          "type": "object",
+          "description": "Actions to perform on successful API call",
+          "additionalProperties": true
+        },
+        "onError": {
+          "type": "object",
+          "description": "Actions to perform on API error",
+          "additionalProperties": true
+        },
+        "cache": {
+          "type": "object",
+          "description": "Caching configuration",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "ttl": { "type": "integer" }
+          }
+        },
+        "trigger": {
+          "type": "string",
+          "enum": ["onStepEntry", "onStepExit", "onFieldChange", "onSubmit"],
+          "description": "When this contract should be triggered"
+        }
+      }
+    },
+    "Branch": {
+      "type": "object",
+      "required": ["condition", "nextStepId"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique branch identifier"
+        },
+        "condition": {
+          "$ref": "#/definitions/Condition",
+          "description": "Condition for this branch"
+        },
+        "nextStepId": {
+          "type": "string",
+          "description": "ID of the next step to go to"
+        },
+        "label": {
+          "type": "string",
+          "description": "Display label for the branch"
+        }
+      }
+    }
+  }
+}

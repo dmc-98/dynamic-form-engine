@@ -1,0 +1,56 @@
+{
+  "name": "@dmc-98/dfe-angular",
+  "version": "0.1.0",
+  "description": "Angular services for Dynamic Form Engine",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dmc-98/dfe-core": "workspace:*",
+    "rxjs": "^7.8.0"
+  },
+  "peerDependencies": {
+    "@angular/core": "^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@angular/core": "^18.0.0",
+    "typescript": "^5.4.0",
+    "tsup": "^8.0.0",
+    "rxjs": "^7.8.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "dts": true,
+    "clean": true,
+    "sourcemap": true,
+    "external": [
+      "@angular/core",
+      "rxjs"
+    ]
+  }
+}

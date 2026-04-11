@@ -1,0 +1,28 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@dmc-98/dfe-core": [
+        "../../../packages/core/src/index.ts"
+      ],
+      "@dmc-98/dfe-react": [
+        "../../../packages/react/src/index.ts"
+      ],
+      "@dmc-98/dfe-react/components": [
+        "../../../packages/react/src/components.ts"
+      ],
+      "@dmc-98/dfe-react/theme": [
+        "../../../packages/react/src/theme.ts"
+      ],
+      "@dmc-98/dfe-playground": [
+        "../../../packages/playground/src/index.ts"
+      ]
+    },
+    "types": ["vite/client"],
+    "noEmit": true
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "dynamic-form-engine",
+  "private": true,
+  "description": "Configuration-driven dynamic form engine for TypeScript",
+  "scripts": {
+    "build": "turbo run build",
+    "storybook": "HOME=$PWD/.cache/storybook-home XDG_CACHE_HOME=$PWD/.cache STORYBOOK_DISABLE_TELEMETRY=1 storybook dev -p 6006",
+    "storybook:build": "HOME=$PWD/.cache/storybook-home XDG_CACHE_HOME=$PWD/.cache STORYBOOK_DISABLE_TELEMETRY=1 storybook build",
+    "test": "turbo run test",
+    "test:coverage:stable": "node scripts/test-stable-coverage.mjs",
+    "test:smoke:artifacts": "node scripts/smoke-built-artifacts.mjs",
+    "test:smoke:wrappers": "node scripts/smoke-wrapper-packages.mjs",
+    "test:e2e:example": "playwright test --config e2e/playwright.config.ts",
+    "test:e2e:playground": "playwright test --config e2e/playwright.playground.config.ts",
+    "test:e2e:serverless": "playwright test --config e2e/playwright.serverless.config.ts",
+    "test:e2e:example:headed": "playwright test --config e2e/playwright.config.ts --headed",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
+    "changeset": "changeset",
+    "release:check": "node scripts/check-release-readiness.mjs",
+    "release:version": "changeset version",
+    "release": "pnpm build && pnpm release:check && changeset publish",
+    "sync-config": "npx tsx scripts/sync-config.ts"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@playwright/test": "^1.55.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@changesets/cli": "^2.27.0",
+    "@types/uuid": "^11.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "storybook": "^8.6.14",
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    "paths": {
+      "@dmc-98/dfe-core": [
+        "../core/src/index.ts"
+      ],
+      "@dmc-98/dfe-react": [
+        "../react/src/index.ts"
+      ],
+      "@dmc-98/dfe-react/components": [
+        "../react/src/components.ts"
+      ]
+    },
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ]
+  },
+  "include": [
+    "src"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "dfe-vscode",
+  "displayName": "DFE - Dynamic Form Engine",
+  "description": "IntelliSense, validation, and snippets for DFE form configuration files",
+  "version": "0.1.0",
+  "license": "MIT",
+  "publisher": "snarjun98",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Snippets",
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:json",
+    "workspaceContains:**/dfe.config.*"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "jsonValidation": [
+      {
+        "fileMatch": [
+          "**/dfe.config.json",
+          "**/dfe-form.json",
+          "**/*.dfe.json"
+        ],
+        "url": "./schemas/dfe-form-schema.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "json",
+        "path": "./snippets/dfe-snippets.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsup src/extension.ts --format cjs --out-dir dist --external vscode",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0",
+    "tsup": "^8.0.0"
+  }
+}

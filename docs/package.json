@@ -1,0 +1,13 @@
+{
+  "name": "dfe-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ./scripts/vitepress-run.mjs dev",
+    "build": "node ./scripts/vitepress-run.mjs build",
+    "preview": "node ./scripts/vitepress-run.mjs preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.0"
+  }
+}
