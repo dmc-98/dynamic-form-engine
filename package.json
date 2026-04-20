@@ -20,7 +20,7 @@
     "changeset": "changeset",
     "release:check": "node scripts/check-release-readiness.mjs",
     "release:version": "changeset version",
-    "release": "pnpm build && pnpm release:check && changeset publish",
+    "release": "pnpm build && pnpm release:check && node scripts/changeset-publish-with-retry.mjs",
     "sync-config": "npx tsx scripts/sync-config.ts"
   },
   "devDependencies": {

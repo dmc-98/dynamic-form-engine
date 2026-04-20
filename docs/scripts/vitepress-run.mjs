@@ -2,15 +2,22 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import { delimiter, dirname, join, resolve } from 'node:path'
 import process from 'node:process'
+import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 
 const scriptDir = dirname(fileURLToPath(import.meta.url))
 const docsDir = resolve(scriptDir, '..')
 const repoRoot = resolve(docsDir, '..')
 const command = process.argv[2] ?? 'build'
+const require = createRequire(import.meta.url)
+const resolvePaths = [docsDir, repoRoot]
 
 function readVersion(packageJsonPath) {
   return JSON.parse(readFileSync(packageJsonPath, 'utf8')).version
+}
+
+function resolvePackageJsonPath(specifier) {
+  return require.resolve(`${specifier}/package.json`, { paths: resolvePaths })
 }
 
 function getNativeTarget(platform, arch) {
@@ -33,7 +40,7 @@ const env = { ...process.env }
 const nativeTarget = getNativeTarget(process.platform, process.arch)
 
 if (nativeTarget) {
-  const rollupVersion = readVersion(join(docsDir, 'node_modules/rollup/package.json'))
+  const rollupVersion = readVersion(resolvePackageJsonPath('rollup'))
   const rollupNodePath = join(
     repoRoot,
     'node_modules',
@@ -47,7 +54,7 @@ if (nativeTarget) {
     addNodePath(env, rollupNodePath)
   }
 
-  const esbuildVersion = readVersion(join(docsDir, 'node_modules/esbuild/package.json'))
+  const esbuildVersion = readVersion(resolvePackageJsonPath('esbuild'))
   const esbuildBinaryPath = join(
     repoRoot,
     'node_modules',
@@ -65,8 +72,8 @@ if (nativeTarget) {
   }
 }
 
-const pnpmCommand = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm'
-const result = spawnSync(pnpmCommand, ['exec', 'vitepress', command], {
+const vitepressCliPath = require.resolve('vitepress/dist/node/cli.js', { paths: resolvePaths })
+const result = spawnSync(process.execPath, [vitepressCliPath, command], {
   cwd: docsDir,
   env,
   stdio: 'inherit',

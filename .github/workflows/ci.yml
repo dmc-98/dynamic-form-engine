@@ -96,6 +96,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build example dependency chain
+        run: pnpm --filter dfe-example-api... --filter dfe-example-web... build
+
       - name: Install Playwright browser
         run: pnpm exec playwright install --with-deps chromium
 
