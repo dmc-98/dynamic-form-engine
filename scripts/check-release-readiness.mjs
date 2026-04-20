@@ -1,27 +1,15 @@
 import assert from 'node:assert/strict'
-import { existsSync, mkdirSync, readFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
-const packageDirs = [
-  'packages/core',
-  'packages/react',
-  'packages/server',
-  'packages/express',
-  'packages/prisma',
-  'packages/drizzle',
-  'packages/cli',
-  'packages/fastify',
-  'packages/hono',
-  'packages/trpc',
-  'packages/angular',
-  'packages/vanilla',
-  'packages/vue',
-  'packages/svelte',
-  'packages/solid',
-]
+const packageDirs = readdirSync(join(repoRoot, 'packages'), { withFileTypes: true })
+  .filter(entry => entry.isDirectory())
+  .map(entry => join('packages', entry.name))
+  .filter(packageDir => existsSync(join(repoRoot, packageDir, 'package.json')))
+  .sort()
 
 const npmCacheDir = join(repoRoot, '.cache', 'npm')
 const npmLogsDir = join(repoRoot, '.cache', 'npm-logs')
@@ -40,6 +28,7 @@ for (const packageDir of packageDirs) {
     Array.isArray(manifest.files) && manifest.files.includes('dist'),
     `${manifest.name} must include dist in package.json files`,
   )
+  assertPackageExists(join(packageDir, 'README.md'))
 
   for (const target of declaredTargets) {
     assertPackageExists(join(packageDir, target))
@@ -49,6 +38,7 @@ for (const packageDir of packageDirs) {
   const packedFiles = new Set(packResult.files.map(file => file.path))
 
   assert.ok(packedFiles.has('package.json'), `${manifest.name} dry-run pack is missing package.json`)
+  assert.ok(packedFiles.has('README.md'), `${manifest.name} dry-run pack is missing README.md`)
   assert.ok(
     [...packedFiles].some(path => path.startsWith('dist/')),
     `${manifest.name} dry-run pack is missing dist output`,

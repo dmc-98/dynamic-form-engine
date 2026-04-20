@@ -2,6 +2,7 @@
   "name": "dfe-docs",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "node ./scripts/vitepress-run.mjs dev",
     "build": "node ./scripts/vitepress-run.mjs build",

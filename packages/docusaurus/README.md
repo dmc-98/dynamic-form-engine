@@ -2,9 +2,23 @@
 
 Beta Docusaurus integration helpers for Dynamic Form Engine.
 
-This package adds route generation and a lightweight DFE form page component so teams already standardized on Docusaurus can embed live DFE examples without forking the renderer stack.
+## What This Package Is
 
-It is ESM-first, which fits the normal `docusaurus.config.mjs` setup.
+`@dmc--98/dfe-docusaurus` helps teams embed live DFE examples into a Docusaurus site without rebuilding the renderer stack from scratch.
+
+It provides:
+
+- a lightweight plugin factory for route generation
+- a preset helper for Docusaurus config
+- a `DfeFormPage` component that renders a live form from supplied config
+
+The package is ESM-first, which fits the normal `docusaurus.config.mjs` setup.
+
+## What This Package Is Not
+
+This is not the repo's primary docs stack. The DFE repo itself still uses VitePress.
+
+Treat this package as a Beta integration path for teams that are already standardized on Docusaurus.
 
 ## Install
 
@@ -22,9 +36,45 @@ import {
 } from '@dmc--98/dfe-docusaurus'
 ```
 
-## Status
+## Usage
 
-This package is `Beta`.
+```ts
+import { createDfeDocusaurusPreset } from '@dmc--98/dfe-docusaurus'
+
+export default {
+  presets: [
+    createDfeDocusaurusPreset({
+      routeBasePath: '/forms',
+      forms: [
+        {
+          id: 'employee-onboarding',
+          title: 'Employee Onboarding',
+          formConfig: {
+            fields: [
+              {
+                id: 'field-full-name',
+                versionId: 'version-1',
+                key: 'full_name',
+                label: 'Full Name',
+                type: 'SHORT_TEXT',
+                required: true,
+                order: 1,
+                config: {},
+              },
+            ],
+          },
+        },
+      ],
+    }),
+  ],
+}
+```
+
+See the package example config in `packages/docusaurus/examples/docusaurus.config.mjs` for a concrete starting point.
+
+## Verification Status
+
+This package is currently `Beta`.
 
 It is covered by:
 
@@ -33,3 +83,17 @@ It is covered by:
 - root `pnpm typecheck`
 - package tests and typecheck
 - wrapper smoke verification
+
+## Notes
+
+- `DfeFormPage` uses the shared `@dmc--98/dfe-react` renderer contract.
+- This package is best for live docs examples, product onboarding flows, and internal documentation portals.
+
+
+---
+
+## Links
+
+- Source: [packages/docusaurus](https://github.com/dmc-98/dynamic-form-engine/tree/main/packages/docusaurus)
+- Docs source: [docs/packages/docusaurus.md](https://github.com/dmc-98/dynamic-form-engine/blob/main/docs/packages/docusaurus.md)
+- Issues: [https://github.com/dmc-98/dynamic-form-engine/issues](https://github.com/dmc-98/dynamic-form-engine/issues)

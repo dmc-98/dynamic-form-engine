@@ -38,6 +38,8 @@ function addNodePath(env, value) {
 
 const env = { ...process.env }
 const nativeTarget = getNativeTarget(process.platform, process.arch)
+const vitepressPackageJsonPath = resolvePackageJsonPath('vitepress')
+resolvePaths.push(dirname(vitepressPackageJsonPath))
 
 if (nativeTarget) {
   const rollupVersion = readVersion(resolvePackageJsonPath('rollup'))
