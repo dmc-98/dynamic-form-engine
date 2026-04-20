@@ -4,7 +4,7 @@ import type {
   SelectFieldConfig, DynamicDataSource,
   TextFieldConfig, NumberFieldConfig,
   FileUploadConfig, RatingConfig, ScaleConfig,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

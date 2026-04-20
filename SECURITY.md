@@ -37,17 +37,17 @@ We follow coordinated disclosure. We ask that you:
 
 When using DFE in production:
 
-- Always enable authentication middleware in `@dmc-98/dfe-express` (never use `skipAuth: true` in production)
+- Always enable authentication middleware in `@dmc--98/dfe-express` (never use `skipAuth: true` in production)
 - Set `maxPageSize` to a reasonable limit (default is 100)
 - Configure `allowedOptionFilterKeys` to whitelist filter parameters
 - Use a body size limit on your Express app (e.g., `express.json({ limit: '1mb' })`)
 - Implement rate limiting on form submission endpoints
 - Use a custom `executeApiContract` handler with SSRF protections if using API contracts
-- Keep all `@dmc-98/dfe-*` packages updated to the latest versions
+- Keep all `@dmc--98/dfe-*` packages updated to the latest versions
 
 ## Known Security Considerations
 
-- **ReDoS protection**: User-supplied regex patterns are validated and sandboxed in `@dmc-98/dfe-core`
-- **Query injection**: Filter parameters are sanitized in `@dmc-98/dfe-express`
+- **ReDoS protection**: User-supplied regex patterns are validated and sandboxed in `@dmc--98/dfe-core`
+- **Query injection**: Filter parameters are sanitized in `@dmc--98/dfe-express`
 - **Ownership checks**: Submission endpoints verify user ownership before allowing access
 - **UUIDv7**: All IDs use time-ordered UUIDv7 to prevent enumeration attacks

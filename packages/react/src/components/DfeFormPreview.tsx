@@ -1,5 +1,5 @@
 import React from 'react'
-import type { FormField, FormValues, FormStep, StepNodeState } from '@dmc-98/dfe-core'
+import type { FormField, FormValues, FormStep, StepNodeState } from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

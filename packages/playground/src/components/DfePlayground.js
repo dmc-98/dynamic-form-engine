@@ -35,9 +35,9 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DfePlayground = DfePlayground;
 const react_1 = __importStar(require("react"));
-const dfe_core_1 = require("@dmc-98/dfe-core");
-const dfe_core_2 = require("@dmc-98/dfe-core");
-const components_1 = require("@dmc-98/dfe-react/components");
+const dfe_core_1 = require("@dmc--98/dfe-core");
+const dfe_core_2 = require("@dmc--98/dfe-core");
+const components_1 = require("@dmc--98/dfe-react/components");
 const validateConfig_1 = require("../validateConfig");
 // ─── Component ──────────────────────────────────────────────────────────────
 /**

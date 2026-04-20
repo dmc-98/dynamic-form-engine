@@ -1,5 +1,5 @@
 import React from 'react';
-import type { StepConfig } from '@dmc-98/dfe-core';
+import type { StepConfig } from '@dmc--98/dfe-core';
 export interface StepConfigPanelProps {
     /** Current step configuration */
     config: StepConfig;

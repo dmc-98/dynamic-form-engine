@@ -4,7 +4,7 @@ import type {
   FormField,
   FormRuntimeContext,
   FormValues,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import type { ServerFormAnalyticsEvent } from './adapters'
 import { generateId } from './uuid'
 

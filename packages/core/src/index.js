@@ -1,5 +1,5 @@
 "use strict";
-// ─── @dmc-98/dfe-core ──────────────────────────────────────────────────────
+// ─── @dmc--98/dfe-core ──────────────────────────────────────────────────────
 // Configuration-driven dynamic form engine
 // Zero dependencies beyond Zod (peer)
 Object.defineProperty(exports, "__esModule", { value: true });

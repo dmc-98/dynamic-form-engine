@@ -1,11 +1,11 @@
-# @dmc-98/dfe-prisma
+# @dmc--98/dfe-prisma
 
 Prisma ORM adapter for the Dynamic Form Engine.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-prisma @dmc-98/dfe-server @prisma/client
+npm install @dmc--98/dfe-prisma @dmc--98/dfe-server @prisma/client
 npm install -D prisma
 ```
 
@@ -40,7 +40,7 @@ npx dfe add prisma-schema
 Option B: copy from the package:
 
 ```bash
-cat node_modules/@dmc-98/dfe-prisma/schema/schema.prisma >> prisma/schema.prisma
+cat node_modules/@dmc--98/dfe-prisma/schema/schema.prisma >> prisma/schema.prisma
 ```
 
 ## Tables Created
@@ -58,7 +58,7 @@ cat node_modules/@dmc-98/dfe-prisma/schema/schema.prisma >> prisma/schema.prisma
 
 ```ts
 import { PrismaClient } from '@prisma/client'
-import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
 
 const prisma = new PrismaClient()
 const db = new PrismaDatabaseAdapter(prisma)

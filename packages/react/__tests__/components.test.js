@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 const components_1 = require("../src/components");
 /**
  * Component tests for DfeFormRenderer and DfeStepIndicator.

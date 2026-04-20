@@ -1,14 +1,14 @@
 /**
- * Default unstyled components for @dmc-98/dfe-react.
+ * Default unstyled components for @dmc--98/dfe-react.
  *
  * These are headless, minimal components that provide the structure
- * but leave styling entirely to you. Import from '@dmc-98/dfe-react/components'.
+ * but leave styling entirely to you. Import from '@dmc--98/dfe-react/components'.
  *
  * For fully styled components, build your own or use a UI library.
  *
  * @example
  * ```tsx
- * import { DfeFormRenderer, DfeStepIndicator } from '@dmc-98/dfe-react/components'
+ * import { DfeFormRenderer, DfeStepIndicator } from '@dmc--98/dfe-react/components'
  * ```
  */
 export { DefaultFieldRenderer, DfeFormRenderer } from './components/DfeFormRenderer';

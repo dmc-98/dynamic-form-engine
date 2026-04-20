@@ -62,7 +62,7 @@ Key features demonstrated:
 ### Conditional Visibility
 
 ```ts
-import { createFormEngine } from '@dmc-98/dfe-core'
+import { createFormEngine } from '@dmc--98/dfe-core'
 
 const engine = createFormEngine([
   { id: '1', key: 'has_pet', type: 'CHECKBOX', label: 'Do you have a pet?',
@@ -108,7 +108,7 @@ engine.validate() // fails if state is empty
 ### Custom Field Type
 
 ```ts
-import { createFormEngine, registerSchemaBuilder } from '@dmc-98/dfe-core'
+import { createFormEngine, registerSchemaBuilder } from '@dmc--98/dfe-core'
 import { z } from 'zod'
 
 registerSchemaBuilder('IP_ADDRESS', () =>

@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-vue",
+  "name": "@dmc--98/dfe-vue",
   "version": "0.1.0",
   "description": "Vue 3 composables for Dynamic Form Engine",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.3.0"

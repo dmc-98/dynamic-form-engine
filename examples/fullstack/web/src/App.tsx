@@ -8,10 +8,10 @@ import {
   useFormStepper,
   useFormSync,
   useOfflineFormRuntime,
-} from '@dmc-98/dfe-react'
-import { DfeThemeProvider, dfeDefaultTheme } from '@dmc-98/dfe-react/theme'
-import { DfeFormRenderer, DfeStepIndicator } from '@dmc-98/dfe-react/components'
-import type { BrowserPersistenceAdapter, FormField, FormStep, SyncPresence } from '@dmc-98/dfe-react'
+} from '@dmc--98/dfe-react'
+import { DfeThemeProvider, dfeDefaultTheme } from '@dmc--98/dfe-react/theme'
+import { DfeFormRenderer, DfeStepIndicator } from '@dmc--98/dfe-react/components'
+import type { BrowserPersistenceAdapter, FormField, FormStep, SyncPresence } from '@dmc--98/dfe-react'
 import { ExampleFieldRenderer } from './ExampleFieldRenderer'
 import { PlaygroundExample } from './PlaygroundExample'
 

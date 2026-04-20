@@ -1,13 +1,13 @@
 "use strict";
 /**
- * Form Builder components for @dmc-98/dfe-react.
+ * Form Builder components for @dmc--98/dfe-react.
  *
  * Headless, unstyled panels for building a form editor/builder UI.
- * Import from '@dmc-98/dfe-react/builder'.
+ * Import from '@dmc--98/dfe-react/builder'.
  *
  * @example
  * ```tsx
- * import { StepConfigPanel, ConfigPanel } from '@dmc-98/dfe-react/builder'
+ * import { StepConfigPanel, ConfigPanel } from '@dmc--98/dfe-react/builder'
  * ```
  */
 Object.defineProperty(exports, "__esModule", { value: true });

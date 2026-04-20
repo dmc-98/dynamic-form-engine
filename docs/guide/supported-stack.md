@@ -2,12 +2,12 @@
 
 As of March 13, 2026, the recommended DFE adoption lane is:
 
-- `@dmc-98/dfe-core`
-- `@dmc-98/dfe-react`
-- `@dmc-98/dfe-server`
-- `@dmc-98/dfe-express`
-- `@dmc-98/dfe-prisma` or `@dmc-98/dfe-drizzle`
-- `@dmc-98/dfe-cli`
+- `@dmc--98/dfe-core`
+- `@dmc--98/dfe-react`
+- `@dmc--98/dfe-server`
+- `@dmc--98/dfe-express`
+- `@dmc--98/dfe-prisma` or `@dmc--98/dfe-drizzle`
+- `@dmc--98/dfe-cli`
 
 This is the package lane that is currently verified from the monorepo root with:
 
@@ -74,13 +74,13 @@ For Drizzle projects, swap `prisma` for `drizzle`. The CLI now detects adapter-s
 
 | Package | Role |
 |--------|------|
-| `@dmc-98/dfe-core` | field engine, conditions, DAG propagation, validation |
-| `@dmc-98/dfe-react` | React hooks and headless render helpers |
-| `@dmc-98/dfe-server` | step submission orchestration and adapter contracts |
-| `@dmc-98/dfe-express` | REST router factory for DFE endpoints |
-| `@dmc-98/dfe-prisma` | Prisma adapter and schema building blocks |
-| `@dmc-98/dfe-drizzle` | Drizzle adapter and schema building blocks |
-| `@dmc-98/dfe-cli` | scaffolding and config validation |
+| `@dmc--98/dfe-core` | field engine, conditions, DAG propagation, validation |
+| `@dmc--98/dfe-react` | React hooks and headless render helpers |
+| `@dmc--98/dfe-server` | step submission orchestration and adapter contracts |
+| `@dmc--98/dfe-express` | REST router factory for DFE endpoints |
+| `@dmc--98/dfe-prisma` | Prisma adapter and schema building blocks |
+| `@dmc--98/dfe-drizzle` | Drizzle adapter and schema building blocks |
+| `@dmc--98/dfe-cli` | scaffolding and config validation |
 
 ## What Is Verified Today
 
@@ -102,14 +102,14 @@ For Drizzle projects, swap `prisma` for `drizzle`. The CLI now detects adapter-s
 
 ## Stable Optional UI Kits
 
-The following packages are now stable themed wrappers on top of `@dmc-98/dfe-react`:
+The following packages are now stable themed wrappers on top of `@dmc--98/dfe-react`:
 
-- `@dmc-98/dfe-ui-mui`
-- `@dmc-98/dfe-ui-antd`
-- `@dmc-98/dfe-ui-chakra`
-- `@dmc-98/dfe-playground`
+- `@dmc--98/dfe-ui-mui`
+- `@dmc--98/dfe-ui-antd`
+- `@dmc--98/dfe-ui-chakra`
+- `@dmc--98/dfe-playground`
 
-Use the UI kits when you want a ready-made visual layer without giving up the shared renderer contract. Use `@dmc-98/dfe-playground` when you want the stable browser-verified authoring surface.
+Use the UI kits when you want a ready-made visual layer without giving up the shared renderer contract. Use `@dmc--98/dfe-playground` when you want the stable browser-verified authoring surface.
 
 ## Recommended Next Reads
 
@@ -118,7 +118,7 @@ Use the UI kits when you want a ready-made visual layer without giving up the sh
 - [Production Checklist](/guide/production-checklist)
 - [Quick Start](/guide/quick-start)
 - [Examples](/guide/examples)
-- [@dmc-98/dfe-react](/packages/react)
-- [@dmc-98/dfe-express](/packages/express)
-- [@dmc-98/dfe-prisma](/packages/prisma)
-- [@dmc-98/dfe-drizzle](/packages/drizzle)
+- [@dmc--98/dfe-react](/packages/react)
+- [@dmc--98/dfe-express](/packages/express)
+- [@dmc--98/dfe-prisma](/packages/prisma)
+- [@dmc--98/dfe-drizzle](/packages/drizzle)

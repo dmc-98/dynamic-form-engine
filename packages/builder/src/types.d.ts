@@ -1,4 +1,4 @@
-import type { FormField, FormStep, FieldType } from '@dmc-98/dfe-core';
+import type { FormField, FormStep, FieldType } from '@dmc--98/dfe-core';
 export interface BuilderState {
     /** All fields in the current form */
     fields: FormField[];

@@ -4,7 +4,7 @@ import {
   type SyncDocumentSnapshot,
   type SyncFieldOperation,
   type SyncPresence,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   CollaborationStoreError,
   type CollaborationAccessContext,
@@ -15,7 +15,7 @@ import {
   type CollaborationListEventsOptions,
   type CollaborationSessionRecord,
   type CollaborationStore,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 
 export interface PrismaCollaborationLike {
   dfeCollaborationSession: any

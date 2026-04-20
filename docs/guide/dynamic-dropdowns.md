@@ -4,7 +4,7 @@ DFE supports API-backed SELECT fields with cursor-based pagination, search, and 
 
 ## Server-Side Setup
 
-Dynamic options are stored in the `DfeFieldOption` table and served via the `/api/dfe/fields/:fieldId/options` endpoint. This is handled automatically by `@dmc-98/dfe-express`.
+Dynamic options are stored in the `DfeFieldOption` table and served via the `/api/dfe/fields/:fieldId/options` endpoint. This is handled automatically by `@dmc--98/dfe-express`.
 
 ## Field Configuration
 
@@ -31,7 +31,7 @@ Dynamic options are stored in the `DfeFieldOption` table and served via the `/ap
 Use `useDynamicOptions` for loading options:
 
 ```tsx
-import { useDynamicOptions } from '@dmc-98/dfe-react'
+import { useDynamicOptions } from '@dmc--98/dfe-react'
 
 function DepartmentSelect({ field, value, onChange }) {
   const { options, isLoading, hasMore, loadMore, search, error } = useDynamicOptions({

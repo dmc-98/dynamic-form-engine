@@ -1,28 +1,28 @@
-# @dmc-98/dfe-ui-chakra
+# @dmc--98/dfe-ui-chakra
 
 Stable Chakra-themed wrappers for the shared DFE React renderer contract.
 
 ## What This Package Is
 
-`@dmc-98/dfe-ui-chakra` gives you a Chakra-inspired presentation layer for:
+`@dmc--98/dfe-ui-chakra` gives you a Chakra-inspired presentation layer for:
 
 - field rendering
 - step indicators
 - form preview screens
 
-It is built on top of the shared renderer contract from `@dmc-98/dfe-react/renderers`.
+It is built on top of the shared renderer contract from `@dmc--98/dfe-react/renderers`.
 
 ## What This Package Is Not
 
 This package does not currently render native `@chakra-ui/react` components.
 It provides a stable Chakra-style visual language and token preset without requiring Chakra UI as a runtime dependency.
 
-If you need direct Chakra component integration, use `renderField` with your own renderer on top of `@dmc-98/dfe-react`.
+If you need direct Chakra component integration, use `renderField` with your own renderer on top of `@dmc--98/dfe-react`.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-ui-chakra @dmc-98/dfe-react @dmc-98/dfe-core react react-dom
+npm install @dmc--98/dfe-ui-chakra @dmc--98/dfe-react @dmc--98/dfe-core react react-dom
 ```
 
 ## Exports
@@ -33,14 +33,14 @@ import {
   DfeChakraStepIndicator,
   DfeChakraFormPreview,
   DfeChakraThemeProvider,
-} from '@dmc-98/dfe-ui-chakra'
+} from '@dmc--98/dfe-ui-chakra'
 ```
 
 ## Usage
 
 ```tsx
-import { DfeFormRenderer } from '@dmc-98/dfe-react/components'
-import { ChakraFieldRenderer } from '@dmc-98/dfe-ui-chakra'
+import { DfeFormRenderer } from '@dmc--98/dfe-react/components'
+import { ChakraFieldRenderer } from '@dmc--98/dfe-ui-chakra'
 
 <DfeFormRenderer
   fields={visibleFields}

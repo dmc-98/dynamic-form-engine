@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SqliteDatabaseAdapter = exports.InMemoryModelStore = void 0;
-const dfe_server_1 = require("@dmc-98/dfe-server");
+const dfe_server_1 = require("@dmc--98/dfe-server");
 // ─── In-Memory Model Store (for API Contract execution) ─────────────────────
 /**
  * Simple in-memory model store for dynamic resource operations.
@@ -43,7 +43,7 @@ exports.InMemoryModelStore = InMemoryModelStore;
  * @example
  * ```ts
  * import Database from 'better-sqlite3'
- * import { SqliteDatabaseAdapter } from '@dmc-98/dfe-sqlite'
+ * import { SqliteDatabaseAdapter } from '@dmc--98/dfe-sqlite'
  *
  * const db = new Database('dfe.db')
  * const adapter = new SqliteDatabaseAdapter(db)

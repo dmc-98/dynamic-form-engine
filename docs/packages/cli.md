@@ -1,4 +1,4 @@
-# @dmc-98/dfe-cli
+# @dmc--98/dfe-cli
 
 CLI scaffolding tool for the Dynamic Form Engine.
 
@@ -15,7 +15,7 @@ npx dfe migrate plan --adapter prisma
 Or install globally:
 
 ```bash
-npm install -g @dmc-98/dfe-cli
+npm install -g @dmc--98/dfe-cli
 ```
 
 ## Commands
@@ -56,10 +56,10 @@ npx dfe add fe-hooks        # React hooks + example component
 
 | Module | Files Created | Packages Required |
 |--------|--------------|-------------------|
-| `prisma-schema` | `prisma/dfe-schema.prisma` | `@dmc-98/dfe-prisma`, `@dmc-98/dfe-server` |
-| `drizzle-schema` | `src/db/dfe-schema.ts` | `@dmc-98/dfe-drizzle`, `@dmc-98/dfe-server` |
-| `be-utils` | `src/routes/dfe.ts` | `@dmc-98/dfe-server`, `@dmc-98/dfe-express` |
-| `fe-hooks` | `src/hooks/useDfe.ts`, `src/components/DfeForm.tsx` | `@dmc-98/dfe-react`, `@dmc-98/dfe-core` |
+| `prisma-schema` | `prisma/dfe-schema.prisma` | `@dmc--98/dfe-prisma`, `@dmc--98/dfe-server` |
+| `drizzle-schema` | `src/db/dfe-schema.ts` | `@dmc--98/dfe-drizzle`, `@dmc--98/dfe-server` |
+| `be-utils` | `src/routes/dfe.ts` | `@dmc--98/dfe-server`, `@dmc--98/dfe-express` |
+| `fe-hooks` | `src/hooks/useDfe.ts`, `src/components/DfeForm.tsx` | `@dmc--98/dfe-react`, `@dmc--98/dfe-core` |
 
 ### `dfe migrate <command>`
 
@@ -107,8 +107,8 @@ npx dfe migrate plan --adapter prisma
 npx dfe migrate generate --adapter prisma
 
 # 4. Install packages
-npm install @dmc-98/dfe-core @dmc-98/dfe-server @dmc-98/dfe-express \
-  @dmc-98/dfe-prisma @dmc-98/dfe-react zod express @prisma/client react
+npm install @dmc--98/dfe-core @dmc--98/dfe-server @dmc--98/dfe-express \
+  @dmc--98/dfe-prisma @dmc--98/dfe-react zod express @prisma/client react
 
 # 5. Run migrations
 npx prisma migrate dev --schema prisma/schema.prisma --name add_dfe_tables

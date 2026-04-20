@@ -1,4 +1,4 @@
-import type { PluginDefinition } from '@dmc-98/dfe-core'
+import type { PluginDefinition } from '@dmc--98/dfe-core'
 
 export interface PluginRegistry {
   /** Register a plugin */

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FormField, FieldType } from '@dmc-98/dfe-core';
+import type { FormField, FieldType } from '@dmc--98/dfe-core';
 export interface ConfigPanelProps {
     /** The field being configured */
     field: FormField;

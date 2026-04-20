@@ -96,7 +96,7 @@ interface FormStepper {
 Generate a `z.object()` schema from field definitions.
 
 ```ts
-import { generateZodSchema } from '@dmc-98/dfe-core'
+import { generateZodSchema } from '@dmc--98/dfe-core'
 const schema = generateZodSchema(visibleFields)
 const result = schema.safeParse(values)
 ```

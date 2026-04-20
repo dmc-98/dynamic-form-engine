@@ -1,19 +1,19 @@
-# @dmc-98/dfe-express
+# @dmc--98/dfe-express
 
 Express route handlers for the Dynamic Form Engine. One-liner setup.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-express @dmc-98/dfe-server express
+npm install @dmc--98/dfe-express @dmc--98/dfe-server express
 ```
 
 ## Usage
 
 ```ts
 import express from 'express'
-import { createDfeRouter } from '@dmc-98/dfe-express'
-import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+import { createDfeRouter } from '@dmc--98/dfe-express'
+import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
 
 const app = express()
 const db = new PrismaDatabaseAdapter(prisma)
@@ -73,7 +73,7 @@ app.use('/api', createDfeRouter({
 Pass the optional `hipaa` config when you want protected-field analytics redaction, audit logging hooks, and encrypted submission-vault storage:
 
 ```ts
-import { createAesGcmFieldProtector, createInMemoryAuditLogStore } from '@dmc-98/dfe-server'
+import { createAesGcmFieldProtector, createInMemoryAuditLogStore } from '@dmc--98/dfe-server'
 
 const audit = createInMemoryAuditLogStore()
 const valueProtector = createAesGcmFieldProtector({ secret: process.env.DFE_HIPAA_SECRET! })

@@ -1,11 +1,11 @@
-# @dmc-98/dfe-react
+# @dmc--98/dfe-react
 
 React hooks and optional headless components for the Dynamic Form Engine, including the current browser-local sync/offline baseline used by the canonical example.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-react @dmc-98/dfe-core react zod
+npm install @dmc--98/dfe-react @dmc--98/dfe-core react zod
 ```
 
 ## Hooks
@@ -15,7 +15,7 @@ npm install @dmc-98/dfe-react @dmc-98/dfe-core react zod
 Wraps `createFormEngine()` with React state:
 
 ```tsx
-import { useFormEngine } from '@dmc-98/dfe-react'
+import { useFormEngine } from '@dmc--98/dfe-react'
 
 const { values, setFieldValue, visibleFields, validate, reset } = useFormEngine({
   fields,               // FormField[]
@@ -31,7 +31,7 @@ const { values, setFieldValue, visibleFields, validate, reset } = useFormEngine(
 Wraps `createFormStepper()` with React state:
 
 ```tsx
-import { useFormStepper } from '@dmc-98/dfe-react'
+import { useFormStepper } from '@dmc--98/dfe-react'
 
 const stepper = useFormStepper({
   steps,                // FormStep[]
@@ -50,7 +50,7 @@ stepper.markComplete('step1')
 Manages the submission lifecycle (create, step submit, complete):
 
 ```tsx
-import { useFormRuntime } from '@dmc-98/dfe-react'
+import { useFormRuntime } from '@dmc--98/dfe-react'
 
 const runtime = useFormRuntime({
   baseUrl: '/api',
@@ -69,7 +69,7 @@ await runtime.completeSubmission()
 Adds IndexedDB-backed draft persistence and queued mutation replay on reconnect:
 
 ```tsx
-import { useOfflineFormRuntime } from '@dmc-98/dfe-react'
+import { useOfflineFormRuntime } from '@dmc--98/dfe-react'
 
 const runtime = useOfflineFormRuntime({
   baseUrl: '/api',
@@ -88,7 +88,7 @@ if (runtime.isOffline) {
 Adds browser-local collaborative draft sync and participant awareness:
 
 ```tsx
-import { useFormEngine, useFormSync } from '@dmc-98/dfe-react'
+import { useFormEngine, useFormSync } from '@dmc--98/dfe-react'
 
 const engine = useFormEngine({ fields })
 const sync = useFormSync({
@@ -107,7 +107,7 @@ console.log(sync.participants)
 Loads options for dynamic SELECT fields with pagination and search:
 
 ```tsx
-import { useDynamicOptions } from '@dmc-98/dfe-react'
+import { useDynamicOptions } from '@dmc--98/dfe-react'
 
 const { options, isLoading, hasMore, loadMore, search } = useDynamicOptions({
   endpoint: '/api/dfe/fields/dept/options',
@@ -119,10 +119,10 @@ const { options, isLoading, hasMore, loadMore, search } = useDynamicOptions({
 
 ## Default Components
 
-Import from `@dmc-98/dfe-react/components`:
+Import from `@dmc--98/dfe-react/components`:
 
 ```tsx
-import { DfeFormRenderer, DfeStepIndicator } from '@dmc-98/dfe-react/components'
+import { DfeFormRenderer, DfeStepIndicator } from '@dmc--98/dfe-react/components'
 ```
 
 ### `<DfeFormRenderer />`
@@ -176,10 +176,10 @@ function MyForm({ fields }) {
 
 ## Theming
 
-`@dmc-98/dfe-react` now ships a token-driven theme layer for the default components:
+`@dmc--98/dfe-react` now ships a token-driven theme layer for the default components:
 
 ```tsx
-import { DfeThemeProvider } from '@dmc-98/dfe-react/theme'
+import { DfeThemeProvider } from '@dmc--98/dfe-react/theme'
 
 <DfeThemeProvider
   theme={{
@@ -213,7 +213,7 @@ The provider injects shared CSS-variable-backed base styles for:
 
 ## Sync Utilities
 
-`@dmc-98/dfe-react` also exports:
+`@dmc--98/dfe-react` also exports:
 
 - `createIndexedDbPersistenceAdapter()`
 - `createMemoryPersistenceAdapter()`

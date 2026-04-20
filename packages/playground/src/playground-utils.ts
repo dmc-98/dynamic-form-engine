@@ -5,7 +5,7 @@ import type {
   FormTemplate,
   GeneratedFormConfig,
   ValidationSuggestion,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import type { PlaygroundFormConfig } from './validateConfig'
 
 export function parsePlaygroundConfig(jsonText: string): {

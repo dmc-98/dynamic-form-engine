@@ -2,7 +2,7 @@
  * Shared test fixtures for E2E tests.
  * Provides reusable form configurations, fields, and steps.
  */
-import type { FormField, FormStep, FormValues, FieldType, ConditionSkipRule, StepBranch } from '@dmc-98/dfe-core'
+import type { FormField, FormStep, FormValues, FieldType, ConditionSkipRule, StepBranch } from '@dmc--98/dfe-core'
 
 // ─── Field Factory ──────────────────────────────────────────────────────────
 

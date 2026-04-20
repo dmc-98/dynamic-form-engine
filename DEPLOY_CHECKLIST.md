@@ -1,10 +1,10 @@
 # Deploy Checklist
 
-This checklist is for the first public `@dmc-98` release and for future release-day deployments.
+This checklist is for the first public `@dmc--98` release and for future release-day deployments.
 
 ## 1. Registry And Repo Setup
 
-- [ ] Reserve the npm scope `@dmc-98` and confirm maintainer access.
+- [ ] Reserve the npm scope `@dmc--98` and confirm maintainer access.
 - [ ] Configure `NPM_TOKEN` in GitHub repository secrets.
 - [ ] Confirm branch protection on `main`.
 - [ ] Confirm the `Release` workflow is enabled.
@@ -35,12 +35,12 @@ This checklist is for the first public `@dmc-98` release and for future release-
 
 ## 4. Publish Readiness
 
-- [ ] README, docs, and examples reflect the current package scope `@dmc-98`.
+- [ ] README, docs, and examples reflect the current package scope `@dmc--98`.
 - [ ] All stable packages are correctly labeled as Stable.
 - [ ] Release notes draft is ready.
 - [ ] Comparison and acknowledgements pages are up to date.
 - [ ] Changesets are present for release-worthy changes.
-- [ ] `pnpm --filter @dmc-98/dfe-core publish --dry-run --access public`
+- [ ] `pnpm --filter @dmc--98/dfe-core publish --dry-run --access public`
 
 ## 5. Release Day
 
@@ -78,6 +78,6 @@ Do not publish if any of these are true:
 
 - `pnpm build`, `pnpm test`, or `pnpm typecheck` fails.
 - A Playwright release path is broken.
-- Package scopes are mixed between `@dmc-98` and any old scope.
+- Package scopes are mixed between `@dmc--98` and any old scope.
 - Release notes or docs materially misrepresent stability.
 - The docs build fails.

@@ -2,7 +2,7 @@
  * Shared test fixtures for E2E tests.
  * Provides reusable form configurations, fields, and steps.
  */
-import type { FormField, FormStep, FormValues, FieldType } from '@dmc-98/dfe-core';
+import type { FormField, FormStep, FormValues, FieldType } from '@dmc--98/dfe-core';
 export declare function makeField(keyOrOverrides: string | (Partial<FormField> & {
     key: string;
     type?: FieldType;

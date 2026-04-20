@@ -1,6 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { FormField, FormStep } from '@dmc-98/dfe-core'
+import type { FormField, FormStep } from '@dmc--98/dfe-core'
 
 export interface DfeDocusaurusFormConfig {
   title?: string

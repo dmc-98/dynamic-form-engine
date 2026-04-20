@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 const fixtures_1 = require("./helpers/fixtures");
 (0, vitest_1.describe)('Multi-Step Forms', () => {
     (0, vitest_1.beforeEach)(() => {

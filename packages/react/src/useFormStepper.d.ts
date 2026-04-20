@@ -1,4 +1,4 @@
-import { type FormEngine, type FormStep, type FormStepper, type StepNodeState } from '@dmc-98/dfe-core';
+import { type FormEngine, type FormStep, type FormStepper, type StepNodeState } from '@dmc--98/dfe-core';
 export interface UseFormStepperOptions {
     /** Step definitions */
     steps: FormStep[];
@@ -50,7 +50,7 @@ export interface UseFormStepperReturn {
  *
  * @example
  * ```tsx
- * import { useFormEngine, useFormStepper } from '@dmc-98/dfe-react'
+ * import { useFormEngine, useFormStepper } from '@dmc--98/dfe-react'
  *
  * function MultiStepForm({ formData }) {
  *   const engine = useFormEngine({ fields: formData.fields })

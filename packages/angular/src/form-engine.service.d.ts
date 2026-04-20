@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState } from '@dmc-98/dfe-core';
+import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState } from '@dmc--98/dfe-core';
 export interface DfeFormEngineServiceConfig {
     /** Form field definitions */
     fields: FormField[];
@@ -14,7 +14,7 @@ export interface DfeFormEngineServiceConfig {
  * @example
  * ```typescript
  * import { Component } from '@angular/core'
- * import { DfeFormEngineService } from '@dmc-98/dfe-angular'
+ * import { DfeFormEngineService } from '@dmc--98/dfe-angular'
  *
  * @Component({
  *   selector: 'app-form',

@@ -5,7 +5,7 @@ import type {
   StepSubmitPayload,
   StepSubmitResponse,
   SyncConnectionState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   buildSyncStorageKey,
   createOfflineRuntimeState,

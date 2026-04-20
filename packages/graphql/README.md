@@ -1,4 +1,4 @@
-# @dmc-98/dfe-graphql
+# @dmc--98/dfe-graphql
 
 Beta GraphQL API helpers for Dynamic Form Engine.
 
@@ -7,7 +7,7 @@ This package provides a GraphQL schema, root resolvers, and an execution helper 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-graphql @dmc-98/dfe-server graphql
+npm install @dmc--98/dfe-graphql @dmc--98/dfe-server graphql
 ```
 
 ## Exports
@@ -16,7 +16,7 @@ npm install @dmc-98/dfe-graphql @dmc-98/dfe-server graphql
 import {
   createDfeGraphqlApi,
   createDfeGraphqlSchema,
-} from '@dmc-98/dfe-graphql'
+} from '@dmc--98/dfe-graphql'
 ```
 
 ## Operations

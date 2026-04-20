@@ -5,7 +5,7 @@ import {
   type FormField,
   type FormStep,
   type StepNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import { DfeFormRenderer, DfeStepIndicator } from '../src/components'
 import type { DfeFormRendererProps, DfeStepIndicatorProps } from '../src/components/DfeFormRenderer'
 

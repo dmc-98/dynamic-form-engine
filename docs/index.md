@@ -49,7 +49,7 @@ features:
 ## Quick Look
 
 ```ts
-import { createFormEngine, createFormStepper } from '@dmc-98/dfe-core'
+import { createFormEngine, createFormStepper } from '@dmc--98/dfe-core'
 
 // 1. Create the engine from field definitions
 const engine = createFormEngine(fields, existingData)
@@ -83,10 +83,10 @@ It matches the package lane currently verified from the repo root.
 
 | Package | Description |
 |---------|-------------|
-| [`@dmc-98/dfe-core`](/packages/core) | Zero-dep engine: types, DAG, conditions, validation, stepper |
-| [`@dmc-98/dfe-server`](/packages/server) | Framework-agnostic backend: adapter interfaces, step submission pipeline |
-| [`@dmc-98/dfe-express`](/packages/express) | Express route handlers — one-liner setup |
-| [`@dmc-98/dfe-prisma`](/packages/prisma) | Prisma adapter + ready-to-use schema |
-| [`@dmc-98/dfe-drizzle`](/packages/drizzle) | Drizzle adapter + PostgreSQL schema |
-| [`@dmc-98/dfe-react`](/packages/react) | React hooks + optional headless components |
-| [`@dmc-98/dfe-cli`](/packages/cli) | CLI scaffolding: `npx dfe init`, `npx dfe add` |
+| [`@dmc--98/dfe-core`](/packages/core) | Zero-dep engine: types, DAG, conditions, validation, stepper |
+| [`@dmc--98/dfe-server`](/packages/server) | Framework-agnostic backend: adapter interfaces, step submission pipeline |
+| [`@dmc--98/dfe-express`](/packages/express) | Express route handlers — one-liner setup |
+| [`@dmc--98/dfe-prisma`](/packages/prisma) | Prisma adapter + ready-to-use schema |
+| [`@dmc--98/dfe-drizzle`](/packages/drizzle) | Drizzle adapter + PostgreSQL schema |
+| [`@dmc--98/dfe-react`](/packages/react) | React hooks + optional headless components |
+| [`@dmc--98/dfe-cli`](/packages/cli) | CLI scaffolding: `npx dfe init`, `npx dfe add` |

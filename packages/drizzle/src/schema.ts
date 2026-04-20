@@ -3,7 +3,7 @@
  *
  * Usage:
  * ```ts
- * import { dfeForms, dfeFormVersions, dfeSteps, dfeFields } from '@dmc-98/dfe-drizzle/schema'
+ * import { dfeForms, dfeFormVersions, dfeSteps, dfeFields } from '@dmc--98/dfe-drizzle/schema'
  * ```
  *
  * Compatible with PostgreSQL via drizzle-orm/pg-core.

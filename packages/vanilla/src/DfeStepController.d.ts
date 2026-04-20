@@ -1,4 +1,4 @@
-import { type FormEngine, type FormStep, type FormStepper, type StepNodeState } from '@dmc-98/dfe-core';
+import { type FormEngine, type FormStep, type FormStepper, type StepNodeState } from '@dmc--98/dfe-core';
 export interface DfeStepControllerConfig {
     /** Step definitions */
     steps: FormStep[];
@@ -35,7 +35,7 @@ export interface StepVisibilityChangeEvent extends Event {
  *
  * @example
  * ```typescript
- * import { DfeFormController, DfeStepController } from '@dmc-98/dfe-vanilla'
+ * import { DfeFormController, DfeStepController } from '@dmc--98/dfe-vanilla'
  *
  * const formController = new DfeFormController({ fields: myFields })
  * const stepController = new DfeStepController({

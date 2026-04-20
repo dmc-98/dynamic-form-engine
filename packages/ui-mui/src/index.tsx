@@ -1,13 +1,13 @@
 import React from 'react'
-import type { FormField, FormValues, StepNodeState } from '@dmc-98/dfe-core'
-import * as DfeRenderers from '@dmc-98/dfe-react/renderers'
+import type { FormField, FormValues, StepNodeState } from '@dmc--98/dfe-core'
+import * as DfeRenderers from '@dmc--98/dfe-react/renderers'
 import {
   DfeFormPreview,
   DfeStepIndicator,
   type DfeFormPreviewProps,
   type DfeStepIndicatorProps,
-} from '@dmc-98/dfe-react/components'
-import type { FieldRendererProps } from '@dmc-98/dfe-react/renderers'
+} from '@dmc--98/dfe-react/components'
+import type { FieldRendererProps } from '@dmc--98/dfe-react/renderers'
 
 const DefaultFieldRenderer = DfeRenderers
   .DefaultFieldRenderer as React.ComponentType<FieldRendererProps>
@@ -105,6 +105,6 @@ export function DfeMuiFormPreview(
 }
 
 export { muiThemeStyles }
-export type { FieldRendererProps } from '@dmc-98/dfe-react/renderers'
-export type { DfeFormPreviewProps, DfeStepIndicatorProps } from '@dmc-98/dfe-react/components'
-export type { FormField, FormValues, StepNodeState } from '@dmc-98/dfe-core'
+export type { FieldRendererProps } from '@dmc--98/dfe-react/renderers'
+export type { DfeFormPreviewProps, DfeStepIndicatorProps } from '@dmc--98/dfe-react/components'
+export type { FormField, FormValues, StepNodeState } from '@dmc--98/dfe-core'

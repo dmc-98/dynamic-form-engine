@@ -14,10 +14,10 @@ This document answers two practical questions:
   - server-backed remote collaboration for the Hono + Prisma serverless reference path
 - A real serverless collaboration architecture is no longer just feasible on paper; it is implemented and browser-verified in the reference lane.
 - The best current foundation for serverless is:
-  - `@dmc-98/dfe-core`
-  - `@dmc-98/dfe-server`
-  - `@dmc-98/dfe-hono`
-  - `@dmc-98/dfe-drizzle` or a carefully configured `@dmc-98/dfe-prisma`
+  - `@dmc--98/dfe-core`
+  - `@dmc--98/dfe-server`
+  - `@dmc--98/dfe-hono`
+  - `@dmc--98/dfe-drizzle` or a carefully configured `@dmc--98/dfe-prisma`
 - The remaining caveats are mostly about breadth and production hardening, not the existence of a serverless collaboration path:
   - only the Hono + Prisma reference lane is browser-verified today
   - observability is still lightweight rather than full OpenTelemetry
@@ -28,11 +28,11 @@ This document answers two practical questions:
 
 What exists today:
 
-- deterministic field-operation merge semantics in `@dmc-98/dfe-core`
+- deterministic field-operation merge semantics in `@dmc--98/dfe-core`
 - participant presence and snapshots
-- offline queueing and IndexedDB persistence in `@dmc-98/dfe-react`
+- offline queueing and IndexedDB persistence in `@dmc--98/dfe-react`
 - browser-verified cross-tab editing in the canonical example
-- server collaboration contracts in `@dmc-98/dfe-server`
+- server collaboration contracts in `@dmc--98/dfe-server`
 - Hono collaboration endpoints for join, snapshot, operations, presence, and SSE streaming
 - durable Prisma-backed collaboration storage
 - browser-verified remote collaboration against the serverless reference app
@@ -61,17 +61,17 @@ The key nuance now is that collaboration has both a local and a remote mode. `Br
 
 | Package / surface | Serverless feasibility | Reality check |
 | --- | --- | --- |
-| `@dmc-98/dfe-core` | Yes | Pure logic/types. Good fit for serverless and edge execution. |
-| `@dmc-98/dfe-server` | Yes, with durable implementations | The contracts are mostly stateless and adapter-driven. Default observability/analytics helpers must not be mistaken for durable infra. |
-| `@dmc-98/dfe-hono` | Best fit | Hono is the strongest current wrapper for fetch-style serverless and edge runtimes. |
-| `@dmc-98/dfe-graphql` | Yes | Pure execution layer. Feasibility depends on the surrounding HTTP/runtime adapter and database choice. |
-| `@dmc-98/dfe-trpc` | Yes | Feasible when hosted through a serverless-compatible adapter. |
-| `@dmc-98/dfe-express` | Partial | Fine for Node-style serverless wrappers, but not the best serverless-first or edge target. |
-| `@dmc-98/dfe-fastify` | Partial | Feasible in Node serverless, less attractive than Hono for serverless-first design. |
-| `@dmc-98/dfe-prisma` | Yes, with caveats | Feasible if the chosen runtime, driver, connection strategy, and pooling model fit the target platform. Default dynamic-resource execution is still in-memory unless overridden. |
-| `@dmc-98/dfe-drizzle` | Yes | Structurally the cleanest current ORM adapter for serverless-first work. Default dynamic-resource execution still needs a real implementation. |
-| `@dmc-98/dfe-mongoose` | Partial | Reasonable for Node serverless, not edge-friendly, and still relies on in-memory dynamic-resource execution by default. |
-| `@dmc-98/dfe-sqlite` | Poor fit for distributed serverless | Useful for local/dev and single-node setups, not a good default for horizontally distributed serverless collaboration. |
+| `@dmc--98/dfe-core` | Yes | Pure logic/types. Good fit for serverless and edge execution. |
+| `@dmc--98/dfe-server` | Yes, with durable implementations | The contracts are mostly stateless and adapter-driven. Default observability/analytics helpers must not be mistaken for durable infra. |
+| `@dmc--98/dfe-hono` | Best fit | Hono is the strongest current wrapper for fetch-style serverless and edge runtimes. |
+| `@dmc--98/dfe-graphql` | Yes | Pure execution layer. Feasibility depends on the surrounding HTTP/runtime adapter and database choice. |
+| `@dmc--98/dfe-trpc` | Yes | Feasible when hosted through a serverless-compatible adapter. |
+| `@dmc--98/dfe-express` | Partial | Fine for Node-style serverless wrappers, but not the best serverless-first or edge target. |
+| `@dmc--98/dfe-fastify` | Partial | Feasible in Node serverless, less attractive than Hono for serverless-first design. |
+| `@dmc--98/dfe-prisma` | Yes, with caveats | Feasible if the chosen runtime, driver, connection strategy, and pooling model fit the target platform. Default dynamic-resource execution is still in-memory unless overridden. |
+| `@dmc--98/dfe-drizzle` | Yes | Structurally the cleanest current ORM adapter for serverless-first work. Default dynamic-resource execution still needs a real implementation. |
+| `@dmc--98/dfe-mongoose` | Partial | Reasonable for Node serverless, not edge-friendly, and still relies on in-memory dynamic-resource execution by default. |
+| `@dmc--98/dfe-sqlite` | Poor fit for distributed serverless | Useful for local/dev and single-node setups, not a good default for horizontally distributed serverless collaboration. |
 | `examples/fullstack/api` | Yes, via the serverless entrypoint | The package now contains both the stable Express entrypoint and a Hono-based serverless reference entrypoint for remote collaboration. |
 
 ## Concrete Blockers Found In The Codebase
@@ -119,11 +119,11 @@ Use the current sync model, but move coordination to the backend.
 
 ### 1. Keep the shared sync model
 
-Retain the current `@dmc-98/dfe-core` sync document, lamport ordering, conflict rules, and snapshot shape.
+Retain the current `@dmc--98/dfe-core` sync document, lamport ordering, conflict rules, and snapshot shape.
 
 ### 2. Add server collaboration contracts
 
-Add collaboration-specific server abstractions, either in `@dmc-98/dfe-server` or a dedicated collaboration package:
+Add collaboration-specific server abstractions, either in `@dmc--98/dfe-server` or a dedicated collaboration package:
 
 - `CollaborationStore`
 - `CollaborationPresenceStore`

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 /**
  * These tests verify the core logic that useFormEngine and useFormStepper
  * hooks rely on. The hooks are thin React wrappers around createFormEngine

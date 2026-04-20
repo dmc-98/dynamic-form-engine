@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import type { NextFunction, Request, Response } from 'express'
-import type { FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { FormRuntimeContext } from '@dmc--98/dfe-core'
 import {
   buildAnalyticsSummary,
   completeSubmission,
@@ -15,14 +15,14 @@ import {
   selectExperimentVariant,
   storeProtectedFieldVault,
   storeProtectedValuesInContext,
-} from '@dmc-98/dfe-server'
-import type { DatabaseAdapter, PersistenceAdapter } from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
+import type { DatabaseAdapter, PersistenceAdapter } from '@dmc--98/dfe-server'
 import type {
   AuditLogStore,
   ComplianceAnalyticsOptions,
   FieldValueProtector,
   ProtectedFieldPolicy,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

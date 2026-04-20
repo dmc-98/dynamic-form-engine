@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DrizzleDatabaseAdapter = void 0;
 const drizzle_orm_1 = require("drizzle-orm");
-const dfe_server_1 = require("@dmc-98/dfe-server");
+const dfe_server_1 = require("@dmc--98/dfe-server");
 const schema_1 = require("./schema");
 // ─── Drizzle Database Adapter ───────────────────────────────────────────────
 /**
@@ -11,7 +11,7 @@ const schema_1 = require("./schema");
  * @example
  * ```ts
  * import { drizzle } from 'drizzle-orm/node-postgres'
- * import { DrizzleDatabaseAdapter } from '@dmc-98/dfe-drizzle'
+ * import { DrizzleDatabaseAdapter } from '@dmc--98/dfe-drizzle'
  *
  * const db = drizzle(pool)
  * const adapter = new DrizzleDatabaseAdapter(db)

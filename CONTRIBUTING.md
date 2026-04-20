@@ -23,13 +23,13 @@ pnpm test
 
 | Package | Path | Description |
 |---------|------|-------------|
-| `@dmc-98/dfe-core` | `packages/core` | Types, DAG engine, conditions, validation, stepper |
-| `@dmc-98/dfe-server` | `packages/server` | Framework-agnostic backend logic |
-| `@dmc-98/dfe-express` | `packages/express` | Express route handlers |
-| `@dmc-98/dfe-prisma` | `packages/prisma` | Prisma database adapter |
-| `@dmc-98/dfe-drizzle` | `packages/drizzle` | Drizzle ORM database adapter |
-| `@dmc-98/dfe-react` | `packages/react` | React hooks and components |
-| `@dmc-98/dfe-cli` | `packages/cli` | CLI scaffolding tool |
+| `@dmc--98/dfe-core` | `packages/core` | Types, DAG engine, conditions, validation, stepper |
+| `@dmc--98/dfe-server` | `packages/server` | Framework-agnostic backend logic |
+| `@dmc--98/dfe-express` | `packages/express` | Express route handlers |
+| `@dmc--98/dfe-prisma` | `packages/prisma` | Prisma database adapter |
+| `@dmc--98/dfe-drizzle` | `packages/drizzle` | Drizzle ORM database adapter |
+| `@dmc--98/dfe-react` | `packages/react` | React hooks and components |
+| `@dmc--98/dfe-cli` | `packages/cli` | CLI scaffolding tool |
 
 ### Useful Commands
 
@@ -104,7 +104,7 @@ Scope should be the package name without the `dfe-` prefix: `core`, `server`, `e
 - TypeScript strict mode — no `any` unless absolutely necessary (use `Record<string, unknown>`)
 - Explicit return types on exported functions
 - JSDoc comments on all public APIs
-- Use UUIDv7 for all ID generation (via `generateId()` from `@dmc-98/dfe-server`)
+- Use UUIDv7 for all ID generation (via `generateId()` from `@dmc--98/dfe-server`)
 - Prefer `const` over `let`, never use `var`
 - Use named exports, not default exports
 

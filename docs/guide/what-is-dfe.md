@@ -23,7 +23,7 @@ DFE separates form *definition* from form *rendering*:
 └───────────────────┬─────────────────────────────┘
                     │
           ┌─────────▼──────────┐
-          │   @dmc-98/dfe-core │  ← Framework-agnostic
+          │   @dmc--98/dfe-core │  ← Framework-agnostic
           │   DAG • Conditions   │
           │   Validation • Steps │
           └────┬────────────┬───┘

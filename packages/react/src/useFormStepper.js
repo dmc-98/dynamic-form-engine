@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useFormStepper = useFormStepper;
 const react_1 = require("react");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Hook ───────────────────────────────────────────────────────────────────
 /**
  * React hook for multi-step form navigation.
  *
  * @example
  * ```tsx
- * import { useFormEngine, useFormStepper } from '@dmc-98/dfe-react'
+ * import { useFormEngine, useFormStepper } from '@dmc--98/dfe-react'
  *
  * function MultiStepForm({ formData }) {
  *   const engine = useFormEngine({ fields: formData.fields })

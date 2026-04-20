@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createFormEngineStore = createFormEngineStore;
 exports.createFormStepperStore = createFormStepperStore;
 const store_1 = require("svelte/store");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Form Engine Store ──────────────────────────────────────────────────────
 /**
  * Creates reactive Svelte stores for form engine state.
@@ -11,7 +11,7 @@ const dfe_core_1 = require("@dmc-98/dfe-core");
  * @example
  * ```svelte
  * <script>
- *   import { createFormEngineStore } from '@dmc-98/dfe-svelte'
+ *   import { createFormEngineStore } from '@dmc--98/dfe-svelte'
  *
  *   export let fields
  *
@@ -83,7 +83,7 @@ function createFormEngineStore(fields, initialValues, onChange) {
  * @example
  * ```svelte
  * <script>
- *   import { createFormEngineStore, createFormStepperStore } from '@dmc-98/dfe-svelte'
+ *   import { createFormEngineStore, createFormStepperStore } from '@dmc--98/dfe-svelte'
  *
  *   export let formData
  *

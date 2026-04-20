@@ -23,7 +23,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@dmc-98/dfe-core': path.resolve(__dirname, '../core/src/index.ts'),
+      '@dmc--98/dfe-core': path.resolve(__dirname, '../core/src/index.ts'),
     },
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs', '.cjs', '.json'],
   },

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { createDfeRouter } from '@dmc-98/dfe-express'
+import { createDfeRouter } from '@dmc--98/dfe-express'
 import { InMemoryDatabase, createTestDb, seedContactForm, seedMultiStepForm } from './helpers/mock-db'
 
 // Use require to load these packages at runtime in Node environment

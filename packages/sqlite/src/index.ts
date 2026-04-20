@@ -1,12 +1,12 @@
 import type {
   FormField, FormStep, SelectOption, StepApiContract,
   FormRuntimeContext,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import type {
   DatabaseAdapter, PaginationParams, PaginatedResult,
   FormDefinitionRecord, FormVersionRecord, FormSubmissionRecord,
-} from '@dmc-98/dfe-server'
-import { generateId } from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
+import { generateId } from '@dmc--98/dfe-server'
 
 // ─── Types for better-sqlite3 ──────────────────────────────────────────────
 
@@ -83,7 +83,7 @@ export interface SqliteAdapterOptions {
  * @example
  * ```ts
  * import Database from 'better-sqlite3'
- * import { SqliteDatabaseAdapter } from '@dmc-98/dfe-sqlite'
+ * import { SqliteDatabaseAdapter } from '@dmc--98/dfe-sqlite'
  *
  * const db = new Database('dfe.db')
  * const adapter = new SqliteDatabaseAdapter(db)

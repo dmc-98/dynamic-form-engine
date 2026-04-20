@@ -3,7 +3,7 @@ import {
   createFormStepper as coreCreateFormStepper,
   type FormEngine, type FormStep, type FormStepper,
   type StepNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -56,7 +56,7 @@ export interface CreateFormStepperSignalsReturn {
  *
  * @example
  * ```tsx
- * import { createFormEngine, createFormStepper } from '@dmc-98/dfe-solid'
+ * import { createFormEngine, createFormStepper } from '@dmc--98/dfe-solid'
  * import { Show } from 'solid-js'
  *
  * export function MultiStepForm(props: { formData: any }) {

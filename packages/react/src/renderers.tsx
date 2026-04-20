@@ -1,5 +1,5 @@
 import React from 'react'
-import type { FormField, SelectOption } from '@dmc-98/dfe-core'
+import type { FormField, SelectOption } from '@dmc--98/dfe-core'
 
 export interface FieldRendererProps {
   field: FormField

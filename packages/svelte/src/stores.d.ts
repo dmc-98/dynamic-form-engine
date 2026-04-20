@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState, type FormStep, type FormStepper, type StepNodeState } from '@dmc-98/dfe-core';
+import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState, type FormStep, type FormStepper, type StepNodeState } from '@dmc--98/dfe-core';
 export interface FormEngineStores {
     /** The underlying engine instance */
     engine: FormEngine;
@@ -60,7 +60,7 @@ export interface FormStepperStores {
  * @example
  * ```svelte
  * <script>
- *   import { createFormEngineStore } from '@dmc-98/dfe-svelte'
+ *   import { createFormEngineStore } from '@dmc--98/dfe-svelte'
  *
  *   export let fields
  *
@@ -89,7 +89,7 @@ export declare function createFormEngineStore(fields: FormField[], initialValues
  * @example
  * ```svelte
  * <script>
- *   import { createFormEngineStore, createFormStepperStore } from '@dmc-98/dfe-svelte'
+ *   import { createFormEngineStore, createFormStepperStore } from '@dmc--98/dfe-svelte'
  *
  *   export let formData
  *

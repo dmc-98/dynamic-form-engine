@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createFormEngine = createFormEngine;
 const solid_js_1 = require("solid-js");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Composable ─────────────────────────────────────────────────────────────
 /**
  * Solid.js primitive for reactive form engine state using signals and memos.
  *
  * @example
  * ```tsx
- * import { createFormEngine } from '@dmc-98/dfe-solid'
+ * import { createFormEngine } from '@dmc--98/dfe-solid'
  * import { For } from 'solid-js'
  *
  * export function MyForm(props: { fields: FormField[] }) {

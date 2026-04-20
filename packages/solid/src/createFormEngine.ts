@@ -3,7 +3,7 @@ import {
   createFormEngine as coreCreateFormEngine,
   type FormField, type FormValues, type FormEngine,
   type GraphPatch, type FieldNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -44,7 +44,7 @@ export interface CreateFormEngineSignalsReturn {
  *
  * @example
  * ```tsx
- * import { createFormEngine } from '@dmc-98/dfe-solid'
+ * import { createFormEngine } from '@dmc--98/dfe-solid'
  * import { For } from 'solid-js'
  *
  * export function MyForm(props: { fields: FormField[] }) {

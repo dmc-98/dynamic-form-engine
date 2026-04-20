@@ -1,5 +1,5 @@
 import React from 'react'
-import type { FormField, FormValues } from '@dmc-98/dfe-core'
+import type { FormField, FormValues } from '@dmc--98/dfe-core'
 import { DefaultFieldRenderer, type FieldRendererProps } from '../renderers'
 
 export interface DfeFormRendererProps {

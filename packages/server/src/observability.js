@@ -56,7 +56,7 @@ function createTracer() {
  * @example
  * ```ts
  * import express from 'express'
- * import { createTracer, createTracingMiddleware } from '@dmc-98/dfe-server'
+ * import { createTracer, createTracingMiddleware } from '@dmc--98/dfe-server'
  *
  * const app = express()
  * const tracer = createTracer()

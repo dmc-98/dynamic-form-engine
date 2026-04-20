@@ -6,7 +6,7 @@
  */
 export declare const config: {
     /** npm scope — used in all package.json "name" fields */
-    readonly orgScope: "@dmc-98";
+    readonly orgScope: "@dmc--98";
     /** GitHub organisation or user */
     readonly githubOrg: "snarjun98";
     /** GitHub repository name */

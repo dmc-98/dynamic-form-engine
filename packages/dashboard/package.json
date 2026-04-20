@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-dashboard",
+  "name": "@dmc--98/dfe-dashboard",
   "version": "0.1.0",
   "description": "Admin dashboard for Dynamic Form Engine — manage forms, submissions, analytics",
   "license": "MIT",
@@ -20,8 +20,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
-    "@dmc-98/dfe-react": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-react": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

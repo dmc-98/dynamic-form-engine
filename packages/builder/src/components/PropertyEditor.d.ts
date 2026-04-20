@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FormField, FormStep } from '@dmc-98/dfe-core';
+import type { FormField, FormStep } from '@dmc--98/dfe-core';
 export interface PropertyEditorProps {
     /** Selected field to edit, or null */
     selectedField: FormField | null;

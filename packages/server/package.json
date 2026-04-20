@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-server",
+  "name": "@dmc--98/dfe-server",
   "version": "0.1.0",
   "description": "Framework-agnostic backend logic for Dynamic Form Engine",
   "license": "MIT",
@@ -21,10 +21,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-core": "workspace:*",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "@types/uuid": "^11.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.4.0",

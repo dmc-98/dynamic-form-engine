@@ -4,11 +4,11 @@ import type {
   FormStep,
   SelectOption,
   StepApiContract,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   buildAnalyticsSummary,
   generateId,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 import type {
   AccessContext,
   AnalyticsQuery,
@@ -21,7 +21,7 @@ import type {
   FormVersionRecord,
   PaginatedResult,
   PaginationParams,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 
 // ─── Types for PrismaClient ─────────────────────────────────────────────────
 
@@ -166,7 +166,7 @@ function mapExperiment(experiment: any): FormExperimentRecord {
  * @example
  * ```ts
  * import { PrismaClient } from '@prisma/client'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const prisma = new PrismaClient()
  * const db = new PrismaDatabaseAdapter(prisma)

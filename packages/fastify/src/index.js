@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDfePlugin = createDfePlugin;
-const dfe_server_1 = require("@dmc-98/dfe-server");
+const dfe_server_1 = require("@dmc--98/dfe-server");
 // ─── Helpers ────────────────────────────────────────────────────────────────
 /**
  * Clamp a page size value to a safe range.
@@ -47,8 +47,8 @@ function getQueryRecord(req) {
  * @example
  * ```ts
  * import Fastify from 'fastify'
- * import { createDfePlugin } from '@dmc-98/dfe-fastify'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { createDfePlugin } from '@dmc--98/dfe-fastify'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const fastify = Fastify()
  * const db = new PrismaDatabaseAdapter(prisma)

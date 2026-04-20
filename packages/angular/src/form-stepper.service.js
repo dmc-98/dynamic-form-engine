@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DfeFormStepperService = void 0;
 const core_1 = require("@angular/core");
 const rxjs_1 = require("rxjs");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Service ────────────────────────────────────────────────────────────────
 /**
  * Angular injectable service for multi-step form navigation with RxJS observables.
@@ -17,7 +17,7 @@ const dfe_core_1 = require("@dmc-98/dfe-core");
  * @example
  * ```typescript
  * import { Component } from '@angular/core'
- * import { DfeFormStepperService } from '@dmc-98/dfe-angular'
+ * import { DfeFormStepperService } from '@dmc--98/dfe-angular'
  *
  * @Component({
  *   selector: 'app-multi-step-form',

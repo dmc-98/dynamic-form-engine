@@ -1,8 +1,8 @@
 import { initTRPC, TRPCError } from '@trpc/server'
 import { z } from 'zod'
-import type { DatabaseAdapter, PersistenceAdapter } from '@dmc-98/dfe-server'
-import { executeStepSubmit, completeSubmission } from '@dmc-98/dfe-server'
-import type { FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { DatabaseAdapter, PersistenceAdapter } from '@dmc--98/dfe-server'
+import { executeStepSubmit, completeSubmission } from '@dmc--98/dfe-server'
+import type { FormRuntimeContext } from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -83,8 +83,8 @@ function buildRuntimeContext(
  *
  * @example
  * ```ts
- * import { createDfeTrpcRouter } from '@dmc-98/dfe-trpc'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { createDfeTrpcRouter } from '@dmc--98/dfe-trpc'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const db = new PrismaDatabaseAdapter(prisma)
  * const dfeRouter = createDfeTrpcRouter({

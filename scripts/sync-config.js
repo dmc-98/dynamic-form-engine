@@ -17,7 +17,7 @@ const ROOT = (0, path_1.join)(__dirname, '..');
 // We eval the config inline to avoid needing a build step
 const configSrc = (0, fs_1.readFileSync)((0, path_1.join)(ROOT, 'dfe.config.ts'), 'utf-8');
 const match = configSrc.match(/orgScope:\s*'([^']+)'/);
-const orgScope = (_a = match === null || match === void 0 ? void 0 : match[1]) !== null && _a !== void 0 ? _a : '@dmc-98';
+const orgScope = (_a = match === null || match === void 0 ? void 0 : match[1]) !== null && _a !== void 0 ? _a : '@dmc--98';
 const ghOrgMatch = configSrc.match(/githubOrg:\s*'([^']+)'/);
 const githubOrg = (_b = ghOrgMatch === null || ghOrgMatch === void 0 ? void 0 : ghOrgMatch[1]) !== null && _b !== void 0 ? _b : 'snarjun98';
 const ghRepoMatch = configSrc.match(/githubRepo:\s*'([^']+)'/);

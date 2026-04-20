@@ -1,6 +1,6 @@
 # Competitive Analysis: Dynamic Form Engine (DFE)
 
-**Date:** March 2026 | **Product:** @dmc-98/dfe
+**Date:** March 2026 | **Product:** @dmc--98/dfe
 
 ---
 

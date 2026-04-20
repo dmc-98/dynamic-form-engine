@@ -5,7 +5,7 @@ import {
   type SyncDocumentSnapshot,
   type SyncFieldOperation,
   type SyncPresence,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import { generateId } from './uuid'
 
 export type CollaborationEventPayload =

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createDfeGraphqlApi } from '../src'
-import type { DatabaseAdapter } from '@dmc-98/dfe-server'
+import type { DatabaseAdapter } from '@dmc--98/dfe-server'
 
 const sampleForm = {
   id: 'form-1',
@@ -164,7 +164,7 @@ function createMockDb(): DatabaseAdapter {
   }
 }
 
-describe('@dmc-98/dfe-graphql', () => {
+describe('@dmc--98/dfe-graphql', () => {
   it('lists forms through GraphQL', async () => {
     const api = createDfeGraphqlApi({
       db: createMockDb(),

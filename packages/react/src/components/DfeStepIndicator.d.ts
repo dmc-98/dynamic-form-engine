@@ -1,5 +1,5 @@
 import React from 'react';
-import type { StepNodeState } from '@dmc-98/dfe-core';
+import type { StepNodeState } from '@dmc--98/dfe-core';
 export interface DfeStepIndicatorProps {
     /** All visible steps */
     steps: StepNodeState[];

@@ -135,4 +135,4 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Core smoke check
-        run: pnpm --filter @dmc-98/dfe-core build
+        run: pnpm --filter @dmc--98/dfe-core build

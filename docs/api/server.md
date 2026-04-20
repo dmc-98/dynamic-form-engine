@@ -7,7 +7,7 @@
 Execute the full step submission pipeline.
 
 ```ts
-import { executeStepSubmit } from '@dmc-98/dfe-server'
+import { executeStepSubmit } from '@dmc--98/dfe-server'
 
 const result = await executeStepSubmit({
   form: FormVersionRecord,      // full form definition

@@ -4,7 +4,7 @@ import {
   generateZodSchema,
   generateStrictSubmissionSchema,
   type FormField,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   makeField,
   resetFieldCounter,

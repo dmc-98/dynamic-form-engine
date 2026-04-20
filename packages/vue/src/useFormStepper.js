@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useFormStepper = useFormStepper;
 const vue_1 = require("vue");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Composable ─────────────────────────────────────────────────────────────
 /**
  * Vue 3 composable for multi-step form navigation.
@@ -10,7 +10,7 @@ const dfe_core_1 = require("@dmc-98/dfe-core");
  * @example
  * ```vue
  * <script setup lang="ts">
- * import { useFormEngine, useFormStepper } from '@dmc-98/dfe-vue'
+ * import { useFormEngine, useFormStepper } from '@dmc--98/dfe-vue'
  *
  * const props = defineProps<{ formData: any }>()
  *

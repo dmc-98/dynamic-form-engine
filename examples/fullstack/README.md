@@ -8,8 +8,8 @@ As of March 12, 2026, it is a runnable local example with Prisma schema and migr
 
 Available today:
 
-- React example UI using `@dmc-98/dfe-react`
-- Express API example using `@dmc-98/dfe-express`
+- React example UI using `@dmc--98/dfe-react`
+- Express API example using `@dmc--98/dfe-express`
 - Prisma schema, initial migration, and seed data for an Employee Onboarding workflow
 - Dockerfiles and Docker Compose for local PostgreSQL and app services
 - root workspace `build` and `typecheck` verification coverage
@@ -91,7 +91,7 @@ This starts:
 │  (dfe-react) │     │ (dfe-express) │     │  (dfe-prisma) │
 └──────────────┘     └───────────────┘     └───────────────┘
        │                     │
-       └─── @dmc-98/dfe-core ──┘
+       └─── @dmc--98/dfe-core ──┘
 ```
 
 ## API Routes

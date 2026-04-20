@@ -21,7 +21,7 @@ const condition_compiler_1 = require("./condition-compiler");
  *
  * @example
  * ```ts
- * import { createFormEngine } from '@dmc-98/dfe-core'
+ * import { createFormEngine } from '@dmc--98/dfe-core'
  *
  * const engine = createFormEngine(formDefinition.fields, existingData)
  *
@@ -298,7 +298,7 @@ function evaluateSafeExpression(expression, values) {
  *
  * @example
  * ```ts
- * import { createFormEngine, createFormStepper } from '@dmc-98/dfe-core'
+ * import { createFormEngine, createFormStepper } from '@dmc--98/dfe-core'
  *
  * const engine = createFormEngine(fields, data)
  * const stepper = createFormStepper(steps, engine)

@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-hono",
+  "name": "@dmc--98/dfe-hono",
   "version": "0.1.0",
   "description": "Hono integration for Dynamic Form Engine",
   "license": "MIT",
@@ -21,8 +21,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
-    "@dmc-98/dfe-server": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-server": "workspace:*"
   },
   "peerDependencies": {
     "hono": "^4.0.0"

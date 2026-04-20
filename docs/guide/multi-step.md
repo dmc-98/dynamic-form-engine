@@ -5,7 +5,7 @@ DFE supports multi-step form workflows with step navigation, skip conditions, pe
 ## Defining Steps
 
 ```ts
-import type { FormStep, FormField } from '@dmc-98/dfe-core'
+import type { FormStep, FormField } from '@dmc--98/dfe-core'
 
 const steps: FormStep[] = [
   {
@@ -47,7 +47,7 @@ const steps: FormStep[] = [
 ### Plain TypeScript
 
 ```ts
-import { createFormEngine, createFormStepper } from '@dmc-98/dfe-core'
+import { createFormEngine, createFormStepper } from '@dmc--98/dfe-core'
 
 const engine = createFormEngine(fields)
 const stepper = createFormStepper(steps, engine)
@@ -65,7 +65,7 @@ stepper.jumpTo(2) // Jump to "Review & Submit"
 ### React
 
 ```tsx
-import { useFormEngine, useFormStepper } from '@dmc-98/dfe-react'
+import { useFormEngine, useFormStepper } from '@dmc--98/dfe-react'
 
 function MultiStepForm({ fields, steps }) {
   const engine = useFormEngine({ fields })

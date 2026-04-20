@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { createFormEngine, createFormStepper } from '@dmc-98/dfe-core'
+import { createFormEngine, createFormStepper } from '@dmc--98/dfe-core'
 import {
   makeField,
   makeStep,

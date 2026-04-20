@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import type { Context } from 'hono'
-import type { FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { FormRuntimeContext } from '@dmc--98/dfe-core'
 import {
   buildAnalyticsSummary,
   CollaborationStoreError,
@@ -24,7 +24,7 @@ import {
   type ProtectedFieldPolicy,
   storeProtectedFieldVault,
   storeProtectedValuesInContext,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

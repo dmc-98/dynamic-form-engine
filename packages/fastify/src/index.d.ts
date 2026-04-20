@@ -1,5 +1,5 @@
 import type { FastifyInstance, FastifyRequest } from 'fastify';
-import type { DatabaseAdapter, PersistenceAdapter } from '@dmc-98/dfe-server';
+import type { DatabaseAdapter, PersistenceAdapter } from '@dmc--98/dfe-server';
 export interface DfeFastifyPluginOptions {
     /** Database adapter instance */
     db: DatabaseAdapter;
@@ -46,8 +46,8 @@ export interface DfeFastifyPluginOptions {
  * @example
  * ```ts
  * import Fastify from 'fastify'
- * import { createDfePlugin } from '@dmc-98/dfe-fastify'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { createDfePlugin } from '@dmc--98/dfe-fastify'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const fastify = Fastify()
  * const db = new PrismaDatabaseAdapter(prisma)

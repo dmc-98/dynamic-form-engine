@@ -1,4 +1,4 @@
-import type { FormRuntimeContext, StepSubmitResponse, FormValues } from '@dmc-98/dfe-core';
+import type { FormRuntimeContext, StepSubmitResponse, FormValues } from '@dmc--98/dfe-core';
 export interface UseFormRuntimeOptions {
     /** Base URL of the DFE API (e.g., "http://localhost:3000/api") */
     baseUrl: string;

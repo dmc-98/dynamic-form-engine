@@ -7,14 +7,14 @@ If you want the repo's most-supported production lane, see [Supported Stack](/gu
 ## 1. Install
 
 ```bash
-npm install @dmc-98/dfe-core @dmc-98/dfe-react zod
+npm install @dmc--98/dfe-core @dmc--98/dfe-react zod
 ```
 
 ## 2. Define Fields
 
 ```ts
 // form-definition.ts
-import type { FormField } from '@dmc-98/dfe-core'
+import type { FormField } from '@dmc--98/dfe-core'
 
 export const fields: FormField[] = [
   {
@@ -53,8 +53,8 @@ export const fields: FormField[] = [
 
 ```tsx
 // SubscribeForm.tsx
-import { useFormEngine } from '@dmc-98/dfe-react'
-import { DfeFormRenderer } from '@dmc-98/dfe-react/components'
+import { useFormEngine } from '@dmc--98/dfe-react'
+import { DfeFormRenderer } from '@dmc--98/dfe-react/components'
 import { fields } from './form-definition'
 
 export function SubscribeForm() {

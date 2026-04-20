@@ -3,7 +3,7 @@ import {
   createFormEngine,
   createFormStepper,
   type FormField,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   makeField,
   makeStep,

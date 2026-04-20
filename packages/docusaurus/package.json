@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-docusaurus",
+  "name": "@dmc--98/dfe-docusaurus",
   "version": "0.1.0",
   "description": "Docusaurus plugin helpers for Dynamic Form Engine",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
-    "@dmc-98/dfe-react": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-react": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

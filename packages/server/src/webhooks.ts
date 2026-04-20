@@ -1,4 +1,4 @@
-import type { WebhookConfig, WebhookEvent, FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { WebhookConfig, WebhookEvent, FormRuntimeContext } from '@dmc--98/dfe-core'
 import { createHmac } from 'crypto'
 
 export interface WebhookPayload {

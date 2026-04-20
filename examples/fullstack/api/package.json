@@ -19,11 +19,11 @@
     "db:seed": "tsx src/seed.ts"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
-    "@dmc-98/dfe-express": "workspace:*",
-    "@dmc-98/dfe-hono": "workspace:*",
-    "@dmc-98/dfe-prisma": "workspace:*",
-    "@dmc-98/dfe-server": "workspace:*",
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-express": "workspace:*",
+    "@dmc--98/dfe-hono": "workspace:*",
+    "@dmc--98/dfe-prisma": "workspace:*",
+    "@dmc--98/dfe-server": "workspace:*",
     "@prisma/client": "^6.0.0",
     "express": "^4.21.0",
     "cors": "^2.8.5",

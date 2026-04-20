@@ -1,5 +1,5 @@
 import React from 'react'
-import type { FieldType } from '@dmc-98/dfe-core'
+import type { FieldType } from '@dmc--98/dfe-core'
 
 // ─── Field Type Categories ──────────────────────────────────────────────────
 

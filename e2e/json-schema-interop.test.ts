@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { toJsonSchema, fromJsonSchema, createFormEngine, getTemplate, listTemplates } from '@dmc-98/dfe-core'
+import { toJsonSchema, fromJsonSchema, createFormEngine, getTemplate, listTemplates } from '@dmc--98/dfe-core'
 import { makeField, resetFieldCounter, createAllFieldTypesForm } from './helpers/fixtures'
 
 describe('JSON Schema Interoperability', () => {

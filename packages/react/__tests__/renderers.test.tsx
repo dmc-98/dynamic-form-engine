@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
-import type { FormField } from '@dmc-98/dfe-core'
+import type { FormField } from '@dmc--98/dfe-core'
 import { DefaultFieldRenderer } from '../src/components/DfeFormRenderer'
 import { DfeResponsiveLayout } from '../src/components/DfeResponsiveLayout'
 import {

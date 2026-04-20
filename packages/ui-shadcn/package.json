@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-ui-shadcn",
+  "name": "@dmc--98/dfe-ui-shadcn",
   "version": "0.1.0",
   "description": "shadcn UI components for Dynamic Form Engine",
   "license": "MIT",
@@ -20,8 +20,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
-    "@dmc-98/dfe-react": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-react": "workspace:*"
   },
   "peerDependencies": {
     "@radix-ui/react-dialog": "^1.1.0",

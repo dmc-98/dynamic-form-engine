@@ -1,4 +1,4 @@
-# @dmc-98/dfe-docusaurus
+# @dmc--98/dfe-docusaurus
 
 Beta Docusaurus integration helpers for Dynamic Form Engine.
 
@@ -9,7 +9,7 @@ It is ESM-first, which fits the normal `docusaurus.config.mjs` setup.
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-docusaurus @dmc-98/dfe-core @dmc-98/dfe-react react react-dom
+npm install @dmc--98/dfe-docusaurus @dmc--98/dfe-core @dmc--98/dfe-react react react-dom
 ```
 
 ## Exports
@@ -19,7 +19,7 @@ import {
   createDfeDocusaurusPlugin,
   createDfeDocusaurusPreset,
   DfeFormPage,
-} from '@dmc-98/dfe-docusaurus'
+} from '@dmc--98/dfe-docusaurus'
 ```
 
 ## Status

@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import type { FormField, FormStep, FieldType } from '@dmc-98/dfe-core'
+import type { FormField, FormStep, FieldType } from '@dmc--98/dfe-core'
 import type { BuilderState, BuilderAction } from './types'
 
 // ─── UUID Generator ─────────────────────────────────────────────────────────

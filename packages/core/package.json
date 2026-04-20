@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-core",
+  "name": "@dmc--98/dfe-core",
   "version": "0.1.0",
   "description": "Configuration-driven dynamic form engine — types, DAG, conditions, validation, stepper",
   "license": "MIT",

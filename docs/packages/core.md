@@ -1,11 +1,11 @@
-# @dmc-98/dfe-core
+# @dmc--98/dfe-core
 
 The zero-dependency core engine. Everything else is built on top of this.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-core zod
+npm install @dmc--98/dfe-core zod
 ```
 
 `zod` is a peer dependency — you must install it alongside.
@@ -26,7 +26,7 @@ npm install @dmc-98/dfe-core zod
 ## Quick Usage
 
 ```ts
-import { createFormEngine, createFormStepper } from '@dmc-98/dfe-core'
+import { createFormEngine, createFormStepper } from '@dmc--98/dfe-core'
 
 // Engine: field management + validation
 const engine = createFormEngine(fields, initialData)

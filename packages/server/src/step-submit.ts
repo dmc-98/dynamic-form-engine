@@ -1,8 +1,8 @@
 import type {
   StepApiContract, FormRuntimeContext, FormValues,
   StepSubmitPayload, StepSubmitResponse,
-} from '@dmc-98/dfe-core'
-import { generateZodSchema } from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
+import { generateZodSchema } from '@dmc--98/dfe-core'
 import type { DatabaseAdapter, FormVersionRecord } from './adapters'
 
 // ─── Endpoint Template Resolution ───────────────────────────────────────────

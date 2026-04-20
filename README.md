@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/snarjun98/dynamic-form-engine/actions"><img src="https://github.com/snarjun98/dynamic-form-engine/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://www.npmjs.com/package/@dmc-98/dfe-core"><img src="https://img.shields.io/npm/v/@dmc-98/dfe-core" alt="npm" /></a>
+  <a href="https://www.npmjs.com/package/@dmc--98/dfe-core"><img src="https://img.shields.io/npm/v/@dmc--98/dfe-core" alt="npm" /></a>
   <a href="https://github.com/snarjun98/dynamic-form-engine/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" /></a>
   <a href="https://snarjun98.github.io/dynamic-form-engine/"><img src="https://img.shields.io/badge/docs-vitepress-646cff" alt="Docs" /></a>
 </p>
@@ -38,13 +38,13 @@
 
 | Package | Description |
 |---------|-------------|
-| [`@dmc-98/dfe-core`](packages/core) | Engine, DAG, validation, conditions — zero dependencies |
-| [`@dmc-98/dfe-server`](packages/server) | DatabaseAdapter interface, step-submission pipeline |
-| [`@dmc-98/dfe-express`](packages/express) | Express router factory with all REST endpoints |
-| [`@dmc-98/dfe-prisma`](packages/prisma) | Prisma adapter + schema |
-| [`@dmc-98/dfe-drizzle`](packages/drizzle) | Drizzle adapter + schema |
-| [`@dmc-98/dfe-react`](packages/react) | React hooks (`useFormEngine`, `useFormStepper`, `useFormRuntime`, `useOfflineFormRuntime`, `useFormSync`) + headless components |
-| [`@dmc-98/dfe-cli`](packages/cli) | CLI scaffolding tool (`dfe init`, `dfe add`) |
+| [`@dmc--98/dfe-core`](packages/core) | Engine, DAG, validation, conditions — zero dependencies |
+| [`@dmc--98/dfe-server`](packages/server) | DatabaseAdapter interface, step-submission pipeline |
+| [`@dmc--98/dfe-express`](packages/express) | Express router factory with all REST endpoints |
+| [`@dmc--98/dfe-prisma`](packages/prisma) | Prisma adapter + schema |
+| [`@dmc--98/dfe-drizzle`](packages/drizzle) | Drizzle adapter + schema |
+| [`@dmc--98/dfe-react`](packages/react) | React hooks (`useFormEngine`, `useFormStepper`, `useFormRuntime`, `useOfflineFormRuntime`, `useFormSync`) + headless components |
+| [`@dmc--98/dfe-cli`](packages/cli) | CLI scaffolding tool (`dfe init`, `dfe add`) |
 
 ---
 
@@ -61,13 +61,13 @@ Use the following maturity levels when choosing packages:
 
 | Status | Packages | Notes |
 |--------|----------|-------|
-| Stable | `@dmc-98/dfe-core`, `@dmc-98/dfe-react`, `@dmc-98/dfe-server`, `@dmc-98/dfe-express`, `@dmc-98/dfe-prisma`, `@dmc-98/dfe-drizzle`, `@dmc-98/dfe-cli`, `@dmc-98/dfe-ui-mui`, `@dmc-98/dfe-ui-antd`, `@dmc-98/dfe-ui-chakra`, `@dmc-98/dfe-playground` | Primary verified path for adoption today, plus stable optional themed wrappers and the browser-verified authoring playground |
-| Beta | `@dmc-98/dfe-builder`, `@dmc-98/dfe-dashboard`, `@dmc-98/dfe-fastify`, `@dmc-98/dfe-trpc`, `@dmc-98/dfe-hono`, `@dmc-98/dfe-graphql`, `@dmc-98/dfe-docusaurus`, `dfe-vscode` | Implemented and buildable, but not yet the main supported lane |
-| Experimental | `@dmc-98/dfe-vue`, `@dmc-98/dfe-svelte`, `@dmc-98/dfe-solid`, `@dmc-98/dfe-angular`, `@dmc-98/dfe-vanilla`, `@dmc-98/dfe-sqlite`, `@dmc-98/dfe-mongoose`, `@dmc-98/dfe-ui-shadcn`, `@dmc-98/dfe-ui-mantine` | Usable packages with lighter validation and documentation coverage |
+| Stable | `@dmc--98/dfe-core`, `@dmc--98/dfe-react`, `@dmc--98/dfe-server`, `@dmc--98/dfe-express`, `@dmc--98/dfe-prisma`, `@dmc--98/dfe-drizzle`, `@dmc--98/dfe-cli`, `@dmc--98/dfe-ui-mui`, `@dmc--98/dfe-ui-antd`, `@dmc--98/dfe-ui-chakra`, `@dmc--98/dfe-playground` | Primary verified path for adoption today, plus stable optional themed wrappers and the browser-verified authoring playground |
+| Beta | `@dmc--98/dfe-builder`, `@dmc--98/dfe-dashboard`, `@dmc--98/dfe-fastify`, `@dmc--98/dfe-trpc`, `@dmc--98/dfe-hono`, `@dmc--98/dfe-graphql`, `@dmc--98/dfe-docusaurus`, `dfe-vscode` | Implemented and buildable, but not yet the main supported lane |
+| Experimental | `@dmc--98/dfe-vue`, `@dmc--98/dfe-svelte`, `@dmc--98/dfe-solid`, `@dmc--98/dfe-angular`, `@dmc--98/dfe-vanilla`, `@dmc--98/dfe-sqlite`, `@dmc--98/dfe-mongoose`, `@dmc--98/dfe-ui-shadcn`, `@dmc--98/dfe-ui-mantine` | Usable packages with lighter validation and documentation coverage |
 
 If you are evaluating DFE for production, start with the Stable lane and treat the rest as opt-in.
 
-`@dmc-98/dfe-playground` is now a browser-verified stable authoring surface with JSON editing, live preview, AI-assisted config generation, validation suggestions, field suggestions, and a consent-based review-first draft-fill flow. The draft-fill workflow never auto-submits and should be treated as assisted review, not autonomous submission.
+`@dmc--98/dfe-playground` is now a browser-verified stable authoring surface with JSON editing, live preview, AI-assisted config generation, validation suggestions, field suggestions, and a consent-based review-first draft-fill flow. The draft-fill workflow never auto-submits and should be treated as assisted review, not autonomous submission.
 
 ---
 
@@ -75,33 +75,33 @@ If you are evaluating DFE for production, start with the Stable lane and treat t
 
 If you are starting fresh, use this package combination first:
 
-- React: `@dmc-98/dfe-react`
-- Server runtime: `@dmc-98/dfe-server`
-- HTTP adapter: `@dmc-98/dfe-express`
-- Persistence: `@dmc-98/dfe-prisma` or `@dmc-98/dfe-drizzle`
-- Scaffolding: `@dmc-98/dfe-cli`
+- React: `@dmc--98/dfe-react`
+- Server runtime: `@dmc--98/dfe-server`
+- HTTP adapter: `@dmc--98/dfe-express`
+- Persistence: `@dmc--98/dfe-prisma` or `@dmc--98/dfe-drizzle`
+- Scaffolding: `@dmc--98/dfe-cli`
 
 This is the package lane currently verified from the repo root.
 
 Optional presentation packages in the stable set:
 
-- `@dmc-98/dfe-ui-mui`
-- `@dmc-98/dfe-ui-antd`
-- `@dmc-98/dfe-ui-chakra`
-- `@dmc-98/dfe-playground`
+- `@dmc--98/dfe-ui-mui`
+- `@dmc--98/dfe-ui-antd`
+- `@dmc--98/dfe-ui-chakra`
+- `@dmc--98/dfe-playground`
 
-The UI kits are stable themed wrappers over `@dmc-98/dfe-react`, not direct bindings to native `@mui/material`, `antd`, or `@chakra-ui/react` components. `@dmc-98/dfe-playground` is the stable browser-verified authoring surface.
+The UI kits are stable themed wrappers over `@dmc--98/dfe-react`, not direct bindings to native `@mui/material`, `antd`, or `@chakra-ui/react` components. `@dmc--98/dfe-playground` is the stable browser-verified authoring surface.
 
 Optional Beta adoption surfaces:
 
-- API alternative: `@dmc-98/dfe-graphql`
-- Docs/site integration: `@dmc-98/dfe-docusaurus`
-- Visual builder: `@dmc-98/dfe-builder`
+- API alternative: `@dmc--98/dfe-graphql`
+- Docs/site integration: `@dmc--98/dfe-docusaurus`
+- Visual builder: `@dmc--98/dfe-builder`
 
 Start here:
 
 - docs: `docs/guide/supported-stack.md`
-- packages: `@dmc-98/dfe-core`, `@dmc-98/dfe-react`, `@dmc-98/dfe-server`, `@dmc-98/dfe-express`, `@dmc-98/dfe-prisma`, `@dmc-98/dfe-drizzle`, `@dmc-98/dfe-cli`
+- packages: `@dmc--98/dfe-core`, `@dmc--98/dfe-react`, `@dmc--98/dfe-server`, `@dmc--98/dfe-express`, `@dmc--98/dfe-prisma`, `@dmc--98/dfe-drizzle`, `@dmc--98/dfe-cli`
 
 The `examples/fullstack` directory now includes Prisma schema and migrations, Docker assets, a Playwright browser E2E lane (`pnpm test:e2e:example`), cross-tab collaboration, offline queueing with service-worker-backed app-shell caching, and a dedicated CI job that boots Postgres and runs the example end to end. Treat it as the browser-verified canonical example stack for the stable lane.
 
@@ -124,11 +124,11 @@ For Drizzle projects, swap `prisma` for `drizzle`, expose the generated schema e
 
 ```bash
 # Install core + React bindings
-pnpm add @dmc-98/dfe-core @dmc-98/dfe-react
+pnpm add @dmc--98/dfe-core @dmc--98/dfe-react
 ```
 
 ```tsx
-import { useFormEngine } from '@dmc-98/dfe-react'
+import { useFormEngine } from '@dmc--98/dfe-react'
 
 const { fields, values, errors, setValue, validate } = useFormEngine({
   fields: [
@@ -150,14 +150,14 @@ const { fields, values, errors, setValue, validate } = useFormEngine({
 ### Server-Side
 
 ```bash
-pnpm add @dmc-98/dfe-server @dmc-98/dfe-express @dmc-98/dfe-prisma
+pnpm add @dmc--98/dfe-server @dmc--98/dfe-express @dmc--98/dfe-prisma
 ```
 
 ```ts
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
-import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
-import { createDfeRouter } from '@dmc-98/dfe-express'
+import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
+import { createDfeRouter } from '@dmc--98/dfe-express'
 
 const app = express()
 const db = new PrismaDatabaseAdapter(new PrismaClient())

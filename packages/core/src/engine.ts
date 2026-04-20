@@ -28,7 +28,7 @@ import { compileCondition } from './condition-compiler'
  *
  * @example
  * ```ts
- * import { createFormEngine } from '@dmc-98/dfe-core'
+ * import { createFormEngine } from '@dmc--98/dfe-core'
  *
  * const engine = createFormEngine(formDefinition.fields, existingData)
  *
@@ -353,7 +353,7 @@ function evaluateSafeExpression(expression: string, values: FormValues): unknown
  *
  * @example
  * ```ts
- * import { createFormEngine, createFormStepper } from '@dmc-98/dfe-core'
+ * import { createFormEngine, createFormStepper } from '@dmc--98/dfe-core'
  *
  * const engine = createFormEngine(fields, data)
  * const stepper = createFormStepper(steps, engine)

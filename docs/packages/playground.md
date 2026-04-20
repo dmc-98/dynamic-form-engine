@@ -1,6 +1,6 @@
-# @dmc-98/dfe-playground
+# @dmc--98/dfe-playground
 
-`@dmc-98/dfe-playground` is the stable authoring surface for DFE.
+`@dmc--98/dfe-playground` is the stable authoring surface for DFE.
 
 As of March 13, 2026, it is browser-verified through the example app at `/playground` and covered by:
 

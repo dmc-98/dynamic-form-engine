@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DfeFormController = void 0;
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Controller ─────────────────────────────────────────────────────────────
 /**
  * Vanilla JavaScript form controller extending EventTarget for reactive updates.
@@ -13,7 +13,7 @@ const dfe_core_1 = require("@dmc-98/dfe-core");
  *
  * @example
  * ```typescript
- * import { DfeFormController } from '@dmc-98/dfe-vanilla'
+ * import { DfeFormController } from '@dmc--98/dfe-vanilla'
  *
  * const controller = new DfeFormController({
  *   fields: myFormFields,

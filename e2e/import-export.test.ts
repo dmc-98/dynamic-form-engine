@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import type { FormStep } from '@dmc-98/dfe-core'
+import type { FormStep } from '@dmc--98/dfe-core'
 import {
   exportForm, exportFormToYaml, exportFormToCsv,
   importForm, importFromTypeform, importFromGoogleForms,
   getTemplate,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import { makeField, resetFieldCounter, createContactForm } from './helpers/fixtures'
 
 describe('Import and Export Functionality', () => {

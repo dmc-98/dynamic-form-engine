@@ -4,7 +4,7 @@ import {
   generateFormFromDescription, buildLlmPrompt, detectFormType,
   suggestValidationRules, suggestAdditionalFields, groupSuggestionsByCategory,
   createFormEngine,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 describe('AI and Templates', () => {
   describe('Template Management', () => {

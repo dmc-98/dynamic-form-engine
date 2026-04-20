@@ -6,8 +6,8 @@ import {
   revealProtectedFieldValues,
   type FormVersionRecord,
   type ProtectedFieldPolicy,
-} from '@dmc-98/dfe-server'
-import type { FormRuntimeContext } from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-server'
+import type { FormRuntimeContext } from '@dmc--98/dfe-core'
 
 const defaultRetentionDays = Number.parseInt(process.env.DFE_HIPAA_RETENTION_DAYS ?? '30', 10)
 

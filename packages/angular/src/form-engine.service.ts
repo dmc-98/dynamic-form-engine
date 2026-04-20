@@ -4,7 +4,7 @@ import {
   createFormEngine,
   type FormField, type FormValues, type FormEngine,
   type GraphPatch, type FieldNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -25,7 +25,7 @@ export interface DfeFormEngineServiceConfig {
  * @example
  * ```typescript
  * import { Component } from '@angular/core'
- * import { DfeFormEngineService } from '@dmc-98/dfe-angular'
+ * import { DfeFormEngineService } from '@dmc--98/dfe-angular'
  *
  * @Component({
  *   selector: 'app-form',

@@ -1,14 +1,14 @@
 import express from 'express'
 import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
-import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
-import { createDfeRouter } from '@dmc-98/dfe-express'
+import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
+import { createDfeRouter } from '@dmc--98/dfe-express'
 import {
   createInMemorySpanExporter,
   createOpenTelemetryTracer,
   createTracingMiddleware,
   createAuditLogEntry,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 import {
   exampleHipaaAuditStore,
   exampleHipaaValueProtector,

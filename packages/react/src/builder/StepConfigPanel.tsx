@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import type { StepConfig, StepApiContract, ReviewConfig } from '@dmc-98/dfe-core'
+import type { StepConfig, StepApiContract, ReviewConfig } from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

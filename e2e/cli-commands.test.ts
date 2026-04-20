@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { validateFormConfig } from '@dmc-98/dfe-cli/src/commands/validate'
+import { validateFormConfig } from '@dmc--98/dfe-cli/src/commands/validate'
 import { writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { getTemplate } from '@dmc-98/dfe-core'
+import { getTemplate } from '@dmc--98/dfe-core'
 
 describe('CLI Commands', () => {
   const tmpDir = join(__dirname, '.tmp-cli-test')

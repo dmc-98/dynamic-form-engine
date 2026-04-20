@@ -16,7 +16,7 @@ const ROOT = join(__dirname, '..')
 // We eval the config inline to avoid needing a build step
 const configSrc = readFileSync(join(ROOT, 'dfe.config.ts'), 'utf-8')
 const match = configSrc.match(/orgScope:\s*'([^']+)'/)
-const orgScope = match?.[1] ?? '@dmc-98'
+const orgScope = match?.[1] ?? '@dmc--98'
 const ghOrgMatch = configSrc.match(/githubOrg:\s*'([^']+)'/)
 const githubOrg = ghOrgMatch?.[1] ?? 'snarjun98'
 const ghRepoMatch = configSrc.match(/githubRepo:\s*'([^']+)'/)

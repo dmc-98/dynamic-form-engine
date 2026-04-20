@@ -13,7 +13,7 @@ const react_1 = require("react");
  * @example
  * ```tsx
  * import { useSearchParams } from 'react-router-dom'
- * import { useFormEngine, useFormStepper, useStepUrl } from '@dmc-98/dfe-react'
+ * import { useFormEngine, useFormStepper, useStepUrl } from '@dmc--98/dfe-react'
  *
  * function MultiStepForm({ formData }) {
  *   const [searchParams, setSearchParams] = useSearchParams()

@@ -3,7 +3,7 @@
  * Creates a fully wired Express app with mock database.
  */
 import express from 'express'
-import { createDfeRouter } from '@dmc-98/dfe-express'
+import { createDfeRouter } from '@dmc--98/dfe-express'
 import type { InMemoryDatabase } from './mock-db'
 
 export interface TestAppOptions {

@@ -210,7 +210,7 @@ function createAnalyticsStore() {
  *
  * @example
  * import express from 'express'
- * import { createAnalyticsStore, createAnalyticsMiddleware } from '@dmc-98/dfe-server'
+ * import { createAnalyticsStore, createAnalyticsMiddleware } from '@dmc--98/dfe-server'
  *
  * const app = express()
  * const analyticsStore = createAnalyticsStore()

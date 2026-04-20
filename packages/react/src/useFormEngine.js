@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useFormEngine = useFormEngine;
 const react_1 = require("react");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Hook ───────────────────────────────────────────────────────────────────
 /**
  * React hook that wraps createFormEngine with reactive state.
  *
  * @example
  * ```tsx
- * import { useFormEngine } from '@dmc-98/dfe-react'
+ * import { useFormEngine } from '@dmc--98/dfe-react'
  *
  * function MyForm({ fields, initialData }) {
  *   const { values, setFieldValue, visibleFields, validate } = useFormEngine({

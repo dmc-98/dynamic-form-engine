@@ -1,13 +1,13 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import type { FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { FormRuntimeContext } from '@dmc--98/dfe-core'
 import {
   createFormEngine, createFormStepper, toJsonSchema, fromJsonSchema,
   generateZodSchema, registerSchemaBuilder, getTemplate,
   exportForm, importForm, auditFormAccessibility, generatePdfLayout,
   generateFormFromDescription, suggestValidationRules,
-} from '@dmc-98/dfe-core'
-import { createDfeRouter } from '@dmc-98/dfe-express'
-import { executeStepSubmit, buildContractBody, propagateContext, signWebhookPayload } from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-core'
+import { createDfeRouter } from '@dmc--98/dfe-express'
+import { executeStepSubmit, buildContractBody, propagateContext, signWebhookPayload } from '@dmc--98/dfe-server'
 import { InMemoryDatabase, createTestDb, seedContactForm, seedMultiStepForm } from './helpers/mock-db'
 import { makeField, resetFieldCounter, createContactForm } from './helpers/fixtures'
 

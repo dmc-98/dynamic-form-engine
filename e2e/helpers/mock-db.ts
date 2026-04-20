@@ -9,10 +9,10 @@ import type {
   FormValues,
   SelectOption,
   StepApiContract,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   buildAnalyticsSummary,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 import type {
   AccessContext,
   AnalyticsQuery,
@@ -24,7 +24,7 @@ import type {
   FormVersionRecord,
   PaginatedResult,
   PaginationParams,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 
 export class InMemoryDatabase implements DatabaseAdapter {
   private forms = new Map<string, FormVersionRecord>()

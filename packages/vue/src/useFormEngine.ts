@@ -3,7 +3,7 @@ import {
   createFormEngine,
   type FormField, type FormValues, type FormEngine,
   type GraphPatch, type FieldNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -45,7 +45,7 @@ export interface UseFormEngineReturn {
  * @example
  * ```vue
  * <script setup lang="ts">
- * import { useFormEngine } from '@dmc-98/dfe-vue'
+ * import { useFormEngine } from '@dmc--98/dfe-vue'
  *
  * const props = defineProps<{ fields: FormField[] }>()
  *

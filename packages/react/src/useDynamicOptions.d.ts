@@ -1,4 +1,4 @@
-import type { SelectOption } from '@dmc-98/dfe-core';
+import type { SelectOption } from '@dmc--98/dfe-core';
 export interface UseDynamicOptionsConfig {
     /** API endpoint for fetching options */
     endpoint: string;

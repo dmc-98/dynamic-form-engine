@@ -1,7 +1,7 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
-import type { DatabaseAdapter, PersistenceAdapter } from '@dmc-98/dfe-server'
-import { executeStepSubmit, completeSubmission } from '@dmc-98/dfe-server'
-import type { FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { DatabaseAdapter, PersistenceAdapter } from '@dmc--98/dfe-server'
+import { executeStepSubmit, completeSubmission } from '@dmc--98/dfe-server'
+import type { FormRuntimeContext } from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -81,8 +81,8 @@ function getQueryRecord(req: FastifyRequest): Record<string, unknown> {
  * @example
  * ```ts
  * import Fastify from 'fastify'
- * import { createDfePlugin } from '@dmc-98/dfe-fastify'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { createDfePlugin } from '@dmc--98/dfe-fastify'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const fastify = Fastify()
  * const db = new PrismaDatabaseAdapter(prisma)

@@ -3,7 +3,7 @@ import {
   createFormStepper,
   type FormEngine, type FormStep, type FormStepper,
   type StepNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -59,7 +59,7 @@ export interface UseFormStepperReturn {
  * @example
  * ```vue
  * <script setup lang="ts">
- * import { useFormEngine, useFormStepper } from '@dmc-98/dfe-vue'
+ * import { useFormEngine, useFormStepper } from '@dmc--98/dfe-vue'
  *
  * const props = defineProps<{ formData: any }>()
  *

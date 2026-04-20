@@ -11,7 +11,7 @@ import {
   type StepSubmitResponse,
   type SyncDocumentState,
   type SyncPendingMutation,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 export interface BrowserPersistenceAdapter {
   get<T>(key: string): Promise<T | null>
@@ -25,9 +25,9 @@ export interface IndexedDbPersistenceOptions {
 }
 
 export type SyncTransportEvent =
-  | { kind: 'operation'; operation: import('@dmc-98/dfe-core').SyncFieldOperation }
-  | { kind: 'presence'; presence: import('@dmc-98/dfe-core').SyncPresence }
-  | { kind: 'snapshot'; snapshot: import('@dmc-98/dfe-core').SyncDocumentSnapshot }
+  | { kind: 'operation'; operation: import('@dmc--98/dfe-core').SyncFieldOperation }
+  | { kind: 'presence'; presence: import('@dmc--98/dfe-core').SyncPresence }
+  | { kind: 'snapshot'; snapshot: import('@dmc--98/dfe-core').SyncDocumentSnapshot }
   | { kind: 'snapshot_request'; actorId: string; requestedAt: number }
 
 export interface SyncTransportConnection {
@@ -371,7 +371,7 @@ export function createRemoteSyncTransport(options: RemoteSyncTransportOptions): 
       readyPromise = (async () => {
         const joined = await requestJson<{
           latestSequence: number
-          snapshot?: import('@dmc-98/dfe-core').SyncDocumentSnapshot
+          snapshot?: import('@dmc--98/dfe-core').SyncDocumentSnapshot
         }>(`sessions/${nextConnection.sessionId}/join`, {
           method: 'POST',
           body: JSON.stringify({
@@ -407,7 +407,7 @@ export function createRemoteSyncTransport(options: RemoteSyncTransportOptions): 
       await readyPromise
 
       if (event.kind === 'snapshot_request') {
-        const response = await requestJson<{ snapshot?: import('@dmc-98/dfe-core').SyncDocumentSnapshot }>(
+        const response = await requestJson<{ snapshot?: import('@dmc--98/dfe-core').SyncDocumentSnapshot }>(
           `sessions/${connection.sessionId}/snapshot`,
           { method: 'GET' },
         )

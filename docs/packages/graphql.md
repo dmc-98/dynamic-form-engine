@@ -1,10 +1,10 @@
-# @dmc-98/dfe-graphql
+# @dmc--98/dfe-graphql
 
 Beta GraphQL API helpers for Dynamic Form Engine.
 
 ## What This Package Is
 
-`@dmc-98/dfe-graphql` gives you a GraphQL surface for the existing DFE server flow without forking the business logic already used by the REST adapters.
+`@dmc--98/dfe-graphql` gives you a GraphQL surface for the existing DFE server flow without forking the business logic already used by the REST adapters.
 
 It exposes:
 
@@ -16,16 +16,16 @@ It exposes:
 
 This package is not the main supported adoption path today. The canonical lane is still REST-oriented:
 
-- `@dmc-98/dfe-server`
-- `@dmc-98/dfe-express`
-- `@dmc-98/dfe-prisma` or `@dmc-98/dfe-drizzle`
+- `@dmc--98/dfe-server`
+- `@dmc--98/dfe-express`
+- `@dmc--98/dfe-prisma` or `@dmc--98/dfe-drizzle`
 
 Use GraphQL when your application platform already expects it.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-graphql @dmc-98/dfe-server graphql
+npm install @dmc--98/dfe-graphql @dmc--98/dfe-server graphql
 ```
 
 ## Exports
@@ -34,7 +34,7 @@ npm install @dmc-98/dfe-graphql @dmc-98/dfe-server graphql
 import {
   createDfeGraphqlApi,
   createDfeGraphqlSchema,
-} from '@dmc-98/dfe-graphql'
+} from '@dmc--98/dfe-graphql'
 ```
 
 ## Supported Operations
@@ -58,7 +58,7 @@ Mutations:
 ## Usage
 
 ```ts
-import { createDfeGraphqlApi } from '@dmc-98/dfe-graphql'
+import { createDfeGraphqlApi } from '@dmc--98/dfe-graphql'
 
 const api = createDfeGraphqlApi({
   db,

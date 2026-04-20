@@ -66,24 +66,24 @@ importers:
 
   examples/fullstack/api:
     dependencies:
+      '@dmc--98/dfe-core':
+        specifier: workspace:*
+        version: link:../../../packages/core
+      '@dmc--98/dfe-express':
+        specifier: workspace:*
+        version: link:../../../packages/express
+      '@dmc--98/dfe-hono':
+        specifier: workspace:*
+        version: link:../../../packages/hono
+      '@dmc--98/dfe-prisma':
+        specifier: workspace:*
+        version: link:../../../packages/prisma
+      '@dmc--98/dfe-server':
+        specifier: workspace:*
+        version: link:../../../packages/server
       '@prisma/client':
         specifier: ^6.0.0
         version: 6.19.2(prisma@6.19.2(magicast@0.3.5)(typescript@5.9.3))(typescript@5.9.3)
-      '@dmc-98/dfe-core':
-        specifier: workspace:*
-        version: link:../../../packages/core
-      '@dmc-98/dfe-express':
-        specifier: workspace:*
-        version: link:../../../packages/express
-      '@dmc-98/dfe-hono':
-        specifier: workspace:*
-        version: link:../../../packages/hono
-      '@dmc-98/dfe-prisma':
-        specifier: workspace:*
-        version: link:../../../packages/prisma
-      '@dmc-98/dfe-server':
-        specifier: workspace:*
-        version: link:../../../packages/server
       cors:
         specifier: ^2.8.5
         version: 2.8.6
@@ -115,13 +115,13 @@ importers:
 
   examples/fullstack/web:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../../../packages/core
-      '@dmc-98/dfe-playground':
+      '@dmc--98/dfe-playground':
         specifier: workspace:*
         version: link:../../../packages/playground
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../../../packages/react
       react:
@@ -149,7 +149,7 @@ importers:
 
   packages/angular:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
       rxjs:
@@ -168,10 +168,10 @@ importers:
 
   packages/builder:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -239,10 +239,10 @@ importers:
 
   packages/dashboard:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -267,10 +267,10 @@ importers:
 
   packages/docusaurus:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -301,10 +301,10 @@ importers:
 
   packages/drizzle:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
     devDependencies:
@@ -323,10 +323,10 @@ importers:
 
   packages/express:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
     devDependencies:
@@ -354,10 +354,10 @@ importers:
 
   packages/fastify:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
     devDependencies:
@@ -373,10 +373,10 @@ importers:
 
   packages/graphql:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
       graphql:
@@ -395,10 +395,10 @@ importers:
 
   packages/hono:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
     devDependencies:
@@ -417,10 +417,10 @@ importers:
 
   packages/mongoose:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
     devDependencies:
@@ -436,10 +436,10 @@ importers:
 
   packages/playground:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -467,10 +467,10 @@ importers:
 
   packages/prisma:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
     devDependencies:
@@ -489,7 +489,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -517,13 +517,16 @@ importers:
 
   packages/server:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
       uuid:
         specifier: ^13.0.0
         version: 13.0.0
     devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.37
       '@types/uuid':
         specifier: ^11.0.0
         version: 11.0.0
@@ -539,7 +542,7 @@ importers:
 
   packages/solid:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -555,10 +558,10 @@ importers:
 
   packages/sqlite:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
     devDependencies:
@@ -571,7 +574,7 @@ importers:
 
   packages/svelte:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -587,10 +590,10 @@ importers:
 
   packages/trpc:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-server':
+      '@dmc--98/dfe-server':
         specifier: workspace:*
         version: link:../server
       zod:
@@ -609,10 +612,10 @@ importers:
 
   packages/ui-antd:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -634,10 +637,10 @@ importers:
 
   packages/ui-chakra:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -659,10 +662,10 @@ importers:
 
   packages/ui-mantine:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -684,10 +687,10 @@ importers:
 
   packages/ui-mui:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -709,10 +712,10 @@ importers:
 
   packages/ui-shadcn:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
-      '@dmc-98/dfe-react':
+      '@dmc--98/dfe-react':
         specifier: workspace:*
         version: link:../react
     devDependencies:
@@ -734,7 +737,7 @@ importers:
 
   packages/vanilla:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -759,7 +762,7 @@ importers:
 
   packages/vue:
     dependencies:
-      '@dmc-98/dfe-core':
+      '@dmc--98/dfe-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 (0, vitest_1.describe)('AI and Templates', () => {
     (0, vitest_1.describe)('Template Management', () => {
         (0, vitest_1.it)('should list templates and return non-empty array', () => {

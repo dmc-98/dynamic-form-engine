@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import type { FormField, StepNodeState } from '@dmc-98/dfe-core'
+import type { FormField, StepNodeState } from '@dmc--98/dfe-core'
 import {
   AntdFieldRenderer,
   DfeAntdFormPreview,
@@ -41,7 +41,7 @@ const stepStates: StepNodeState[] = [
   },
 ]
 
-describe('@dmc-98/dfe-ui-antd', () => {
+describe('@dmc--98/dfe-ui-antd', () => {
   it('renders a themed field renderer', () => {
     const markup = renderToStaticMarkup(
       <AntdFieldRenderer

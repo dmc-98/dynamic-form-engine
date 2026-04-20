@@ -4,7 +4,7 @@ import {
   createFormStepper,
   type FormField,
   type FormStep,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 /**
  * These tests verify the core logic that useFormEngine and useFormStepper

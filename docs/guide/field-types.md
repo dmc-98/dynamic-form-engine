@@ -97,7 +97,7 @@ Layout fields are excluded from validation and submission values.
 Register custom Zod schemas for your own field types:
 
 ```ts
-import { registerSchemaBuilder } from '@dmc-98/dfe-core'
+import { registerSchemaBuilder } from '@dmc--98/dfe-core'
 import { z } from 'zod'
 
 registerSchemaBuilder('COLOR_PICKER', (field) =>

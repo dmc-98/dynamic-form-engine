@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const validate_1 = require("@dmc-98/dfe-cli/src/commands/validate");
+const validate_1 = require("@dmc--98/dfe-cli/src/commands/validate");
 const node_fs_1 = require("node:fs");
 const node_path_1 = require("node:path");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 (0, vitest_1.describe)('CLI Commands', () => {
     const tmpDir = (0, node_path_1.join)(__dirname, '.tmp-cli-test');
     (0, vitest_1.beforeEach)(() => {

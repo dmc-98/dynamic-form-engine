@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrismaDatabaseAdapter = exports.InMemoryModelStore = void 0;
-const dfe_server_1 = require("@dmc-98/dfe-server");
+const dfe_server_1 = require("@dmc--98/dfe-server");
 // ─── In-Memory Model Store (for API Contract execution) ─────────────────────
 /**
  * Simple in-memory model store for dynamic resource operations.
@@ -40,7 +40,7 @@ exports.InMemoryModelStore = InMemoryModelStore;
  * @example
  * ```ts
  * import { PrismaClient } from '@prisma/client'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const prisma = new PrismaClient()
  * const db = new PrismaDatabaseAdapter(prisma)

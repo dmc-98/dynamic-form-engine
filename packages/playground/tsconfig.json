@@ -4,13 +4,13 @@
     "outDir": "dist",
     "jsx": "react-jsx",
     "paths": {
-      "@dmc-98/dfe-core": [
+      "@dmc--98/dfe-core": [
         "../core/src/index.ts"
       ],
-      "@dmc-98/dfe-react": [
+      "@dmc--98/dfe-react": [
         "../react/src/index.ts"
       ],
-      "@dmc-98/dfe-react/components": [
+      "@dmc--98/dfe-react/components": [
         "../react/src/components.ts"
       ]
     },

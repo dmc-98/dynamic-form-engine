@@ -1,4 +1,4 @@
-import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState } from '@dmc-98/dfe-core';
+import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState } from '@dmc--98/dfe-core';
 export interface UseFormEngineOptions {
     /** Form field definitions */
     fields: FormField[];
@@ -38,7 +38,7 @@ export interface UseFormEngineReturn {
  *
  * @example
  * ```tsx
- * import { useFormEngine } from '@dmc-98/dfe-react'
+ * import { useFormEngine } from '@dmc--98/dfe-react'
  *
  * function MyForm({ fields, initialData }) {
  *   const { values, setFieldValue, visibleFields, validate } = useFormEngine({

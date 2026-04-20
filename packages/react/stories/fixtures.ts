@@ -1,4 +1,4 @@
-import type { FormField, FormStep, StepNodeState } from '@dmc-98/dfe-core'
+import type { FormField, FormStep, StepNodeState } from '@dmc--98/dfe-core'
 
 export const sampleFields: FormField[] = [
   {

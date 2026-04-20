@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import type { FormField, FormValues } from '@dmc-98/dfe-core'
+import type { FormField, FormValues } from '@dmc--98/dfe-core'
 import { DefaultFieldRenderer } from './DfeFormRenderer'
 import type { FieldRendererProps } from '../renderers'
 

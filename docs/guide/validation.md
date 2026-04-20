@@ -49,7 +49,7 @@ if (stepResult.success) {
 Register your own Zod schema builder for custom types:
 
 ```ts
-import { registerSchemaBuilder } from '@dmc-98/dfe-core'
+import { registerSchemaBuilder } from '@dmc--98/dfe-core'
 import { z } from 'zod'
 
 // Color picker that validates hex format
@@ -71,7 +71,7 @@ registerSchemaBuilder('JSON_EDITOR', (field) =>
 The step submission pipeline also validates on the backend:
 
 ```ts
-import { executeStepSubmit } from '@dmc-98/dfe-server'
+import { executeStepSubmit } from '@dmc--98/dfe-server'
 
 const result = await executeStepSubmit({
   form, stepId, payload, db, submissionId,

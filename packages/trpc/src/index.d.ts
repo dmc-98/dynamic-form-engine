@@ -1,4 +1,4 @@
-import type { DatabaseAdapter, PersistenceAdapter } from '@dmc-98/dfe-server';
+import type { DatabaseAdapter, PersistenceAdapter } from '@dmc--98/dfe-server';
 export interface DfeTrpcRouterOptions {
     /** Database adapter instance */
     db: DatabaseAdapter;
@@ -39,8 +39,8 @@ export interface DfeTrpcRouterOptions {
  *
  * @example
  * ```ts
- * import { createDfeTrpcRouter } from '@dmc-98/dfe-trpc'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { createDfeTrpcRouter } from '@dmc--98/dfe-trpc'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const db = new PrismaDatabaseAdapter(prisma)
  * const dfeRouter = createDfeTrpcRouter({
@@ -80,7 +80,7 @@ export declare function createDfeTrpcRouter(options: DfeTrpcRouterOptions): impo
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, import("@dmc-98/dfe-server").PaginatedResult<import("@dmc-98/dfe-server").FormDefinitionRecord>>;
+    }, import("@dmc--98/dfe-server").PaginatedResult<import("@dmc--98/dfe-server").FormDefinitionRecord>>;
     getFormBySlug: import("@trpc/server").BuildProcedure<"query", {
         _config: import("@trpc/server").RootConfig<{
             ctx: any;
@@ -98,7 +98,7 @@ export declare function createDfeTrpcRouter(options: DfeTrpcRouterOptions): impo
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, import("@dmc-98/dfe-server").FormVersionRecord>;
+    }, import("@dmc--98/dfe-server").FormVersionRecord>;
     getFormById: import("@trpc/server").BuildProcedure<"query", {
         _config: import("@trpc/server").RootConfig<{
             ctx: any;
@@ -116,7 +116,7 @@ export declare function createDfeTrpcRouter(options: DfeTrpcRouterOptions): impo
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, import("@dmc-98/dfe-server").FormVersionRecord>;
+    }, import("@dmc--98/dfe-server").FormVersionRecord>;
     createSubmission: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: any;
@@ -136,7 +136,7 @@ export declare function createDfeTrpcRouter(options: DfeTrpcRouterOptions): impo
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, import("@dmc-98/dfe-server").FormSubmissionRecord>;
+    }, import("@dmc--98/dfe-server").FormSubmissionRecord>;
     getSubmission: import("@trpc/server").BuildProcedure<"query", {
         _config: import("@trpc/server").RootConfig<{
             ctx: any;
@@ -154,7 +154,7 @@ export declare function createDfeTrpcRouter(options: DfeTrpcRouterOptions): impo
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, import("@dmc-98/dfe-server").FormSubmissionRecord>;
+    }, import("@dmc--98/dfe-server").FormSubmissionRecord>;
     submitStep: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: any;
@@ -178,7 +178,7 @@ export declare function createDfeTrpcRouter(options: DfeTrpcRouterOptions): impo
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, import("@dmc-98/dfe-core").StepSubmitResponse>;
+    }, import("@dmc--98/dfe-core").StepSubmitResponse>;
     completeSubmission: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: any;
@@ -224,6 +224,6 @@ export declare function createDfeTrpcRouter(options: DfeTrpcRouterOptions): impo
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, import("@dmc-98/dfe-server").PaginatedResult<import("@dmc-98/dfe-core").SelectOption>>;
+    }, import("@dmc--98/dfe-server").PaginatedResult<import("@dmc--98/dfe-core").SelectOption>>;
 }>;
 export type DfeTrpcRouter = ReturnType<typeof createDfeTrpcRouter>;

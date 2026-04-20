@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createFormStepper = createFormStepper;
 const solid_js_1 = require("solid-js");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Composable ─────────────────────────────────────────────────────────────
 /**
  * Solid.js primitive for multi-step form navigation using signals and memos.
  *
  * @example
  * ```tsx
- * import { createFormEngine, createFormStepper } from '@dmc-98/dfe-solid'
+ * import { createFormEngine, createFormStepper } from '@dmc--98/dfe-solid'
  * import { Show } from 'solid-js'
  *
  * export function MultiStepForm(props: { formData: any }) {

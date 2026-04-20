@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-ui-mantine",
+  "name": "@dmc--98/dfe-ui-mantine",
   "version": "0.1.0",
   "description": "Mantine UI components for Dynamic Form Engine",
   "license": "MIT",
@@ -20,8 +20,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
-    "@dmc-98/dfe-react": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-react": "workspace:*"
   },
   "peerDependencies": {
     "@mantine/core": "^7.0.0",

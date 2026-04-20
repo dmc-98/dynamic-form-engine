@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import { Hono } from 'hono'
-import { PrismaCollaborationStore, PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+import { PrismaCollaborationStore, PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
 import { cors } from 'hono/cors'
-import { createDfeApp } from '@dmc-98/dfe-hono'
-import { createAuditLogEntry } from '@dmc-98/dfe-server'
+import { createDfeApp } from '@dmc--98/dfe-hono'
+import { createAuditLogEntry } from '@dmc--98/dfe-server'
 import {
   exampleHipaaAuditStore,
   exampleHipaaValueProtector,

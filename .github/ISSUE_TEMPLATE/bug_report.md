@@ -36,7 +36,7 @@ Minimal code snippet or link to a reproduction repo:
 ## Environment
 
 - DFE version: `0.1.0`
-- Package(s): `@dmc-98/dfe-core`, `@dmc-98/dfe-react`, etc.
+- Package(s): `@dmc--98/dfe-core`, `@dmc--98/dfe-react`, etc.
 - Node.js version: `v20.x`
 - OS: macOS / Linux / Windows
 - Framework: Next.js / Express / etc.

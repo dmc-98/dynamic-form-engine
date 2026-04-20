@@ -4,7 +4,7 @@ import {
   createFormStepper,
   type FormEngine, type FormStep, type FormStepper,
   type StepNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -33,7 +33,7 @@ export interface DfeFormStepperServiceConfig {
  * @example
  * ```typescript
  * import { Component } from '@angular/core'
- * import { DfeFormStepperService } from '@dmc-98/dfe-angular'
+ * import { DfeFormStepperService } from '@dmc--98/dfe-angular'
  *
  * @Component({
  *   selector: 'app-multi-step-form',

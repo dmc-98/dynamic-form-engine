@@ -9,7 +9,7 @@ exports.createTestApp = createTestApp;
  * Creates a fully wired Express app with mock database.
  */
 const express_1 = __importDefault(require("express"));
-const dfe_express_1 = require("@dmc-98/dfe-express");
+const dfe_express_1 = require("@dmc--98/dfe-express");
 function createTestApp(options) {
     var _a, _b;
     const app = (0, express_1.default)();

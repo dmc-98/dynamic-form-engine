@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { generatePdfLayout, generatePrintableHtml, getTemplate } from '@dmc-98/dfe-core'
+import { generatePdfLayout, generatePrintableHtml, getTemplate } from '@dmc--98/dfe-core'
 import { makeField, makeStep, resetFieldCounter, createContactForm } from './helpers/fixtures'
 
 describe('PDF Renderer', () => {

@@ -47,7 +47,7 @@ describe('detectMigrationProject', () => {
       name: 'prisma-app',
       dependencies: {
         '@prisma/client': '^6.0.0',
-        '@dmc-98/dfe-prisma': 'workspace:*',
+        '@dmc--98/dfe-prisma': 'workspace:*',
       },
       devDependencies: {
         prisma: '^6.0.0',
@@ -71,7 +71,7 @@ describe('detectMigrationProject', () => {
       name: 'drizzle-app',
       dependencies: {
         'drizzle-orm': '^0.38.0',
-        '@dmc-98/dfe-drizzle': 'workspace:*',
+        '@dmc--98/dfe-drizzle': 'workspace:*',
       },
       devDependencies: {
         'drizzle-kit': '^0.30.0',
@@ -81,7 +81,7 @@ describe('detectMigrationProject', () => {
       },
     })
     writeFileSync(join(dir, 'drizzle.config.ts'), 'export default {}')
-    writeFileSync(join(dir, 'src/db/dfe-schema.ts'), "export { dfeForms } from '@dmc-98/dfe-drizzle/schema'\n")
+    writeFileSync(join(dir, 'src/db/dfe-schema.ts'), "export { dfeForms } from '@dmc--98/dfe-drizzle/schema'\n")
 
     const project = detectMigrationProject(dir)
 
@@ -317,7 +317,7 @@ describe('runMigrationDoctor', () => {
       },
     })
     writeFileSync(join(dir, 'drizzle.config.ts'), 'export default {}')
-    writeFileSync(join(dir, 'src/db/dfe-schema.ts'), "export { dfeForms } from '@dmc-98/dfe-drizzle/schema'\n")
+    writeFileSync(join(dir, 'src/db/dfe-schema.ts'), "export { dfeForms } from '@dmc--98/dfe-drizzle/schema'\n")
 
     const report = await runMigrationDoctor(dir, 'drizzle', {
       databaseUrl: 'postgresql://example.com/dfe',

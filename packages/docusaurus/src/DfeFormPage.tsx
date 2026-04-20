@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { createFormEngine, type FormValues } from '@dmc-98/dfe-core'
-import { DfeFormRenderer } from '@dmc-98/dfe-react/components'
+import { createFormEngine, type FormValues } from '@dmc--98/dfe-core'
+import { DfeFormRenderer } from '@dmc--98/dfe-react/components'
 import type { DfeDocusaurusFormConfig } from './index'
 
 export interface DfeFormPageProps {

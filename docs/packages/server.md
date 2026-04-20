@@ -1,11 +1,11 @@
-# @dmc-98/dfe-server
+# @dmc--98/dfe-server
 
 Framework-agnostic backend logic: adapter interfaces, the step submission pipeline, analytics, collaboration contracts, and compliance-supporting controls.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-server @dmc-98/dfe-core zod
+npm install @dmc--98/dfe-server @dmc--98/dfe-core zod
 ```
 
 ## DatabaseAdapter Interface
@@ -33,13 +33,13 @@ interface DatabaseAdapter {
 ```
 
 Implement this interface for your ORM, or use the built-in adapters:
-- [`@dmc-98/dfe-prisma`](/packages/prisma)
-- [`@dmc-98/dfe-drizzle`](/packages/drizzle)
+- [`@dmc--98/dfe-prisma`](/packages/prisma)
+- [`@dmc--98/dfe-drizzle`](/packages/drizzle)
 
 ## Step Submission Pipeline
 
 ```ts
-import { executeStepSubmit, completeSubmission } from '@dmc-98/dfe-server'
+import { executeStepSubmit, completeSubmission } from '@dmc--98/dfe-server'
 
 // Submit a step
 const result = await executeStepSubmit({
@@ -76,7 +76,7 @@ await completeSubmission(db, submissionId, context)
 
 ## HIPAA-Supporting Controls
 
-`@dmc-98/dfe-server` now also exposes:
+`@dmc--98/dfe-server` now also exposes:
 
 - protected-field policy derivation from field config metadata
 - encrypted-at-rest submission vault helpers via `createAesGcmFieldProtector()` and `storeProtectedValuesInContext()`

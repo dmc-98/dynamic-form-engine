@@ -10,29 +10,29 @@ Install the packages you need:
 
 ```bash [npm]
 # Core engine (required)
-npm install @dmc-98/dfe-core zod
+npm install @dmc--98/dfe-core zod
 
 # React bindings
-npm install @dmc-98/dfe-react
+npm install @dmc--98/dfe-react
 
 # Backend (pick your ORM)
-npm install @dmc-98/dfe-server @dmc-98/dfe-express
-npm install @dmc-98/dfe-prisma    # if using Prisma
-npm install @dmc-98/dfe-drizzle   # if using Drizzle
+npm install @dmc--98/dfe-server @dmc--98/dfe-express
+npm install @dmc--98/dfe-prisma    # if using Prisma
+npm install @dmc--98/dfe-drizzle   # if using Drizzle
 ```
 
 ```bash [pnpm]
-pnpm add @dmc-98/dfe-core zod
-pnpm add @dmc-98/dfe-react
-pnpm add @dmc-98/dfe-server @dmc-98/dfe-express
-pnpm add @dmc-98/dfe-prisma
+pnpm add @dmc--98/dfe-core zod
+pnpm add @dmc--98/dfe-react
+pnpm add @dmc--98/dfe-server @dmc--98/dfe-express
+pnpm add @dmc--98/dfe-prisma
 ```
 
 ```bash [yarn]
-yarn add @dmc-98/dfe-core zod
-yarn add @dmc-98/dfe-react
-yarn add @dmc-98/dfe-server @dmc-98/dfe-express
-yarn add @dmc-98/dfe-prisma
+yarn add @dmc--98/dfe-core zod
+yarn add @dmc--98/dfe-react
+yarn add @dmc--98/dfe-server @dmc--98/dfe-express
+yarn add @dmc--98/dfe-prisma
 ```
 
 :::
@@ -57,7 +57,7 @@ Use `--adapter drizzle` instead if your project is using Drizzle. The migrate he
 The engine works without any framework:
 
 ```ts
-import { createFormEngine } from '@dmc-98/dfe-core'
+import { createFormEngine } from '@dmc--98/dfe-core'
 
 const fields = [
   {
@@ -110,7 +110,7 @@ console.log(result.success) // true
 ## React Example
 
 ```tsx
-import { useFormEngine } from '@dmc-98/dfe-react'
+import { useFormEngine } from '@dmc--98/dfe-react'
 
 function MyForm({ fields }) {
   const { values, setFieldValue, visibleFields, validate } = useFormEngine({

@@ -35,8 +35,8 @@ var __importStar = (this && this.__importStar) || (function () {
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const dfe_react_1 = require("@dmc-98/dfe-react");
-const components_1 = require("@dmc-98/dfe-react/components");
+const dfe_react_1 = require("@dmc--98/dfe-react");
+const components_1 = require("@dmc--98/dfe-react/components");
 const API_URL = (_a = import.meta.env.VITE_API_URL) !== null && _a !== void 0 ? _a : 'http://localhost:3001/api';
 function App() {
     const [formData, setFormData] = (0, react_1.useState)(null);

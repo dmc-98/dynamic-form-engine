@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FieldType } from '@dmc-98/dfe-core';
+import type { FieldType } from '@dmc--98/dfe-core';
 export interface FieldPaletteProps {
     /** Callback when a field type is selected for dragging */
     onFieldTypeSelect?: (fieldType: FieldType) => void;

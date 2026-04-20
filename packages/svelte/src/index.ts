@@ -11,4 +11,4 @@ export type {
   FieldConditions, ConditionRule, ConditionAction, ConditionOperator,
   SelectOption, DynamicDataSource, OptionsPage,
   FormRuntimeContext, StepSubmitPayload, StepSubmitResponse,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const dfe_express_1 = require("@dmc-98/dfe-express");
+const dfe_express_1 = require("@dmc--98/dfe-express");
 const mock_db_1 = require("./helpers/mock-db");
 // Use require to load these packages at runtime in Node environment
 const express = require('express').default || require('express');

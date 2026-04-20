@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createRateLimiter = void 0;
 exports.createDfeRouter = createDfeRouter;
 const express_1 = require("express");
-const dfe_server_1 = require("@dmc-98/dfe-server");
+const dfe_server_1 = require("@dmc--98/dfe-server");
 // ─── Helpers ────────────────────────────────────────────────────────────────
 function asyncHandler(fn) {
     return (req, res, next) => {
@@ -53,8 +53,8 @@ Object.defineProperty(exports, "createRateLimiter", { enumerable: true, get: fun
  * @example
  * ```ts
  * import express from 'express'
- * import { createDfeRouter } from '@dmc-98/dfe-express'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { createDfeRouter } from '@dmc--98/dfe-express'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const app = express()
  * app.use(express.json({ limit: '1mb' })) // Recommended: set body size limit

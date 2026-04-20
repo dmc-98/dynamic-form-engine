@@ -1,8 +1,8 @@
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import type { FieldSuggestion, ValidationSuggestion } from '@dmc-98/dfe-core'
-import { TEMPLATES } from '@dmc-98/dfe-core'
+import type { FieldSuggestion, ValidationSuggestion } from '@dmc--98/dfe-core'
+import { TEMPLATES } from '@dmc--98/dfe-core'
 import { DfePlayground } from '../src'
 import {
   appendFieldSuggestion,

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { CollaborationStoreError } from '@dmc-98/dfe-server'
+import { CollaborationStoreError } from '@dmc--98/dfe-server'
 import { PrismaCollaborationStore } from '../src/collaboration'
 
 function createMockPrismaCollaboration() {

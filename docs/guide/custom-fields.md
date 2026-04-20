@@ -7,7 +7,7 @@ DFE ships with 21 built-in field types but you can add your own.
 Use `registerSchemaBuilder()` to add Zod validation for a custom type:
 
 ```ts
-import { registerSchemaBuilder } from '@dmc-98/dfe-core'
+import { registerSchemaBuilder } from '@dmc--98/dfe-core'
 import { z } from 'zod'
 
 registerSchemaBuilder('COLOR_PICKER', (field) =>
@@ -44,7 +44,7 @@ engine.validate() // success: true
 
 ## Render Custom Fields
 
-When using `@dmc-98/dfe-react`, handle your custom type in the field renderer:
+When using `@dmc--98/dfe-react`, handle your custom type in the field renderer:
 
 ```tsx
 <DfeFormRenderer

@@ -558,7 +558,7 @@ function scorePrismaProject(state: PrismaMigrationState, manifest?: PackageManif
   if (state.fragmentExists) score += 2
   if (state.dfeModelsInSchema) score += 3
   if (hasDependency(manifest, '@prisma/client')) score += 2
-  if (hasDependency(manifest, '@dmc-98/dfe-prisma')) score += 1
+  if (hasDependency(manifest, '@dmc--98/dfe-prisma')) score += 1
   if (state.prismaCliAvailable) score += 1
   return score
 }
@@ -569,7 +569,7 @@ function scoreDrizzleProject(state: DrizzleMigrationState, manifest?: PackageMan
   if (state.schemaExists) score += 2
   if (state.schemaUsesDfeTables) score += 3
   if (hasDependency(manifest, 'drizzle-orm')) score += 2
-  if (hasDependency(manifest, '@dmc-98/dfe-drizzle')) score += 1
+  if (hasDependency(manifest, '@dmc--98/dfe-drizzle')) score += 1
   if (state.drizzleKitAvailable) score += 1
   return score
 }
@@ -589,8 +589,8 @@ function collectPrismaEvidence(
   if (hasDependency(manifest, '@prisma/client')) {
     evidence.push('package.json depends on @prisma/client')
   }
-  if (hasDependency(manifest, '@dmc-98/dfe-prisma')) {
-    evidence.push('package.json depends on @dmc-98/dfe-prisma')
+  if (hasDependency(manifest, '@dmc--98/dfe-prisma')) {
+    evidence.push('package.json depends on @dmc--98/dfe-prisma')
   }
   if (hasScriptContaining(baseState.scripts, 'prisma migrate')) {
     evidence.push('package.json includes a Prisma migration script')
@@ -616,8 +616,8 @@ function collectDrizzleEvidence(
   if (hasDependency(manifest, 'drizzle-orm')) {
     evidence.push('package.json depends on drizzle-orm')
   }
-  if (hasDependency(manifest, '@dmc-98/dfe-drizzle')) {
-    evidence.push('package.json depends on @dmc-98/dfe-drizzle')
+  if (hasDependency(manifest, '@dmc--98/dfe-drizzle')) {
+    evidence.push('package.json depends on @dmc--98/dfe-drizzle')
   }
   if (hasScriptContaining(baseState.scripts, 'drizzle-kit')) {
     evidence.push('package.json includes a drizzle-kit script')

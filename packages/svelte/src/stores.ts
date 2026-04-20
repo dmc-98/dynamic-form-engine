@@ -5,7 +5,7 @@ import {
   type FormField, type FormValues, type FormEngine,
   type GraphPatch, type FieldNodeState,
   type FormStep, type FormStepper, type StepNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -63,7 +63,7 @@ export interface FormStepperStores {
  * @example
  * ```svelte
  * <script>
- *   import { createFormEngineStore } from '@dmc-98/dfe-svelte'
+ *   import { createFormEngineStore } from '@dmc--98/dfe-svelte'
  *
  *   export let fields
  *
@@ -150,7 +150,7 @@ export function createFormEngineStore(
  * @example
  * ```svelte
  * <script>
- *   import { createFormEngineStore, createFormStepperStore } from '@dmc-98/dfe-svelte'
+ *   import { createFormEngineStore, createFormStepperStore } from '@dmc--98/dfe-svelte'
  *
  *   export let formData
  *

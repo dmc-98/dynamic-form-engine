@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react'
 import type {
   FormRuntimeContext, StepSubmitPayload, StepSubmitResponse, FormValues,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

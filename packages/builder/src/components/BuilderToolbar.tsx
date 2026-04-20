@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import type { FormField, FormStep, FieldType } from '@dmc-98/dfe-core'
+import type { FormField, FormStep, FieldType } from '@dmc--98/dfe-core'
 import type { BuilderAction } from '../types'
 
 // ─── Types ──────────────────────────────────────────────────────────────────

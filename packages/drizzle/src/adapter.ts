@@ -5,11 +5,11 @@ import type {
   FormStep,
   SelectOption,
   StepApiContract,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   buildAnalyticsSummary,
   generateId,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 import type {
   AccessContext,
   AnalyticsQuery,
@@ -22,7 +22,7 @@ import type {
   FormVersionRecord,
   PaginatedResult,
   PaginationParams,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 import {
   dfeAnalyticsEvents,
   dfeExperimentVariants,
@@ -95,7 +95,7 @@ function mapAnalyticsEvent(row: any): ServerFormAnalyticsEvent {
  * @example
  * ```ts
  * import { drizzle } from 'drizzle-orm/node-postgres'
- * import { DrizzleDatabaseAdapter } from '@dmc-98/dfe-drizzle'
+ * import { DrizzleDatabaseAdapter } from '@dmc--98/dfe-drizzle'
  *
  * const db = drizzle(pool)
  * const adapter = new DrizzleDatabaseAdapter(db)

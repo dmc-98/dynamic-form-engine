@@ -5,7 +5,7 @@ exports.REACT_PKG = exports.DRIZZLE_PKG = exports.PRISMA_PKG = exports.EXPRESS_P
  * Centralized constants for CLI template generation.
  * Update these when the org scope changes (or read from dfe.config.ts at runtime).
  */
-exports.ORG_SCOPE = '@dmc-98';
+exports.ORG_SCOPE = '@dmc--98';
 exports.CORE_PKG = `${exports.ORG_SCOPE}/dfe-core`;
 exports.SERVER_PKG = `${exports.ORG_SCOPE}/dfe-server`;
 exports.EXPRESS_PKG = `${exports.ORG_SCOPE}/dfe-express`;

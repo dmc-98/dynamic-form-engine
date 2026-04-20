@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FormField, FieldType } from '@dmc-98/dfe-core';
+import type { FormField, FieldType } from '@dmc--98/dfe-core';
 import type { BuilderAction } from '../types';
 export interface FormCanvasProps {
     /** All fields to display */

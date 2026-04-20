@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { FormRuntimeContext } from '@dmc--98/dfe-core'
 import {
   createMemoryPersistenceAdapter,
   createOfflineRuntimeState,

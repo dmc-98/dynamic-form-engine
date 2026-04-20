@@ -4,7 +4,7 @@ import type {
   FieldSuggestion,
   FormValues,
   ValidationSuggestion,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   TEMPLATES,
   createFormEngine,
@@ -14,8 +14,8 @@ import {
   groupSuggestionsByCategory,
   suggestAdditionalFields,
   suggestValidationRules,
-} from '@dmc-98/dfe-core'
-import { DfeFormRenderer } from '@dmc-98/dfe-react/components'
+} from '@dmc--98/dfe-core'
+import { DfeFormRenderer } from '@dmc--98/dfe-react/components'
 import {
   appendFieldSuggestion,
   applyValidationSuggestion,

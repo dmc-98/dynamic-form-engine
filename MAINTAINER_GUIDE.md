@@ -1,12 +1,12 @@
 # Maintainer Guide
 
-This guide is the practical operating manual for shipping and growing Dynamic Form Engine under the `@dmc-98` package scope.
+This guide is the practical operating manual for shipping and growing Dynamic Form Engine under the `@dmc--98` package scope.
 
 ## Release Basics
 
 Start here for the first public release:
 
-1. Reserve the npm scope `@dmc-98`.
+1. Reserve the npm scope `@dmc--98`.
 2. Add `NPM_TOKEN` to GitHub repository secrets.
 3. Keep `main` green.
 4. Run the verification list in `RELEASE.md`.
@@ -114,7 +114,7 @@ Good early sponsorship messaging:
 
 Before each release:
 
-- Verify the package scope is `@dmc-98` everywhere.
+- Verify the package scope is `@dmc--98` everywhere.
 - Rebuild the docs locally.
 - Update comparison content if product positioning changed.
 - Refresh acknowledgements when major new dependencies or contributors land.

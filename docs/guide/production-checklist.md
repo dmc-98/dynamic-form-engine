@@ -2,18 +2,18 @@
 
 Use this checklist for the currently supported production lane:
 
-- `@dmc-98/dfe-core`
-- `@dmc-98/dfe-react`
-- `@dmc-98/dfe-server`
-- `@dmc-98/dfe-express`
-- `@dmc-98/dfe-prisma` or `@dmc-98/dfe-drizzle`
-- `@dmc-98/dfe-cli`
+- `@dmc--98/dfe-core`
+- `@dmc--98/dfe-react`
+- `@dmc--98/dfe-server`
+- `@dmc--98/dfe-express`
+- `@dmc--98/dfe-prisma` or `@dmc--98/dfe-drizzle`
+- `@dmc--98/dfe-cli`
 
 ## 1. Lock The Package Lane
 
 - Prefer the Stable packages first.
 - Add Beta or Experimental packages only when you have a clear reason and acceptance of the extra support risk.
-- Keep `@dmc-98/dfe-core`, `@dmc-98/dfe-react`, and the server adapter packages version-aligned.
+- Keep `@dmc--98/dfe-core`, `@dmc--98/dfe-react`, and the server adapter packages version-aligned.
 
 ## 2. Make Migrations Repeatable
 

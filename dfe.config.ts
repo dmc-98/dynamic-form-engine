@@ -7,7 +7,7 @@
 
 export const config = {
   /** npm scope — used in all package.json "name" fields */
-  orgScope: '@dmc-98',
+  orgScope: '@dmc--98',
 
   /** GitHub organisation or user */
   githubOrg: 'snarjun98',

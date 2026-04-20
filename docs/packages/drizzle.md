@@ -1,11 +1,11 @@
-# @dmc-98/dfe-drizzle
+# @dmc--98/dfe-drizzle
 
 Drizzle ORM adapter for the Dynamic Form Engine.
 
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-drizzle @dmc-98/dfe-server drizzle-orm
+npm install @dmc--98/dfe-drizzle @dmc--98/dfe-server drizzle-orm
 ```
 
 ## Recommended Migration Flow
@@ -37,7 +37,7 @@ Import the schema in your Drizzle config:
 import {
   dfeForms, dfeFormVersions, dfeSteps, dfeFields,
   dfeFieldOptions, dfeSubmissions,
-} from '@dmc-98/dfe-drizzle/schema'
+} from '@dmc--98/dfe-drizzle/schema'
 ```
 
 Or scaffold a starter entrypoint directly:
@@ -50,7 +50,7 @@ npx dfe add drizzle-schema
 
 ```ts
 import { drizzle } from 'drizzle-orm/node-postgres'
-import { DrizzleDatabaseAdapter } from '@dmc-98/dfe-drizzle'
+import { DrizzleDatabaseAdapter } from '@dmc--98/dfe-drizzle'
 
 const db = drizzle(pool)
 const adapter = new DrizzleDatabaseAdapter(db)

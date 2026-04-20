@@ -1,10 +1,10 @@
-# @dmc-98/dfe-docusaurus
+# @dmc--98/dfe-docusaurus
 
 Beta Docusaurus integration helpers for Dynamic Form Engine.
 
 ## What This Package Is
 
-`@dmc-98/dfe-docusaurus` helps teams embed live DFE examples into a Docusaurus site without rebuilding the renderer stack from scratch.
+`@dmc--98/dfe-docusaurus` helps teams embed live DFE examples into a Docusaurus site without rebuilding the renderer stack from scratch.
 
 It provides:
 
@@ -23,7 +23,7 @@ Treat this package as a Beta integration path for teams that are already standar
 ## Install
 
 ```bash
-npm install @dmc-98/dfe-docusaurus @dmc-98/dfe-core @dmc-98/dfe-react react react-dom
+npm install @dmc--98/dfe-docusaurus @dmc--98/dfe-core @dmc--98/dfe-react react react-dom
 ```
 
 ## Exports
@@ -33,13 +33,13 @@ import {
   createDfeDocusaurusPlugin,
   createDfeDocusaurusPreset,
   DfeFormPage,
-} from '@dmc-98/dfe-docusaurus'
+} from '@dmc--98/dfe-docusaurus'
 ```
 
 ## Usage
 
 ```ts
-import { createDfeDocusaurusPreset } from '@dmc-98/dfe-docusaurus'
+import { createDfeDocusaurusPreset } from '@dmc--98/dfe-docusaurus'
 
 export default {
   presets: [
@@ -86,5 +86,5 @@ It is covered by:
 
 ## Notes
 
-- `DfeFormPage` uses the shared `@dmc-98/dfe-react` renderer contract.
+- `DfeFormPage` uses the shared `@dmc--98/dfe-react` renderer contract.
 - This package is best for live docs examples, product onboarding flows, and internal documentation portals.

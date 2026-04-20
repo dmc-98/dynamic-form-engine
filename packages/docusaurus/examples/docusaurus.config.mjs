@@ -1,4 +1,4 @@
-import { createDfeDocusaurusPlugin } from '@dmc-98/dfe-docusaurus'
+import { createDfeDocusaurusPlugin } from '@dmc--98/dfe-docusaurus'
 
 const employeeOnboarding = {
   title: 'Employee Onboarding',

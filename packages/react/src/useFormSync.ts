@@ -15,7 +15,7 @@ import {
   type SyncDocumentState,
   type SyncFieldOperation,
   type SyncPresence,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 import {
   buildSyncStorageKey,
   createBroadcastChannelSyncTransport,

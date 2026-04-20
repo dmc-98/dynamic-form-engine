@@ -1,5 +1,5 @@
-import type { SelectOption, StepApiContract, FormRuntimeContext } from '@dmc-98/dfe-core';
-import type { DatabaseAdapter, PaginationParams, PaginatedResult, FormDefinitionRecord, FormVersionRecord, FormSubmissionRecord } from '@dmc-98/dfe-server';
+import type { SelectOption, StepApiContract, FormRuntimeContext } from '@dmc--98/dfe-core';
+import type { DatabaseAdapter, PaginationParams, PaginatedResult, FormDefinitionRecord, FormVersionRecord, FormSubmissionRecord } from '@dmc--98/dfe-server';
 /**
  * Minimal Mongoose connection interface to avoid hard dependency on mongoose.
  * Your Mongoose models will satisfy this interface.
@@ -39,7 +39,7 @@ export interface MongooseAdapterOptions {
  * @example
  * ```ts
  * import mongoose from 'mongoose'
- * import { MongooseDatabaseAdapter } from '@dmc-98/dfe-mongoose'
+ * import { MongooseDatabaseAdapter } from '@dmc--98/dfe-mongoose'
  *
  * const conn = await mongoose.connect('mongodb://localhost/dfe')
  * const db = new MongooseDatabaseAdapter(conn)

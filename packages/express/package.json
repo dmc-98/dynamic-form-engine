@@ -1,5 +1,5 @@
 {
-  "name": "@dmc-98/dfe-express",
+  "name": "@dmc--98/dfe-express",
   "version": "0.1.0",
   "description": "Express route handlers for Dynamic Form Engine",
   "license": "MIT",
@@ -21,8 +21,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc-98/dfe-core": "workspace:*",
-    "@dmc-98/dfe-server": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-server": "workspace:*"
   },
   "peerDependencies": {
     "express": "^4.18.0 || ^5.0.0"

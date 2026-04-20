@@ -5,7 +5,7 @@ import {
   propagateContext,
   executeStepSubmit,
 } from '../src/step-submit'
-import type { StepApiContract, FormRuntimeContext } from '@dmc-98/dfe-core'
+import type { StepApiContract, FormRuntimeContext } from '@dmc--98/dfe-core'
 import type { DatabaseAdapter, FormVersionRecord } from '../src/adapters'
 
 describe('resolveEndpoint', () => {

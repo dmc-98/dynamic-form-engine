@@ -1,6 +1,6 @@
 # Type Reference
 
-All types are exported from `@dmc-98/dfe-core`.
+All types are exported from `@dmc--98/dfe-core`.
 
 ## Field Types
 

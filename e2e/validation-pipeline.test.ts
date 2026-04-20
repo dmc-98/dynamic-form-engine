@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { generateZodSchema, generateStepZodSchema, generateStrictSubmissionSchema, registerSchemaBuilder, createFormEngine } from '@dmc-98/dfe-core'
+import { generateZodSchema, generateStepZodSchema, generateStrictSubmissionSchema, registerSchemaBuilder, createFormEngine } from '@dmc--98/dfe-core'
 import { z } from 'zod'
 import { makeField, resetFieldCounter, createAllFieldTypesForm, createConditionalVisibilityForm } from './helpers/fixtures'
 

@@ -10,13 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial release of all packages
-- `@dmc-98/dfe-core` — DAG engine, condition compiler, Zod validation generator, form stepper
-- `@dmc-98/dfe-server` — Framework-agnostic step submission pipeline, UUIDv7 ID generation
-- `@dmc-98/dfe-express` — Express route handlers with auth, ownership checks, query sanitization
-- `@dmc-98/dfe-prisma` — Prisma database adapter with UUIDv7 support
-- `@dmc-98/dfe-drizzle` — Drizzle ORM database adapter with transaction support
-- `@dmc-98/dfe-react` — React hooks (`useFormEngine`, `useFormStepper`, `useFormRuntime`)
-- `@dmc-98/dfe-cli` — CLI scaffolding tool (`dfe init`, `dfe add`)
+- `@dmc--98/dfe-core` — DAG engine, condition compiler, Zod validation generator, form stepper
+- `@dmc--98/dfe-server` — Framework-agnostic step submission pipeline, UUIDv7 ID generation
+- `@dmc--98/dfe-express` — Express route handlers with auth, ownership checks, query sanitization
+- `@dmc--98/dfe-prisma` — Prisma database adapter with UUIDv7 support
+- `@dmc--98/dfe-drizzle` — Drizzle ORM database adapter with transaction support
+- `@dmc--98/dfe-react` — React hooks (`useFormEngine`, `useFormStepper`, `useFormRuntime`)
+- `@dmc--98/dfe-cli` — CLI scaffolding tool (`dfe init`, `dfe add`)
 - VitePress documentation site
 - Centralized config system (`dfe.config.ts`)
 

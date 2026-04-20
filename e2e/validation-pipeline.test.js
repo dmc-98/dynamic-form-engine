@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 const zod_1 = require("zod");
 const fixtures_1 = require("./helpers/fixtures");
 (0, vitest_1.describe)('Validation Pipeline E2E Tests', () => {

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DfeStepController = void 0;
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Controller ─────────────────────────────────────────────────────────────
 /**
  * Vanilla JavaScript step controller extending EventTarget for multi-step form navigation.
@@ -13,7 +13,7 @@ const dfe_core_1 = require("@dmc-98/dfe-core");
  *
  * @example
  * ```typescript
- * import { DfeFormController, DfeStepController } from '@dmc-98/dfe-vanilla'
+ * import { DfeFormController, DfeStepController } from '@dmc--98/dfe-vanilla'
  *
  * const formController = new DfeFormController({ fields: myFields })
  * const stepController = new DfeStepController({

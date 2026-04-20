@@ -9,8 +9,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@dmc-98/dfe-core': path.resolve(__dirname, '../core/src/index.ts'),
-      '@dmc-98/dfe-server': path.resolve(__dirname, '../server/src/index.ts'),
+      '@dmc--98/dfe-core': path.resolve(__dirname, '../core/src/index.ts'),
+      '@dmc--98/dfe-server': path.resolve(__dirname, '../server/src/index.ts'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs', '.json'],
   },

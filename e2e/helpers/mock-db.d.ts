@@ -2,8 +2,8 @@
  * In-memory DatabaseAdapter implementation for E2E testing.
  * Provides a fully functional mock database with real storage semantics.
  */
-import type { StepApiContract, FormRuntimeContext, SelectOption } from '@dmc-98/dfe-core';
-import type { DatabaseAdapter, FormDefinitionRecord, FormVersionRecord, FormSubmissionRecord, PaginationParams, PaginatedResult } from '@dmc-98/dfe-server';
+import type { StepApiContract, FormRuntimeContext, SelectOption } from '@dmc--98/dfe-core';
+import type { DatabaseAdapter, FormDefinitionRecord, FormVersionRecord, FormSubmissionRecord, PaginationParams, PaginatedResult } from '@dmc--98/dfe-server';
 export declare class InMemoryDatabase implements DatabaseAdapter {
     private forms;
     private formsBySlug;

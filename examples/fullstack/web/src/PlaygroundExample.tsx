@@ -1,5 +1,5 @@
 import React from 'react'
-import { DfePlayground } from '@dmc-98/dfe-playground'
+import { DfePlayground } from '@dmc--98/dfe-playground'
 
 export function PlaygroundExample() {
   return (

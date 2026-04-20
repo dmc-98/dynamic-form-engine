@@ -1,7 +1,7 @@
 import React, { useEffect, useId, useMemo, useRef, useState } from 'react'
-import type { FormValues, SelectFieldConfig } from '@dmc-98/dfe-core'
-import type { FieldRendererProps } from '@dmc-98/dfe-react'
-import { useDynamicOptions } from '@dmc-98/dfe-react'
+import type { FormValues, SelectFieldConfig } from '@dmc--98/dfe-core'
+import type { FieldRendererProps } from '@dmc--98/dfe-react'
+import { useDynamicOptions } from '@dmc--98/dfe-react'
 
 interface ExampleFieldRendererProps extends FieldRendererProps {
   apiBaseUrl: string

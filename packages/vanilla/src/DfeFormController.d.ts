@@ -1,4 +1,4 @@
-import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState } from '@dmc-98/dfe-core';
+import { type FormField, type FormValues, type FormEngine, type GraphPatch, type FieldNodeState } from '@dmc--98/dfe-core';
 export interface DfeFormControllerConfig {
     /** Form field definitions */
     fields: FormField[];
@@ -33,7 +33,7 @@ export interface FormVisibilityChangeEvent extends Event {
  *
  * @example
  * ```typescript
- * import { DfeFormController } from '@dmc-98/dfe-vanilla'
+ * import { DfeFormController } from '@dmc--98/dfe-vanilla'
  *
  * const controller = new DfeFormController({
  *   fields: myFormFields,

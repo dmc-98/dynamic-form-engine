@@ -5,7 +5,7 @@ exports.buildContractBody = buildContractBody;
 exports.propagateContext = propagateContext;
 exports.executeStepSubmit = executeStepSubmit;
 exports.completeSubmission = completeSubmission;
-const dfe_core_1 = require("@dmc-98/dfe-core");
+const dfe_core_1 = require("@dmc--98/dfe-core");
 // ─── Endpoint Template Resolution ───────────────────────────────────────────
 /**
  * Resolve placeholders in an endpoint template using context values.

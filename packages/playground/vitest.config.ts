@@ -24,15 +24,15 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@dmc-98/dfe-react/components',
+        find: '@dmc--98/dfe-react/components',
         replacement: path.resolve(__dirname, '../react/src/components.ts'),
       },
       {
-        find: '@dmc-98/dfe-react',
+        find: '@dmc--98/dfe-react',
         replacement: path.resolve(__dirname, '../react/src/index.ts'),
       },
       {
-        find: '@dmc-98/dfe-core',
+        find: '@dmc--98/dfe-core',
         replacement: path.resolve(__dirname, '../core/src/index.ts'),
       },
     ],

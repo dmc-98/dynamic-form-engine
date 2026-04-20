@@ -60,4 +60,4 @@ export type {
   FormRuntimeContext, StepSubmitPayload, StepSubmitResponse,
   SyncConnectionState, SyncDocumentSnapshot, SyncDocumentState,
   SyncFieldOperation, SyncPresence, SyncPendingMutation,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDfeTrpcRouter = createDfeTrpcRouter;
 const server_1 = require("@trpc/server");
 const zod_1 = require("zod");
-const dfe_server_1 = require("@dmc-98/dfe-server");
+const dfe_server_1 = require("@dmc--98/dfe-server");
 // ─── Helpers ────────────────────────────────────────────────────────────────
 /**
  * Clamp a page size value to a safe range.
@@ -47,8 +47,8 @@ function buildRuntimeContext(userId, fallback, overrides) {
  *
  * @example
  * ```ts
- * import { createDfeTrpcRouter } from '@dmc-98/dfe-trpc'
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
+ * import { createDfeTrpcRouter } from '@dmc--98/dfe-trpc'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
  *
  * const db = new PrismaDatabaseAdapter(prisma)
  * const dfeRouter = createDfeTrpcRouter({

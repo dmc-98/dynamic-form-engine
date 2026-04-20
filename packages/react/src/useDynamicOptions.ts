@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-import type { SelectOption, OptionsPage } from '@dmc-98/dfe-core'
+import type { SelectOption, OptionsPage } from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

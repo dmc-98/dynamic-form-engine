@@ -3,7 +3,7 @@ import {
   InMemoryCollaborationStore,
   createAesGcmFieldProtector,
   createInMemoryAuditLogStore,
-} from '@dmc-98/dfe-server'
+} from '@dmc--98/dfe-server'
 import { createDfeApp } from '../src/index'
 
 function createStubDb() {

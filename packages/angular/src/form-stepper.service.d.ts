@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { type FormEngine, type FormStep, type FormStepper, type StepNodeState } from '@dmc-98/dfe-core';
+import { type FormEngine, type FormStep, type FormStepper, type StepNodeState } from '@dmc--98/dfe-core';
 export interface DfeFormStepperServiceConfig {
     /** Step definitions */
     steps: FormStep[];
@@ -22,7 +22,7 @@ export interface DfeFormStepperServiceConfig {
  * @example
  * ```typescript
  * import { Component } from '@angular/core'
- * import { DfeFormStepperService } from '@dmc-98/dfe-angular'
+ * import { DfeFormStepperService } from '@dmc--98/dfe-angular'
  *
  * @Component({
  *   selector: 'app-multi-step-form',

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { auditFormAccessibility, summarizeA11yAudit, getTemplate, createFormEngine } from '@dmc-98/dfe-core'
+import { auditFormAccessibility, summarizeA11yAudit, getTemplate, createFormEngine } from '@dmc--98/dfe-core'
 import { makeField, resetFieldCounter } from './helpers/fixtures'
 
 describe('Accessibility Audit', () => {

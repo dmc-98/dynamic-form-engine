@@ -2,7 +2,7 @@ import type {
   FormAnalyticsEvent as CoreFormAnalyticsEvent,
   FormField, FormStep, FormValues, StepApiContract,
   FormRuntimeContext, SelectOption,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Database Adapter Interface ─────────────────────────────────────────────
 
@@ -153,8 +153,8 @@ export interface FormSubmissionRecord {
  *
  * @example
  * ```ts
- * import { PrismaDatabaseAdapter } from '@dmc-98/dfe-prisma'
- * import { createDfeServer } from '@dmc-98/dfe-server'
+ * import { PrismaDatabaseAdapter } from '@dmc--98/dfe-prisma'
+ * import { createDfeServer } from '@dmc--98/dfe-server'
  *
  * const db = new PrismaDatabaseAdapter(prismaClient)
  * const server = createDfeServer({ db })

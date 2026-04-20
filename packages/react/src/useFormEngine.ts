@@ -3,7 +3,7 @@ import {
   createFormEngine,
   type FormField, type FormValues, type FormEngine,
   type GraphPatch, type FieldNodeState,
-} from '@dmc-98/dfe-core'
+} from '@dmc--98/dfe-core'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -44,7 +44,7 @@ export interface UseFormEngineReturn {
  *
  * @example
  * ```tsx
- * import { useFormEngine } from '@dmc-98/dfe-react'
+ * import { useFormEngine } from '@dmc--98/dfe-react'
  *
  * function MyForm({ fields, initialData }) {
  *   const { values, setFieldValue, visibleFields, validate } = useFormEngine({

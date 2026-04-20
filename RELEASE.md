@@ -6,7 +6,7 @@ This repo uses Changesets for versioning, release PRs, and npm publishing.
 
 If this is the first time DFE is being published publicly:
 
-1. Create or reserve the npm scope `@dmc-98`.
+1. Create or reserve the npm scope `@dmc--98`.
 2. Add the `NPM_TOKEN` repository secret in GitHub.
 3. Confirm the default branch is protected and CI is green on `main`.
 4. Run the local verification commands in this document.
@@ -61,9 +61,9 @@ Use these when you want extra confidence before the first publish:
 
 ```bash
 npm whoami
-pnpm --filter @dmc-98/dfe-core publish --dry-run --access public
-pnpm --filter @dmc-98/dfe-react publish --dry-run --access public
-pnpm --filter @dmc-98/dfe-server publish --dry-run --access public
+pnpm --filter @dmc--98/dfe-core publish --dry-run --access public
+pnpm --filter @dmc--98/dfe-react publish --dry-run --access public
+pnpm --filter @dmc--98/dfe-server publish --dry-run --access public
 ```
 
 ## Release Notes Template

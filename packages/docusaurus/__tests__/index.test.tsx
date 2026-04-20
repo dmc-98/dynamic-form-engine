@@ -20,7 +20,7 @@ const sampleForm = {
   ],
 }
 
-describe('@dmc-98/dfe-docusaurus', () => {
+describe('@dmc--98/dfe-docusaurus', () => {
   it('registers DFE routes and global data through the plugin hook', async () => {
     const plugin = createDfeDocusaurusPlugin({}, {
       routeBasePath: '/forms',
