@@ -24,6 +24,15 @@ If this is the first time DFE is being published publicly:
 5. Merge the release PR when it looks correct.
 6. Confirm npm packages, GitHub release notes, docs, and smoke checks after publish.
 
+Private workspace example apps are intentionally excluded from Changesets.
+`dfe-example-api` and `dfe-example-web` stay in the workspace for builds, tests, and e2e coverage, but they must never appear in release PRs, version bumps, or package changelog generation.
+
+For the current patch republish lane, keep the public release message focused on:
+- improved package docs and npm package pages
+- harder-to-break release publishing and npm retry behavior
+- docs deployment and release workflow reliability
+- no breaking API changes
+
 ## Local Verification
 
 Run these from the repo root before cutting or merging a release PR:
@@ -36,6 +45,7 @@ pnpm typecheck
 pnpm test:coverage:stable
 pnpm test:smoke:artifacts
 pnpm test:smoke:wrappers
+pnpm changeset status
 pnpm release:check
 pnpm --dir docs build
 ```

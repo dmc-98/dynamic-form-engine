@@ -29,4 +29,4 @@
 "dfe-vscode": patch
 ---
 
-Republish packages with package-level README files and publishing pipeline fixes.
+Improve package docs and npm package pages, harden release publishing against npm throttling, and fix docs and release workflow reliability. No breaking API changes.

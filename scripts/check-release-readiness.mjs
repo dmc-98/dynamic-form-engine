@@ -13,11 +13,16 @@ const packageDirs = readdirSync(join(repoRoot, 'packages'), { withFileTypes: tru
 
 const npmCacheDir = join(repoRoot, '.cache', 'npm')
 const npmLogsDir = join(repoRoot, '.cache', 'npm-logs')
+const changesetStatusPath = join(repoRoot, '.cache', 'changeset-status.json')
+const ignoredPrivateWorkspaceApps = ['dfe-example-api', 'dfe-example-web']
 mkdirSync(npmCacheDir, { recursive: true })
 mkdirSync(npmLogsDir, { recursive: true })
 
 assertPackageExists('.changeset/config.json')
 assertPackageExists('.github/workflows/release.yml')
+assertChangesetIgnoresPrivateExamples()
+assertPrivateExampleAppsStayPrivate()
+assertChangesetStatusLeavesPrivateExamplesUnchanged()
 
 for (const packageDir of packageDirs) {
   const packageRoot = join(repoRoot, packageDir)
@@ -123,4 +128,72 @@ function runPackDryRun(packageRoot) {
   }
 
   return JSON.parse(result.stdout)[0]
+}
+
+function assertChangesetIgnoresPrivateExamples() {
+  const config = JSON.parse(readFileSync(join(repoRoot, '.changeset/config.json'), 'utf8'))
+  const ignoredPackages = new Set(config.ignore ?? [])
+
+  for (const packageName of ignoredPrivateWorkspaceApps) {
+    assert.ok(
+      ignoredPackages.has(packageName),
+      `Changesets config must ignore private example app ${packageName}`,
+    )
+  }
+}
+
+function assertPrivateExampleAppsStayPrivate() {
+  for (const packageName of ignoredPrivateWorkspaceApps) {
+    const packageRoot = join(repoRoot, 'examples', 'fullstack', packageName === 'dfe-example-api' ? 'api' : 'web')
+    const manifest = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf8'))
+
+    assert.equal(
+      manifest.private,
+      true,
+      `${packageName} must remain private`,
+    )
+  }
+}
+
+function assertChangesetStatusLeavesPrivateExamplesUnchanged() {
+  const result = spawnSync(
+    'pnpm',
+    ['exec', 'changeset', 'status', `--output=${changesetStatusPath}`],
+    {
+      cwd: repoRoot,
+      encoding: 'utf8',
+      env: process.env,
+    },
+  )
+
+  if (result.status !== 0) {
+    throw new Error(result.stderr || result.stdout || 'changeset status failed')
+  }
+
+  const status = JSON.parse(readFileSync(changesetStatusPath, 'utf8'))
+  const releasedPackages = new Map((status.releases ?? []).map(release => [release.name, release]))
+
+  for (const packageName of ignoredPrivateWorkspaceApps) {
+    const release = releasedPackages.get(packageName)
+
+    if (!release) {
+      continue
+    }
+
+    assert.equal(
+      release.type,
+      'none',
+      `Changesets must not version-bump private example app ${packageName}`,
+    )
+    assert.equal(
+      release.oldVersion,
+      release.newVersion,
+      `Changesets must not change the version of private example app ${packageName}`,
+    )
+    assert.deepEqual(
+      release.changesets,
+      [],
+      `Changesets must not attach release notes to private example app ${packageName}`,
+    )
+  }
 }
