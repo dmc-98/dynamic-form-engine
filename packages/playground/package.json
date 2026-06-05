@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-playground",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Interactive playground for testing Dynamic Form Engine configurations",
   "license": "MIT",
   "type": "module",
