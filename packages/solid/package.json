@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-solid",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Solid.js signal-based bindings for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",
