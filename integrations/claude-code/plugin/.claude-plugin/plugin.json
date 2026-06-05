@@ -1,0 +1,15 @@
+{
+  "name": "dfe-scaffold",
+  "version": "0.1.0",
+  "description": "Scaffold and wire up Dynamic Form Engine (DFE) projects from Claude Code — multi-step/conditional/workflow forms, starter templates, backend setup, validation, and migrations via the dfe CLI.",
+  "author": {
+    "name": "dmc-98"
+  },
+  "homepage": "https://github.com/dmc-98/dynamic-form-engine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmc-98/dynamic-form-engine.git"
+  },
+  "keywords": ["dynamic-form-engine", "dfe", "forms", "scaffold", "typescript", "react"],
+  "license": "MIT"
+}

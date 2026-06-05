@@ -1,0 +1,37 @@
+title: "Showcase / Feedback: "
+labels:
+  - feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying Dynamic Form Engine. Share what you built, where the project was unclear, or what would make adoption easier.
+  - type: input
+    id: use-case
+    attributes:
+      label: Use case
+      description: What kind of form or workflow are you building?
+      placeholder: "Example: onboarding flow, loan application, internal admin workflow"
+    validations:
+      required: true
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Feedback
+      description: What worked, what was confusing, or what should be improved?
+    validations:
+      required: true
+  - type: dropdown
+    id: package-area
+    attributes:
+      label: Area
+      options:
+        - Playground
+        - React runtime
+        - Server/backend adapters
+        - Prisma/Drizzle
+        - CLI/migrations
+        - Docs/examples
+        - Other
+    validations:
+      required: true

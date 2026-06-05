@@ -1,0 +1,97 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+*.tsbuildinfo
+.turbo/
+
+# VitePress
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+ehthumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Prisma
+packages/prisma/prisma/*.db
+packages/prisma/prisma/migrations/
+
+# Drizzle
+packages/drizzle/drizzle/
+
+# Docker
+examples/fullstack/pgdata/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lock files from other package managers (we use pnpm)
+package-lock.json
+yarn.lock
+
+# Changesets
+!.changeset/
+!.changeset/*.json
+!.changeset/*.md
+
+# Debug
+.cache/
+output/playwright/
+output/
+storybook-static/
+.claude/
+
+# ── Internal planning / reference notes (local only — never publish) ──────────
+# Working documents for the maintainer, not part of the OSS repo.
+CODE_REVIEW.md
+FEATURE_COMPLETION_PLAN.md
+FEATURE_EXECUTION_CHECKLIST.md
+IMPLEMENTATION_ROADMAP.md
+PHASE_0_EXECUTION_CHECKLIST.md
+PHASE_9_QUICK_START.md
+PHASE_9_SUMMARY.md
+
+# Strategy, growth, and milestone planning
+PRODUCT_STRATEGY_1000_STARS.md
+GROWTH_RELEASE_PLAN.md
+JUNE_2026_RELEASE_PLAN.md
+MILESTONES.md
+TDD_EXECUTION_PLAN.md
+COMPETITIVE_ANALYSIS.md
+SERVERLESS_FEASIBILITY_AUDIT.md
+RELEASE_TO_PERFECTION.md
+
+# Release scratch
+INITIAL_COMMIT_MESSAGE.txt
+
+# Marketing working docs (campaign/sponsorship strategy stay private;
+# the landing site under marketing/landing/ is intentionally NOT ignored)
+marketing/CAMPAIGN_PLAN.md
+marketing/SPONSORSHIP.md
+marketing/launch-kit.md
+marketing/DEMO_VIDEO_SCRIPT.md

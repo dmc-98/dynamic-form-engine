@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DFE Example — Employee Onboarding</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: #f9fafb; }
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+    label { font-weight: 500; display: block; margin-top: 1rem; }
+    [data-dfe-field] { margin-bottom: 1rem; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button {
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0.65rem 1rem;
+    }
+    [data-dfe-playground] {
+      display: grid;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+    }
+    [data-dfe-playground-header] h2,
+    [data-dfe-playground-pane-header] h3,
+    [data-dfe-playground-section] h4,
+    [data-dfe-playground-suggestion-group] h5 {
+      margin: 0 0 0.5rem;
+    }
+    [data-dfe-playground-description],
+    [data-dfe-playground-pane-copy] {
+      margin: 0;
+      color: #475569;
+      line-height: 1.5;
+    }
+    [data-dfe-playground-meta] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    [data-dfe-playground-meta-item] {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #312e81;
+      font-size: 0.9rem;
+    }
+    [data-dfe-playground-status] {
+      padding: 0.85rem 1rem;
+      border-radius: 16px;
+      font-weight: 600;
+    }
+    [data-dfe-playground-status="success"] {
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    [data-dfe-playground-status="warning"] {
+      background: #fffbeb;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+    }
+    [data-dfe-playground-status="error"] {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+    [data-dfe-playground-toolbar],
+    [data-dfe-playground-inline-controls] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    [data-dfe-playground-toolbar] {
+      justify-content: space-between;
+    }
+    [data-dfe-playground-toolbar-group] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: end;
+    }
+    [data-dfe-playground-action],
+    [data-dfe-playground-ai-generate],
+    [data-dfe-playground-add-field],
+    [data-dfe-playground-apply-validation],
+    [data-dfe-playground-autofill-generate],
+    [data-dfe-playground-autofill-apply] {
+      background: #1d4ed8;
+      color: #fff;
+    }
+    [data-dfe-playground-apply-validation][disabled] {
+      background: #cbd5e1;
+      color: #334155;
+    }
+    [data-dfe-playground-content],
+    [data-dfe-playground-ai-workspace] {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    [data-dfe-playground-pane] {
+      min-width: 0;
+      padding: 1rem;
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    [data-dfe-playground-textarea],
+    [data-dfe-playground-ai-description],
+    [data-dfe-playground-autofill-source] {
+      min-height: 220px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      line-height: 1.45;
+    }
+    [data-dfe-playground-ai-description] {
+      min-height: 120px;
+    }
+    [data-dfe-playground-autofill-source] {
+      min-height: 180px;
+    }
+    [data-dfe-playground-inline-field] {
+      display: grid;
+      gap: 0.35rem;
+      min-width: 180px;
+    }
+    [data-dfe-playground-inline-checkbox] {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #334155;
+      margin-top: 0.75rem;
+    }
+    [data-dfe-playground-inline-checkbox] input {
+      width: auto;
+      margin: 0;
+    }
+    [data-dfe-playground-suggestion-list],
+    [data-dfe-playground-warning-list],
+    [data-dfe-playground-issues] {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+    [data-dfe-playground-validation-suggestion],
+    [data-dfe-playground-field-suggestion],
+    [data-dfe-playground-autofill-match] {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: start;
+      padding: 0.85rem 0.9rem;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+    [data-dfe-playground-validation-suggestion] p,
+    [data-dfe-playground-field-suggestion] p,
+    [data-dfe-playground-autofill-match] p {
+      margin: 0.35rem 0 0;
+      color: #475569;
+      line-height: 1.45;
+    }
+    [data-dfe-playground-confidence] {
+      flex: none;
+      min-width: 3.5rem;
+      text-align: center;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1e3a8a;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    [data-dfe-playground-footer] {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    [data-dfe-playground-section] {
+      min-width: 0;
+      padding: 1rem;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+    }
+    [data-dfe-playground-json],
+    [data-dfe-playground-errors] {
+      margin: 0;
+      overflow: auto;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    [data-dfe-playground-empty],
+    [data-dfe-playground-error] {
+      padding: 1rem;
+      border-radius: 16px;
+      background: #f8fafc;
+      color: #475569;
+    }
+    [data-dfe-playground-error] {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+# Git-based CMS configuration for the DFE landing page.
+#
+# This dashboard edits the landing page content (src/content/site/home.json)
+# and commits the change back to the repo. No database; the repo IS the CMS.
+#
+# ── Backend / auth ────────────────────────────────────────────────────────────
+# Set your repo, then choose an auth method:
+#   • GitHub OAuth: host a tiny OAuth proxy (Cloudflare Worker / Vercel function)
+#     and set base_url/auth_endpoint, OR use Sveltia CMS which supports a PAT.
+#   • For local editing: run `npx decap-server` and use the local_backend below.
+backend:
+  name: github
+  repo: dmc-98/dynamic-form-engine        # ← change to your org/repo
+  branch: main
+  # base_url: https://your-oauth-proxy.example.com   # uncomment when OAuth proxy is set up
+
+# Allow editing on http://localhost during development (run `npx decap-server`).
+local_backend: true
+
+# Content edits commit to the repo under this path.
+media_folder: "marketing/landing/public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "site"
+    label: "Landing Page"
+    files:
+      - name: "home"
+        label: "Home Page Content"
+        file: "marketing/landing/src/content/site/home.json"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "text" }
+              - label: "Primary CTA"
+                name: "primaryCta"
+                widget: "object"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Href", name: "href", widget: "string" }
+              - label: "Secondary CTAs"
+                name: "secondaryCtas"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Href", name: "href", widget: "string" }
+          - label: "Features"
+            name: "features"
+            widget: "list"
+            fields:
+              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Comparison rows"
+            name: "comparison"
+            widget: "list"
+            fields:
+              - { label: "Tool", name: "tool", widget: "string" }
+              - { label: "Best at", name: "bestAt", widget: "string" }
+              - { label: "Where DFE fits", name: "dfe", widget: "string" }
+          - label: "Sponsor tiers"
+            name: "sponsorTiers"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Amount", name: "amount", widget: "string" }
+              - { label: "Perk", name: "perk", widget: "string" }
+          - { label: "Demo embed URL", name: "demoEmbedUrl", widget: "string", required: false }
+          - { label: "GitHub URL", name: "githubUrl", widget: "string" }
+          - { label: "Docs URL", name: "docsUrl", widget: "string" }
+          - { label: "Playground URL", name: "playgroundUrl", widget: "string" }
+          - { label: "Sponsor URL", name: "sponsorUrl", widget: "string" }

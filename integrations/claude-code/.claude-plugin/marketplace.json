@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "dfe",
+  "owner": {
+    "name": "Dynamic Form Engine",
+    "email": "snarjun98claude@gmail.com"
+  },
+  "description": "Official Claude Code plugins for Dynamic Form Engine.",
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "name": "dfe-scaffold",
+      "source": "./plugin",
+      "description": "Scaffold DFE projects — multi-step/workflow forms, starter templates, backend wiring, validation, and migrations via the dfe CLI.",
+      "version": "0.1.0",
+      "author": { "name": "dmc-98" }
+    }
+  ]
+}

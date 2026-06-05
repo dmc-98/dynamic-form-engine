@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: dfe
+      POSTGRES_PASSWORD: dfe_secret
+      POSTGRES_DB: dfe_example
+    ports:
+      - "${DFE_EXAMPLE_POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dfe"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build:
+      context: ../../
+      dockerfile: examples/fullstack/api/Dockerfile
+    ports:
+      - "${DFE_EXAMPLE_API_PORT:-3001}:3001"
+    environment:
+      DATABASE_URL: postgresql://dfe:dfe_secret@postgres:5432/dfe_example
+      NODE_ENV: production
+      PORT: "3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3001/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))\""]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build:
+      context: ../../
+      dockerfile: examples/fullstack/web/Dockerfile
+      args:
+        VITE_API_URL: http://localhost:${DFE_EXAMPLE_API_PORT:-3001}/api
+    ports:
+      - "${DFE_EXAMPLE_WEB_PORT:-5173}:5173"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  pgdata:
