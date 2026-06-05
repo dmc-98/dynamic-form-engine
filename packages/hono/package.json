@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-hono",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hono integration for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",
