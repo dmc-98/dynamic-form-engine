@@ -59,7 +59,7 @@ const { success, errors } = engine.validate()         // Zod schema, auto-genera
       <h2>Try it in your browser</h2>
       <p class="lede">A live multi-step form. Set Account Type to “Business” and watch fields appear.</p>
       {demoEmbedUrl
-        ? <iframe class="demo" src={demoEmbedUrl} title="Dynamic Form Engine live demo" loading="lazy" allow="cross-origin-isolated"></iframe>
+        ? <iframe class="demo" src={demoEmbedUrl} title="Dynamic Form Engine live demo" loading="lazy" credentialless allow="cross-origin-isolated"></iframe>
         : <div class="demo placeholder">▶ Live demo / video goes here</div>}
       {demoEmbedUrl ? (
         <p class="demo-fallback">
