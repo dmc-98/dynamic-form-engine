@@ -104,11 +104,15 @@ const SCHEMA_MAP: Record<string, (field: FormField) => z.ZodTypeAny> = {
   SELECT: buildSelectSchema,
   MULTI_SELECT: (field) => {
     const cfg = field.config as SelectFieldConfig
-    if (cfg.mode === 'static' && cfg.options?.length) {
-      const values = cfg.options.map(o => o.value) as [string, ...string[]]
-      return z.array(z.enum(values)).min(1, 'Select at least one option')
-    }
-    return z.array(z.string()).min(1, 'Select at least one option')
+    const item = cfg.mode === 'static' && cfg.options?.length
+      ? z.enum(cfg.options.map(o => o.value) as [string, ...string[]])
+      : z.string()
+    // Only require a selection when the field itself is required. An optional
+    // multi-select must accept its default value (an empty array) — otherwise
+    // untouched optional fields block submission.
+    return field.required
+      ? z.array(item).min(1, 'Select at least one option')
+      : z.array(item)
   },
   RADIO: buildSelectSchema,
   CHECKBOX: () => z.boolean(),

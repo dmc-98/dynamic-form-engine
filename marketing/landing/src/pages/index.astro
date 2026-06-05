@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content'
 import Base from '../layouts/Base.astro'
+import Playground from '../components/Playground.tsx'
 
 // All copy comes from the content collection (editable via /admin).
 const { data } = await getEntry('site', 'home')
@@ -56,14 +57,15 @@ const { success, errors } = engine.validate()         // Zod schema, auto-genera
     </section>
 
     <section id="demo">
-      <h2>Try it in your browser</h2>
-      <p class="lede">A live multi-step form. Set Account Type to “Business” and watch fields appear.</p>
-      {demoEmbedUrl
-        ? <iframe class="demo" src={demoEmbedUrl} title="Dynamic Form Engine live demo" loading="lazy" credentialless allow="cross-origin-isolated"></iframe>
-        : <div class="demo placeholder">▶ Live demo / video goes here</div>}
+      <h2>Build a form right here</h2>
+      <p class="lede">
+        A real playground, not a video: drag-and-drop fields, restyle it live, watch conditions and
+        validation work, copy the code — and see the <em>actual server pipeline</em> reject a tampered payload.
+      </p>
+      <Playground client:visible />
       {demoEmbedUrl ? (
         <p class="demo-fallback">
-          Embed not loading? <a href={demoEmbedUrl.replace('embed=1&', '').replace(/[?&]embed=1/, '')} target="_blank" rel="noopener">Open the demo in a new tab →</a>
+          Want the full multi-step editor experience? <a href={demoEmbedUrl.replace('embed=1&', '').replace(/[?&]embed=1/, '')} target="_blank" rel="noopener">Open the StackBlitz demo →</a>
         </p>
       ) : null}
     </section>
