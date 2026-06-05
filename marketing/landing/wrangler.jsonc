@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers config for the DFE landing site (static Astro build).
+  // Used by Workers Builds: build with `npm run build`, then `npx wrangler deploy`
+  // from this directory serves ./dist as static assets — no Worker script needed.
+  "name": "dynamic-form-engine",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
