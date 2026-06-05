@@ -11,7 +11,7 @@ import react from '@astrojs/react'
 // This config is static-output (output: 'static'), which both hosts serve
 // directly and which keeps the git-based CMS (/admin) simple.
 export default defineConfig({
-  site: 'https://dynamic-form-engine.dev',
+  site: 'https://dynamic-form-engine.snarjun98claude.workers.dev',
   integrations: [react()],
   output: 'static',
 })
