@@ -59,8 +59,13 @@ const { success, errors } = engine.validate()         // Zod schema, auto-genera
       <h2>Try it in your browser</h2>
       <p class="lede">A live multi-step form. Set Account Type to “Business” and watch fields appear.</p>
       {demoEmbedUrl
-        ? <iframe class="demo" src={demoEmbedUrl} title="Dynamic Form Engine live demo" loading="lazy"></iframe>
+        ? <iframe class="demo" src={demoEmbedUrl} title="Dynamic Form Engine live demo" loading="lazy" allow="cross-origin-isolated"></iframe>
         : <div class="demo placeholder">▶ Live demo / video goes here</div>}
+      {demoEmbedUrl ? (
+        <p class="demo-fallback">
+          Embed not loading? <a href={demoEmbedUrl.replace('embed=1&', '').replace(/[?&]embed=1/, '')} target="_blank" rel="noopener">Open the demo in a new tab →</a>
+        </p>
+      ) : null}
     </section>
 
     {claudeCode ? (
@@ -158,5 +163,6 @@ const { success, errors } = engine.validate()         // Zod schema, auto-genera
   .note { font-size: 13px; color: var(--muted); max-width: 620px; margin: 0 auto 20px; }
 
   .cc-cta { text-align: center; margin-top: 18px; }
+  .demo-fallback { text-align: center; font-size: 13.5px; color: var(--muted); margin-top: 10px; }
   footer { padding: 40px 0 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; text-align: center; }
 </style>
