@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-drizzle",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Drizzle ORM database adapter for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",
