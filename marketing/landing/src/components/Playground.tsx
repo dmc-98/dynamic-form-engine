@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { createBuilderState, builderReducer, toFormConfig, makeField } from '@dmc--98/dfe-builder'
-import { createFormEngine, auditFormAccessibility, getTemplate, buildFlowModel } from '@dmc--98/dfe-core'
+import { createFormEngine, auditFormAccessibility, getTemplate } from '@dmc--98/dfe-core'
 import type { FormField, FieldType, FormStep } from '@dmc--98/dfe-core'
-import { executeStepSubmit, createPaymentStepHandler } from '@dmc--98/dfe-server'
+import { executeStepSubmit } from '@dmc--98/dfe-server'
+// buildFlowModel + createPaymentStepHandler are vendored locally so the deployed
+// landing build doesn't depend on the published package versions resolving to
+// the ones containing these (newer) APIs. See lib/playground-vendor.ts.
+import { buildFlowModel, createPaymentStepHandler } from '../lib/playground-vendor'
 
 // Inline theme export — mirrors @dmc--98/dfe-core's exportTheme(), kept local so
 // the deployed playground works against the currently-published core version.
