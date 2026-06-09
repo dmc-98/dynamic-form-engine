@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro'
+import { listTemplates } from '@dmc--98/dfe-core'
+
+// Single source of truth: the gallery is generated from the package registry.
+const templates = listTemplates()
+const categories = Array.from(new Set(templates.map((t) => t.category))).sort()
+const icons: Record<string, string> = {
+  contact: '✉️', survey: '📊', onboarding: '🚀', registration: '📝',
+  feedback: '💬', application: '📄', workflow: '🔀', 'lead-gen': '🎯',
+}
+---
+
+<Base
+  title="Form Templates — Dynamic Form Engine"
+  description="Open-source, production-ready form templates — multi-step, conditional, validated. Open any one in the live playground."
+>
+  <header class="nav">
+    <a class="brand" href="/"><span class="dot"></span> Dynamic Form Engine</a>
+    <nav class="links">
+      <a href="/#features">Features</a>
+      <a href="/#demo">Playground</a>
+      <a href="/templates">Templates</a>
+      <a href="https://github.com/dmc-98/dynamic-form-engine">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="head">
+      <span class="eyebrow">Templates</span>
+      <h1>Start from a real template</h1>
+      <p class="lede">
+        Every template is a valid, validated DFE config — multi-step, conditional, type-safe.
+        Open one in the playground, tweak it, and copy the code. No signup, no lock-in.
+      </p>
+    </section>
+
+    <div class="filters">
+      <button class="filter active" data-cat="all">All ({templates.length})</button>
+      {categories.map((c) => (
+        <button class="filter" data-cat={c}>{icons[c] ?? '•'} {c}</button>
+      ))}
+    </div>
+
+    <div class="grid" id="grid">
+      {templates.map((t) => (
+        <a class="card" data-cat={t.category} href={`/#demo?template=${t.id}`}>
+          <div class="ico">{icons[t.category] ?? '•'}</div>
+          <h3>{t.name}</h3>
+          <p>{t.description}</p>
+          <div class="meta">
+            <span class="cat">{t.category}</span>
+            <span class="open">Open in playground →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+
+  <footer>
+    Dynamic Form Engine · MIT Licensed · <a href="https://github.com/dmc-98/dynamic-form-engine">GitHub</a>
+  </footer>
+
+  <script is:inline>
+    // Category filter (no framework needed).
+    const buttons = document.querySelectorAll('.filter')
+    const cards = document.querySelectorAll('.card')
+    buttons.forEach((b) => b.addEventListener('click', () => {
+      buttons.forEach((x) => x.classList.remove('active'))
+      b.classList.add('active')
+      const cat = b.getAttribute('data-cat')
+      cards.forEach((c) => {
+        c.style.display = cat === 'all' || c.getAttribute('data-cat') === cat ? '' : 'none'
+      })
+    }))
+  </script>
+</Base>
+
+<style>
+  header.nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; max-width: var(--max); margin: 0 auto; }
+  .brand { font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 10px; color: var(--text); }
+  .brand .dot { width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(135deg, var(--brand), var(--brand2)); }
+  nav.links a { color: var(--muted); margin-left: 22px; font-size: 14px; }
+  nav.links a:hover { color: var(--text); }
+
+  .head { text-align: center; padding: 48px 0 24px; }
+  .eyebrow { display: inline-block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; margin-bottom: 18px; }
+  .head h1 { font-size: clamp(30px, 5vw, 46px); margin: 0 0 14px; letter-spacing: -0.02em; }
+  .head .lede { color: var(--muted); max-width: 620px; margin: 0 auto; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 24px 0 28px; }
+  .filter { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 13px; text-transform: capitalize; }
+  .filter.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; padding-bottom: 60px; }
+  .card { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-decoration: none; color: var(--text); transition: border-color .15s, transform .15s; }
+  .card:hover { border-color: var(--brand); transform: translateY(-2px); text-decoration: none; }
+  .card .ico { font-size: 22px; margin-bottom: 10px; }
+  .card h3 { margin: 0 0 6px; font-size: 17px; }
+  .card p { margin: 0 0 14px; color: var(--muted); font-size: 14px; flex: 1; }
+  .card .meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+  .card .cat { color: var(--muted); text-transform: capitalize; }
+  .card .open { color: var(--brand); font-weight: 600; }
+
+  footer { padding: 40px 0 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; text-align: center; }
+</style>

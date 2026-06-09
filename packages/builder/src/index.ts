@@ -18,6 +18,9 @@ export type { DfeFormBuilderProps } from './components/DfeFormBuilder'
 // ── Drag-and-drop FormBuilder + headless state engine ────────────────────────
 // A self-contained, dependency-free builder with native HTML5 drag-and-drop and
 // a fully unit-tested headless reducer. Complements the panel components above.
+// Its state types are named Dnd* at the source so they don't collide with the
+// panel API's BuilderState/BuilderAction (the collision previously made the dts
+// bundler silently drop this whole export block).
 export { FormBuilder } from './FormBuilder'
 export type { FormBuilderProps } from './FormBuilder'
 export {
@@ -28,9 +31,8 @@ export {
   deriveFieldKey,
 } from './builder-state'
 export type {
-  // Aliased to avoid colliding with the established BuilderState/BuilderAction.
-  BuilderState as DndBuilderState,
-  BuilderAction as DndBuilderAction,
+  DndBuilderState,
+  DndBuilderAction,
   BuilderFormConfig,
 } from './builder-state'
 

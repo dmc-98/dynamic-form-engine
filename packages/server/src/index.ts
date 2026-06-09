@@ -38,6 +38,19 @@ export type { PluginRegistry } from './plugins'
 // ─── Experiments ─────────────────────────────────────────────────────────────
 export { selectExperimentVariant } from './experiments'
 
+// ─── Payments (provider-agnostic; bring your own Stripe) ──────────────────────
+export { createPaymentStepHandler } from './payment'
+export type {
+  PaymentClient, PaymentIntentResult, PaymentStepHandler,
+  CreateIntentInput, VerifyOptions, VerifyResult,
+} from './payment'
+
+// ─── Auth gate + email notifications (adapters; bring your own provider) ───────
+export { createAuthGate } from './auth'
+export type { AuthGate, AuthGateOptions, AuthResolver, AuthPrincipal, AuthDecision } from './auth'
+export { createEmailNotifier } from './notify'
+export type { EmailNotifier, EmailNotifierOptions, EmailTransport, EmailMessage, EmailTemplate, NotifyContext } from './notify'
+
 // ─── Observability ────────────────────────────────────────────────────────────
 export {
   createTracer,

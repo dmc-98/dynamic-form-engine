@@ -4,7 +4,7 @@ export interface FormTemplate {
   id: string
   name: string
   description: string
-  category: 'contact' | 'survey' | 'onboarding' | 'registration' | 'feedback' | 'application' | 'workflow'
+  category: 'contact' | 'survey' | 'onboarding' | 'registration' | 'feedback' | 'application' | 'workflow' | 'lead-gen'
   fields: FormField[]
   steps?: FormStep[]
 }
@@ -863,6 +863,125 @@ const adminApprovalWorkflowTemplate: FormTemplate = {
   ],
 }
 
+// ─── M3 gallery templates ────────────────────────────────────────────────────
+
+const leadGenerationTemplate: FormTemplate = {
+  id: 'lead-generation',
+  name: 'Lead Generation',
+  description: 'Capture and qualify inbound leads with budget-gated follow-up fields',
+  category: 'lead-gen',
+  fields: [
+    { id: 'lg_name', versionId: 'v1', key: 'name', label: 'Name', type: 'SHORT_TEXT', required: true, order: 1, config: {} },
+    { id: 'lg_email', versionId: 'v1', key: 'workEmail', label: 'Work Email', type: 'EMAIL', required: true, order: 2, config: {} },
+    { id: 'lg_company', versionId: 'v1', key: 'company', label: 'Company', type: 'SHORT_TEXT', required: true, order: 3, config: {} },
+    {
+      id: 'lg_size', versionId: 'v1', key: 'companySize', label: 'Company Size', type: 'SELECT', required: true, order: 4,
+      config: { mode: 'static', options: [
+        { label: '1–10', value: '1-10' }, { label: '11–50', value: '11-50' },
+        { label: '51–200', value: '51-200' }, { label: '200+', value: '200-plus' },
+      ] },
+    },
+    {
+      id: 'lg_budget', versionId: 'v1', key: 'budget', label: 'Monthly Budget', type: 'SELECT', required: true, order: 5,
+      config: { mode: 'static', options: [
+        { label: 'Under $1k', value: 'under-1k' }, { label: '$1k–$10k', value: '1k-10k' }, { label: '$10k+', value: '10k-plus' },
+      ] },
+    },
+    {
+      id: 'lg_timeline', versionId: 'v1', key: 'timeline', label: 'Decision Timeline', type: 'SELECT', required: false, order: 6,
+      config: { mode: 'static', options: [
+        { label: 'This month', value: 'this-month' }, { label: 'This quarter', value: 'this-quarter' }, { label: 'Exploring', value: 'exploring' },
+      ] },
+      // Only ask timeline for qualified budgets.
+      conditions: { action: 'SHOW', operator: 'or', rules: [
+        { fieldKey: 'budget', operator: 'eq', value: '1k-10k' },
+        { fieldKey: 'budget', operator: 'eq', value: '10k-plus' },
+      ] },
+    },
+    { id: 'lg_notes', versionId: 'v1', key: 'notes', label: 'What are you looking to solve?', type: 'LONG_TEXT', required: false, order: 7, config: { maxLength: 1000 } },
+  ],
+}
+
+const newsletterSignupTemplate: FormTemplate = {
+  id: 'newsletter-signup',
+  name: 'Newsletter Signup',
+  description: 'Minimal email capture with topic preferences and consent',
+  category: 'lead-gen',
+  fields: [
+    { id: 'ns_email', versionId: 'v1', key: 'email', label: 'Email', type: 'EMAIL', required: true, order: 1, config: { placeholder: 'you@example.com' } },
+    { id: 'ns_name', versionId: 'v1', key: 'firstName', label: 'First Name', type: 'SHORT_TEXT', required: false, order: 2, config: {} },
+    {
+      id: 'ns_topics', versionId: 'v1', key: 'topics', label: 'Topics', type: 'MULTI_SELECT', required: false, order: 3,
+      config: { mode: 'static', options: [
+        { label: 'Product updates', value: 'product' }, { label: 'Engineering', value: 'engineering' },
+        { label: 'Community', value: 'community' }, { label: 'Offers', value: 'offers' },
+      ] },
+    },
+    { id: 'ns_consent', versionId: 'v1', key: 'consent', label: 'I agree to receive emails', type: 'CHECKBOX', required: true, order: 4, config: {} },
+  ],
+}
+
+const npsSurveyTemplate: FormTemplate = {
+  id: 'nps-survey',
+  name: 'NPS Survey',
+  description: 'Net Promoter Score with a follow-up reason shown after scoring',
+  category: 'survey',
+  fields: [
+    { id: 'nps_score', versionId: 'v1', key: 'score', label: 'How likely are you to recommend us? (0–10)', type: 'SCALE', required: true, order: 1, config: { min: 0, max: 10, minLabel: 'Not likely', maxLabel: 'Very likely' } },
+    { id: 'nps_reason', versionId: 'v1', key: 'reason', label: 'What is the main reason for your score?', type: 'LONG_TEXT', required: true, order: 2, config: { maxLength: 1000 },
+      // Ask the follow-up only once a score has been given.
+      conditions: { action: 'SHOW', operator: 'and', rules: [{ fieldKey: 'score', operator: 'not_empty', value: true }] } },
+    { id: 'nps_email', versionId: 'v1', key: 'email', label: 'Email (optional, for follow-up)', type: 'EMAIL', required: false, order: 3, config: {} },
+  ],
+}
+
+const appointmentBookingTemplate: FormTemplate = {
+  id: 'appointment-booking',
+  name: 'Appointment Booking',
+  description: 'Book a slot with service selection, date/time, and contact details',
+  category: 'registration',
+  steps: [
+    { id: 'book_service', versionId: 'v1', title: 'Service', order: 1 },
+    { id: 'book_when', versionId: 'v1', title: 'Date & Time', order: 2 },
+    { id: 'book_contact', versionId: 'v1', title: 'Your Details', order: 3 },
+  ],
+  fields: [
+    { id: 'bk_service', versionId: 'v1', stepId: 'book_service', key: 'service', label: 'Service', type: 'SELECT', required: true, order: 1,
+      config: { mode: 'static', options: [
+        { label: 'Consultation (30m)', value: 'consult' }, { label: 'Full session (60m)', value: 'full' }, { label: 'Follow-up (15m)', value: 'followup' },
+      ] } },
+    { id: 'bk_notes', versionId: 'v1', stepId: 'book_service', key: 'serviceNotes', label: 'Anything we should prepare?', type: 'LONG_TEXT', required: false, order: 2, config: { maxLength: 500 } },
+    { id: 'bk_date', versionId: 'v1', stepId: 'book_when', key: 'date', label: 'Preferred Date', type: 'DATE', required: true, order: 1, config: {} },
+    { id: 'bk_time', versionId: 'v1', stepId: 'book_when', key: 'time', label: 'Preferred Time', type: 'TIME', required: true, order: 2, config: {} },
+    { id: 'bk_name', versionId: 'v1', stepId: 'book_contact', key: 'name', label: 'Name', type: 'SHORT_TEXT', required: true, order: 1, config: {} },
+    { id: 'bk_email', versionId: 'v1', stepId: 'book_contact', key: 'email', label: 'Email', type: 'EMAIL', required: true, order: 2, config: {} },
+    { id: 'bk_phone', versionId: 'v1', stepId: 'book_contact', key: 'phone', label: 'Phone', type: 'PHONE', required: false, order: 3, config: {} },
+  ],
+}
+
+const supportTicketTemplate: FormTemplate = {
+  id: 'support-ticket',
+  name: 'Support Ticket',
+  description: 'Support request with priority, category, and conditional reproduction steps',
+  category: 'feedback',
+  fields: [
+    { id: 'st_subject', versionId: 'v1', key: 'subject', label: 'Subject', type: 'SHORT_TEXT', required: true, order: 1, config: { maxLength: 120 } },
+    { id: 'st_category', versionId: 'v1', key: 'category', label: 'Category', type: 'SELECT', required: true, order: 2,
+      config: { mode: 'static', options: [
+        { label: 'Bug', value: 'bug' }, { label: 'Billing', value: 'billing' }, { label: 'Feature request', value: 'feature' }, { label: 'Other', value: 'other' },
+      ] } },
+    { id: 'st_priority', versionId: 'v1', key: 'priority', label: 'Priority', type: 'RADIO', required: true, order: 3,
+      config: { mode: 'static', options: [
+        { label: 'Low', value: 'low' }, { label: 'Medium', value: 'medium' }, { label: 'High', value: 'high' }, { label: 'Urgent', value: 'urgent' },
+      ] } },
+    { id: 'st_desc', versionId: 'v1', key: 'description', label: 'Description', type: 'LONG_TEXT', required: true, order: 4, config: { maxLength: 4000 } },
+    { id: 'st_steps', versionId: 'v1', key: 'reproSteps', label: 'Steps to Reproduce', type: 'LONG_TEXT', required: true, order: 5, config: { maxLength: 2000 },
+      conditions: { action: 'SHOW', operator: 'and', rules: [{ fieldKey: 'category', operator: 'eq', value: 'bug' }] } },
+    { id: 'st_email', versionId: 'v1', key: 'email', label: 'Email', type: 'EMAIL', required: true, order: 6, config: {} },
+    { id: 'st_attach', versionId: 'v1', key: 'attachment', label: 'Attachment', type: 'FILE_UPLOAD', required: false, order: 7, config: { maxSizeMB: 10, allowedMimeTypes: ['image/*', 'application/pdf'] } },
+  ],
+}
+
 // ─── All templates ──────────────────────────────────────────────────────────
 
 export const TEMPLATES: FormTemplate[] = [
@@ -877,6 +996,11 @@ export const TEMPLATES: FormTemplate[] = [
   userOnboardingTemplate,
   loanApplicationTemplate,
   adminApprovalWorkflowTemplate,
+  leadGenerationTemplate,
+  newsletterSignupTemplate,
+  npsSurveyTemplate,
+  appointmentBookingTemplate,
+  supportTicketTemplate,
 ]
 
 /**

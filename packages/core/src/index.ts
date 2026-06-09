@@ -117,6 +117,18 @@ export type { JsonSchema } from './json-schema'
 export { diffFormConfig, summarizeFormConfigDiff } from './config-diff'
 export type { FormConfigDiff, FormConfigSnapshot, FieldChange } from './config-diff'
 
+// Theme export (headless theming — your theme is code you own)
+export { exportTheme, defaultTheme } from './theme'
+export type { FormTheme, ThemeExport, ExportThemeOptions } from './theme'
+
+// Flow model (visual flow builder / diagram)
+export { buildFlowModel } from './flow-model'
+export type { FlowModel, FlowNode, FlowEdge, FlowEdgeKind } from './flow-model'
+
+// Review summary + post-submit redirect
+export { buildReviewSummary, resolveRedirect } from './review'
+export type { ReviewGroup, ReviewItem } from './review'
+
 // Config repair suggestions
 export { suggestConfigRepairs, autofixConfig } from './config-repair'
 export type {
@@ -143,11 +155,12 @@ export {
   exportForm,
   exportFormToYaml,
   exportFormToCsv,
+  exportSubmissionsToCsv,
   importForm,
   importFromTypeform,
   importFromGoogleForms,
 } from './import-export'
-export type { ExportOptions, FormExportData } from './import-export'
+export type { ExportOptions, FormExportData, SubmissionRow } from './import-export'
 
 // AI Integration & Assistants
 export {
