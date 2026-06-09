@@ -30,6 +30,8 @@ export type DndBuilderAction =
   | { type: 'SELECT_FIELD'; id: string | null }
   | { type: 'ADD_STEP'; title?: string }
   | { type: 'REMOVE_STEP'; id: string }
+  /** Edit a step's title/description. */
+  | { type: 'UPDATE_STEP'; id: string; patch: Partial<FormStep> }
   | { type: 'ASSIGN_FIELD_TO_STEP'; id: string; stepId: string | null }
   | { type: 'RESET'; state?: Partial<DndBuilderState> }
 
@@ -248,6 +250,11 @@ export function builderReducer(state: DndBuilderState, action: DndBuilderAction)
       // Detach fields that pointed at the removed step.
       const fields = state.fields.map(f => (f.stepId === action.id ? { ...f, stepId: null } : f))
       return { ...state, steps, fields }
+    }
+
+    case 'UPDATE_STEP': {
+      const steps = state.steps.map(s => (s.id === action.id ? { ...s, ...action.patch } : s))
+      return { ...state, steps }
     }
 
     case 'ASSIGN_FIELD_TO_STEP': {
