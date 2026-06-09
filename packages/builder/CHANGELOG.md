@@ -1,5 +1,11 @@
 # @dmc--98/dfe-builder
 
+## 0.4.0
+
+### Minor Changes
+
+- cfd0f46: Add an `UPDATE_STEP` reducer action to edit a step's title/description (e.g. renaming a step in a visual builder). Unknown step ids are a no-op.
+
 ## 0.3.0
 
 ### Minor Changes
