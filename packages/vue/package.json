@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-vue",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Vue 3 composables for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",
