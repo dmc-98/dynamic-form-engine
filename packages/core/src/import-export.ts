@@ -1,4 +1,4 @@
-import type { FormField, FormStep, SelectOption } from './types'
+import type { FormField, FormStep, SelectOption, FormValues } from './types'
 
 export interface ExportOptions {
   format: 'json' | 'yaml' | 'csv'
@@ -381,9 +381,64 @@ export function exportFormToCsv(fields: FormField[]): string {
   const rows = fields.map(f => [f.key, f.label, f.type, f.required ? 'Yes' : 'No', f.order, f.description || ''])
 
   const csvRows = [
-    headers.map(h => `"${h}"`).join(','),
-    ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')),
+    headers.map(csvCell).join(','),
+    ...rows.map(row => row.map(csvCell).join(',')),
   ]
 
   return csvRows.join('\n')
+}
+
+/**
+ * Render one CSV cell safely:
+ * - **Formula-injection guard**: a value starting with `=`, `+`, `-`, `@`, tab,
+ *   or CR is prefixed with `'` so spreadsheet apps treat it as text, not a
+ *   formula (prevents CSV/Excel injection from user-submitted answers).
+ * - RFC-4180 quoting: wrap and double-quote when the value contains a comma,
+ *   quote, or newline.
+ * Arrays join with ", "; objects fall back to JSON; null/undefined → empty.
+ */
+function csvCell(value: unknown): string {
+  let s: string
+  if (value === undefined || value === null) {
+    s = ''
+  } else if (Array.isArray(value)) {
+    s = value.map(v => (v !== null && typeof v === 'object' ? JSON.stringify(v) : String(v))).join(', ')
+  } else if (typeof value === 'object') {
+    s = JSON.stringify(value)
+  } else {
+    s = String(value)
+  }
+  // Neutralize formula injection (applied before quoting).
+  if (/^[=+\-@\t\r]/.test(s)) {
+    s = `'${s}`
+  }
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+}
+
+export interface SubmissionRow {
+  id: string
+  status: string
+  values: FormValues
+  /** Optional ISO timestamp included as a "Submitted" column when present. */
+  submittedAt?: string
+}
+
+/**
+ * Export form submissions to CSV — the "save as CSV" of a submissions tracker.
+ * Columns are ID, Status, (Submitted,) then one per field (by label, in order).
+ * Values resolve missing → empty and arrays → comma-joined; everything is
+ * RFC-4180 escaped so commas/quotes/newlines in answers survive.
+ */
+export function exportSubmissionsToCsv(fields: FormField[], submissions: SubmissionRow[]): string {
+  const hasTimestamp = submissions.some(s => s.submittedAt !== undefined)
+  const headerCells = ['ID', 'Status', ...(hasTimestamp ? ['Submitted'] : []), ...fields.map(f => f.label)]
+
+  const lines = [headerCells.map(csvCell).join(',')]
+  for (const sub of submissions) {
+    const cells: unknown[] = [sub.id, sub.status]
+    if (hasTimestamp) cells.push(sub.submittedAt ?? '')
+    for (const f of fields) cells.push(sub.values[f.key])
+    lines.push(cells.map(csvCell).join(','))
+  }
+  return lines.join('\n')
 }

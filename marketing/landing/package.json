@@ -11,10 +11,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.15.0",
     "@astrojs/react": "^3.6.0",
+    "@dmc--98/dfe-builder": "^0.2.0",
+    "@dmc--98/dfe-core": "^0.2.0",
+    "@dmc--98/dfe-server": "^0.1.1",
+    "astro": "^4.15.0",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0"
+    "react-dom": "^18.3.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/react": "^18.3.0",

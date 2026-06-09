@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { FieldType } from '@dmc--98/dfe-core'
 import {
-  type BuilderState,
+  type DndBuilderState,
   type BuilderFormConfig,
   builderReducer,
   createBuilderState,
@@ -30,7 +30,7 @@ const PALETTE: Array<{ type: FieldType; label: string }> = [
 
 export interface FormBuilderProps {
   /** Optional starting state (fields/steps). */
-  initialState?: Partial<BuilderState>
+  initialState?: Partial<DndBuilderState>
   /** Called with the emitted DFE config whenever the form changes. */
   onChange?: (config: BuilderFormConfig) => void
 }

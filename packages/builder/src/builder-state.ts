@@ -5,23 +5,33 @@ import type { FormField, FormStep, FieldType, FieldKey } from '@dmc--98/dfe-core
 // All builder logic lives here so it can be unit-tested without a DOM; the React
 // component is a thin view over this state.
 
-export interface BuilderState {
+export interface DndBuilderState {
   fields: FormField[]
   steps: FormStep[]
   /** id of the currently selected field (for the property editor), or null. */
   selectedFieldId: string | null
 }
 
-export type BuilderAction =
+export type DndBuilderAction =
   | { type: 'ADD_FIELD'; fieldType: FieldType; stepId?: string }
   | { type: 'REMOVE_FIELD'; id: string }
   | { type: 'MOVE_FIELD'; from: number; to: number }
+  /** Keyboard-accessible relative move: delta -1 = up, +1 = down. Clamped. */
+  | { type: 'MOVE_FIELD_BY'; id: string; delta: number }
   | { type: 'UPDATE_FIELD'; id: string; patch: Partial<FormField> }
+  /** Append an option to a selection field; value derived from label, deduped. */
+  | { type: 'ADD_OPTION'; id: string; label: string }
+  /** Edit one option of a selection field by index. */
+  | { type: 'UPDATE_OPTION'; id: string; index: number; patch: Partial<{ label: string; value: string }> }
+  /** Remove one option by index. Refused if it would leave zero options. */
+  | { type: 'REMOVE_OPTION'; id: string; index: number }
+  /** Set/clear validation rules in the field config (undefined clears a rule). */
+  | { type: 'SET_VALIDATION'; id: string; validation: Record<string, unknown> }
   | { type: 'SELECT_FIELD'; id: string | null }
   | { type: 'ADD_STEP'; title?: string }
   | { type: 'REMOVE_STEP'; id: string }
   | { type: 'ASSIGN_FIELD_TO_STEP'; id: string; stepId: string | null }
-  | { type: 'RESET'; state?: Partial<BuilderState> }
+  | { type: 'RESET'; state?: Partial<DndBuilderState> }
 
 let counter = 0
 /** Deterministic-ish unique id generator for builder-created entities. */
@@ -46,6 +56,12 @@ const DEFAULT_LABELS: Partial<Record<FieldType, string>> = {
 }
 
 const SELECTION_TYPES = new Set<FieldType>(['SELECT', 'MULTI_SELECT', 'RADIO'])
+
+/** Config keys that SET_VALIDATION may write — keeps it from corrupting structural config. */
+const VALIDATION_KEYS = new Set<string>([
+  'minLength', 'maxLength', 'pattern', 'min', 'max', 'format',
+  'maxSizeMB', 'allowedMimeTypes', 'maxFiles', 'minLabel', 'maxLabel', 'step',
+])
 
 /** Generate a unique field key from a label, disambiguating against existing keys. */
 export function deriveFieldKey(label: string, existing: Set<FieldKey>): FieldKey {
@@ -87,7 +103,7 @@ export function makeField(fieldType: FieldType, existingKeys: Set<FieldKey>, ord
 }
 
 /** Create an empty builder state. */
-export function createBuilderState(initial: Partial<BuilderState> = {}): BuilderState {
+export function createBuilderState(initial: Partial<DndBuilderState> = {}): DndBuilderState {
   return {
     fields: initial.fields ?? [],
     steps: initial.steps ?? [],
@@ -111,7 +127,7 @@ function move<T>(arr: T[], from: number, to: number): T[] {
 }
 
 /** The builder reducer. Pure: never mutates the input state. */
-export function builderReducer(state: BuilderState, action: BuilderAction): BuilderState {
+export function builderReducer(state: DndBuilderState, action: DndBuilderAction): DndBuilderState {
   switch (action.type) {
     case 'ADD_FIELD': {
       const existingKeys = new Set(state.fields.map(f => f.key))
@@ -130,6 +146,73 @@ export function builderReducer(state: BuilderState, action: BuilderAction): Buil
 
     case 'MOVE_FIELD': {
       return { ...state, fields: renumber(move(state.fields, action.from, action.to)) }
+    }
+
+    case 'MOVE_FIELD_BY': {
+      const from = state.fields.findIndex(f => f.id === action.id)
+      if (from === -1) return state
+      const to = Math.max(0, Math.min(state.fields.length - 1, from + action.delta))
+      if (to === from) return state
+      return { ...state, fields: renumber(move(state.fields, from, to)) }
+    }
+
+    case 'ADD_OPTION': {
+      const fields = state.fields.map((f): FormField => {
+        if (f.id !== action.id || !SELECTION_TYPES.has(f.type)) return f
+        const cfg = f.config as { options?: Array<{ label: string; value: string }> }
+        const options = cfg.options ?? []
+        const existing = new Set(options.map(o => o.value))
+        const value = deriveFieldKey(action.label, existing as Set<FieldKey>)
+        const config = { ...cfg, options: [...options, { label: action.label, value }] } as FormField['config']
+        return { ...f, config }
+      })
+      return { ...state, fields }
+    }
+
+    case 'UPDATE_OPTION': {
+      const fields = state.fields.map((f): FormField => {
+        if (f.id !== action.id || !SELECTION_TYPES.has(f.type)) return f
+        const cfg = f.config as { options?: Array<{ label: string; value: string }> }
+        const options = cfg.options ?? []
+        if (action.index < 0 || action.index >= options.length) return f
+        const next = options.slice()
+        next[action.index] = { ...next[action.index], ...action.patch }
+        const config = { ...cfg, options: next } as FormField['config']
+        return { ...f, config }
+      })
+      return { ...state, fields }
+    }
+
+    case 'REMOVE_OPTION': {
+      const fields = state.fields.map((f): FormField => {
+        if (f.id !== action.id || !SELECTION_TYPES.has(f.type)) return f
+        const cfg = f.config as { options?: Array<{ label: string; value: string }> }
+        const options = cfg.options ?? []
+        // Selection fields must keep at least one option.
+        if (options.length <= 1 || action.index < 0 || action.index >= options.length) return f
+        const config = { ...cfg, options: options.filter((_, i) => i !== action.index) } as FormField['config']
+        return { ...f, config }
+      })
+      return { ...state, fields }
+    }
+
+    case 'SET_VALIDATION': {
+      const fields = state.fields.map((f): FormField => {
+        if (f.id !== action.id) return f
+        const cfg = { ...(f.config as Record<string, unknown>) }
+        for (const [rule, value] of Object.entries(action.validation)) {
+          // Only known validation keys may be written, so this action can't
+          // corrupt structural config (e.g. `options`, `mode`).
+          if (!VALIDATION_KEYS.has(rule)) continue
+          if (value === undefined) {
+            delete cfg[rule]
+          } else {
+            cfg[rule] = value
+          }
+        }
+        return { ...f, config: cfg as FormField['config'] }
+      })
+      return { ...state, fields }
     }
 
     case 'UPDATE_FIELD': {
@@ -186,7 +269,7 @@ export interface BuilderFormConfig {
 }
 
 /** Emit a clean DFE form configuration from the current builder state. */
-export function toFormConfig(state: BuilderState): BuilderFormConfig {
+export function toFormConfig(state: DndBuilderState): BuilderFormConfig {
   return {
     fields: renumber(state.fields),
     steps: state.steps.map((s, i) => ({ ...s, order: i + 1 })),
