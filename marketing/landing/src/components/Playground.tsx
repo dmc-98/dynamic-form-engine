@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useReducer, useState } from 'react'
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { createBuilderState, builderReducer, toFormConfig, makeField } from '@dmc--98/dfe-builder'
-import { createFormEngine, auditFormAccessibility, getTemplate } from '@dmc--98/dfe-core'
-import type { FormField, FieldType } from '@dmc--98/dfe-core'
-import { executeStepSubmit } from '@dmc--98/dfe-server'
+import { createFormEngine, auditFormAccessibility, getTemplate, buildFlowModel } from '@dmc--98/dfe-core'
+import type { FormField, FieldType, FormStep } from '@dmc--98/dfe-core'
+import { executeStepSubmit, createPaymentStepHandler } from '@dmc--98/dfe-server'
 
 // Inline theme export — mirrors @dmc--98/dfe-core's exportTheme(), kept local so
 // the deployed playground works against the currently-published core version.
@@ -101,13 +101,72 @@ export function MyForm() {
 }`
 }
 
-type Tab = 'build' | 'style' | 'export' | 'server'
-const FIELD_PALETTE: FieldType[] = ['SHORT_TEXT', 'EMAIL', 'NUMBER', 'SELECT', 'DATE', 'CHECKBOX', 'LONG_TEXT']
+type Tab = 'build' | 'flow' | 'style' | 'export' | 'server'
+
+// All field types, grouped, with friendly labels — the full DFE palette.
+const PALETTE_GROUPS: Array<{ group: string; types: Array<{ type: FieldType; label: string }> }> = [
+  { group: 'Text', types: [
+    { type: 'SHORT_TEXT', label: 'Short text' }, { type: 'LONG_TEXT', label: 'Paragraph' },
+    { type: 'EMAIL', label: 'Email' }, { type: 'URL', label: 'URL' },
+    { type: 'PHONE', label: 'Phone' }, { type: 'PASSWORD', label: 'Password' },
+    { type: 'RICH_TEXT', label: 'Rich text' },
+  ] },
+  { group: 'Choice', types: [
+    { type: 'SELECT', label: 'Dropdown' }, { type: 'MULTI_SELECT', label: 'Multi-select' },
+    { type: 'RADIO', label: 'Radio' }, { type: 'CHECKBOX', label: 'Checkbox' },
+  ] },
+  { group: 'Number & scale', types: [
+    { type: 'NUMBER', label: 'Number' }, { type: 'RATING', label: 'Rating' }, { type: 'SCALE', label: 'Scale' },
+  ] },
+  { group: 'Date & time', types: [
+    { type: 'DATE', label: 'Date' }, { type: 'TIME', label: 'Time' },
+    { type: 'DATE_TIME', label: 'Date & time' }, { type: 'DATE_RANGE', label: 'Date range' },
+  ] },
+  { group: 'Advanced', types: [
+    { type: 'FILE_UPLOAD', label: 'File upload' }, { type: 'SIGNATURE', label: 'Signature' }, { type: 'ADDRESS', label: 'Address' },
+  ] },
+  { group: 'Layout', types: [
+    { type: 'SECTION_BREAK', label: 'Section break' },
+  ] },
+]
+const FRIENDLY: Record<string, string> = Object.fromEntries(
+  PALETTE_GROUPS.flatMap((g) => g.types.map((t) => [t.type, t.label])),
+)
+
+// ─── Undo/redo: a history wrapper over the builder reducer ───────────────────
+type BState = ReturnType<typeof createBuilderState>
+interface History { past: BState[]; present: BState; future: BState[] }
+type HistoryAction = Parameters<typeof builderReducer>[1] | { type: '__UNDO__' } | { type: '__REDO__' }
+
+const MAX_HISTORY = 50
+function historyReducer(h: History, action: HistoryAction): History {
+  if (action.type === '__UNDO__') {
+    if (h.past.length === 0) return h
+    const previous = h.past[h.past.length - 1]
+    return { past: h.past.slice(0, -1), present: previous, future: [h.present, ...h.future] }
+  }
+  if (action.type === '__REDO__') {
+    if (h.future.length === 0) return h
+    const next = h.future[0]
+    return { past: [...h.past, h.present], present: next, future: h.future.slice(1) }
+  }
+  const present = builderReducer(h.present, action)
+  if (present === h.present) return h // no-op action: don't record history
+  return { past: [...h.past, h.present].slice(-MAX_HISTORY), present, future: [] }
+}
 
 export default function Playground() {
-  const [state, dispatch] = useReducer(builderReducer, undefined, () =>
-    createBuilderState({ fields: starterFields() }),
+  const [history, hdispatch] = useReducer(
+    historyReducer,
+    undefined,
+    (): History => ({ past: [], present: createBuilderState({ fields: starterFields() }), future: [] }),
   )
+  const state = history.present
+  const dispatch = hdispatch as React.Dispatch<Parameters<typeof builderReducer>[1]>
+  const undo = () => hdispatch({ type: '__UNDO__' })
+  const redo = () => hdispatch({ type: '__REDO__' })
+  const canUndo = history.past.length > 0
+  const canRedo = history.future.length > 0
   const [theme, setTheme] = useState<Theme>(DEFAULT_THEME)
   const [tab, setTab] = useState<Tab>('build')
   const [copied, setCopied] = useState<string | null>(null)
@@ -173,6 +232,30 @@ export default function Playground() {
 
   const copy = async (what: string, text: string) => {
     try { await navigator.clipboard.writeText(text); setCopied(what); setTimeout(() => setCopied(null), 1500) } catch { /* no clipboard */ }
+  }
+
+  // Payment-step demo — the real createPaymentStepHandler against a mock provider.
+  const runPaymentDemo = async (succeed: boolean) => {
+    const log: string[] = []
+    // A mock PaymentClient (in production this wraps Stripe). Server-side only.
+    const client = {
+      createPaymentIntent: async (p: { amount: number; currency: string }) => ({
+        id: 'pi_demo', clientSecret: 'pi_demo_secret', amount: p.amount, currency: p.currency, status: 'requires_payment_method',
+      }),
+      retrievePaymentIntent: async (id: string) => ({
+        id, clientSecret: 'pi_demo_secret', amount: 4900, currency: 'usd', status: succeed ? 'succeeded' : 'requires_payment_method',
+      }),
+    }
+    const payments = createPaymentStepHandler({ client })
+    const intent = await payments.createIntent({ amount: 4900, currency: 'usd', metadata: { plan: 'pro' } })
+    log.push(`→ createIntent({ amount: 4900, currency: 'usd' })`)
+    log.push(`← clientSecret: ${intent.clientSecret} (frontend confirms with Stripe Elements)`)
+    log.push(`→ verify('${intent.id}', { expectAmount: 4900, expectCurrency: 'usd' })  [server-side]`)
+    const result = await payments.verify(intent.id, { expectAmount: 4900, expectCurrency: 'usd' })
+    log.push(result.paid
+      ? '← ✓ PAID — verified server-side; safe to complete the step.'
+      : `← ✗ NOT PAID — ${result.reason}`)
+    setServerLog(log)
   }
 
   const runServerDemo = async (tamper: boolean) => {
@@ -253,23 +336,51 @@ export default function Playground() {
     <div style={css.wrap} className="pg-wrap">
       <div style={css.panel}>
         <div style={css.tabs}>
-          {(['build', 'style', 'export', 'server'] as Tab[]).map((x) => (
+          {(['build', 'flow', 'style', 'export', 'server'] as Tab[]).map((x) => (
             <button key={x} style={tab === x ? { ...css.tabBtn, ...css.tabOn } : css.tabBtn} onClick={() => setTab(x)}>
-              {x === 'build' ? '⚒ Build' : x === 'style' ? '🎨 Style' : x === 'export' ? '⧉ Export code' : '🛡 Server demo'}
+              {x === 'build' ? '⚒ Build' : x === 'flow' ? '🔀 Flow' : x === 'style' ? '🎨 Style' : x === 'export' ? '⧉ Export code' : '🛡 Server demo'}
             </button>
           ))}
+          <span style={{ marginLeft: 'auto', display: 'inline-flex', gap: 4 }}>
+            <button style={{ ...css.tabBtn, opacity: canUndo ? 1 : 0.4 }} disabled={!canUndo} title="Undo" onClick={undo}>↶</button>
+            <button style={{ ...css.tabBtn, opacity: canRedo ? 1 : 0.4 }} disabled={!canRedo} title="Redo" onClick={redo}>↷</button>
+          </span>
         </div>
 
         {tab === 'build' && (
           <>
-            <div style={css.palette}>
-              {FIELD_PALETTE.map((ft) => (
-                <span key={ft} style={css.chip}
-                  draggable
-                  onDragStart={() => setDragId(`__new__${ft}`)}
-                  onClick={() => dispatch({ type: 'ADD_FIELD', fieldType: ft })}>
-                  + {ft.toLowerCase().replace('_', ' ')}
+            {/* Steps strip — build a multi-step form */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginBottom: 10, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
+              <span style={{ fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--muted)' }}>Steps</span>
+              {state.steps.map((s) => (
+                // Step chips are drop targets: drag a field row onto a step to assign it.
+                <span key={s.id}
+                  onDragOver={(e) => { if (dragId && !dragId.startsWith('__new__')) e.preventDefault() }}
+                  onDrop={() => { if (dragId && !dragId.startsWith('__new__')) { dispatch({ type: 'ASSIGN_FIELD_TO_STEP', id: dragId, stepId: s.id }); setDragId(null) } }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 4, border: `1px solid ${dragId && !dragId.startsWith('__new__') ? t.accent : 'var(--border)'}`, borderRadius: 8, padding: '2px 6px', fontSize: 12 }}>
+                  <input style={{ background: 'transparent', border: 'none', color: 'var(--text)', fontSize: 12, width: 84 }}
+                    value={s.title} onChange={(e) => dispatch({ type: 'UPDATE_STEP', id: s.id, patch: { title: e.target.value } })} />
+                  <button style={css.move} title="Remove step" onClick={() => dispatch({ type: 'REMOVE_STEP', id: s.id })}>✕</button>
                 </span>
+              ))}
+              <button style={css.ghostSm} onClick={() => dispatch({ type: 'ADD_STEP', title: `Step ${state.steps.length + 1}` })}>+ Add step</button>
+              {state.steps.length > 0 ? <span style={{ fontSize: 10.5, color: 'var(--muted)' }}>drag a field onto a step to assign</span> : null}
+            </div>
+            <div style={{ marginBottom: 10 }}>
+              {PALETTE_GROUPS.map((g) => (
+                <div key={g.group} style={{ marginBottom: 6 }}>
+                  <div style={{ fontSize: 10.5, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--muted)', marginBottom: 3 }}>{g.group}</div>
+                  <div style={css.palette}>
+                    {g.types.map((ft) => (
+                      <span key={ft.type} style={css.chip}
+                        draggable
+                        onDragStart={() => setDragId(`__new__${ft.type}`)}
+                        onClick={() => dispatch({ type: 'ADD_FIELD', fieldType: ft.type })}>
+                        + {ft.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
             <div onDragOver={(e) => e.preventDefault()}
@@ -289,7 +400,14 @@ export default function Playground() {
                     </span>
                     <input style={{ ...css.input, width: 120, padding: '4px 8px' }} value={f.label}
                       onChange={(e) => dispatch({ type: 'UPDATE_FIELD', id: f.id, patch: { label: e.target.value } })} />
-                    <span style={{ fontSize: 11, color: 'var(--muted)' }}>{f.type}</span>
+                    <span style={{ fontSize: 11, color: 'var(--muted)' }}>{FRIENDLY[f.type] ?? f.type}</span>
+                    {state.steps.length > 0 ? (
+                      <select style={{ ...css.input, width: 'auto', padding: '2px 4px', fontSize: 11 }} value={f.stepId ?? ''}
+                        onChange={(e) => dispatch({ type: 'ASSIGN_FIELD_TO_STEP', id: f.id, stepId: e.target.value || null })}>
+                        <option value="">No step</option>
+                        {state.steps.map((s) => <option key={s.id} value={s.id}>{s.title}</option>)}
+                      </select>
+                    ) : null}
                     <label style={{ fontSize: 11.5, color: 'var(--muted)', display: 'flex', gap: 3, alignItems: 'center' }}>
                       <input type="checkbox" checked={f.required}
                         onChange={(e) => dispatch({ type: 'UPDATE_FIELD', id: f.id, patch: { required: e.target.checked } })} /> req
@@ -352,16 +470,35 @@ export default function Playground() {
                       ) : (
                         <div style={{ fontSize: 12, color: 'var(--muted)' }}>No extra validation options for {f.type.toLowerCase()}.</div>
                       )}
+
+                      {/* Field properties: placeholder, help text, default value */}
+                      {f.type !== 'SECTION_BREAK' ? (
+                        <div style={{ marginTop: 10, paddingTop: 8, borderTop: '1px dashed var(--border)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, fontSize: 12 }}>
+                          <label style={{ gridColumn: '1 / -1' }}>Placeholder
+                            <input style={{ ...css.input, padding: '4px 6px' }} value={String((f.config as { placeholder?: string }).placeholder ?? '')}
+                              onChange={(e) => setValidationRule(f, 'placeholder', e.target.value || undefined)} /></label>
+                          <label style={{ gridColumn: '1 / -1' }}>Help text
+                            <input style={{ ...css.input, padding: '4px 6px' }} value={String((f.config as { helpText?: string }).helpText ?? '')}
+                              onChange={(e) => setValidationRule(f, 'helpText', e.target.value || undefined)} /></label>
+                        </div>
+                      ) : null}
+
+                      {/* Logic: a visual one-rule condition builder */}
+                      {f.type !== 'SECTION_BREAK' ? (
+                        <ConditionEditor field={f} allFields={ordered} dispatch={dispatch} css={css} />
+                      ) : null}
                     </div>
                   ) : null}
                 </div>
               ))}
             </div>
             <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 8 }}>
-              Drag or use ▲▼ to reorder · ⚙ edits options &amp; validation · the “Company Name” badge is a live condition — set Account Type to Business in the preview.
+              Drag or use ▲▼ to reorder · ⚙ edits options, validation, properties &amp; logic · add steps above to build a multi-step form.
             </p>
           </>
         )}
+
+        {tab === 'flow' && <FlowDiagram steps={state.steps} accent={t.accent} css={css} />}
 
         {tab === 'style' && (
           <>
@@ -419,9 +556,17 @@ export default function Playground() {
               (in-memory adapter). The server regenerates the Zod schema from the same config and re-validates —
               a tampered client can't sneak bad data past it.
             </p>
-            <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 10, flexWrap: 'wrap' }}>
               <button style={css.btn} onClick={() => runServerDemo(false)}>Submit clean payload</button>
               <button style={css.ghost} onClick={() => runServerDemo(true)}>Submit tampered payload</button>
+            </div>
+            <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
+              <strong>Payments</strong> use <code>createPaymentStepHandler</code> — provider-agnostic, verified server-side
+              (here against a mock; in production you wrap Stripe). DFE hosts nothing.
+            </p>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 10, flexWrap: 'wrap' }}>
+              <button style={css.btn} onClick={() => runPaymentDemo(true)}>Pay $49 (succeeds)</button>
+              <button style={css.ghost} onClick={() => runPaymentDemo(false)}>Pay $49 (unpaid)</button>
             </div>
             {serverLog.length > 0 && <pre style={css.pre}>{serverLog.join('\n')}</pre>}
           </>
@@ -432,26 +577,20 @@ export default function Playground() {
         <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8 }}>LIVE PREVIEW — a real dfe-core engine</div>
         {visible.map((f) => {
           const error = showErrors ? validation.errors[f.key] : undefined
-          const cfg = f.config as { options?: Array<{ label: string; value: string }>; placeholder?: string }
+          if (f.type === 'SECTION_BREAK') {
+            return (
+              <div key={f.key} style={{ margin: '18px 0 8px', paddingBottom: 4, borderBottom: '1px solid var(--border)', fontWeight: 700, fontSize: 14 }}>
+                {f.label}
+              </div>
+            )
+          }
+          const help = (f.config as { helpText?: string; description?: string }).helpText
+            ?? (f.config as { description?: string }).description ?? f.description ?? undefined
           return (
             <label key={f.key} style={{ display: 'block', margin: '10px 0' }}>
               <span style={css.label}>{f.label}{f.required ? ' *' : ''}</span>
-              {f.type === 'SELECT' ? (
-                <select style={css.input} value={String(engine.getValues()[f.key] ?? '')} onChange={(e) => setValue(f.key, e.target.value)}>
-                  <option value="">Select…</option>
-                  {cfg.options?.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                </select>
-              ) : f.type === 'CHECKBOX' ? (
-                <input type="checkbox" checked={!!engine.getValues()[f.key]} onChange={(e) => setValue(f.key, e.target.checked)} />
-              ) : f.type === 'LONG_TEXT' ? (
-                <textarea style={{ ...css.input, minHeight: 60 }} value={String(engine.getValues()[f.key] ?? '')} onChange={(e) => setValue(f.key, e.target.value)} />
-              ) : (
-                <input style={error ? { ...css.input, borderColor: '#e5484d' } : css.input}
-                  type={f.type === 'EMAIL' ? 'email' : f.type === 'NUMBER' ? 'number' : f.type === 'DATE' ? 'date' : 'text'}
-                  placeholder={cfg.placeholder}
-                  value={String(engine.getValues()[f.key] ?? '')}
-                  onChange={(e) => setValue(f.key, f.type === 'NUMBER' ? (e.target.value === '' ? null : Number(e.target.value)) : e.target.value)} />
-              )}
+              <PreviewInput field={f} value={engine.getValues()[f.key]} setValue={(v) => setValue(f.key, v)} error={!!error} css={css} accent={t.accent} />
+              {help ? <span style={{ fontSize: 11.5, color: 'var(--muted)', display: 'block', marginTop: 2 }}>{help}</span> : null}
               {error ? <span style={css.err}>{error}</span> : null}
             </label>
           )
@@ -491,5 +630,333 @@ export default function Playground() {
         </div>
       </div>
     </div>
+  )
+}
+
+// ─── Flow / workflow diagram ─────────────────────────────────────────────────
+// Renders buildFlowModel(steps) from @dmc--98/dfe-core: step nodes in order,
+// with sequential edges and labelled conditional-branch edges.
+
+function FlowDiagram({ steps, accent, css }: { steps: FormStep[]; accent: string; css: Record<string, React.CSSProperties> }) {
+  const model = useMemo(() => buildFlowModel(steps), [steps])
+  if (model.nodes.length === 0) {
+    return (
+      <div style={{ fontSize: 13, color: 'var(--muted)', padding: '20px 0' }}>
+        No steps yet. Add steps on the <strong>Build</strong> tab to see the form's flow as a diagram —
+        sequential progression plus any conditional branches.
+      </div>
+    )
+  }
+  const branchesByFrom = new Map<string, typeof model.edges>()
+  for (const e of model.edges) {
+    if (e.kind === 'branch') {
+      const list = branchesByFrom.get(e.from) ?? []
+      list.push(e); branchesByFrom.set(e.from, list)
+    }
+  }
+  return (
+    <div style={{ padding: '4px 0' }}>
+      <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 0 }}>
+        The form's flow — generated from <code>buildFlowModel()</code>. Steps run top to bottom; branches show conditional jumps.
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 0 }}>
+        {model.nodes.map((n, i) => (
+          <div key={n.id}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{
+                flex: 1, border: `1px solid ${n.isReview ? accent : 'var(--border)'}`, borderRadius: 10,
+                padding: '10px 12px', background: 'var(--panel)',
+              }}>
+                <div style={{ fontWeight: 600, fontSize: 14 }}>{n.title}</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>
+                  step {n.order}{n.skippable ? ' · skippable' : ''}{n.isReview ? ' · review' : ''}
+                </div>
+              </div>
+              {(branchesByFrom.get(n.id) ?? []).map((b, bi) => (
+                <div key={bi} style={{
+                  fontSize: 11, color: b.dangling ? '#e5484d' : accent,
+                  border: `1px dashed ${b.dangling ? '#e5484d' : accent}`, borderRadius: 999, padding: '3px 10px', whiteSpace: 'nowrap',
+                }} title={b.dangling ? 'Branch targets a missing step' : undefined}>
+                  ↳ if {b.label} → {model.nodes.find((x) => x.id === b.to)?.title ?? b.to}{b.dangling ? ' (missing)' : ''}
+                </div>
+              ))}
+            </div>
+            {i < model.nodes.length - 1 ? (
+              <div style={{ textAlign: 'center', color: 'var(--muted)', fontSize: 14, lineHeight: '18px' }}>↓</div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ─── Visual condition builder (one rule per field) ──────────────────────────
+
+const COND_ACTIONS = ['SHOW', 'HIDE', 'REQUIRE', 'DISABLE'] as const
+const COND_OPERATORS: Array<{ value: string; label: string; noValue?: boolean }> = [
+  { value: 'eq', label: 'equals' }, { value: 'neq', label: 'not equals' },
+  { value: 'empty', label: 'is empty', noValue: true }, { value: 'not_empty', label: 'is not empty', noValue: true },
+  { value: 'gt', label: 'greater than' }, { value: 'lt', label: 'less than' },
+  { value: 'contains', label: 'contains' },
+]
+
+interface CondRule { fieldKey: string; operator: string; value: unknown }
+interface Cond { action: string; operator: 'and' | 'or'; rules: CondRule[] }
+
+function ConditionEditor({ field, allFields, dispatch, css }: {
+  field: FormField
+  allFields: FormField[]
+  dispatch: React.Dispatch<{ type: 'UPDATE_FIELD'; id: string; patch: Partial<FormField> }>
+  css: Record<string, React.CSSProperties>
+}) {
+  const others = allFields.filter((f) => f.key !== field.key && f.type !== 'SECTION_BREAK')
+  const cond = field.conditions as Cond | undefined
+  const enabled = !!cond
+
+  const write = (next: Cond | null) =>
+    dispatch({ type: 'UPDATE_FIELD', id: field.id, patch: { conditions: next ?? undefined } as Partial<FormField> })
+  const setRule = (i: number, patch: Partial<CondRule>) => {
+    if (!cond) return
+    write({ ...cond, rules: cond.rules.map((r, ri) => ri === i ? { ...r, ...patch } : r) })
+  }
+  const addRule = () => cond && write({ ...cond, rules: [...cond.rules, { fieldKey: others[0]?.key ?? '', operator: 'eq', value: '' }] })
+  const removeRule = (i: number) => {
+    if (!cond) return
+    const rules = cond.rules.filter((_, ri) => ri !== i)
+    write(rules.length ? { ...cond, rules } : null)
+  }
+
+  const sel = { ...css.input, padding: '4px 6px', width: 'auto' as const, fontSize: 12 }
+
+  return (
+    <div style={{ marginTop: 10, paddingTop: 8, borderTop: '1px dashed var(--border)' }}>
+      <label style={{ fontSize: 12, display: 'flex', gap: 6, alignItems: 'center', marginBottom: enabled ? 6 : 0 }}>
+        <input type="checkbox" checked={enabled}
+          onChange={(e) => e.target.checked
+            ? write({ action: 'SHOW', operator: 'and', rules: [{ fieldKey: others[0]?.key ?? '', operator: 'eq', value: '' }] })
+            : write(null)}
+          disabled={others.length === 0} />
+        Conditional logic {others.length === 0 ? <span style={{ color: 'var(--muted)' }}>(add another field first)</span> : null}
+      </label>
+      {enabled && cond ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12 }}>
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+            <select style={sel} value={cond.action} onChange={(e) => write({ ...cond, action: e.target.value })}>
+              {COND_ACTIONS.map((a) => <option key={a} value={a}>{a[0] + a.slice(1).toLowerCase()}</option>)}
+            </select>
+            <span>this field when</span>
+            {cond.rules.length > 1 ? (
+              <select style={sel} value={cond.operator} onChange={(e) => write({ ...cond, operator: e.target.value as 'and' | 'or' })}>
+                <option value="and">ALL of</option>
+                <option value="or">ANY of</option>
+              </select>
+            ) : null}
+          </div>
+          {cond.rules.map((rule, i) => {
+            const target = others.find((f) => f.key === rule.fieldKey)
+            const opts = (target?.config as { options?: Array<{ label: string; value: string }> })?.options
+            const opMeta = COND_OPERATORS.find((o) => o.value === rule.operator)
+            return (
+              <div key={i} style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', paddingLeft: 8 }}>
+                <select style={sel} value={rule.fieldKey} onChange={(e) => setRule(i, { fieldKey: e.target.value })}>
+                  {others.map((f) => <option key={f.key} value={f.key}>{f.label}</option>)}
+                </select>
+                <select style={sel} value={rule.operator} onChange={(e) => setRule(i, { operator: e.target.value })}>
+                  {COND_OPERATORS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+                </select>
+                {!opMeta?.noValue ? (
+                  opts ? (
+                    <select style={sel} value={String(rule.value ?? '')} onChange={(e) => setRule(i, { value: e.target.value })}>
+                      <option value="">—</option>
+                      {opts.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+                    </select>
+                  ) : (
+                    <input style={{ ...sel, width: 100 }} value={String(rule.value ?? '')} placeholder="value"
+                      onChange={(e) => setRule(i, { value: e.target.value })} />
+                  )
+                ) : null}
+                {cond.rules.length > 1 ? <button style={css.move} title="Remove rule" onClick={() => removeRule(i)}>✕</button> : null}
+              </div>
+            )
+          })}
+          <button style={{ ...css.ghostSm, alignSelf: 'flex-start', marginLeft: 8 }} onClick={addRule}>+ Add rule</button>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+// ─── Preview inputs — a real widget for every field type ─────────────────────
+
+interface PreviewInputProps {
+  field: FormField
+  value: unknown
+  setValue: (v: unknown) => void
+  error: boolean
+  css: Record<string, React.CSSProperties>
+  accent: string
+}
+
+function PreviewInput({ field, value, setValue, error, css, accent }: PreviewInputProps) {
+  const cfg = (field.config ?? {}) as {
+    options?: Array<{ label: string; value: string }>
+    placeholder?: string; max?: number; min?: number; maxLength?: number
+  }
+  const base = error ? { ...css.input, borderColor: '#e5484d' } : css.input
+  const chip = (on: boolean): React.CSSProperties => ({
+    border: `1px solid ${on ? accent : 'var(--border)'}`, background: on ? accent : 'transparent',
+    color: on ? '#fff' : 'var(--text)', borderRadius: 999, padding: '5px 12px', fontSize: 13, cursor: 'pointer', userSelect: 'none',
+  })
+  const row: React.CSSProperties = { display: 'flex', flexWrap: 'wrap', gap: 6 }
+
+  switch (field.type) {
+    case 'LONG_TEXT':
+    case 'RICH_TEXT':
+      return <textarea style={{ ...base, minHeight: 60 }} maxLength={cfg.maxLength} placeholder={cfg.placeholder}
+        value={String(value ?? '')} onChange={(e) => setValue(e.target.value)} />
+    case 'CHECKBOX':
+      return <input type="checkbox" checked={!!value} onChange={(e) => setValue(e.target.checked)} />
+    case 'SELECT':
+      return (
+        <select style={base} value={String(value ?? '')} onChange={(e) => setValue(e.target.value)}>
+          <option value="">Select…</option>
+          {cfg.options?.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+        </select>
+      )
+    case 'RADIO':
+      return (
+        <span style={row}>
+          {cfg.options?.map((o) => (
+            <span key={o.value} style={chip(value === o.value)} onClick={() => setValue(o.value)}>{o.label}</span>
+          ))}
+        </span>
+      )
+    case 'MULTI_SELECT': {
+      const sel: string[] = Array.isArray(value) ? (value as string[]) : []
+      return (
+        <span style={row}>
+          {cfg.options?.map((o) => (
+            <span key={o.value} style={chip(sel.includes(o.value))}
+              onClick={() => setValue(sel.includes(o.value) ? sel.filter((x) => x !== o.value) : [...sel, o.value])}>{o.label}</span>
+          ))}
+        </span>
+      )
+    }
+    case 'NUMBER':
+      return <input style={base} type="number" placeholder={cfg.placeholder} value={value == null ? '' : String(value)}
+        onChange={(e) => setValue(e.target.value === '' ? null : Number(e.target.value))} />
+    case 'RATING': {
+      const max = cfg.max ?? 5
+      return (
+        <span style={row}>
+          {Array.from({ length: max }, (_, i) => i + 1).map((n) => (
+            <span key={n} style={{ cursor: 'pointer', fontSize: 20, color: typeof value === 'number' && value >= n ? accent : 'var(--border)' }}
+              onClick={() => setValue(n)}>★</span>
+          ))}
+        </span>
+      )
+    }
+    case 'SCALE': {
+      const min = cfg.min ?? 1; const max = cfg.max ?? 10
+      return (
+        <span style={row}>
+          {Array.from({ length: max - min + 1 }, (_, i) => min + i).map((n) => (
+            <span key={n} style={chip(value === n)} onClick={() => setValue(n)}>{n}</span>
+          ))}
+        </span>
+      )
+    }
+    case 'DATE': return <input style={base} type="date" value={String(value ?? '')} onChange={(e) => setValue(e.target.value)} />
+    case 'TIME': return <input style={base} type="time" value={String(value ?? '')} onChange={(e) => setValue(e.target.value)} />
+    case 'DATE_TIME': return <input style={base} type="datetime-local" value={String(value ?? '')} onChange={(e) => setValue(e.target.value)} />
+    case 'DATE_RANGE': {
+      const v = (value ?? {}) as { from?: string; to?: string }
+      return (
+        <span style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+          <input style={base} type="date" value={v.from ?? ''} onChange={(e) => setValue({ ...v, from: e.target.value })} />
+          <span style={{ color: 'var(--muted)' }}>→</span>
+          <input style={base} type="date" value={v.to ?? ''} onChange={(e) => setValue({ ...v, to: e.target.value })} />
+        </span>
+      )
+    }
+    case 'FILE_UPLOAD':
+      return (
+        <span style={{ display: 'block' }}>
+          <input type="file" style={{ fontSize: 13 }}
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              if (!file) { setValue([]); return }
+              // Read the real file to a data URL (in-browser; nothing uploaded).
+              const reader = new FileReader()
+              reader.onload = () => setValue([{ name: file.name, size: file.size, type: file.type, url: String(reader.result) }])
+              reader.readAsDataURL(file)
+            }} />
+          {(() => {
+            const f0 = Array.isArray(value) ? (value[0] as { name?: string; size?: number } | undefined) : undefined
+            return f0?.name
+              ? <span style={{ fontSize: 11.5, color: 'var(--muted)' }}>{f0.name} ({Math.round((f0.size ?? 0) / 1024)} KB) read ✓</span>
+              : null
+          })()}
+        </span>
+      )
+    case 'ADDRESS': {
+      const a = (value ?? {}) as Record<string, string>
+      const fieldKeys: Array<[string, string]> = [['street', 'Street'], ['city', 'City'], ['state', 'State'], ['zip', 'ZIP'], ['country', 'Country']]
+      return (
+        <span style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+          {fieldKeys.map(([k, ph]) => (
+            <input key={k} style={{ ...base, gridColumn: k === 'street' ? '1 / -1' : 'auto' }} placeholder={ph}
+              value={a[k] ?? ''} onChange={(e) => setValue({ ...a, [k]: e.target.value })} />
+          ))}
+        </span>
+      )
+    }
+    case 'SIGNATURE':
+      return <SignaturePad value={String(value ?? '')} setValue={setValue} accent={accent} />
+    default: // SHORT_TEXT, EMAIL, URL, PHONE, PASSWORD, HIDDEN
+      return <input style={base}
+        type={field.type === 'EMAIL' ? 'email' : field.type === 'URL' ? 'url' : field.type === 'PASSWORD' ? 'password' : field.type === 'PHONE' ? 'tel' : 'text'}
+        placeholder={cfg.placeholder} value={String(value ?? '')} onChange={(e) => setValue(e.target.value)} />
+  }
+}
+
+// A tiny real signature pad: draw on a canvas, store a data URL, clear.
+function SignaturePad({ value, setValue, accent }: { value: string; setValue: (v: unknown) => void; accent: string }) {
+  const ref = useRef<HTMLCanvasElement | null>(null)
+  const drawing = useRef(false)
+  const pos = (e: React.PointerEvent) => {
+    const c = ref.current!; const r = c.getBoundingClientRect()
+    return { x: e.clientX - r.left, y: e.clientY - r.top }
+  }
+  const start = (e: React.PointerEvent) => {
+    drawing.current = true
+    const ctx = ref.current!.getContext('2d')!; const p = pos(e)
+    ctx.strokeStyle = accent; ctx.lineWidth = 2; ctx.lineCap = 'round'
+    ctx.beginPath(); ctx.moveTo(p.x, p.y)
+  }
+  const move = (e: React.PointerEvent) => {
+    if (!drawing.current) return
+    const ctx = ref.current!.getContext('2d')!; const p = pos(e)
+    ctx.lineTo(p.x, p.y); ctx.stroke()
+  }
+  const end = () => {
+    if (!drawing.current) return
+    drawing.current = false
+    setValue(ref.current!.toDataURL('image/png'))
+  }
+  const clear = () => {
+    const c = ref.current!; c.getContext('2d')!.clearRect(0, 0, c.width, c.height); setValue('')
+  }
+  return (
+    <span style={{ display: 'block' }}>
+      <canvas ref={ref} width={320} height={90}
+        style={{ border: '1px solid var(--border)', borderRadius: 8, touchAction: 'none', background: 'var(--bg)', display: 'block' }}
+        onPointerDown={start} onPointerMove={move} onPointerUp={end} onPointerLeave={end} />
+      <button type="button" onClick={clear}
+        style={{ marginTop: 4, fontSize: 12, background: 'none', border: '1px solid var(--border)', borderRadius: 6, padding: '2px 8px', cursor: 'pointer', color: 'var(--text)' }}>
+        Clear{value ? ' ✓' : ''}
+      </button>
+    </span>
   )
 }

@@ -122,6 +122,17 @@ describe('builderReducer — steps', () => {
     expect(s.steps[0].order).toBe(1)
   })
 
+  it('updates a step title via UPDATE_STEP', () => {
+    let s = createBuilderState()
+    s = builderReducer(s, { type: 'ADD_STEP', title: 'Old' })
+    const id = s.steps[0].id
+    s = builderReducer(s, { type: 'UPDATE_STEP', id, patch: { title: 'New' } })
+    expect(s.steps[0].title).toBe('New')
+    // unknown id is a no-op
+    s = builderReducer(s, { type: 'UPDATE_STEP', id: 'nope', patch: { title: 'X' } })
+    expect(s.steps[0].title).toBe('New')
+  })
+
   it('assigns a field to a step and detaches on step removal', () => {
     let s = createBuilderState()
     s = builderReducer(s, { type: 'ADD_STEP', title: 'S1' })
