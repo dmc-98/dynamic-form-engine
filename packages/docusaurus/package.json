@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-docusaurus",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Docusaurus plugin helpers for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",

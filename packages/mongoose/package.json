@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-mongoose",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Mongoose/MongoDB adapter for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",
