@@ -1,0 +1,41 @@
+{
+  "name": "@dmc--98/dfe-tokens",
+  "version": "0.1.0",
+  "description": "Canonical design tokens (Graphite & Teal) for Dynamic Form Engine — CSS custom properties + typed token object",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./tokens.css": "./tokens.css",
+    "./motion.css": "./motion.css"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist"
+  },
+  "files": ["dist", "tokens.css", "motion.css", "README.md", "LICENSE"],
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "keywords": ["design-tokens", "css-variables", "theme", "dynamic-form-engine", "design-system"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmc-98/dynamic-form-engine",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://github.com/dmc-98/dynamic-form-engine#readme",
+  "bugs": "https://github.com/dmc-98/dynamic-form-engine/issues"
+}

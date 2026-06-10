@@ -43,17 +43,17 @@ export function MantineFieldRenderer({
             aria-describedby={field.description ? `${id}-desc` : undefined}
             style={{
               padding: '8px 12px',
-              border: error ? '1px solid #f76707' : '1px solid #ced4da',
+              border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
               borderRadius: '4px',
               fontSize: '14px',
               transition: 'border-color 150ms ease, box-shadow 150ms ease',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#1971c2'
+              e.currentTarget.style.borderColor = 'var(--dfe-color-primary, #0f766e)'
               e.currentTarget.style.boxShadow = '0 0 0 3px rgba(25, 113, 194, 0.1)'
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = error ? '#f76707' : '#ced4da'
+              e.currentTarget.style.borderColor = error ? 'var(--dfe-color-primary, #0f766e)' : 'var(--dfe-color-border, #e2e8f0)'
               e.currentTarget.style.boxShadow = 'none'
             }}
           />
@@ -73,7 +73,7 @@ export function MantineFieldRenderer({
             aria-describedby={field.description ? `${id}-desc` : undefined}
             style={{
               padding: '8px 12px',
-              border: error ? '1px solid #f76707' : '1px solid #ced4da',
+              border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
               borderRadius: '4px',
               fontSize: '14px',
               fontFamily: 'monospace',
@@ -81,11 +81,11 @@ export function MantineFieldRenderer({
               resize: 'vertical',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#1971c2'
+              e.currentTarget.style.borderColor = 'var(--dfe-color-primary, #0f766e)'
               e.currentTarget.style.boxShadow = '0 0 0 3px rgba(25, 113, 194, 0.1)'
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = error ? '#f76707' : '#ced4da'
+              e.currentTarget.style.borderColor = error ? 'var(--dfe-color-primary, #0f766e)' : 'var(--dfe-color-border, #e2e8f0)'
               e.currentTarget.style.boxShadow = 'none'
             }}
           />
@@ -103,7 +103,7 @@ export function MantineFieldRenderer({
                   left: '12px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: '#868e96',
+                  color: 'var(--dfe-color-text-muted, #475569)',
                   fontSize: '14px',
                 }}
               >
@@ -126,7 +126,7 @@ export function MantineFieldRenderer({
               aria-describedby={field.description ? `${id}-desc` : undefined}
               style={{
                 padding: `8px ${config?.suffix ? '32px' : '12px'} 8px ${config?.prefix ? '32px' : '12px'}`,
-                border: error ? '1px solid #f76707' : '1px solid #ced4da',
+                border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
                 transition: 'border-color 150ms ease, box-shadow 150ms ease',
@@ -134,11 +134,11 @@ export function MantineFieldRenderer({
                 boxSizing: 'border-box',
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = '#1971c2'
+                e.currentTarget.style.borderColor = 'var(--dfe-color-primary, #0f766e)'
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(25, 113, 194, 0.1)'
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = error ? '#f76707' : '#ced4da'
+                e.currentTarget.style.borderColor = error ? 'var(--dfe-color-primary, #0f766e)' : 'var(--dfe-color-border, #e2e8f0)'
                 e.currentTarget.style.boxShadow = 'none'
               }}
             />
@@ -149,7 +149,7 @@ export function MantineFieldRenderer({
                   right: '12px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: '#868e96',
+                  color: 'var(--dfe-color-text-muted, #475569)',
                   fontSize: '14px',
                 }}
               >
@@ -181,7 +181,7 @@ export function MantineFieldRenderer({
             aria-describedby={field.description ? `${id}-desc` : undefined}
             style={{
               padding: '8px 12px',
-              border: error ? '1px solid #f76707' : '1px solid #ced4da',
+              border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
               borderRadius: '4px',
               fontSize: '14px',
               transition: 'border-color 150ms ease, box-shadow 150ms ease',
@@ -212,12 +212,12 @@ export function MantineFieldRenderer({
               style={{
                 flex: 1,
                 padding: '8px 12px',
-                border: error ? '1px solid #f76707' : '1px solid #ced4da',
+                border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
               }}
             />
-            <span style={{ color: '#868e96' }}>→</span>
+            <span style={{ color: 'var(--dfe-color-text-muted, #475569)' }}>→</span>
             <input
               id={`${id}-to`}
               type="date"
@@ -234,7 +234,7 @@ export function MantineFieldRenderer({
               style={{
                 flex: 1,
                 padding: '8px 12px',
-                border: error ? '1px solid #f76707' : '1px solid #ced4da',
+                border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
               }}
@@ -256,7 +256,7 @@ export function MantineFieldRenderer({
             aria-describedby={field.description ? `${id}-desc` : undefined}
             style={{
               padding: '8px 12px',
-              border: error ? '1px solid #f76707' : '1px solid #ced4da',
+              border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
               borderRadius: '4px',
               fontSize: '14px',
               transition: 'border-color 150ms ease, box-shadow 150ms ease',
@@ -344,7 +344,7 @@ export function MantineFieldRenderer({
               {field.label}
             </span>
             {field.required && (
-              <span style={{ color: '#f76707', marginLeft: '4px' }}>*</span>
+              <span style={{ color: 'var(--dfe-color-primary, #0f766e)', marginLeft: '4px' }}>*</span>
             )}
           </label>
         )
@@ -369,14 +369,14 @@ export function MantineFieldRenderer({
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  color: rating >= i + 1 ? '#fcc419' : '#ccc',
+                  color: rating >= i + 1 ? 'var(--dfe-color-warning, #b45309)' : 'var(--dfe-color-border-strong, #cbd5e1)',
                   transition: 'color 150ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#fcc419'
+                  e.currentTarget.style.color = 'var(--dfe-color-warning, #b45309)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = rating >= i + 1 ? '#fcc419' : '#ccc'
+                  e.currentTarget.style.color = rating >= i + 1 ? 'var(--dfe-color-warning, #b45309)' : 'var(--dfe-color-border-strong, #cbd5e1)'
                 }}
               >
                 ★
@@ -409,11 +409,11 @@ export function MantineFieldRenderer({
                 display: 'flex',
                 justifyContent: 'space-between',
                 fontSize: '12px',
-                color: '#868e96',
+                color: 'var(--dfe-color-text-muted, #475569)',
               }}
             >
               <span>{config?.minLabel || min}</span>
-              <span style={{ fontWeight: 600, color: '#333' }}>
+              <span style={{ fontWeight: 600, color: 'var(--dfe-color-text, #0f172a)' }}>
                 {value ?? min}
               </span>
               <span>{config?.maxLabel || max}</span>
@@ -445,13 +445,13 @@ export function MantineFieldRenderer({
               aria-describedby={field.description ? `${id}-desc` : undefined}
               style={{
                 padding: '8px 12px',
-                border: '2px dashed #ced4da',
+                border: '2px dashed var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 cursor: 'pointer',
               }}
             />
             {files.length > 0 && (
-              <ul style={{ fontSize: '12px', color: '#868e96', margin: 0, padding: 0 }}>
+              <ul style={{ fontSize: '12px', color: 'var(--dfe-color-text-muted, #475569)', margin: 0, padding: 0 }}>
                 {files.map((f: any, idx) => (
                   <li key={idx} style={{ listStyle: 'none' }}>
                     {f.name}
@@ -476,7 +476,7 @@ export function MantineFieldRenderer({
             aria-describedby={field.description ? `${id}-desc` : undefined}
             style={{
               padding: '8px 12px',
-              border: error ? '1px solid #f76707' : '1px solid #ced4da',
+              border: error ? '1px solid var(--dfe-color-primary, #0f766e)' : '1px solid var(--dfe-color-border, #e2e8f0)',
               borderRadius: '4px',
               fontSize: '14px',
               transition: 'border-color 150ms ease, box-shadow 150ms ease',
@@ -494,13 +494,13 @@ export function MantineFieldRenderer({
         const height = config?.canvasHeight ?? 100
 
         return (
-          <div style={{ padding: '8px', border: '1px solid #ced4da', borderRadius: '4px' }}>
+          <div style={{ padding: '8px', border: '1px solid var(--dfe-color-border, #e2e8f0)', borderRadius: '4px' }}>
             <canvas
               id={id}
               width={width}
               height={height}
               style={{
-                border: '1px solid #ccc',
+                border: '1px solid var(--dfe-color-border-strong, #cbd5e1)',
                 borderRadius: '4px',
                 background: config?.backgroundColor ?? 'white',
                 display: 'block',
@@ -523,7 +523,7 @@ export function MantineFieldRenderer({
               style={{
                 marginTop: '8px',
                 fontSize: '12px',
-                color: '#868e96',
+                color: 'var(--dfe-color-text-muted, #475569)',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
@@ -552,7 +552,7 @@ export function MantineFieldRenderer({
               }
               style={{
                 padding: '8px 12px',
-                border: '1px solid #ced4da',
+                border: '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
               }}
@@ -569,7 +569,7 @@ export function MantineFieldRenderer({
               }
               style={{
                 padding: '8px 12px',
-                border: '1px solid #ced4da',
+                border: '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
               }}
@@ -586,7 +586,7 @@ export function MantineFieldRenderer({
               }
               style={{
                 padding: '8px 12px',
-                border: '1px solid #ced4da',
+                border: '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
               }}
@@ -603,7 +603,7 @@ export function MantineFieldRenderer({
               }
               style={{
                 padding: '8px 12px',
-                border: '1px solid #ced4da',
+                border: '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
               }}
@@ -620,7 +620,7 @@ export function MantineFieldRenderer({
               }
               style={{
                 padding: '8px 12px',
-                border: '1px solid #ced4da',
+                border: '1px solid var(--dfe-color-border, #e2e8f0)',
                 borderRadius: '4px',
                 fontSize: '14px',
               }}
@@ -630,7 +630,7 @@ export function MantineFieldRenderer({
       }
 
       case 'SECTION_BREAK':
-        return <hr style={{ margin: '16px 0', border: 'none', borderTop: '1px solid #ced4da' }} />
+        return <hr style={{ margin: '16px 0', border: 'none', borderTop: '1px solid var(--dfe-color-border, #e2e8f0)' }} />
 
       case 'FIELD_GROUP':
       case 'HIDDEN':
@@ -646,7 +646,7 @@ export function MantineFieldRenderer({
           {field.label}
         </h3>
         {field.description && (
-          <p style={{ fontSize: '14px', color: '#868e96', margin: 0 }}>
+          <p style={{ fontSize: '14px', color: 'var(--dfe-color-text-muted, #475569)', margin: 0 }}>
             {field.description}
           </p>
         )}
@@ -664,7 +664,7 @@ export function MantineFieldRenderer({
         <label htmlFor={id} style={{ fontSize: '14px', fontWeight: 500 }}>
           {field.label}
           {field.required && (
-            <span style={{ color: '#f76707', marginLeft: '4px' }}>*</span>
+            <span style={{ color: 'var(--dfe-color-primary, #0f766e)', marginLeft: '4px' }}>*</span>
           )}
         </label>
       )}
@@ -674,7 +674,7 @@ export function MantineFieldRenderer({
           id={`${id}-desc`}
           style={{
             fontSize: '12px',
-            color: '#868e96',
+            color: 'var(--dfe-color-text-muted, #475569)',
             margin: 0,
           }}
         >
@@ -690,7 +690,7 @@ export function MantineFieldRenderer({
           role="alert"
           style={{
             fontSize: '12px',
-            color: '#f76707',
+            color: 'var(--dfe-color-primary, #0f766e)',
             fontWeight: 500,
             margin: 0,
           }}

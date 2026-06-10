@@ -408,9 +408,9 @@ export function ShadcnFieldRenderer({
               width={width}
               height={height}
               style={{
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                background: config?.backgroundColor ?? 'white',
+                border: '1px solid var(--dfe-color-border, #cbd5e1)',
+                borderRadius: 'var(--dfe-radius-md, 0.5rem)',
+                background: config?.backgroundColor ?? 'var(--dfe-color-surface, #fff)',
               }}
               className="w-full max-w-full"
             />

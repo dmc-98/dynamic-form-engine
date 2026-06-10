@@ -75,7 +75,7 @@ export function DfeStepIndicator({
           const itemStyle: React.CSSProperties = {
             ...sharedItemStyle,
             background: isActive
-              ? 'var(--dfe-color-surface-muted, #eef2ff)'
+              ? 'var(--dfe-color-surface-muted, #f1f5f9)'
               : 'var(--dfe-color-surface, #ffffff)',
             border: isActive
               ? '1px solid var(--dfe-color-primary, #0f766e)'

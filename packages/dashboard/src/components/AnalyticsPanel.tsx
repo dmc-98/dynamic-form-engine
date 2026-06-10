@@ -52,19 +52,19 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
   }, [getAnalytics])
 
   if (loading) {
-    return <div style={{ textAlign: 'center', color: '#666' }}>Loading analytics...</div>
+    return <div style={{ textAlign: 'center', color: 'var(--dfe-color-text-muted)' }}>Loading analytics...</div>
   }
 
   if (error) {
     return (
-      <div style={{ color: '#d32f2f', padding: '10px', backgroundColor: '#ffebee', borderRadius: '4px' }}>
+      <div style={{ color: 'var(--dfe-color-danger)', padding: '10px', backgroundColor: 'var(--dfe-color-danger-surface)', borderRadius: '4px' }}>
         Error loading analytics: {error.message}
       </div>
     )
   }
 
   if (!analytics) {
-    return <div style={{ textAlign: 'center', color: '#999' }}>No analytics data available</div>
+    return <div style={{ textAlign: 'center', color: 'var(--dfe-color-text-subtle)' }}>No analytics data available</div>
   }
 
   const maxFunnelCount = Math.max(...analytics.stepFunnel.map((step) => step.count), 1)
@@ -72,19 +72,19 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
   return (
     <div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-        <StatCard label="Total Forms" value={String(analytics.totalForms)} accent="#1f2937" />
-        <StatCard label="Starts" value={String(analytics.totalStarts)} accent="#2563eb" />
-        <StatCard label="Completions" value={String(analytics.totalCompletions)} accent="#16a34a" />
-        <StatCard label="Completion Rate" value={formatPercent(analytics.completionRate)} accent="#16a34a" />
-        <StatCard label="Abandonment Rate" value={formatPercent(analytics.abandonmentRate)} accent="#dc2626" />
-        <StatCard label="Avg Completion Time" value={formatDuration(analytics.averageCompletionTimeMs)} accent="#7c3aed" />
+        <StatCard label="Total Forms" value={String(analytics.totalForms)} accent="var(--dfe-color-text)" />
+        <StatCard label="Starts" value={String(analytics.totalStarts)} accent="var(--dfe-color-primary)" />
+        <StatCard label="Completions" value={String(analytics.totalCompletions)} accent="var(--dfe-color-success)" />
+        <StatCard label="Completion Rate" value={formatPercent(analytics.completionRate)} accent="var(--dfe-color-success)" />
+        <StatCard label="Abandonment Rate" value={formatPercent(analytics.abandonmentRate)} accent="var(--dfe-color-danger)" />
+        <StatCard label="Avg Completion Time" value={formatDuration(analytics.averageCompletionTimeMs)} accent="var(--dfe-data-5)" />
       </div>
 
       <section style={panelStyle}>
         <h3 style={headingStyle}>Submission Funnel</h3>
 
         {analytics.stepFunnel.length === 0 ? (
-          <div style={{ color: '#999' }}>No step data available</div>
+          <div style={{ color: 'var(--dfe-color-text-subtle)' }}>No step data available</div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
             {analytics.stepFunnel.map((step) => (
@@ -98,16 +98,16 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
                   }}
                 >
                   <span style={{ fontWeight: '500' }}>{step.stepTitle}</span>
-                  <span style={{ color: '#666' }}>
+                  <span style={{ color: 'var(--dfe-color-text-muted)' }}>
                     {step.count} visits
-                    {step.dropOff > 0 && <span style={{ color: '#d32f2f', marginLeft: '8px' }}>(-{step.dropOff})</span>}
+                    {step.dropOff > 0 && <span style={{ color: 'var(--dfe-color-danger)', marginLeft: '8px' }}>(-{step.dropOff})</span>}
                   </span>
                 </div>
                 <div
                   style={{
                     width: '100%',
                     height: '24px',
-                    backgroundColor: '#f0f0f0',
+                    backgroundColor: 'var(--dfe-color-surface-muted)',
                     borderRadius: '4px',
                     overflow: 'hidden',
                   }}
@@ -116,7 +116,7 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
                     style={{
                       height: '100%',
                       width: `${(step.count / maxFunnelCount) * 100}%`,
-                      backgroundColor: '#0066cc',
+                      backgroundColor: 'var(--dfe-color-primary)',
                       transition: 'width 0.3s ease',
                     }}
                   />
@@ -131,11 +131,11 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
         <h3 style={headingStyle}>Variant Performance</h3>
 
         {analytics.variantComparison.length === 0 ? (
-          <div style={{ color: '#999' }}>No active experiments recorded yet</div>
+          <div style={{ color: 'var(--dfe-color-text-subtle)' }}>No active experiments recorded yet</div>
         ) : (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+              <tr style={{ borderBottom: '1px solid var(--dfe-color-border)' }}>
                 <TableHeading>Variant</TableHeading>
                 <TableHeading align="right">Starts</TableHeading>
                 <TableHeading align="right">Completions</TableHeading>
@@ -145,10 +145,10 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
             </thead>
             <tbody>
               {analytics.variantComparison.map((variant) => (
-                <tr key={variant.variantId ?? variant.variantKey} style={{ borderBottom: '1px solid #f3f4f6' }}>
+                <tr key={variant.variantId ?? variant.variantKey} style={{ borderBottom: '1px solid var(--dfe-color-surface-muted)' }}>
                   <td style={{ padding: '12px 0' }}>
                     <div style={{ fontWeight: 600 }}>{variant.variantLabel}</div>
-                    <div style={{ fontSize: '12px', color: '#6b7280' }}>{variant.variantKey}</div>
+                    <div style={{ fontSize: '12px', color: 'var(--dfe-color-text-muted)' }}>{variant.variantKey}</div>
                   </td>
                   <TableCell align="right">{variant.starts}</TableCell>
                   <TableCell align="right">{variant.completions}</TableCell>
@@ -165,20 +165,20 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
         <h3 style={headingStyle}>Field Error Frequency</h3>
 
         {analytics.fieldErrors.length === 0 ? (
-          <div style={{ color: '#999' }}>No field errors</div>
+          <div style={{ color: 'var(--dfe-color-text-subtle)' }}>No field errors</div>
         ) : (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid #e0e0e0' }}>
+              <tr style={{ borderBottom: '1px solid var(--dfe-color-border)' }}>
                 <TableHeading>Field</TableHeading>
                 <TableHeading align="right">Error Count</TableHeading>
               </tr>
             </thead>
             <tbody>
               {analytics.fieldErrors.map((field) => (
-                <tr key={field.fieldKey} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                <tr key={field.fieldKey} style={{ borderBottom: '1px solid var(--dfe-color-surface-muted)' }}>
                   <td style={{ padding: '10px 0', fontSize: '14px' }}>{field.fieldLabel}</td>
-                  <TableCell align="right" color="#d32f2f">{field.errorCount}</TableCell>
+                  <TableCell align="right" color="var(--dfe-color-danger)">{field.errorCount}</TableCell>
                 </tr>
               ))}
             </tbody>
@@ -190,7 +190,7 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
         <h3 style={headingStyle}>Recent Activity</h3>
 
         {analytics.recentActivity.length === 0 ? (
-          <div style={{ color: '#999' }}>No recent activity</div>
+          <div style={{ color: 'var(--dfe-color-text-subtle)' }}>No recent activity</div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {analytics.recentActivity.map((activity, index) => (
@@ -198,21 +198,21 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
                 key={`${activity.timestamp}-${index}`}
                 style={{
                   padding: '12px',
-                  backgroundColor: '#f9f9f9',
-                  borderLeft: '3px solid #0066cc',
+                  backgroundColor: 'var(--dfe-color-surface-muted)',
+                  borderLeft: '3px solid var(--dfe-color-primary)',
                   borderRadius: '4px',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
-                    <div style={{ fontWeight: '500', fontSize: '14px', color: '#1a1a1a' }}>
+                    <div style={{ fontWeight: '500', fontSize: '14px', color: 'var(--dfe-color-text)' }}>
                       {activity.type}
                     </div>
-                    <div style={{ fontSize: '13px', color: '#666', marginTop: '4px' }}>
+                    <div style={{ fontSize: '13px', color: 'var(--dfe-color-text-muted)', marginTop: '4px' }}>
                       {activity.description}
                     </div>
                   </div>
-                  <div style={{ fontSize: '12px', color: '#999', whiteSpace: 'nowrap', marginLeft: '10px' }}>
+                  <div style={{ fontSize: '12px', color: 'var(--dfe-color-text-subtle)', whiteSpace: 'nowrap', marginLeft: '10px' }}>
                     {new Date(activity.timestamp).toLocaleTimeString()}
                   </div>
                 </div>
@@ -226,7 +226,7 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ config }) => {
 }
 
 const panelStyle: React.CSSProperties = {
-  backgroundColor: '#fff',
+  backgroundColor: 'var(--dfe-color-surface)',
   padding: '20px',
   borderRadius: '8px',
   boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
@@ -244,13 +244,13 @@ function StatCard({ label, value, accent }: { label: string; value: string; acce
   return (
     <div
       style={{
-        backgroundColor: '#fff',
+        backgroundColor: 'var(--dfe-color-surface)',
         padding: '20px',
         borderRadius: '8px',
         boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
       }}
     >
-      <div style={{ fontSize: '12px', color: '#666', marginBottom: '8px', textTransform: 'uppercase', fontWeight: 600 }}>
+      <div style={{ fontSize: '12px', color: 'var(--dfe-color-text-muted)', marginBottom: '8px', textTransform: 'uppercase', fontWeight: 600 }}>
         {label}
       </div>
       <div style={{ fontSize: '30px', fontWeight: 'bold', color: accent }}>
@@ -268,7 +268,7 @@ function TableHeading({ children, align = 'left' }: { children: React.ReactNode;
         textAlign: align,
         fontWeight: 600,
         fontSize: '13px',
-        color: '#666',
+        color: 'var(--dfe-color-text-muted)',
       }}
     >
       {children}
@@ -279,7 +279,7 @@ function TableHeading({ children, align = 'left' }: { children: React.ReactNode;
 function TableCell({
   children,
   align = 'left',
-  color = '#111827',
+  color = 'var(--dfe-color-text)',
 }: {
   children: React.ReactNode
   align?: 'left' | 'right'

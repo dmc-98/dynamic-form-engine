@@ -33,11 +33,11 @@ export interface ThemeExport {
 /** The default DFE theme. */
 export function defaultTheme(): FormTheme {
   return {
-    accent: '#6366f1',
+    accent: '#0f766e',
     radius: 8,
     density: 10,
     labelWeight: 600,
-    fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+    fontFamily: '"IBM Plex Sans", "Avenir Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
   }
 }
 

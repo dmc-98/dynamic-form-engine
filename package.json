@@ -14,6 +14,7 @@
     "test:e2e:playground": "playwright test --config e2e/playwright.playground.config.ts",
     "test:e2e:serverless": "playwright test --config e2e/playwright.serverless.config.ts",
     "test:e2e:example:headed": "playwright test --config e2e/playwright.config.ts --headed",
+    "test:e2e:visual": "playwright test --config e2e/playwright.visual.config.ts",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "clean": "turbo run clean",

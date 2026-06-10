@@ -1,0 +1,54 @@
+/* ============================================================================
+ * @dmc--98/dfe-ui-shadcn — DFE theme bridge (Graphite & Teal)
+ * ----------------------------------------------------------------------------
+ * Maps shadcn/ui's CSS design tokens onto DFE values so shadcn components render
+ * in the DFE look BY DEFAULT. Import once in your app entry:
+ *   import "@dmc--98/dfe-ui-shadcn/dfe-shadcn.css"
+ * shadcn expects HSL channel triples in its variables. Opt out by simply not
+ * importing this file (your own shadcn theme then wins).
+ * ==========================================================================*/
+
+:root {
+  --background: 0 0% 100%;            /* white */
+  --foreground: 222 47% 11%;          /* slate-900 */
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 175 77% 26%;             /* teal-700 #0f766e */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96%;           /* slate-100 */
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 19% 35%;    /* slate-600 */
+  --accent: 168 84% 96%;              /* teal-50 */
+  --accent-foreground: 175 77% 26%;
+  --destructive: 0 72% 51%;           /* red-600/700 */
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;              /* slate-200 */
+  --input: 214 32% 91%;
+  --ring: 175 64% 33%;                /* teal-ish focus */
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222 47% 4%;           /* slate-950 */
+  --foreground: 210 40% 96%;          /* slate-100 */
+  --card: 222 47% 11%;                /* slate-900 */
+  --card-foreground: 210 40% 96%;
+  --popover: 222 47% 11%;
+  --popover-foreground: 210 40% 96%;
+  --primary: 172 66% 50%;             /* teal-400 #2dd4bf */
+  --primary-foreground: 222 47% 4%;
+  --secondary: 217 33% 17%;           /* slate-800 */
+  --secondary-foreground: 210 40% 96%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;    /* slate-400 */
+  --accent: 175 60% 20%;
+  --accent-foreground: 166 76% 70%;
+  --destructive: 0 72% 60%;
+  --destructive-foreground: 210 40% 96%;
+  --border: 217 33% 25%;              /* slate-700 */
+  --input: 217 33% 25%;
+  --ring: 172 66% 50%;
+}

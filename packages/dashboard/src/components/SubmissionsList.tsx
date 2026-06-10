@@ -48,23 +48,23 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
   const getStatusColor = (status: string): string => {
     switch (status) {
       case 'IN_PROGRESS':
-        return '#ff9800'
+        return 'var(--dfe-color-warning)'
       case 'COMPLETED':
-        return '#4caf50'
+        return 'var(--dfe-color-success)'
       case 'ABANDONED':
-        return '#d32f2f'
+        return 'var(--dfe-color-danger)'
       default:
-        return '#666'
+        return 'var(--dfe-color-text-muted)'
     }
   }
 
   if (loading) {
-    return <div style={{ textAlign: 'center', color: '#666' }}>Loading submissions...</div>
+    return <div style={{ textAlign: 'center', color: 'var(--dfe-color-text-muted)' }}>Loading submissions...</div>
   }
 
   if (error) {
     return (
-      <div style={{ color: '#d32f2f', padding: '10px', backgroundColor: '#ffebee', borderRadius: '4px' }}>
+      <div style={{ color: 'var(--dfe-color-danger)', padding: '10px', backgroundColor: 'var(--dfe-color-danger-surface)', borderRadius: '4px' }}>
         Error loading submissions: {error.message}
       </div>
     )
@@ -80,7 +80,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
           style={{
             padding: '8px 12px',
             borderRadius: '4px',
-            border: '1px solid #ccc',
+            border: '1px solid var(--dfe-color-border-strong)',
             fontSize: '14px',
           }}
         >
@@ -92,7 +92,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
       </div>
 
       {/* Results count */}
-      <div style={{ marginBottom: '15px', fontSize: '14px', color: '#666' }}>
+      <div style={{ marginBottom: '15px', fontSize: '14px', color: 'var(--dfe-color-text-muted)' }}>
         {filteredSubmissions.length} submission{filteredSubmissions.length !== 1 ? 's' : ''} found
       </div>
 
@@ -101,14 +101,14 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
         style={{
           width: '100%',
           borderCollapse: 'collapse',
-          backgroundColor: '#fff',
+          backgroundColor: 'var(--dfe-color-surface)',
           borderRadius: '8px',
           overflow: 'hidden',
           boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
         }}
       >
         <thead>
-          <tr style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
+          <tr style={{ backgroundColor: 'var(--dfe-color-canvas)', borderBottom: '1px solid var(--dfe-color-border)' }}>
             <th style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', fontSize: '14px' }}>
               ID
             </th>
@@ -137,16 +137,16 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
             <tr
               key={submission.id}
               style={{
-                borderBottom: '1px solid #e0e0e0',
+                borderBottom: '1px solid var(--dfe-color-border)',
                 cursor: 'pointer',
                 transition: 'background-color 0.2s',
               }}
               onClick={() => setSelectedSubmission(submission)}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#fafafa'
+                e.currentTarget.style.backgroundColor = 'var(--dfe-color-surface-muted)'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#fff'
+                e.currentTarget.style.backgroundColor = 'var(--dfe-color-surface)'
               }}
             >
               <td
@@ -154,18 +154,18 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
                   padding: '12px 16px',
                   fontFamily: 'monospace',
                   fontSize: '13px',
-                  color: '#0066cc',
+                  color: 'var(--dfe-color-primary)',
                 }}
               >
                 {submission.id.substring(0, 8)}...
               </td>
-              <td style={{ padding: '12px 16px', fontSize: '13px', color: '#666' }}>
+              <td style={{ padding: '12px 16px', fontSize: '13px', color: 'var(--dfe-color-text-muted)' }}>
                 {submission.formId.substring(0, 8)}...
               </td>
-              <td style={{ padding: '12px 16px', fontSize: '13px', color: '#666' }}>
+              <td style={{ padding: '12px 16px', fontSize: '13px', color: 'var(--dfe-color-text-muted)' }}>
                 {submission.userId.substring(0, 8)}...
               </td>
-              <td style={{ padding: '12px 16px', fontSize: '13px', color: '#666' }}>
+              <td style={{ padding: '12px 16px', fontSize: '13px', color: 'var(--dfe-color-text-muted)' }}>
                 {submission.variantKey || '—'}
               </td>
               <td style={{ padding: '12px 16px', textAlign: 'center', fontSize: '14px' }}>
@@ -187,10 +187,10 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
                       : 'Abandoned'}
                 </span>
               </td>
-              <td style={{ padding: '12px 16px', fontSize: '13px', color: '#666' }}>
+              <td style={{ padding: '12px 16px', fontSize: '13px', color: 'var(--dfe-color-text-muted)' }}>
                 {submission.currentStepId || '—'}
               </td>
-              <td style={{ padding: '12px 16px', fontSize: '14px', color: '#666' }}>
+              <td style={{ padding: '12px 16px', fontSize: '14px', color: 'var(--dfe-color-text-muted)' }}>
                 {new Date(submission.createdAt).toLocaleDateString()}
               </td>
             </tr>
@@ -203,8 +203,8 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
           style={{
             textAlign: 'center',
             padding: '40px',
-            color: '#999',
-            backgroundColor: '#fff',
+            color: 'var(--dfe-color-text-subtle)',
+            backgroundColor: 'var(--dfe-color-surface)',
             borderRadius: '8px',
           }}
         >
@@ -228,7 +228,7 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
         >
           <div
             style={{
-              backgroundColor: '#fff',
+              backgroundColor: 'var(--dfe-color-surface)',
               borderRadius: '8px',
               padding: '30px',
               maxWidth: '500px',
@@ -269,8 +269,8 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ config }) => {
               onClick={() => setSelectedSubmission(null)}
               style={{
                 padding: '8px 16px',
-                backgroundColor: '#0066cc',
-                color: '#fff',
+                backgroundColor: 'var(--dfe-color-primary)',
+                color: 'var(--dfe-color-surface)',
                 border: 'none',
                 borderRadius: '4px',
                 cursor: 'pointer',

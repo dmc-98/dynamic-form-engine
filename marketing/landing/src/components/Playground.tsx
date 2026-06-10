@@ -36,8 +36,8 @@ function exportThemeCss(t: Theme): string {
 //            including a "tampered payload rejected" demonstration.
 
 interface Theme { accent: string; radius: number; density: number; labelWeight: number; fontFamily: string }
-const SYSTEM_FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif'
-const DEFAULT_THEME: Theme = { accent: '#6366f1', radius: 8, density: 10, labelWeight: 600, fontFamily: SYSTEM_FONT }
+const SYSTEM_FONT = '"IBM Plex Sans", "Avenir Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif'
+const DEFAULT_THEME: Theme = { accent: '#0f766e', radius: 8, density: 10, labelWeight: 600, fontFamily: SYSTEM_FONT }
 
 // Font choices for the switcher. Web-safe stacks so nothing needs loading.
 const FONT_OPTIONS: Array<{ label: string; value: string }> = [
@@ -508,7 +508,7 @@ export default function Playground() {
           <>
             <div style={css.row}><span style={{ width: 110 }}>Accent</span>
               <input type="color" value={t.accent} onChange={(e) => setTheme({ ...t, accent: e.target.value })} />
-              {['#6366f1', '#0ea5e9', '#16a34a', '#e11d48', '#f59e0b'].map((c) => (
+              {['#0f766e', '#0ea5e9', '#16a34a', '#e11d48', '#f59e0b'].map((c) => (
                 <span key={c} style={{ width: 18, height: 18, borderRadius: 6, background: c, cursor: 'pointer', border: '1px solid var(--border)' }} onClick={() => setTheme({ ...t, accent: c })} />
               ))}
             </div>

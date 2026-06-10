@@ -58,14 +58,14 @@ export function DfeMantineStepIndicator({
                   fontSize: '14px',
                   transition: 'all 150ms ease',
                   backgroundColor: isComplete
-                    ? '#51cf66'
+                    ? 'var(--dfe-color-success, #15803d)'
                     : isActive
-                      ? '#1971c2'
+                      ? 'var(--dfe-color-primary, #0f766e)'
                       : isPast
-                        ? '#dee2e6'
-                        : '#e9ecef',
-                  color: isComplete || isActive ? 'white' : isActive ? 'white' : '#495057',
-                  border: isActive ? '2px solid #1971c2' : 'none',
+                        ? 'var(--dfe-color-border, #e2e8f0)'
+                        : 'var(--dfe-color-surface-muted, #f1f5f9)',
+                  color: isComplete || isActive ? 'white' : isActive ? 'white' : 'var(--dfe-color-text, #0f172a)',
+                  border: isActive ? '2px solid var(--dfe-color-primary, #0f766e)' : 'none',
                 }}
               >
                 {isComplete ? (
@@ -86,7 +86,7 @@ export function DfeMantineStepIndicator({
                     padding: 0,
                     cursor: 'pointer',
                     transition: 'all 150ms ease',
-                    color: isActive ? '#1971c2' : '#495057',
+                    color: isActive ? 'var(--dfe-color-primary, #0f766e)' : 'var(--dfe-color-text, #0f172a)',
                     fontWeight: isActive ? 600 : 400,
                   }}
                 >
@@ -94,7 +94,7 @@ export function DfeMantineStepIndicator({
                     {stepNode.step.title}
                   </div>
                   {stepNode.step.description && (
-                    <div style={{ fontSize: '12px', color: '#868e96' }}>
+                    <div style={{ fontSize: '12px', color: 'var(--dfe-color-text-muted, #475569)' }}>
                       {stepNode.step.description}
                     </div>
                   )}
@@ -105,13 +105,13 @@ export function DfeMantineStepIndicator({
                     style={{
                       fontSize: '14px',
                       fontWeight: isActive ? 500 : 400,
-                      color: isActive ? '#1971c2' : '#495057',
+                      color: isActive ? 'var(--dfe-color-primary, #0f766e)' : 'var(--dfe-color-text, #0f172a)',
                     }}
                   >
                     {stepNode.step.title}
                   </div>
                   {stepNode.step.description && (
-                    <div style={{ fontSize: '12px', color: '#868e96' }}>
+                    <div style={{ fontSize: '12px', color: 'var(--dfe-color-text-muted, #475569)' }}>
                       {stepNode.step.description}
                     </div>
                   )}

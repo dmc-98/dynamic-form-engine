@@ -1,4 +1,7 @@
+import { createRequire } from 'node:module'
 import { createDfeDocusaurusPlugin } from '@dmc--98/dfe-docusaurus'
+
+const require = createRequire(import.meta.url)
 
 const employeeOnboarding = {
   title: 'Employee Onboarding',
@@ -21,7 +24,20 @@ export default {
   title: 'DFE Docs',
   url: 'https://example.com',
   baseUrl: '/',
-  presets: [],
+  // Graphite & Teal theme — maps Infima vars onto the DFE design tokens.
+  themeConfig: {
+    colorMode: { respectPrefersColorScheme: true },
+  },
+  presets: [
+    [
+      'classic',
+      {
+        theme: {
+          customCss: [require.resolve('@dmc--98/dfe-docusaurus/theme.css')],
+        },
+      },
+    ],
+  ],
   plugins: [
     [
       createDfeDocusaurusPlugin,

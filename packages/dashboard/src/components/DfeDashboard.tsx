@@ -12,8 +12,11 @@ export interface DfeDashboardProps {
 }
 
 /**
- * Main dashboard layout component for the Dynamic Form Engine.
- * Provides navigation between Forms, Submissions, Analytics, and Templates views.
+ * Main dashboard layout for the Dynamic Form Engine. Navigation between Forms,
+ * Submissions, Analytics and Templates. Token-driven (Graphite & Teal): the
+ * whole tree is scoped to [data-dfe-theme] so every child panel's `--dfe-*`
+ * references resolve and dark mode works by setting data-dfe-color-scheme on an
+ * ancestor.
  */
 export const DfeDashboard: React.FC<DfeDashboardProps> = ({
   config,
@@ -30,104 +33,41 @@ export const DfeDashboard: React.FC<DfeDashboardProps> = ({
   ]
 
   return (
-    <div style={{ display: 'flex', height: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      {/* Sidebar Navigation */}
-      <aside
-        style={{
-          width: '220px',
-          backgroundColor: '#1a1a1a',
-          color: '#fff',
-          padding: '20px',
-          borderRight: '1px solid #333',
-          overflowY: 'auto',
-        }}
-      >
-        <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '30px' }}>
-          DFE Dashboard
-        </div>
+    <div className="dfe-dashboard" data-dfe-theme style={shell}>
+      <style>{DASH_CSS}</style>
 
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setCurrentView(item.id)}
-              style={{
-                padding: '10px 12px',
-                backgroundColor: currentView === item.id ? '#0066cc' : 'transparent',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                textAlign: 'left',
-                fontSize: '14px',
-                transition: 'background-color 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                if (currentView !== item.id) {
-                  e.currentTarget.style.backgroundColor = '#333'
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (currentView !== item.id) {
-                  e.currentTarget.style.backgroundColor = 'transparent'
-                }
-              }}
-            >
-              {item.icon} {item.label}
-            </button>
-          ))}
+      <aside style={sidebar} aria-label="Dashboard navigation">
+        <div style={brand}>DFE Dashboard</div>
+        <nav style={nav}>
+          {navItems.map((item) => {
+            const active = currentView === item.id
+            return (
+              <button
+                key={item.id}
+                className="dfe-dash-nav"
+                data-active={active ? 'true' : undefined}
+                onClick={() => setCurrentView(item.id)}
+                style={navBtn}
+              >
+                <span aria-hidden>{item.icon}</span> {item.label}
+              </button>
+            )
+          })}
         </nav>
       </aside>
 
-      {/* Main Content Area */}
-      <main
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          backgroundColor: '#f5f5f5',
-          overflowY: 'auto',
-        }}
-      >
-        {/* Header */}
-        <header
-          style={{
-            padding: '20px 30px',
-            backgroundColor: '#fff',
-            borderBottom: '1px solid #e0e0e0',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <h1 style={{ margin: 0, fontSize: '24px', color: '#1a1a1a' }}>
-            {navItems.find((item) => item.id === currentView)?.label}
-          </h1>
-
+      <main style={main}>
+        <header style={header}>
+          <h1 style={title}>{navItems.find((item) => item.id === currentView)?.label}</h1>
           {currentView === 'forms' && onFormCreate && (
-            <button
-              onClick={onFormCreate}
-              style={{
-                padding: '8px 16px',
-                backgroundColor: '#0066cc',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: '600',
-              }}
-            >
-              Create Form
+            <button onClick={onFormCreate} className="dfe-dash-cta" style={cta}>
+              + Create Form
             </button>
           )}
         </header>
 
-        {/* View Content */}
-        <div style={{ padding: '30px', flex: 1, overflow: 'auto' }}>
-          {currentView === 'forms' && (
-            <FormsList config={config} onFormEdit={onFormEdit} />
-          )}
+        <div style={content}>
+          {currentView === 'forms' && <FormsList config={config} onFormEdit={onFormEdit} />}
           {currentView === 'submissions' && <SubmissionsList config={config} />}
           {currentView === 'analytics' && <AnalyticsPanel config={config} />}
           {currentView === 'templates' && <TemplateGallery />}
@@ -136,3 +76,66 @@ export const DfeDashboard: React.FC<DfeDashboardProps> = ({
     </div>
   )
 }
+
+// ─── Token-driven styles ──────────────────────────────────────────────────────
+const shell: React.CSSProperties = {
+  display: 'flex', height: '100vh',
+  fontFamily: 'var(--dfe-font-sans)',
+  color: 'var(--dfe-color-text)', background: 'var(--dfe-color-canvas)',
+}
+const sidebar: React.CSSProperties = {
+  width: 224, padding: 'var(--dfe-space-5)',
+  background: 'var(--dfe-color-surface)',
+  borderRight: '1px solid var(--dfe-color-border)',
+  overflowY: 'auto',
+}
+const brand: React.CSSProperties = {
+  fontSize: 'var(--dfe-text-base)', fontWeight: 700, marginBottom: 'var(--dfe-space-8)',
+  letterSpacing: 'var(--dfe-tracking-tight)',
+}
+const nav: React.CSSProperties = { display: 'flex', flexDirection: 'column', gap: 'var(--dfe-space-2)' }
+const navBtn: React.CSSProperties = {
+  display: 'flex', alignItems: 'center', gap: 'var(--dfe-space-2)',
+  padding: 'var(--dfe-space-2) var(--dfe-space-3)',
+  background: 'transparent', color: 'var(--dfe-color-text-muted)',
+  border: '1px solid transparent', borderRadius: 'var(--dfe-radius-md)',
+  cursor: 'pointer', textAlign: 'left', font: 'inherit', fontSize: 'var(--dfe-text-sm)', fontWeight: 500,
+}
+const main: React.CSSProperties = { flex: 1, display: 'flex', flexDirection: 'column', background: 'var(--dfe-color-canvas)', overflowY: 'auto' }
+const header: React.CSSProperties = {
+  padding: 'var(--dfe-space-5) var(--dfe-space-8)',
+  background: 'var(--dfe-glass-bg)',
+  WebkitBackdropFilter: 'blur(var(--dfe-glass-blur))', backdropFilter: 'blur(var(--dfe-glass-blur))',
+  borderBottom: '1px solid var(--dfe-color-border)',
+  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+  position: 'sticky', top: 0, zIndex: 'var(--dfe-z-sticky)' as unknown as number,
+}
+const title: React.CSSProperties = { margin: 0, fontSize: 'var(--dfe-text-2xl)', letterSpacing: 'var(--dfe-tracking-tight)' }
+const cta: React.CSSProperties = {
+  padding: 'var(--dfe-space-2) var(--dfe-space-4)',
+  background: 'var(--dfe-gradient-brand)', color: 'var(--dfe-slate-0)', border: 'none',
+  borderRadius: 'var(--dfe-radius-md)', cursor: 'pointer',
+  fontSize: 'var(--dfe-text-sm)', fontWeight: 600, boxShadow: 'var(--dfe-shadow-sm)',
+}
+const content: React.CSSProperties = { padding: 'var(--dfe-space-8)', flex: 1, overflow: 'auto' }
+
+const DASH_CSS = `
+.dfe-dashboard .dfe-dash-nav {
+  transition: background var(--dfe-duration-fast) var(--dfe-ease-standard),
+              color var(--dfe-duration-fast) var(--dfe-ease-standard),
+              transform var(--dfe-duration-fast) var(--dfe-ease-spring);
+}
+.dfe-dashboard .dfe-dash-nav:hover { background: var(--dfe-color-surface-muted); color: var(--dfe-color-text); }
+.dfe-dashboard .dfe-dash-nav[data-active="true"] {
+  background: var(--dfe-color-primary-subtle); color: var(--dfe-color-primary);
+  border-color: var(--dfe-color-primary-border); font-weight: var(--dfe-weight-semibold);
+}
+.dfe-dashboard .dfe-dash-nav:focus-visible,
+.dfe-dashboard .dfe-dash-cta:focus-visible { outline: none; box-shadow: var(--dfe-ring-primary); }
+.dfe-dashboard .dfe-dash-cta { transition: transform var(--dfe-duration-fast) var(--dfe-ease-spring), box-shadow var(--dfe-duration-fast) var(--dfe-ease-standard); }
+.dfe-dashboard .dfe-dash-cta:hover { transform: translateY(-1px); box-shadow: var(--dfe-shadow-md); }
+.dfe-dashboard .dfe-dash-cta:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  .dfe-dashboard .dfe-dash-nav, .dfe-dashboard .dfe-dash-cta { transition-duration: 0.001ms; }
+}
+`

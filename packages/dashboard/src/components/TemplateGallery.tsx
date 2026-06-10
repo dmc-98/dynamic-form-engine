@@ -100,9 +100,9 @@ export const TemplateGallery: React.FC = () => {
             onClick={() => setSelectedCategory(cat.id)}
             style={{
               padding: '8px 16px',
-              backgroundColor: selectedCategory === cat.id ? '#0066cc' : '#fff',
-              color: selectedCategory === cat.id ? '#fff' : '#333',
-              border: selectedCategory === cat.id ? 'none' : '1px solid #ccc',
+              backgroundColor: selectedCategory === cat.id ? 'var(--dfe-color-primary)' : 'var(--dfe-color-surface)',
+              color: selectedCategory === cat.id ? 'var(--dfe-color-surface)' : 'var(--dfe-color-text)',
+              border: selectedCategory === cat.id ? 'none' : '1px solid var(--dfe-color-border-strong)',
               borderRadius: '20px',
               cursor: 'pointer',
               fontSize: '14px',
@@ -116,7 +116,7 @@ export const TemplateGallery: React.FC = () => {
       </div>
 
       {/* Results count */}
-      <div style={{ marginBottom: '20px', fontSize: '14px', color: '#666' }}>
+      <div style={{ marginBottom: '20px', fontSize: '14px', color: 'var(--dfe-color-text-muted)' }}>
         {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} available
       </div>
 
@@ -132,7 +132,7 @@ export const TemplateGallery: React.FC = () => {
           <div
             key={template.id}
             style={{
-              backgroundColor: '#fff',
+              backgroundColor: 'var(--dfe-color-surface)',
               borderRadius: '8px',
               overflow: 'hidden',
               boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
@@ -152,8 +152,8 @@ export const TemplateGallery: React.FC = () => {
             <div
               style={{
                 padding: '20px',
-                backgroundColor: '#f5f5f5',
-                borderBottom: '1px solid #e0e0e0',
+                backgroundColor: 'var(--dfe-color-canvas)',
+                borderBottom: '1px solid var(--dfe-color-border)',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -165,8 +165,8 @@ export const TemplateGallery: React.FC = () => {
                     style={{
                       display: 'inline-block',
                       padding: '3px 8px',
-                      backgroundColor: '#0066cc',
-                      color: '#fff',
+                      backgroundColor: 'var(--dfe-color-primary)',
+                      color: 'var(--dfe-color-surface)',
                       borderRadius: '12px',
                       fontSize: '11px',
                       fontWeight: '600',
@@ -181,17 +181,17 @@ export const TemplateGallery: React.FC = () => {
 
             {/* Card Body */}
             <div style={{ padding: '20px' }}>
-              <p style={{ margin: '0 0 15px 0', fontSize: '13px', color: '#666', lineHeight: '1.5' }}>
+              <p style={{ margin: '0 0 15px 0', fontSize: '13px', color: 'var(--dfe-color-text-muted)', lineHeight: '1.5' }}>
                 {template.description}
               </p>
 
               <div
                 style={{
                   padding: '10px',
-                  backgroundColor: '#f9f9f9',
+                  backgroundColor: 'var(--dfe-color-surface-muted)',
                   borderRadius: '4px',
                   fontSize: '12px',
-                  color: '#999',
+                  color: 'var(--dfe-color-text-subtle)',
                   marginBottom: '15px',
                 }}
               >
@@ -206,8 +206,8 @@ export const TemplateGallery: React.FC = () => {
                 style={{
                   width: '100%',
                   padding: '10px 16px',
-                  backgroundColor: '#0066cc',
-                  color: '#fff',
+                  backgroundColor: 'var(--dfe-color-primary)',
+                  color: 'var(--dfe-color-surface)',
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
@@ -216,10 +216,10 @@ export const TemplateGallery: React.FC = () => {
                   transition: 'background-color 0.2s',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#0052a3'
+                  e.currentTarget.style.backgroundColor = 'var(--dfe-color-primary-hover)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#0066cc'
+                  e.currentTarget.style.backgroundColor = 'var(--dfe-color-primary)'
                 }}
               >
                 Use Template
@@ -234,7 +234,7 @@ export const TemplateGallery: React.FC = () => {
           style={{
             textAlign: 'center',
             padding: '60px 20px',
-            color: '#999',
+            color: 'var(--dfe-color-text-subtle)',
           }}
         >
           <div style={{ fontSize: '16px', marginBottom: '10px' }}>No templates found</div>
@@ -258,7 +258,7 @@ export const TemplateGallery: React.FC = () => {
         >
           <div
             style={{
-              backgroundColor: '#fff',
+              backgroundColor: 'var(--dfe-color-surface)',
               borderRadius: '8px',
               padding: '30px',
               maxWidth: '500px',
@@ -268,14 +268,14 @@ export const TemplateGallery: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <h2 style={{ marginTop: 0 }}>{selectedTemplate.name}</h2>
-            <p style={{ color: '#666', lineHeight: '1.6' }}>
+            <p style={{ color: 'var(--dfe-color-text-muted)', lineHeight: '1.6' }}>
               {selectedTemplate.description}
             </p>
 
             <div
               style={{
                 padding: '15px',
-                backgroundColor: '#f5f5f5',
+                backgroundColor: 'var(--dfe-color-canvas)',
                 borderRadius: '4px',
                 marginBottom: '20px',
                 fontSize: '14px',
@@ -298,8 +298,8 @@ export const TemplateGallery: React.FC = () => {
                 style={{
                   flex: 1,
                   padding: '10px 16px',
-                  backgroundColor: '#0066cc',
-                  color: '#fff',
+                  backgroundColor: 'var(--dfe-color-primary)',
+                  color: 'var(--dfe-color-surface)',
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
@@ -313,8 +313,8 @@ export const TemplateGallery: React.FC = () => {
                 style={{
                   flex: 1,
                   padding: '10px 16px',
-                  backgroundColor: '#f0f0f0',
-                  color: '#333',
+                  backgroundColor: 'var(--dfe-color-surface-muted)',
+                  color: 'var(--dfe-color-text)',
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
