@@ -1,0 +1,223 @@
+/* ============================================================================
+ * @dmc--98/dfe-builder — panel styles (Graphite & Teal)
+ * ----------------------------------------------------------------------------
+ * Styles the attribute-hooked panel components (DfeFormBuilder, FieldPalette,
+ * FormCanvas, PropertyEditor, BuilderToolbar). Token-driven; scoped to
+ * [data-dfe-theme] so it never leaks to the host. Import once:
+ *
+ *   import "@dmc--98/dfe-tokens/tokens.css"
+ *   import "@dmc--98/dfe-tokens/motion.css"
+ *   import "@dmc--98/dfe-builder/builder.css"
+ * ==========================================================================*/
+
+/* ── Shell / layout ──────────────────────────────────────────────────────── */
+[data-dfe-theme] [data-dfe-builder] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dfe-space-4);
+  min-height: 480px;
+  font-family: var(--dfe-font-sans);
+  color: var(--dfe-color-text);
+  background: var(--dfe-color-canvas);
+  border: var(--dfe-border-thin) solid var(--dfe-color-border);
+  border-radius: var(--dfe-radius-xl);
+  padding: var(--dfe-space-4);
+}
+[data-dfe-theme] [data-dfe-builder-main] {
+  display: grid;
+  grid-template-columns: 200px 1fr 248px;
+  gap: var(--dfe-space-4);
+  align-items: start;
+}
+@media (max-width: 860px) {
+  [data-dfe-theme] [data-dfe-builder-main] { grid-template-columns: 1fr; }
+}
+[data-dfe-theme] [data-dfe-builder-sidebar-left],
+[data-dfe-theme] [data-dfe-builder-center],
+[data-dfe-theme] [data-dfe-builder-sidebar-right] { min-width: 0; }
+
+[data-dfe-theme] [data-dfe-builder-sidebar-left],
+[data-dfe-theme] [data-dfe-builder-sidebar-right],
+[data-dfe-theme] [data-dfe-builder-center] {
+  background: var(--dfe-color-surface);
+  border: var(--dfe-border-thin) solid var(--dfe-color-border);
+  border-radius: var(--dfe-radius-lg);
+  box-shadow: var(--dfe-shadow-xs);
+  padding: var(--dfe-space-4);
+}
+
+/* Scroll containers + small structural hooks */
+[data-dfe-theme] [data-dfe-palette-content],
+[data-dfe-theme] [data-dfe-canvas-content],
+[data-dfe-theme] [data-dfe-editor-content] {
+  display: flex; flex-direction: column; gap: var(--dfe-space-3);
+  max-height: 520px; overflow: auto;
+}
+[data-dfe-theme] [data-dfe-builder-header] { flex: 0 0 auto; }
+[data-dfe-theme] [data-dfe-field-card-actions] { display: flex; align-items: center; gap: var(--dfe-space-1); }
+[data-dfe-theme] [data-dfe-handle-icon] { color: var(--dfe-color-text-subtle); line-height: 1; }
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+[data-dfe-theme] [data-dfe-toolbar] {
+  display: flex; align-items: center; gap: var(--dfe-space-3); flex-wrap: wrap;
+  padding: var(--dfe-space-3) var(--dfe-space-4);
+  background: var(--dfe-glass-bg);
+  -webkit-backdrop-filter: blur(var(--dfe-glass-blur)); backdrop-filter: blur(var(--dfe-glass-blur));
+  border: var(--dfe-border-thin) solid var(--dfe-color-border);
+  border-radius: var(--dfe-radius-lg);
+}
+[data-dfe-theme] [data-dfe-toolbar-section] { display: flex; align-items: center; gap: var(--dfe-space-2); }
+[data-dfe-theme] [data-dfe-toolbar-info] { margin-left: auto; color: var(--dfe-color-text-muted); font-size: var(--dfe-text-sm); }
+[data-dfe-theme] [data-dfe-toolbar-action] {
+  font: inherit; font-size: var(--dfe-text-sm); font-weight: var(--dfe-weight-semibold);
+  padding: var(--dfe-space-2) var(--dfe-space-4);
+  border-radius: var(--dfe-radius-md); border: var(--dfe-border-thin) solid var(--dfe-color-border-strong);
+  background: var(--dfe-color-surface); color: var(--dfe-color-text); cursor: pointer;
+  transition: transform var(--dfe-duration-fast) var(--dfe-ease-spring),
+              background var(--dfe-duration-fast) var(--dfe-ease-standard),
+              box-shadow var(--dfe-duration-fast) var(--dfe-ease-standard);
+}
+[data-dfe-theme] [data-dfe-toolbar-action]:hover { background: var(--dfe-color-surface-muted); transform: translateY(-1px); }
+[data-dfe-theme] [data-dfe-toolbar-action]:active { transform: scale(0.97); }
+[data-dfe-theme] [data-dfe-toolbar-action][data-dfe-primary],
+[data-dfe-theme] [data-dfe-toolbar-action].primary {
+  background: var(--dfe-gradient-brand); color: #fff; border-color: transparent; box-shadow: var(--dfe-shadow-sm);
+}
+[data-dfe-theme] [data-dfe-toolbar-action]:focus-visible { outline: none; box-shadow: var(--dfe-ring-primary); }
+
+/* ── Section headings shared by panels ───────────────────────────────────── */
+[data-dfe-theme] [data-dfe-palette-header] h3,
+[data-dfe-theme] [data-dfe-canvas-header],
+[data-dfe-theme] [data-dfe-editor-header] {
+  font-size: var(--dfe-text-xs); text-transform: uppercase; letter-spacing: var(--dfe-tracking-wide);
+  color: var(--dfe-color-text-subtle); font-weight: var(--dfe-weight-semibold);
+  margin: 0 0 var(--dfe-space-3);
+}
+
+/* ── Palette ─────────────────────────────────────────────────────────────── */
+[data-dfe-theme] [data-dfe-palette-group] { margin-bottom: var(--dfe-space-4); }
+[data-dfe-theme] [data-dfe-palette-group-title] {
+  font-size: var(--dfe-text-xs); color: var(--dfe-color-text-subtle); font-weight: var(--dfe-weight-semibold);
+  text-transform: uppercase; letter-spacing: var(--dfe-tracking-wide); margin: 0 0 var(--dfe-space-2);
+}
+[data-dfe-theme] [data-dfe-palette-items] { display: flex; flex-direction: column; gap: var(--dfe-space-2); }
+[data-dfe-theme] [data-dfe-palette-item] {
+  padding: var(--dfe-space-2) var(--dfe-space-3);
+  border: var(--dfe-border-thin) solid var(--dfe-color-border);
+  border-radius: var(--dfe-radius-md);
+  background: var(--dfe-color-surface-muted);
+  font-size: var(--dfe-text-sm); cursor: grab; user-select: none;
+  transition: transform var(--dfe-duration-fast) var(--dfe-ease-spring),
+              background var(--dfe-duration-fast) var(--dfe-ease-standard),
+              border-color var(--dfe-duration-fast) var(--dfe-ease-standard),
+              color var(--dfe-duration-fast) var(--dfe-ease-standard);
+}
+[data-dfe-theme] [data-dfe-palette-item]:hover {
+  background: var(--dfe-color-primary-subtle); border-color: var(--dfe-color-primary-border);
+  color: var(--dfe-color-primary); transform: translateY(-2px) rotate(-0.5deg);
+}
+[data-dfe-theme] [data-dfe-palette-item]:active { cursor: grabbing; transform: scale(1.04) rotate(1deg); box-shadow: var(--dfe-shadow-md); }
+
+/* ── Canvas + drop zone ──────────────────────────────────────────────────── */
+[data-dfe-theme] [data-dfe-canvas-fields] { display: flex; flex-direction: column; gap: var(--dfe-space-3); }
+[data-dfe-theme] [data-dfe-canvas-empty] {
+  display: grid; place-items: center; text-align: center; gap: var(--dfe-space-2);
+  padding: var(--dfe-space-12) var(--dfe-space-6);
+  color: var(--dfe-color-text-muted); font-size: var(--dfe-text-sm);
+  border: var(--dfe-border-medium) dashed var(--dfe-color-border-strong);
+  border-radius: var(--dfe-radius-lg);
+}
+[data-dfe-theme] [data-dfe-canvas-drop-zone] {
+  border: var(--dfe-border-medium) dashed transparent; border-radius: var(--dfe-radius-md);
+  transition: all var(--dfe-duration-base) var(--dfe-ease-standard);
+}
+[data-dfe-theme] [data-dfe-canvas-drop-zone][data-dfe-drop-over="true"],
+[data-dfe-theme] [data-dfe-canvas][data-dfe-drop-over="true"] {
+  border-color: var(--dfe-color-primary);
+  background: var(--dfe-color-primary-subtle);
+  transform: scale(1.005);
+}
+
+/* ── Field card ──────────────────────────────────────────────────────────── */
+[data-dfe-theme] [data-dfe-field-card] {
+  display: flex; align-items: center; gap: var(--dfe-space-3);
+  padding: var(--dfe-space-3) var(--dfe-space-4);
+  background: var(--dfe-color-surface);
+  border: var(--dfe-border-thin) solid var(--dfe-color-border);
+  border-radius: var(--dfe-radius-md);
+  box-shadow: var(--dfe-shadow-xs);
+  cursor: grab;
+  transition: transform var(--dfe-duration-base) var(--dfe-ease-spring),
+              box-shadow var(--dfe-duration-base) var(--dfe-ease-standard),
+              border-color var(--dfe-duration-fast) var(--dfe-ease-standard),
+              background var(--dfe-duration-fast) var(--dfe-ease-standard);
+  animation: dfe-rise var(--dfe-duration-base) var(--dfe-ease-spring);
+}
+[data-dfe-theme] [data-dfe-field-card]:hover { transform: translateY(-2px); box-shadow: var(--dfe-shadow-sm); border-color: var(--dfe-color-border-strong); }
+[data-dfe-theme] [data-dfe-field-card][data-dfe-selected="true"] {
+  border-color: var(--dfe-color-primary);
+  box-shadow: 0 0 0 1px var(--dfe-color-primary), var(--dfe-shadow-sm);
+  background: var(--dfe-color-primary-subtle);
+}
+[data-dfe-theme] [data-dfe-field-card][data-dfe-dragging="true"] { opacity: 0.5; }
+[data-dfe-theme] [data-dfe-field-card-handle] { color: var(--dfe-color-text-subtle); cursor: grab; }
+[data-dfe-theme] [data-dfe-field-card-content] { flex: 1; min-width: 0; }
+[data-dfe-theme] [data-dfe-field-card-title] { font-weight: var(--dfe-weight-semibold); font-size: var(--dfe-text-sm); }
+[data-dfe-theme] [data-dfe-field-card-meta] { display: flex; gap: var(--dfe-space-2); align-items: center; margin-top: 2px; }
+[data-dfe-theme] [data-dfe-field-type-badge] {
+  font-family: var(--dfe-font-mono); font-size: var(--dfe-text-xs);
+  color: var(--dfe-color-text-muted); background: var(--dfe-color-surface-muted);
+  padding: 1px 8px; border-radius: var(--dfe-radius-pill);
+}
+[data-dfe-theme] [data-dfe-required-badge] {
+  font-size: var(--dfe-text-xs); font-weight: var(--dfe-weight-semibold);
+  color: var(--dfe-color-danger); background: var(--dfe-color-danger-surface);
+  padding: 1px 8px; border-radius: var(--dfe-radius-pill);
+}
+[data-dfe-theme] [data-dfe-field-card-remove] {
+  border: none; background: transparent; color: var(--dfe-color-text-subtle);
+  font-size: 18px; line-height: 1; cursor: pointer; border-radius: var(--dfe-radius-sm);
+  padding: 2px 6px; transition: background var(--dfe-duration-fast) var(--dfe-ease-standard), color var(--dfe-duration-fast) var(--dfe-ease-standard);
+}
+[data-dfe-theme] [data-dfe-field-card-remove]:hover { background: var(--dfe-color-danger-surface); color: var(--dfe-color-danger); }
+[data-dfe-theme] [data-dfe-field-card-remove]:focus-visible { outline: none; box-shadow: var(--dfe-ring-primary); }
+
+/* ── Property editor ─────────────────────────────────────────────────────── */
+[data-dfe-theme] [data-dfe-editor-section] { margin-bottom: var(--dfe-space-5); }
+[data-dfe-theme] [data-dfe-editor-field] { display: flex; flex-direction: column; gap: var(--dfe-space-2); margin-bottom: var(--dfe-space-3); }
+[data-dfe-theme] [data-dfe-editor-field] > label,
+[data-dfe-theme] [data-dfe-editor-field] > span { font-size: var(--dfe-text-sm); font-weight: var(--dfe-weight-semibold); }
+[data-dfe-theme] [data-dfe-editor-field] input:not([type="checkbox"]),
+[data-dfe-theme] [data-dfe-editor-field] select,
+[data-dfe-theme] [data-dfe-editor-field] textarea {
+  width: 100%; font: inherit; font-weight: 400; color: var(--dfe-color-text);
+  background: var(--dfe-color-surface);
+  border: var(--dfe-border-thin) solid var(--dfe-color-border);
+  border-radius: var(--dfe-radius-md);
+  padding: var(--dfe-space-2) var(--dfe-space-3);
+  transition: border-color var(--dfe-duration-fast) var(--dfe-ease-standard), box-shadow var(--dfe-duration-base) var(--dfe-ease-out);
+}
+[data-dfe-theme] [data-dfe-editor-field] input:focus-visible,
+[data-dfe-theme] [data-dfe-editor-field] select:focus-visible,
+[data-dfe-theme] [data-dfe-editor-field] textarea:focus-visible {
+  outline: none; border-color: var(--dfe-color-primary); box-shadow: var(--dfe-ring-primary);
+}
+[data-dfe-theme] [data-dfe-editor-checkbox] { display: flex; align-items: center; gap: var(--dfe-space-2); font-size: var(--dfe-text-sm); }
+[data-dfe-theme] [data-dfe-editor-checkbox] input { accent-color: var(--dfe-color-primary); }
+[data-dfe-theme] [data-dfe-editor-notice] {
+  color: var(--dfe-color-text-muted); font-size: var(--dfe-text-sm);
+  background: var(--dfe-color-surface-muted); border-radius: var(--dfe-radius-md);
+  padding: var(--dfe-space-3) var(--dfe-space-4);
+}
+
+/* ── Reduced motion (self-sufficient even without motion.css) ────────────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-dfe-theme] [data-dfe-palette-item],
+  [data-dfe-theme] [data-dfe-field-card],
+  [data-dfe-theme] [data-dfe-toolbar-action],
+  [data-dfe-theme] [data-dfe-field-card-remove],
+  [data-dfe-theme] [data-dfe-canvas-drop-zone] {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}

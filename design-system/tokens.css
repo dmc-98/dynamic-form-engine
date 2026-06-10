@@ -1,0 +1,320 @@
+/* ============================================================================
+ * DFE Design System — Canonical Tokens
+ * ----------------------------------------------------------------------------
+ * Single source of truth for the dynamic-form-engine visual language.
+ * Convention: every token is a CSS custom property prefixed `--dfe-`.
+ * Scope: applied under [data-dfe-theme] so consumers stay isolated and the
+ * engine remains headless-friendly (host pages never get global overrides).
+ *
+ * Layers (do not skip):
+ *   1. Primitives  — raw scales (color ramps, sizes). Never reference directly
+ *                    in components; they exist only to feed the semantic layer.
+ *   2. Semantic    — intent-named tokens (surface, text, primary, danger…).
+ *                    THIS is what components consume.
+ *   3. Dark theme  — remaps the semantic layer only. Primitives are constant.
+ *
+ * Direction: "Graphite & Teal" — cool slate neutrals + a single confident teal
+ * accent (evolved from the existing #0f766e primary). Resolves the prior
+ * teal-primary / indigo-tint contradiction by committing to one identity.
+ * ==========================================================================*/
+
+[data-dfe-theme] {
+  /* ── 1. PRIMITIVES ─────────────────────────────────────────────────────── */
+
+  /* Neutral — graphite/slate ramp */
+  --dfe-slate-0:   #ffffff;
+  --dfe-slate-50:  #f8fafc;
+  --dfe-slate-100: #f1f5f9;
+  --dfe-slate-200: #e2e8f0;
+  --dfe-slate-300: #cbd5e1;
+  --dfe-slate-400: #94a3b8;
+  --dfe-slate-500: #64748b;
+  --dfe-slate-600: #475569;
+  --dfe-slate-700: #334155;
+  --dfe-slate-800: #1e293b;
+  --dfe-slate-900: #0f172a;
+  --dfe-slate-950: #020617;
+
+  /* Brand — teal ramp (primary identity) */
+  --dfe-teal-50:  #f0fdfa;
+  --dfe-teal-100: #ccfbf1;
+  --dfe-teal-200: #99f6e4;
+  --dfe-teal-300: #5eead4;
+  --dfe-teal-400: #2dd4bf;
+  --dfe-teal-500: #14b8a6;
+  --dfe-teal-600: #0d9488;
+  --dfe-teal-700: #0f766e; /* legacy primary — preserved */
+  --dfe-teal-800: #115e59; /* legacy primaryHover — preserved */
+  --dfe-teal-900: #134e4a;
+  --dfe-teal-950: #042f2e;
+
+  /* Status ramps (compressed — only the stops we use) */
+  --dfe-green-100: #dcfce7;
+  --dfe-green-600: #16a34a;
+  --dfe-green-700: #15803d;
+  --dfe-green-900: #14532d;
+
+  --dfe-amber-100: #fef3c7;
+  --dfe-amber-500: #f59e0b;
+  --dfe-amber-700: #b45309;
+  --dfe-amber-900: #78350f;
+
+  --dfe-red-100: #fee2e2;
+  --dfe-red-600: #dc2626;
+  --dfe-red-700: #b91c1c; /* legacy error — preserved */
+  --dfe-red-900: #7f1d1d;
+
+  --dfe-sky-100: #e0f2fe;
+  --dfe-sky-600: #0284c7;
+  --dfe-sky-700: #0369a1;
+  --dfe-sky-900: #0c4a6e;
+
+  /* Data-viz categorical set (dashboard analytics) */
+  --dfe-data-1: #0d9488; /* teal   */
+  --dfe-data-2: #6366f1; /* indigo */
+  --dfe-data-3: #f59e0b; /* amber  */
+  --dfe-data-4: #e11d48; /* rose   */
+  --dfe-data-5: #8b5cf6; /* violet */
+  --dfe-data-6: #0891b2; /* cyan   */
+
+  /* ── Typography primitives ───────────────────────────────────────────── */
+  --dfe-font-sans: "IBM Plex Sans", "Avenir Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --dfe-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --dfe-text-xs:   0.75rem;   /* 12 */
+  --dfe-text-sm:   0.875rem;  /* 14 */
+  --dfe-text-base: 1rem;      /* 16 */
+  --dfe-text-lg:   1.125rem;  /* 18 */
+  --dfe-text-xl:   1.25rem;   /* 20 */
+  --dfe-text-2xl:  1.5rem;    /* 24 */
+  --dfe-text-3xl:  1.875rem;  /* 30 */
+  --dfe-text-4xl:  2.25rem;   /* 36 */
+
+  --dfe-weight-regular:  400;
+  --dfe-weight-medium:   500;
+  --dfe-weight-semibold: 600;
+  --dfe-weight-bold:     700;
+
+  --dfe-leading-tight:   1.25;
+  --dfe-leading-normal:  1.5;
+  --dfe-leading-relaxed: 1.7;
+
+  --dfe-tracking-tight:  -0.01em;
+  --dfe-tracking-normal: 0;
+  --dfe-tracking-wide:   0.02em;
+
+  /* ── Spacing — 4px grid ──────────────────────────────────────────────── */
+  --dfe-space-0:  0;
+  --dfe-space-1:  0.25rem; /*  4 */
+  --dfe-space-2:  0.5rem;  /*  8 */
+  --dfe-space-3:  0.75rem; /* 12 */
+  --dfe-space-4:  1rem;    /* 16 */
+  --dfe-space-5:  1.25rem; /* 20 */
+  --dfe-space-6:  1.5rem;  /* 24 */
+  --dfe-space-8:  2rem;    /* 32 */
+  --dfe-space-10: 2.5rem;  /* 40 */
+  --dfe-space-12: 3rem;    /* 48 */
+  --dfe-space-16: 4rem;    /* 64 */
+
+  /* Semantic spacing aliases (back-compat with old xs..2xl names) */
+  --dfe-space-xs:  var(--dfe-space-1);
+  --dfe-space-sm:  var(--dfe-space-2);
+  --dfe-space-md:  var(--dfe-space-3);
+  --dfe-space-lg:  var(--dfe-space-5);
+  --dfe-space-xl:  var(--dfe-space-8);
+  --dfe-space-2xl: var(--dfe-space-12);
+
+  /* ── Radius ──────────────────────────────────────────────────────────── */
+  --dfe-radius-xs:   0.25rem;
+  --dfe-radius-sm:   0.375rem;
+  --dfe-radius-md:   0.5rem;
+  --dfe-radius-lg:   0.75rem;
+  --dfe-radius-xl:   1rem;
+  --dfe-radius-2xl:  1.5rem;
+  --dfe-radius-pill: 999px;
+
+  /* ── Border widths ───────────────────────────────────────────────────── */
+  --dfe-border-thin:   1px;
+  --dfe-border-medium: 1.5px;
+  --dfe-border-thick:  2px;
+
+  /* ── Motion ──────────────────────────────────────────────────────────── */
+  --dfe-duration-instant: 80ms;
+  --dfe-duration-fast:    120ms;
+  --dfe-duration-base:    160ms;
+  --dfe-duration-slow:    240ms;
+  --dfe-ease-standard:    cubic-bezier(0.2, 0, 0, 1);
+  --dfe-ease-emphasized:  cubic-bezier(0.3, 0, 0, 1);
+  --dfe-ease-out:         cubic-bezier(0, 0, 0.2, 1);
+  --dfe-ease-spring:      cubic-bezier(0.34, 1.56, 0.64, 1); /* gentle overshoot */
+
+  /* Choreography — stagger delay between items in a revealed group */
+  --dfe-stagger-step: 60ms;
+
+  /* ── Z-index scale ───────────────────────────────────────────────────── */
+  --dfe-z-base:     0;
+  --dfe-z-raised:   10;
+  --dfe-z-sticky:   100;
+  --dfe-z-dropdown: 1000;
+  --dfe-z-overlay:  1100;
+  --dfe-z-modal:    1200;
+  --dfe-z-toast:    1300;
+
+  /* ── 2. SEMANTIC (LIGHT) ───────────────────────────────────────────────
+   * Components consume ONLY these. Light is the default theme. */
+
+  /* Surfaces & lines */
+  --dfe-color-canvas:         var(--dfe-slate-50);
+  --dfe-color-surface:        var(--dfe-slate-0);
+  --dfe-color-surface-muted:  var(--dfe-slate-100);
+  --dfe-color-surface-sunken: var(--dfe-slate-100);
+  --dfe-color-border:         var(--dfe-slate-200);
+  --dfe-color-border-strong:  var(--dfe-slate-300);
+
+  /* Text */
+  --dfe-color-text:        var(--dfe-slate-900);
+  --dfe-color-text-muted:  var(--dfe-slate-600);
+  --dfe-color-text-subtle: var(--dfe-slate-500);
+  --dfe-color-text-on-primary: var(--dfe-slate-0);
+
+  /* Primary (brand) */
+  --dfe-color-primary:        var(--dfe-teal-700);
+  --dfe-color-primary-hover:  var(--dfe-teal-800);
+  --dfe-color-primary-active: var(--dfe-teal-900);
+  --dfe-color-primary-subtle: var(--dfe-teal-50);
+  --dfe-color-primary-border: var(--dfe-teal-200);
+
+  /* Focus ring */
+  --dfe-color-focus: rgba(13, 148, 136, 0.28);
+
+  /* Status — solid + subtle surface pairs */
+  --dfe-color-success:         var(--dfe-green-700);
+  --dfe-color-success-surface: var(--dfe-green-100);
+  --dfe-color-warning:         var(--dfe-amber-700);
+  --dfe-color-warning-surface: var(--dfe-amber-100);
+  --dfe-color-danger:          var(--dfe-red-700);
+  --dfe-color-danger-surface:  var(--dfe-red-100);
+  --dfe-color-info:            var(--dfe-sky-700);
+  --dfe-color-info-surface:    var(--dfe-sky-100);
+
+  /* Legacy semantic aliases (so existing components keep working verbatim) */
+  --dfe-color-error:         var(--dfe-color-danger);
+  --dfe-color-error-surface: var(--dfe-color-danger-surface);
+
+  /* ── Elevation (shadows) ─────────────────────────────────────────────── */
+  --dfe-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --dfe-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --dfe-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --dfe-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12), 0 4px 8px rgba(15, 23, 42, 0.06);
+  --dfe-shadow-xl: 0 24px 48px rgba(15, 23, 42, 0.16);
+
+  /* ── Aesthetic layer (expressive-modern) ─────────────────────────────── */
+  /* Gradients — brand surfaces, hero washes, button sheen. */
+  --dfe-gradient-brand:      linear-gradient(135deg, var(--dfe-teal-500), var(--dfe-teal-700));
+  --dfe-gradient-brand-soft: linear-gradient(135deg, var(--dfe-teal-50), var(--dfe-slate-0));
+  --dfe-gradient-sheen:      linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+  --dfe-gradient-hero:       radial-gradient(120% 120% at 0% 0%, var(--dfe-teal-50) 0%, transparent 45%),
+                             radial-gradient(120% 120% at 100% 0%, #eef6ff 0%, transparent 40%),
+                             linear-gradient(180deg, var(--dfe-slate-0), var(--dfe-slate-50));
+
+  /* Glass — overlays, sticky headers, popovers. */
+  --dfe-glass-bg:     color-mix(in srgb, var(--dfe-color-surface) 72%, transparent);
+  --dfe-glass-border: color-mix(in srgb, var(--dfe-slate-0) 60%, transparent);
+  --dfe-glass-blur:   14px;
+
+  /* Ring used for the animated focus/selection halo. */
+  --dfe-ring-primary: 0 0 0 3px var(--dfe-color-focus);
+
+  /* ── Convenience composite tokens for the form renderer ──────────────── */
+  --dfe-font-family: var(--dfe-font-sans);
+  --dfe-font-size:   var(--dfe-text-base);
+  --dfe-label-size:  var(--dfe-text-sm);
+  --dfe-helper-size: var(--dfe-text-sm);
+  --dfe-title-size:  var(--dfe-text-2xl);
+  --dfe-line-height: var(--dfe-leading-normal);
+}
+
+/* ── 3. DARK THEME ─────────────────────────────────────────────────────────
+ * Remaps the SEMANTIC layer only. Toggle via [data-dfe-color-scheme="dark"]
+ * or honor the OS preference automatically (block below). */
+
+[data-dfe-theme][data-dfe-color-scheme="dark"] {
+  --dfe-color-canvas:         var(--dfe-slate-950);
+  --dfe-color-surface:        var(--dfe-slate-900);
+  --dfe-color-surface-muted:  var(--dfe-slate-800);
+  --dfe-color-surface-sunken: #0b1120;
+  --dfe-color-border:         var(--dfe-slate-700);
+  --dfe-color-border-strong:  var(--dfe-slate-600);
+
+  --dfe-color-text:        var(--dfe-slate-100);
+  --dfe-color-text-muted:  var(--dfe-slate-400);
+  --dfe-color-text-subtle: var(--dfe-slate-500);
+  --dfe-color-text-on-primary: var(--dfe-slate-950);
+
+  --dfe-color-primary:        var(--dfe-teal-400);
+  --dfe-color-primary-hover:  var(--dfe-teal-300);
+  --dfe-color-primary-active: var(--dfe-teal-200);
+  --dfe-color-primary-subtle: rgba(20, 184, 166, 0.12);
+  --dfe-color-primary-border: rgba(20, 184, 166, 0.35);
+
+  --dfe-color-focus: rgba(45, 212, 191, 0.35);
+
+  --dfe-color-success:         #4ade80;
+  --dfe-color-success-surface: rgba(34, 197, 94, 0.14);
+  --dfe-color-warning:         #fbbf24;
+  --dfe-color-warning-surface: rgba(245, 158, 11, 0.14);
+  --dfe-color-danger:          #f87171;
+  --dfe-color-danger-surface:  rgba(220, 38, 38, 0.16);
+  --dfe-color-info:            #38bdf8;
+  --dfe-color-info-surface:    rgba(2, 132, 199, 0.16);
+
+  --dfe-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --dfe-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --dfe-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+  --dfe-shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4);
+  --dfe-shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.7);
+
+  /* Aesthetic layer — dark */
+  --dfe-gradient-brand-soft: linear-gradient(135deg, rgba(20,184,166,0.14), var(--dfe-slate-900));
+  --dfe-gradient-hero:       radial-gradient(120% 120% at 0% 0%, rgba(20,184,166,0.16) 0%, transparent 45%),
+                             radial-gradient(120% 120% at 100% 0%, rgba(99,102,241,0.16) 0%, transparent 40%),
+                             linear-gradient(180deg, var(--dfe-slate-950), #0b1120);
+  --dfe-glass-bg:     color-mix(in srgb, var(--dfe-color-surface) 64%, transparent);
+  --dfe-glass-border: color-mix(in srgb, var(--dfe-slate-100) 14%, transparent);
+}
+
+/* Auto dark mode when the consumer opts in with [data-dfe-color-scheme="auto"] */
+@media (prefers-color-scheme: dark) {
+  [data-dfe-theme][data-dfe-color-scheme="auto"] {
+    --dfe-color-canvas:         var(--dfe-slate-950);
+    --dfe-color-surface:        var(--dfe-slate-900);
+    --dfe-color-surface-muted:  var(--dfe-slate-800);
+    --dfe-color-surface-sunken: #0b1120;
+    --dfe-color-border:         var(--dfe-slate-700);
+    --dfe-color-border-strong:  var(--dfe-slate-600);
+    --dfe-color-text:        var(--dfe-slate-100);
+    --dfe-color-text-muted:  var(--dfe-slate-400);
+    --dfe-color-text-subtle: var(--dfe-slate-500);
+    --dfe-color-text-on-primary: var(--dfe-slate-950);
+    --dfe-color-primary:        var(--dfe-teal-400);
+    --dfe-color-primary-hover:  var(--dfe-teal-300);
+    --dfe-color-primary-active: var(--dfe-teal-200);
+    --dfe-color-primary-subtle: rgba(20, 184, 166, 0.12);
+    --dfe-color-primary-border: rgba(20, 184, 166, 0.35);
+    --dfe-color-focus: rgba(45, 212, 191, 0.35);
+    --dfe-color-success: #4ade80;  --dfe-color-success-surface: rgba(34, 197, 94, 0.14);
+    --dfe-color-warning: #fbbf24;  --dfe-color-warning-surface: rgba(245, 158, 11, 0.14);
+    --dfe-color-danger:  #f87171;  --dfe-color-danger-surface:  rgba(220, 38, 38, 0.16);
+    --dfe-color-info:    #38bdf8;  --dfe-color-info-surface:    rgba(2, 132, 199, 0.16);
+  }
+}
+
+/* Respect reduced-motion globally for anything wired to the motion tokens. */
+@media (prefers-reduced-motion: reduce) {
+  [data-dfe-theme] {
+    --dfe-duration-instant: 0ms;
+    --dfe-duration-fast:    0ms;
+    --dfe-duration-base:    0ms;
+    --dfe-duration-slow:    0ms;
+  }
+}

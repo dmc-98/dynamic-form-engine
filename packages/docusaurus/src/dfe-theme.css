@@ -1,0 +1,68 @@
+/* ============================================================================
+ * @dmc--98/dfe-docusaurus — Docusaurus (Infima) theme: Graphite & Teal
+ * ----------------------------------------------------------------------------
+ * Maps Infima's design variables onto the DFE token values so a docs site
+ * matches the product. Import in docusaurus.config: theme.customCss.
+ * Mirrors packages/tokens/tokens.css (Docusaurus owns :root, not [data-dfe-theme]).
+ * ==========================================================================*/
+
+:root {
+  /* Brand — teal ramp mapped to Infima primary shades */
+  --ifm-color-primary: #0f766e;          /* teal-700 */
+  --ifm-color-primary-dark: #0d6b63;
+  --ifm-color-primary-darker: #0c645d;
+  --ifm-color-primary-darkest: #115e59;  /* teal-800 */
+  --ifm-color-primary-light: #11857b;
+  --ifm-color-primary-lighter: #138c81;
+  --ifm-color-primary-lightest: #14b8a6; /* teal-500 */
+
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8fafc;
+  --ifm-color-content: #0f172a;
+  --ifm-color-content-secondary: #475569;
+  --ifm-color-emphasis-200: #e2e8f0;
+  --ifm-color-emphasis-300: #cbd5e1;
+
+  --ifm-font-family-base: "IBM Plex Sans", "Avenir Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ifm-font-family-monospace: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ifm-code-font-size: 0.9em;
+  --ifm-global-radius: 0.5rem;
+
+  --ifm-link-color: var(--ifm-color-primary);
+  --docusaurus-highlighted-code-line-bg: rgba(13, 148, 136, 0.12);
+}
+
+/* Dark mode (Docusaurus sets data-theme="dark") → DFE dark semantic values */
+[data-theme='dark'] {
+  --ifm-color-primary: #2dd4bf;          /* teal-400 — legible on dark */
+  --ifm-color-primary-dark: #14b8a6;
+  --ifm-color-primary-darker: #0d9488;
+  --ifm-color-primary-darkest: #0f766e;
+  --ifm-color-primary-light: #5eead4;
+  --ifm-color-primary-lighter: #99f6e4;
+  --ifm-color-primary-lightest: #ccfbf1;
+
+  --ifm-background-color: #020617;       /* slate-950 */
+  --ifm-background-surface-color: #0f172a;
+  --ifm-color-content: #f1f5f9;
+  --ifm-color-content-secondary: #94a3b8;
+  --ifm-color-emphasis-200: #334155;
+  --ifm-color-emphasis-300: #475569;
+
+  --docusaurus-highlighted-code-line-bg: rgba(45, 212, 191, 0.16);
+}
+
+/* Brand-gradient hero for the docs landing, matching the rest of the product. */
+.hero--primary {
+  background: radial-gradient(120% 120% at 0% 0%, #f0fdfa 0%, transparent 45%),
+              linear-gradient(180deg, #ffffff, #f8fafc);
+  color: var(--ifm-color-content);
+}
+[data-theme='dark'] .hero--primary {
+  background: radial-gradient(120% 120% at 0% 0%, rgba(20,184,166,0.18) 0%, transparent 45%),
+              linear-gradient(180deg, #020617, #0b1120);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

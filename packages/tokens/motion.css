@@ -1,0 +1,70 @@
+/* ============================================================================
+ * DFE Motion — shared keyframes + utility classes
+ * ----------------------------------------------------------------------------
+ * Companion to tokens.css. Every value is bound to a `--dfe-*` motion token so
+ * duration/easing stay centralized. Scoped under [data-dfe-theme]. Import after
+ * tokens.css. Full reduced-motion fallback at the bottom (non-negotiable).
+ * ==========================================================================*/
+
+@keyframes dfe-rise      { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes dfe-fade      { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dfe-pop       { 0% { opacity: 0; transform: scale(.9); } 60% { opacity: 1; transform: scale(1.03); } 100% { transform: scale(1); } }
+@keyframes dfe-grow      { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes dfe-shimmer   { from { background-position: -160% 0; } to { background-position: 260% 0; } }
+@keyframes dfe-spin      { to { transform: rotate(360deg); } }
+@keyframes dfe-toast-in  { from { opacity: 0; transform: translateY(12px) scale(.96); } to { opacity: 1; transform: none; } }
+
+[data-dfe-theme] .dfe-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+[data-dfe-theme] .dfe-reveal[data-in="true"] {
+  animation: dfe-rise var(--dfe-duration-slow) var(--dfe-ease-spring) forwards;
+}
+
+[data-dfe-theme] .dfe-lift {
+  transition: transform var(--dfe-duration-base) var(--dfe-ease-spring),
+              box-shadow var(--dfe-duration-base) var(--dfe-ease-standard);
+}
+[data-dfe-theme] .dfe-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--dfe-shadow-lg);
+}
+
+[data-dfe-theme] .dfe-press {
+  transition: transform var(--dfe-duration-fast) var(--dfe-ease-spring);
+}
+[data-dfe-theme] .dfe-press:active { transform: scale(0.96); }
+
+[data-dfe-theme] .dfe-skeleton {
+  background: linear-gradient(90deg,
+    var(--dfe-color-surface-muted) 25%,
+    var(--dfe-color-border) 37%,
+    var(--dfe-color-surface-muted) 63%);
+  background-size: 240% 100%;
+  animation: dfe-shimmer 1.3s linear infinite;
+  border-radius: var(--dfe-radius-pill);
+}
+
+[data-dfe-theme] .dfe-spinner {
+  width: 1em; height: 1em; border-radius: 50%;
+  border: 2px solid var(--dfe-color-primary-subtle);
+  border-top-color: var(--dfe-color-primary);
+  animation: dfe-spin .7s linear infinite;
+  display: inline-block;
+}
+
+/* Stagger helper: set --dfe-i (index) on items inside a group. */
+[data-dfe-theme] [data-dfe-stagger] > * { animation-delay: calc(var(--dfe-i, 0) * var(--dfe-stagger-step)); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-dfe-theme] *,
+  [data-dfe-theme] *::before,
+  [data-dfe-theme] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-dfe-theme] .dfe-reveal { opacity: 1; transform: none; }
+}

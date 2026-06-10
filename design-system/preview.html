@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DFE Design System — Graphite &amp; Teal · Motion Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body[data-dfe-theme] {
+    background: var(--dfe-color-canvas);
+    color: var(--dfe-color-text);
+    font-family: var(--dfe-font-sans);
+    font-size: var(--dfe-text-base);
+    line-height: var(--dfe-leading-normal);
+    transition: background var(--dfe-duration-slow) var(--dfe-ease-standard),
+                color var(--dfe-duration-slow) var(--dfe-ease-standard);
+  }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 var(--dfe-space-6) var(--dfe-space-16); }
+
+  /* ── Keyframes (the motion system) ───────────────────────────────────── */
+  @keyframes dfe-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes dfe-pop  { 0% { opacity:0; transform: scale(.9); } 60% { opacity:1; transform: scale(1.03);} 100% { transform: scale(1);} }
+  @keyframes dfe-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes dfe-shimmer { from { background-position: -160% 0; } to { background-position: 260% 0; } }
+  @keyframes dfe-spin { to { transform: rotate(360deg); } }
+  @keyframes dfe-toast-in { from { opacity:0; transform: translateY(12px) scale(.96); } to { opacity:1; transform: none; } }
+
+  /* Reveal-on-scroll: hidden until .in is added by IntersectionObserver */
+  .reveal { opacity: 0; transform: translateY(16px); }
+  .reveal.in { animation: dfe-rise var(--dfe-duration-slow) var(--dfe-ease-spring) forwards; }
+
+  /* ── Glass sticky header ─────────────────────────────────────────────── */
+  header.bar {
+    position: sticky; top: 0; z-index: var(--dfe-z-sticky);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--dfe-space-4);
+    padding: var(--dfe-space-4) var(--dfe-space-6);
+    background: var(--dfe-glass-bg);
+    -webkit-backdrop-filter: blur(var(--dfe-glass-blur)); backdrop-filter: blur(var(--dfe-glass-blur));
+    border-bottom: var(--dfe-border-thin) solid var(--dfe-color-border);
+  }
+  header.bar .brand { display: flex; align-items: center; gap: var(--dfe-space-3); }
+  .logo { width: 30px; height: 30px; border-radius: var(--dfe-radius-md); background: var(--dfe-gradient-brand); box-shadow: var(--dfe-shadow-md); position: relative; overflow: hidden; }
+  .logo::after { content:""; position:absolute; inset:0; background: var(--dfe-gradient-sheen); }
+  header.bar h1 { font-size: var(--dfe-text-lg); margin: 0; letter-spacing: var(--dfe-tracking-tight); }
+  header.bar .sub { color: var(--dfe-color-text-subtle); font-size: var(--dfe-text-sm); }
+
+  /* ── Hero ────────────────────────────────────────────────────────────── */
+  .hero { background: var(--dfe-gradient-hero); border-bottom: var(--dfe-border-thin) solid var(--dfe-color-border); }
+  .hero .inner { max-width: 1060px; margin: 0 auto; padding: var(--dfe-space-16) var(--dfe-space-6) var(--dfe-space-12); }
+  .hero h2 { font-size: var(--dfe-text-4xl); line-height: 1.05; letter-spacing: var(--dfe-tracking-tight); margin: 0 0 var(--dfe-space-3); max-width: 18ch; }
+  .hero .grad { background: var(--dfe-gradient-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { font-size: var(--dfe-text-lg); color: var(--dfe-color-text-muted); margin: 0 0 var(--dfe-space-6); max-width: 52ch; }
+
+  section { margin-top: var(--dfe-space-12); }
+  section > h3 { font-size: var(--dfe-text-xl); margin: 0 0 var(--dfe-space-1); letter-spacing: var(--dfe-tracking-tight); }
+  section > p.lead { margin: 0 0 var(--dfe-space-5); color: var(--dfe-color-text-muted); max-width: 62ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: var(--dfe-tracking-wide); font-size: var(--dfe-text-xs); font-weight: var(--dfe-weight-semibold); color: var(--dfe-color-text-subtle); margin: var(--dfe-space-6) 0 var(--dfe-space-3); }
+
+  .card { background: var(--dfe-color-surface); border: var(--dfe-border-thin) solid var(--dfe-color-border); border-radius: var(--dfe-radius-lg); box-shadow: var(--dfe-shadow-sm); padding: var(--dfe-space-6); }
+  .lift { transition: transform var(--dfe-duration-base) var(--dfe-ease-spring), box-shadow var(--dfe-duration-base) var(--dfe-ease-standard); }
+  .lift:hover { transform: translateY(-4px); box-shadow: var(--dfe-shadow-lg); }
+
+  .ramp { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; }
+  .swatch { border-radius: var(--dfe-radius-sm); overflow: hidden; border: var(--dfe-border-thin) solid var(--dfe-color-border); transition: transform var(--dfe-duration-fast) var(--dfe-ease-spring); }
+  .swatch:hover { transform: translateY(-3px) scale(1.03); }
+  .swatch .chip { height: 48px; }
+  .swatch .meta { font-size: 10px; padding: 4px 6px; background: var(--dfe-color-surface); color: var(--dfe-color-text-muted); font-family: var(--dfe-font-mono); }
+
+  .row { display: flex; flex-wrap: wrap; gap: var(--dfe-space-3); align-items: center; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--dfe-space-6); }
+  @media (max-width: 760px) { .grid2, .hero h2 { grid-template-columns: 1fr; } }
+
+  /* ── Buttons w/ press + sheen ────────────────────────────────────────── */
+  .btn { position: relative; overflow: hidden; font: inherit; font-weight: var(--dfe-weight-semibold); font-size: var(--dfe-text-sm); padding: var(--dfe-space-2) var(--dfe-space-4); border-radius: var(--dfe-radius-md); border: var(--dfe-border-thin) solid transparent; cursor: pointer; transition: transform var(--dfe-duration-fast) var(--dfe-ease-spring), background var(--dfe-duration-fast) var(--dfe-ease-standard), box-shadow var(--dfe-duration-fast) var(--dfe-ease-standard); }
+  .btn:active { transform: scale(0.96); }
+  .btn:focus-visible { outline: none; box-shadow: var(--dfe-ring-primary); }
+  .btn-primary { background: var(--dfe-gradient-brand); color: #fff; box-shadow: var(--dfe-shadow-sm); }
+  .btn-primary::after { content:""; position:absolute; inset:0; background: var(--dfe-gradient-sheen); opacity: 0; transition: opacity var(--dfe-duration-base) var(--dfe-ease-standard); }
+  .btn-primary:hover::after { opacity: 1; }
+  .btn-primary:hover { box-shadow: var(--dfe-shadow-md); }
+  .btn-secondary { background: var(--dfe-color-surface); color: var(--dfe-color-text); border-color: var(--dfe-color-border-strong); }
+  .btn-secondary:hover { background: var(--dfe-color-surface-muted); }
+  .btn-ghost { background: transparent; color: var(--dfe-color-primary); }
+  .btn-ghost:hover { background: var(--dfe-color-primary-subtle); }
+
+  /* ── Inputs w/ animated focus ring ───────────────────────────────────── */
+  label.fl { display: grid; gap: var(--dfe-space-2); }
+  .fl .lbl { font-size: var(--dfe-text-sm); font-weight: var(--dfe-weight-semibold); }
+  .fl .help { font-size: var(--dfe-text-sm); color: var(--dfe-color-text-muted); }
+  .ctrl { width: 100%; font: inherit; color: var(--dfe-color-text); background: var(--dfe-color-surface); border: var(--dfe-border-thin) solid var(--dfe-color-border); border-radius: var(--dfe-radius-md); padding: var(--dfe-space-2) var(--dfe-space-3); transition: border-color var(--dfe-duration-fast) var(--dfe-ease-standard), box-shadow var(--dfe-duration-base) var(--dfe-ease-out); }
+  .ctrl::placeholder { color: var(--dfe-color-text-subtle); }
+  .ctrl:focus-visible { outline: none; border-color: var(--dfe-color-primary); box-shadow: var(--dfe-ring-primary); }
+  .ctrl[aria-invalid="true"] { border-color: var(--dfe-color-danger); background: var(--dfe-color-danger-surface); }
+  .err { font-size: var(--dfe-text-sm); color: var(--dfe-color-danger); background: var(--dfe-color-danger-surface); border-radius: var(--dfe-radius-sm); padding: var(--dfe-space-1) var(--dfe-space-2); justify-self: start; animation: dfe-pop var(--dfe-duration-base) var(--dfe-ease-spring); }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: var(--dfe-text-xs); font-weight: var(--dfe-weight-semibold); padding: 3px 10px; border-radius: var(--dfe-radius-pill); }
+  .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .badge-success { color: var(--dfe-color-success); background: var(--dfe-color-success-surface); }
+  .badge-warning { color: var(--dfe-color-warning); background: var(--dfe-color-warning-surface); }
+  .badge-danger  { color: var(--dfe-color-danger);  background: var(--dfe-color-danger-surface); }
+  .badge-info    { color: var(--dfe-color-info);    background: var(--dfe-color-info-surface); }
+
+  /* ── Builder palette w/ drag-hint ────────────────────────────────────── */
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px,1fr)); gap: var(--dfe-space-2); }
+  .pchip { display: flex; align-items: center; gap: var(--dfe-space-2); font-size: var(--dfe-text-sm); padding: var(--dfe-space-2) var(--dfe-space-3); border-radius: var(--dfe-radius-md); background: var(--dfe-color-surface-muted); border: var(--dfe-border-thin) solid var(--dfe-color-border); cursor: grab; transition: transform var(--dfe-duration-fast) var(--dfe-ease-spring), background var(--dfe-duration-fast) var(--dfe-ease-standard), border-color var(--dfe-duration-fast) var(--dfe-ease-standard), color var(--dfe-duration-fast) var(--dfe-ease-standard); }
+  .pchip:hover { background: var(--dfe-color-primary-subtle); border-color: var(--dfe-color-primary-border); color: var(--dfe-color-primary); transform: translateY(-2px) rotate(-1deg); }
+  .pchip:active { cursor: grabbing; transform: scale(1.05) rotate(2deg); box-shadow: var(--dfe-shadow-md); }
+  .pchip .gi { font-family: var(--dfe-font-mono); opacity: .6; }
+  .dropzone { margin-top: var(--dfe-space-3); border: var(--dfe-border-medium) dashed var(--dfe-color-border-strong); border-radius: var(--dfe-radius-lg); padding: var(--dfe-space-6); text-align: center; color: var(--dfe-color-text-subtle); font-size: var(--dfe-text-sm); transition: all var(--dfe-duration-base) var(--dfe-ease-standard); }
+  .dropzone.hot { border-color: var(--dfe-color-primary); background: var(--dfe-color-primary-subtle); color: var(--dfe-color-primary); transform: scale(1.01); }
+
+  /* ── Dashboard stats + animated chart ────────────────────────────────── */
+  .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: var(--dfe-space-4); }
+  .stat { background: var(--dfe-color-surface); border: var(--dfe-border-thin) solid var(--dfe-color-border); border-radius: var(--dfe-radius-lg); padding: var(--dfe-space-5); box-shadow: var(--dfe-shadow-xs); }
+  .stat .k { font-size: var(--dfe-text-sm); color: var(--dfe-color-text-muted); }
+  .stat .v { font-family: var(--dfe-font-mono); font-size: var(--dfe-text-3xl); font-weight: var(--dfe-weight-medium); letter-spacing: var(--dfe-tracking-tight); }
+  .stat .t { font-size: var(--dfe-text-sm); font-weight: var(--dfe-weight-semibold); }
+  .up { color: var(--dfe-color-success); } .down { color: var(--dfe-color-danger); }
+  .viz { display: flex; align-items: flex-end; gap: var(--dfe-space-3); height: 130px; }
+  .viz .col { flex: 1; border-radius: var(--dfe-radius-sm) var(--dfe-radius-sm) 0 0; transform-origin: bottom; transition: transform var(--dfe-duration-fast) var(--dfe-ease-standard), filter var(--dfe-duration-fast); }
+  .viz.in .col { animation: dfe-grow var(--dfe-duration-slow) var(--dfe-ease-spring) backwards; }
+  .viz .col:hover { filter: brightness(1.08); transform: scaleY(1.04); }
+
+  /* ── Stepper w/ progress fill ────────────────────────────────────────── */
+  .steps { display: flex; gap: var(--dfe-space-2); flex-wrap: wrap; }
+  .step { display: flex; align-items: center; gap: var(--dfe-space-2); padding: var(--dfe-space-2) var(--dfe-space-4); border-radius: var(--dfe-radius-pill); border: var(--dfe-border-thin) solid var(--dfe-color-border); background: var(--dfe-color-surface); font-size: var(--dfe-text-sm); box-shadow: var(--dfe-shadow-xs); transition: all var(--dfe-duration-base) var(--dfe-ease-spring); }
+  .step .ix { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; background: var(--dfe-color-surface-muted); color: var(--dfe-color-text-muted); transition: all var(--dfe-duration-base) var(--dfe-ease-spring); }
+  .step.active { border-color: var(--dfe-color-primary); background: var(--dfe-color-primary-subtle); color: var(--dfe-color-primary); }
+  .step.active .ix { background: var(--dfe-gradient-brand); color: #fff; transform: scale(1.1); }
+  .step.future { opacity: .55; }
+
+  /* ── Skeleton loader ─────────────────────────────────────────────────── */
+  .skel { height: 14px; border-radius: var(--dfe-radius-pill); background: linear-gradient(90deg, var(--dfe-color-surface-muted) 25%, var(--dfe-color-border) 37%, var(--dfe-color-surface-muted) 63%); background-size: 240% 100%; animation: dfe-shimmer 1.3s linear infinite; }
+
+  /* ── Toast ───────────────────────────────────────────────────────────── */
+  #toast { position: fixed; bottom: 22px; right: 22px; z-index: var(--dfe-z-toast); display: grid; gap: 10px; }
+  .toast { display: flex; align-items: center; gap: var(--dfe-space-3); background: var(--dfe-glass-bg); -webkit-backdrop-filter: blur(var(--dfe-glass-blur)); backdrop-filter: blur(var(--dfe-glass-blur)); border: var(--dfe-border-thin) solid var(--dfe-color-border); border-left: 3px solid var(--dfe-color-success); border-radius: var(--dfe-radius-md); padding: var(--dfe-space-3) var(--dfe-space-4); box-shadow: var(--dfe-shadow-lg); font-size: var(--dfe-text-sm); animation: dfe-toast-in var(--dfe-duration-base) var(--dfe-ease-spring); }
+
+  .spinner { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--dfe-color-primary-subtle); border-top-color: var(--dfe-color-primary); animation: dfe-spin .7s linear infinite; display: inline-block; vertical-align: middle; }
+
+  /* Toggle */
+  .toggle { display: inline-flex; align-items: center; gap: var(--dfe-space-2); font-size: var(--dfe-text-sm); }
+  .toggle button { font: inherit; cursor: pointer; padding: 6px 12px; border-radius: var(--dfe-radius-md); border: var(--dfe-border-thin) solid var(--dfe-color-border-strong); background: var(--dfe-color-surface); color: var(--dfe-color-text); transition: all var(--dfe-duration-fast) var(--dfe-ease-standard); }
+  .toggle button[aria-pressed="true"] { background: var(--dfe-gradient-brand); color: #fff; border-color: transparent; }
+
+  .note { margin-top: var(--dfe-space-3); font-size: var(--dfe-text-sm); color: var(--dfe-color-text-subtle); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body data-dfe-theme data-dfe-color-scheme="light">
+  <header class="bar">
+    <div class="brand">
+      <div class="logo"></div>
+      <div><h1>DFE Design System</h1><div class="sub">Graphite &amp; Teal · expressive-modern · motion showcase</div></div>
+    </div>
+    <div class="toggle">
+      <span class="sub">Theme</span>
+      <button id="t-light" aria-pressed="true" onclick="setScheme('light')">Light</button>
+      <button id="t-dark" aria-pressed="false" onclick="setScheme('dark')">Dark</button>
+      <button onclick="fireToast()" style="margin-left:8px">Toast ↗</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="inner">
+      <h2 class="reveal">Build forms, not boilerplate — <span class="grad">beautifully.</span></h2>
+      <p class="reveal">A single token system drives every surface: the renderer, the visual builder, the analytics dashboard, the playground, and the marketing site. Flip the theme, scroll the page — every motion here is built only from <code style="font-family:var(--dfe-font-mono)">--dfe-*</code> tokens.</p>
+      <div class="row reveal">
+        <button class="btn btn-primary">Get started</button>
+        <button class="btn btn-secondary">View docs</button>
+        <button class="btn btn-ghost">Live demo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="reveal">
+      <span class="eyebrow">Color</span>
+      <h3>Two ramps, one identity</h3>
+      <p class="lead">Graphite/slate for structure, teal for everything interactive. Hover a swatch.</p>
+      <div class="eyebrow">Slate</div><div class="ramp" id="ramp-slate"></div>
+      <div class="eyebrow">Teal</div><div class="ramp" id="ramp-teal"></div>
+      <div class="row" style="margin-top:var(--dfe-space-4)">
+        <span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span>
+        <span class="badge badge-danger">Danger</span><span class="badge badge-info">Info</span>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <span class="eyebrow">Components &amp; micro-interactions</span>
+      <h3>Press, hover, focus — all token-driven</h3>
+      <div class="grid2">
+        <div class="card lift">
+          <div class="eyebrow" style="margin-top:0">Buttons</div>
+          <div class="row"><button class="btn btn-primary">Primary</button><button class="btn btn-secondary">Secondary</button><button class="btn btn-ghost">Ghost</button></div>
+          <div class="eyebrow">Form fields</div>
+          <label class="fl" style="margin-bottom:var(--dfe-space-3)"><span class="lbl">Work email</span><input class="ctrl" type="email" placeholder="you@company.com" /><span class="help">Focus me to see the animated ring.</span></label>
+          <label class="fl"><span class="lbl">Phone</span><input class="ctrl" aria-invalid="true" value="oops" /><span class="err">Enter a valid phone number.</span></label>
+        </div>
+        <div class="card lift">
+          <div class="eyebrow" style="margin-top:0">Builder — drag a field</div>
+          <div class="palette" id="palette">
+            <div class="pchip" draggable="true"><span class="gi">Aa</span> Short text</div>
+            <div class="pchip" draggable="true"><span class="gi">@</span> Email</div>
+            <div class="pchip" draggable="true"><span class="gi">▾</span> Dropdown</div>
+            <div class="pchip" draggable="true"><span class="gi">★</span> Rating</div>
+            <div class="pchip" draggable="true"><span class="gi">▦</span> Date</div>
+            <div class="pchip" draggable="true"><span class="gi">✎</span> Signature</div>
+          </div>
+          <div class="dropzone" id="dropzone">Drag a field here ↑ (drop zone reacts)</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <span class="eyebrow">Dashboard</span>
+      <h3>Stats &amp; charts that animate in</h3>
+      <div class="stats">
+        <div class="stat lift"><div class="k">Submissions (30d)</div><div class="v">12,840</div><div class="t up">▲ 18.2%</div></div>
+        <div class="stat lift"><div class="k">Completion</div><div class="v">71.4%</div><div class="t up">▲ 3.1%</div></div>
+        <div class="stat lift"><div class="k">Avg. time</div><div class="v">1:48</div><div class="t down">▼ 0:12</div></div>
+        <div class="stat lift"><div class="k">Drop-off</div><div class="v">3/5</div><div class="t">Payment</div></div>
+      </div>
+      <div class="card" style="margin-top:var(--dfe-space-4)"><div class="viz" id="viz"></div></div>
+    </section>
+
+    <section class="reveal">
+      <span class="eyebrow">States &amp; flow</span>
+      <h3>Stepper, loading, empty</h3>
+      <div class="grid2">
+        <div class="card">
+          <div class="eyebrow" style="margin-top:0">Multi-step (auto-advances)</div>
+          <div class="steps" id="steps">
+            <div class="step"><span class="ix">1</span> Details</div>
+            <div class="step active"><span class="ix">2</span> Preferences</div>
+            <div class="step future"><span class="ix">3</span> Payment</div>
+            <div class="step future"><span class="ix">4</span> Review</div>
+          </div>
+          <div class="note">Watch the active step move ↻</div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-top:0">Skeleton loader <span class="spinner"></span></div>
+          <div class="skel" style="width:80%;margin-bottom:10px"></div>
+          <div class="skel" style="width:95%;margin-bottom:10px"></div>
+          <div class="skel" style="width:60%"></div>
+        </div>
+      </div>
+    </section>
+
+    <p class="note" style="margin-top:var(--dfe-space-12)">Tokens from <code style="font-family:var(--dfe-font-mono)">tokens.css</code>. All motion respects <code style="font-family:var(--dfe-font-mono)">prefers-reduced-motion</code> — enable it in your OS and reload to see everything settle instantly. This page is a proposal artifact; it changes nothing in the packages.</p>
+  </div>
+
+  <div id="toast"></div>
+
+<script>
+  const styles = getComputedStyle(document.body);
+  const get = v => styles.getPropertyValue(v).trim();
+  const SLATE=["0","50","100","200","300","400","500","600","700","800","900","950"];
+  const TEAL=["50","100","200","300","400","500","600","700","800","900","950"];
+  const ramp=(id,name,stops)=>{document.getElementById(id).innerHTML=stops.map(s=>`<div class="swatch"><div class="chip" style="background:${get(`--dfe-${name}-${s}`)}"></div><div class="meta">${s}</div></div>`).join("");};
+  ramp("ramp-slate","slate",SLATE); ramp("ramp-teal","teal",TEAL);
+
+  const DATA=[["data-1",70],["data-2",55],["data-3",92],["data-4",42],["data-5",66],["data-6",80]];
+  const step=parseFloat(get("--dfe-stagger-step"))||60;
+  document.getElementById("viz").innerHTML=DATA.map(([c,h],i)=>`<div class="col" style="height:${h}%;background:var(--dfe-${c});animation-delay:${i*step}ms"></div>`).join("");
+
+  // Reveal on scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }),{threshold:.15});
+  document.querySelectorAll(".reveal, .viz").forEach(el=>io.observe(el));
+
+  // Builder drop-zone reaction
+  const dz=document.getElementById("dropzone");
+  document.querySelectorAll("#palette .pchip").forEach(c=>{
+    c.addEventListener("dragstart",()=>dz.classList.add("hot"));
+    c.addEventListener("dragend",()=>dz.classList.remove("hot"));
+  });
+  dz.addEventListener("dragover",e=>{e.preventDefault();dz.classList.add("hot");});
+  dz.addEventListener("dragleave",()=>dz.classList.remove("hot"));
+  dz.addEventListener("drop",e=>{e.preventDefault();dz.classList.remove("hot");dz.textContent="Dropped! ✓ (this is just a demo)";});
+
+  // Stepper auto-advance
+  let active=1; const steps=[...document.querySelectorAll("#steps .step")];
+  setInterval(()=>{ steps.forEach((s,i)=>{ s.classList.toggle("active",i===active); s.classList.toggle("future",i>active); }); active=(active+1)%steps.length; },1600);
+
+  // Toast
+  function fireToast(){ const t=document.createElement("div"); t.className="toast"; t.innerHTML='✓ Form published <span style="color:var(--dfe-color-text-muted)">· 2s ago</span>'; document.getElementById("toast").appendChild(t); setTimeout(()=>{t.style.transition="opacity .3s, transform .3s"; t.style.opacity=0; t.style.transform="translateY(8px)"; setTimeout(()=>t.remove(),300);},2600); }
+
+  function setScheme(s){ document.body.setAttribute("data-dfe-color-scheme",s); document.getElementById("t-light").setAttribute("aria-pressed",s==="light"); document.getElementById("t-dark").setAttribute("aria-pressed",s==="dark"); }
+  setTimeout(fireToast,900);
+</script>
+</body>
+</html>
