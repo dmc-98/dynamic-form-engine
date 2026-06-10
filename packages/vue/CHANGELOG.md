@@ -1,5 +1,12 @@
 # @dmc--98/dfe-vue
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [6e7dab0]
+  - @dmc--98/dfe-core@1.0.0
+
 ## 0.1.2
 
 ### Patch Changes

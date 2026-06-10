@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-tokens",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Canonical design tokens (Graphite & Teal) for Dynamic Form Engine — CSS custom properties + typed token object",
   "license": "MIT",
   "type": "module",
@@ -24,13 +24,25 @@
     "lint": "eslint src/",
     "clean": "rm -rf dist"
   },
-  "files": ["dist", "tokens.css", "motion.css", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "tokens.css",
+    "motion.css",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "tsup": "^8.0.0",
     "typescript": "^5.4.0",
     "vitest": "^1.6.0"
   },
-  "keywords": ["design-tokens", "css-variables", "theme", "dynamic-form-engine", "design-system"],
+  "keywords": [
+    "design-tokens",
+    "css-variables",
+    "theme",
+    "dynamic-form-engine",
+    "design-system"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/dmc-98/dynamic-form-engine",

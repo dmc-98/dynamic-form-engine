@@ -1,5 +1,17 @@
 # @dmc--98/dfe-builder
 
+## 1.0.0
+
+### Major Changes
+
+- 6e7dab0: s
+
+### Patch Changes
+
+- Updated dependencies [6e7dab0]
+  - @dmc--98/dfe-react@1.0.0
+  - @dmc--98/dfe-core@1.0.0
+
 ## 0.4.0
 
 ### Minor Changes

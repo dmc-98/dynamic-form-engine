@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-ui-antd",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Ant Design-themed stable wrappers for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",
