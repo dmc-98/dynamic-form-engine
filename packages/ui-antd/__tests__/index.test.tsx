@@ -6,6 +6,7 @@ import {
   AntdFieldRenderer,
   DfeAntdFormPreview,
   DfeAntdStepIndicator,
+  DfeAntdThemeProvider,
 } from '../src/index.tsx'
 
 const sampleField: FormField = {
@@ -53,6 +54,16 @@ describe('@dmc--98/dfe-ui-antd', () => {
 
     expect(markup).toContain('data-dfe-antd-theme')
     expect(markup).toContain('Engineer')
+    // Default look is now DFE "Graphite & Teal" (teal-700), not antd blue.
+    expect(markup).toContain('--dfe-color-primary:#0f766e')
+  })
+
+  it('restores the antd-native palette when disableDfeTheme is set', () => {
+    const markup = renderToStaticMarkup(
+      <DfeAntdThemeProvider disableDfeTheme>
+        <span>opt-out</span>
+      </DfeAntdThemeProvider>
+    )
     expect(markup).toContain('--dfe-color-primary:#1677ff')
   })
 

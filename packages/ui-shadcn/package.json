@@ -13,10 +13,10 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./dfe-shadcn.css": "./src/dfe-shadcn.css"
+    "./dfe-shadcn.css": "./dist/dfe-shadcn.css"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cp src/dfe-shadcn.css dist/",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
@@ -46,7 +46,6 @@
   },
   "files": [
     "dist",
-    "src/dfe-shadcn.css",
     "README.md",
     "LICENSE"
   ],

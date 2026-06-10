@@ -5,6 +5,7 @@ import type { FormField, StepNodeState } from '@dmc--98/dfe-core'
 import {
   DfeMuiFormPreview,
   DfeMuiStepIndicator,
+  DfeMuiThemeProvider,
   MuiFieldRenderer,
 } from '../src/index.tsx'
 
@@ -47,6 +48,16 @@ describe('@dmc--98/dfe-ui-mui', () => {
 
     expect(markup).toContain('data-dfe-mui-theme')
     expect(markup).toContain('placeholder="ada@example.com"')
+    // Default look is now DFE "Graphite & Teal" (teal-700), not MUI blue.
+    expect(markup).toContain('--dfe-color-primary:#0f766e')
+  })
+
+  it('restores the MUI-native palette when disableDfeTheme is set', () => {
+    const markup = renderToStaticMarkup(
+      <DfeMuiThemeProvider disableDfeTheme>
+        <span>opt-out</span>
+      </DfeMuiThemeProvider>
+    )
     expect(markup).toContain('--dfe-color-primary:#1976d2')
   })
 
