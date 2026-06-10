@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-sqlite",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "SQLite adapter for Dynamic Form Engine using better-sqlite3",
   "license": "MIT",
   "type": "module",
