@@ -13,10 +13,10 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./playground.css": "./src/playground.css"
+    "./playground.css": "./dist/playground.css"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cp src/playground.css dist/",
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
@@ -40,7 +40,6 @@
   },
   "files": [
     "dist",
-    "src/playground.css",
     "README.md",
     "LICENSE"
   ],

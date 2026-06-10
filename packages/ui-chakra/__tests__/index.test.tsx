@@ -6,6 +6,7 @@ import {
   ChakraFieldRenderer,
   DfeChakraFormPreview,
   DfeChakraStepIndicator,
+  DfeChakraThemeProvider,
 } from '../src/index.tsx'
 
 const sampleField: FormField = {
@@ -47,6 +48,16 @@ describe('@dmc--98/dfe-ui-chakra', () => {
 
     expect(markup).toContain('data-dfe-chakra-theme')
     expect(markup).toContain('textarea')
+    // Default look is now DFE "Graphite & Teal" (teal-700), not Chakra blue.
+    expect(markup).toContain('--dfe-color-primary:#0f766e')
+  })
+
+  it('restores the Chakra-native palette when disableDfeTheme is set', () => {
+    const markup = renderToStaticMarkup(
+      <DfeChakraThemeProvider disableDfeTheme>
+        <span>opt-out</span>
+      </DfeChakraThemeProvider>
+    )
     expect(markup).toContain('--dfe-color-primary:#3182ce')
   })
 

@@ -16,10 +16,10 @@
       "types": "./dist/DfeFormPage.d.ts",
       "import": "./dist/DfeFormPage.js"
     },
-    "./theme.css": "./src/dfe-theme.css"
+    "./theme.css": "./dist/dfe-theme.css"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cp src/dfe-theme.css dist/",
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
@@ -44,7 +44,6 @@
   },
   "files": [
     "dist",
-    "src/dfe-theme.css",
     "README.md",
     "LICENSE",
     "examples"

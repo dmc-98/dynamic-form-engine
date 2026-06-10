@@ -13,10 +13,10 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./builder.css": "./src/builder.css"
+    "./builder.css": "./dist/builder.css"
   },
   "scripts": {
-    "build": "tsup && tsc --emitDeclarationOnly --declaration --outDir dist",
+    "build": "tsup && tsc --emitDeclarationOnly --declaration --outDir dist && cp src/builder.css dist/",
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
@@ -42,7 +42,6 @@
   },
   "files": [
     "dist",
-    "src/builder.css",
     "README.md",
     "LICENSE"
   ],
