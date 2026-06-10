@@ -1,6 +1,6 @@
 {
   "name": "@dmc--98/dfe-ui-shadcn",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "shadcn UI components for Dynamic Form Engine",
   "license": "MIT",
   "type": "module",
