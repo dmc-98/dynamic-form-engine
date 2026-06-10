@@ -57,7 +57,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@dmc--98/dfe-core": "workspace:*"
+    "@dmc--98/dfe-core": "workspace:*",
+    "@dmc--98/dfe-tokens": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0"

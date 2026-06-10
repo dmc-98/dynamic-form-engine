@@ -1,100 +1,15 @@
 import React, { useMemo } from 'react'
+import { dfeDefaultTheme, type DfeThemeTokens } from '@dmc--98/dfe-tokens'
 
 type DeepPartial<T> = {
   [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K]
 }
 
-export interface DfeThemeTokens {
-  colors: {
-    canvas: string
-    surface: string
-    surfaceMuted: string
-    border: string
-    borderStrong: string
-    text: string
-    textMuted: string
-    primary: string
-    primaryHover: string
-    primaryForeground: string
-    focus: string
-    error: string
-    errorSurface: string
-    success: string
-    successSurface: string
-  }
-  spacing: {
-    xs: string
-    sm: string
-    md: string
-    lg: string
-    xl: string
-    '2xl': string
-  }
-  radius: {
-    sm: string
-    md: string
-    lg: string
-    pill: string
-  }
-  typography: {
-    fontFamily: string
-    fontSize: string
-    labelSize: string
-    helperSize: string
-    titleSize: string
-    lineHeight: string
-  }
-  shadow: {
-    sm: string
-    md: string
-  }
-}
-
-export const dfeDefaultTheme: DfeThemeTokens = {
-  colors: {
-    canvas: '#f8fafc',
-    surface: '#ffffff',
-    surfaceMuted: '#eef2ff',
-    border: '#cbd5e1',
-    borderStrong: '#94a3b8',
-    text: '#0f172a',
-    textMuted: '#475569',
-    primary: '#0f766e',
-    primaryHover: '#115e59',
-    primaryForeground: '#f8fafc',
-    focus: 'rgba(15, 118, 110, 0.22)',
-    error: '#b91c1c',
-    errorSurface: '#fef2f2',
-    success: '#166534',
-    successSurface: '#f0fdf4',
-  },
-  spacing: {
-    xs: '0.375rem',
-    sm: '0.625rem',
-    md: '0.875rem',
-    lg: '1.25rem',
-    xl: '1.75rem',
-    '2xl': '2.5rem',
-  },
-  radius: {
-    sm: '0.5rem',
-    md: '0.75rem',
-    lg: '1.25rem',
-    pill: '999px',
-  },
-  typography: {
-    fontFamily: '"IBM Plex Sans", "Avenir Next", sans-serif',
-    fontSize: '1rem',
-    labelSize: '0.95rem',
-    helperSize: '0.9rem',
-    titleSize: '1.35rem',
-    lineHeight: '1.5',
-  },
-  shadow: {
-    sm: '0 1px 2px rgba(15, 23, 42, 0.06)',
-    md: '0 10px 30px rgba(15, 23, 42, 0.08)',
-  },
-}
+// The canonical theme token definition now lives in @dmc--98/dfe-tokens — the
+// single source of truth shared by every DFE surface. Re-exported here so
+// existing consumers of `@dmc--98/dfe-react/theme` keep importing these unchanged.
+export { dfeDefaultTheme }
+export type { DfeThemeTokens }
 
 export interface DfeThemeProviderProps {
   children: React.ReactNode
@@ -202,7 +117,7 @@ export const dfeBaseThemeCss = `
 [data-dfe-theme] [data-dfe-step-item][data-dfe-active="true"] [data-dfe-step-button],
 [data-dfe-theme] [data-dfe-step-item][data-dfe-active="true"] [data-dfe-step-label] {
   border-color: var(--dfe-color-primary, #0f766e);
-  background: var(--dfe-color-surface-muted, #eef2ff);
+  background: var(--dfe-color-surface-muted, #f1f5f9);
 }
 
 [data-dfe-theme] [data-dfe-step-item][data-dfe-future="true"] [data-dfe-step-button],

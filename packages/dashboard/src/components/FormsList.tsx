@@ -58,25 +58,25 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
   const getStatusColor = (status: string): string => {
     switch (status) {
       case 'draft':
-        return '#999'
+        return 'var(--dfe-color-text-subtle)'
       case 'published':
-        return '#0066cc'
+        return 'var(--dfe-color-primary)'
       case 'archived':
-        return '#666'
+        return 'var(--dfe-color-text-muted)'
       default:
-        return '#000'
+        return 'var(--dfe-color-text)'
     }
   }
 
   const formatPercent = (value: number) => `${(value * 100).toFixed(1)}%`
 
   if (loading) {
-    return <div style={{ textAlign: 'center', color: '#666' }}>Loading forms...</div>
+    return <div style={{ textAlign: 'center', color: 'var(--dfe-color-text-muted)' }}>Loading forms...</div>
   }
 
   if (error) {
     return (
-      <div style={{ color: '#d32f2f', padding: '10px', backgroundColor: '#ffebee', borderRadius: '4px' }}>
+      <div style={{ color: 'var(--dfe-color-danger)', padding: '10px', backgroundColor: 'var(--dfe-color-danger-surface)', borderRadius: '4px' }}>
         Error loading forms: {error.message}
       </div>
     )
@@ -94,7 +94,7 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
           style={{
             padding: '8px 12px',
             borderRadius: '4px',
-            border: '1px solid #ccc',
+            border: '1px solid var(--dfe-color-border-strong)',
             fontSize: '14px',
             minWidth: '300px',
           }}
@@ -106,7 +106,7 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
           style={{
             padding: '8px 12px',
             borderRadius: '4px',
-            border: '1px solid #ccc',
+            border: '1px solid var(--dfe-color-border-strong)',
             fontSize: '14px',
           }}
         >
@@ -118,7 +118,7 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
       </div>
 
       {/* Results count */}
-      <div style={{ marginBottom: '15px', fontSize: '14px', color: '#666' }}>
+      <div style={{ marginBottom: '15px', fontSize: '14px', color: 'var(--dfe-color-text-muted)' }}>
         {filteredForms.length} form{filteredForms.length !== 1 ? 's' : ''} found
       </div>
 
@@ -127,14 +127,14 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
         style={{
           width: '100%',
           borderCollapse: 'collapse',
-          backgroundColor: '#fff',
+          backgroundColor: 'var(--dfe-color-surface)',
           borderRadius: '8px',
           overflow: 'hidden',
           boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
         }}
       >
         <thead>
-          <tr style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
+          <tr style={{ backgroundColor: 'var(--dfe-color-canvas)', borderBottom: '1px solid var(--dfe-color-border)' }}>
             <th style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', fontSize: '14px' }}>
               Title
             </th>
@@ -160,15 +160,15 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
             <tr
               key={form.id}
               style={{
-                borderBottom: '1px solid #e0e0e0',
+                borderBottom: '1px solid var(--dfe-color-border)',
                 cursor: 'pointer',
                 transition: 'background-color 0.2s',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#fafafa'
+                e.currentTarget.style.backgroundColor = 'var(--dfe-color-surface-muted)'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#fff'
+                e.currentTarget.style.backgroundColor = 'var(--dfe-color-surface)'
               }}
             >
               <td
@@ -176,7 +176,7 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
                   padding: '12px 16px',
                   fontWeight: '500',
                   fontSize: '14px',
-                  color: '#1a1a1a',
+                  color: 'var(--dfe-color-text)',
                 }}
               >
                 {form.title}
@@ -203,7 +203,7 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
               <td style={{ padding: '12px 16px', textAlign: 'center', fontSize: '14px' }}>
                 {formatPercent(form.completionRate)}
               </td>
-              <td style={{ padding: '12px 16px', fontSize: '14px', color: '#666' }}>
+              <td style={{ padding: '12px 16px', fontSize: '14px', color: 'var(--dfe-color-text-muted)' }}>
                 {new Date(form.createdAt).toLocaleDateString()}
               </td>
               <td style={{ padding: '12px 16px', textAlign: 'center' }}>
@@ -212,8 +212,8 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
                     onClick={() => onFormEdit(form.id)}
                     style={{
                       padding: '6px 12px',
-                      backgroundColor: '#0066cc',
-                      color: '#fff',
+                      backgroundColor: 'var(--dfe-color-primary)',
+                      color: 'var(--dfe-color-surface)',
                       border: 'none',
                       borderRadius: '4px',
                       cursor: 'pointer',
@@ -235,8 +235,8 @@ export const FormsList: React.FC<FormsListProps> = ({ config, onFormEdit }) => {
           style={{
             textAlign: 'center',
             padding: '40px',
-            color: '#999',
-            backgroundColor: '#fff',
+            color: 'var(--dfe-color-text-subtle)',
+            backgroundColor: 'var(--dfe-color-surface)',
             borderRadius: '8px',
           }}
         >

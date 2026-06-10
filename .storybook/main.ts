@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
   stories: [
-    '../packages/{react,ui-mui,ui-antd,ui-chakra}/stories/**/*.stories.@(ts|tsx)',
+    '../packages/{react,builder,dashboard,playground,ui-mui,ui-antd,ui-chakra,ui-mantine,ui-shadcn}/stories/**/*.stories.@(ts|tsx)',
   ],
   addons: ['@storybook/addon-essentials'],
   framework: {

@@ -57,15 +57,15 @@ export function DfeMantineFormPreview({
       style={{
         padding: '12px',
         borderRadius: '4px',
-        border: '1px solid #dee2e6',
-        backgroundColor: '#f8f9fa',
+        border: '1px solid var(--dfe-color-border, #e2e8f0)',
+        backgroundColor: 'var(--dfe-color-surface-muted, #f1f5f9)',
       }}
       data-dfe-preview-field={field.key}
     >
       <div style={{ fontWeight: 500, fontSize: '14px', marginBottom: '4px' }}>
         {field.label}
       </div>
-      <div style={{ fontSize: '14px', color: '#868e96' }}>
+      <div style={{ fontSize: '14px', color: 'var(--dfe-color-text-muted, #475569)' }}>
         {formatValue(field, values[field.key])}
       </div>
     </div>
@@ -89,7 +89,7 @@ export function DfeMantineFormPreview({
                   {stepNode.step.title}
                 </h2>
                 {stepNode.step.description && (
-                  <p style={{ fontSize: '14px', color: '#868e96', margin: 0 }}>
+                  <p style={{ fontSize: '14px', color: 'var(--dfe-color-text-muted, #475569)', margin: 0 }}>
                     {stepNode.step.description}
                   </p>
                 )}

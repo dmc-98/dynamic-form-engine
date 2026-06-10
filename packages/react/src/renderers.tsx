@@ -410,7 +410,7 @@ function renderRatingField(
               border: selected
                 ? '1px solid var(--dfe-color-primary, #0f766e)'
                 : '1px solid var(--dfe-color-border, #cbd5e1)',
-              background: selected ? 'var(--dfe-color-surface-muted, #eef2ff)' : controlStyle.background,
+              background: selected ? 'var(--dfe-color-surface-muted, #f1f5f9)' : controlStyle.background,
             }}
           >
             {score}
