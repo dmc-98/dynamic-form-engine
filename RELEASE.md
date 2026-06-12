@@ -135,6 +135,4 @@ When the Turbo cache variables are absent, the repo falls back to local caching 
 
 ## Related Docs
 
-- `DEPLOY_CHECKLIST.md`
-- `MAINTAINER_GUIDE.md`
 - `CONTRIBUTING.md`

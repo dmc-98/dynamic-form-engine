@@ -306,11 +306,7 @@ pnpm release:check
 
 The repo falls back to local Turbo caching automatically when the cache env vars are not set.
 
-Maintainers should also use:
-
-- [Release Guide](RELEASE.md)
-- [Deploy Checklist](DEPLOY_CHECKLIST.md)
-- [Maintainer Guide](MAINTAINER_GUIDE.md)
+Maintainers should also use the [Release Guide](RELEASE.md).
 
 ---
 

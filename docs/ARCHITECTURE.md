@@ -100,11 +100,11 @@ A typical full-stack request moves through the layers like this:
 
 ## Build, Test, and Release Pipeline
 
-Builds are orchestrated by Turborepo (`turbo.json`) and most packages bundle with `tsup`. CI (`.github/workflows/ci.yml`) runs install, build, artifact and wrapper smoke tests, the full test suite, stable-package coverage enforcement, release-readiness checks, and typecheck on Node 20, plus a canonical Postgres-backed example E2E job and a Node 18/22 compatibility matrix. Releases use Changesets (`.github/workflows/release.yml`): a changeset in a PR drives version bumps, per-package changelog generation, and npm publishing, while the two private example apps are explicitly excluded from versioning by a guard script. See `RELEASE.md` and `MAINTAINER_GUIDE.md` for the operational details.
+Builds are orchestrated by Turborepo (`turbo.json`) and most packages bundle with `tsup`. CI (`.github/workflows/ci.yml`) runs install, build, artifact and wrapper smoke tests, the full test suite, stable-package coverage enforcement, release-readiness checks, and typecheck on Node 20, plus a canonical Postgres-backed example E2E job and a Node 18/22 compatibility matrix. Releases use Changesets (`.github/workflows/release.yml`): a changeset in a PR drives version bumps, per-package changelog generation, and npm publishing, while the two private example apps are explicitly excluded from versioning by a guard script. See `RELEASE.md` for the operational details.
 
 ## Where to Go Next
 
 - Getting started and package selection: `docs/guide/getting-started.md`, `docs/guide/choose-your-package.md`
 - Core concepts in depth: `docs/guide/dag.md`, `docs/guide/conditions.md`, `docs/guide/validation.md`, `docs/guide/multi-step.md`, `docs/guide/api-contracts.md`
 - API reference: `docs/api/core.md`, `docs/api/react.md`, `docs/api/server.md`, `docs/api/types.md`
-- Production and release: `docs/guide/production-checklist.md`, `RELEASE.md`, `DEPLOY_CHECKLIST.md`
+- Production and release: `docs/guide/production-checklist.md`, `RELEASE.md`

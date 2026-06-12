@@ -44,5 +44,3 @@ Think of DFE like this:
 - A serverless-capable collaboration path.
 
 ## Deeper Analysis
-
-For a longer-form market snapshot with more detailed positioning notes, see the repository-level [competitive analysis](https://github.com/dmc-98/dynamic-form-engine/blob/main/COMPETITIVE_ANALYSIS.md).
