@@ -9,11 +9,5 @@
     "bench:dom:build": "esbuild src/dom-entry.tsx --bundle --outfile=dom-dist/bundle.js --alias:@dmc--98/dfe-react=../react/src/index.ts --alias:@dmc--98/dfe-core=../core/src/index.ts --jsx=automatic --define:process.env.NODE_ENV='\"production\"' --minify",
     "bench:engine": "DFE_BENCH=1 vitest run test/engine-bench.test.ts"
   },
-  "dependencies": {
-    "@dmc--98/dfe-core": "workspace:*"
-  },
-  "devDependencies": {
-    "typescript": "^5.4.0",
-    "vitest": "^1.6.0"
-  }
+  "//": "No install-time deps by design: tests/benches resolve @dmc--98/dfe-core and @dmc--98/dfe-react from source via vitest/esbuild aliases, and vitest runs from the workspace root. Keeps the lockfile importer empty and CI installs untouched."
 }

@@ -197,6 +197,8 @@ importers:
         specifier: ^5.4.0
         version: 5.9.3
 
+  packages/benchmarks: {}
+
   packages/builder:
     dependencies:
       '@dmc--98/dfe-core':
