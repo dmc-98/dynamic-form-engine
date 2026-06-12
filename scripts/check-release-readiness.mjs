@@ -27,6 +27,15 @@ assertChangesetStatusLeavesPrivateExamplesUnchanged()
 for (const packageDir of packageDirs) {
   const packageRoot = join(repoRoot, packageDir)
   const manifest = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf-8'))
+
+  // Private workspace packages (e.g. the benchmark harness) never publish:
+  // files/README/pack-dry-run requirements don't apply to them. Changesets
+  // already excludes them via privatePackages config.
+  if (manifest.private === true) {
+    console.log(`Release readiness skipped (private): ${manifest.name}`)
+    continue
+  }
+
   const declaredTargets = collectDeclaredTargets(manifest)
 
   assert.ok(
