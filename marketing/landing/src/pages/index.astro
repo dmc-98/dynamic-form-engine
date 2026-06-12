@@ -3,169 +3,406 @@ import { getEntry } from 'astro:content'
 import Base from '../layouts/Base.astro'
 import Playground from '../components/Playground.tsx'
 
-// All copy comes from the content collection (editable via /admin).
+// All editable copy comes from the content collection (also editable via /admin).
 const { data } = await getEntry('site', 'home')
 const { hero, features, comparison, sponsorTiers, demoEmbedUrl, githubUrl, docsUrl, sponsorUrl, claudeCode } = data
+
+// Inline SVG icons (no emoji — see BRAND_AND_COPY style rules). currentColor.
+const icons: Record<string, string> = {
+  graph: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7 7.4 10.5 16M17 7.4 13.5 16"/></svg>',
+  branch: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="12" r="2.2"/><path d="M6 7.2v9.6M8 5h4a4 4 0 0 1 4 4v.8M8 19h4a4 4 0 0 0 4-4v-.8"/></svg>',
+  steps: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h5v-4h5v-4h6"/><rect x="3" y="16" width="4" height="4" rx="1"/></svg>',
+  plug: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-10 0zM12 16v6"/></svg>',
+  db: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>',
+}
 ---
 
 <Base
-  title="Dynamic Form Engine — Forms Are Workflows"
+  title="Dynamic Form Engine — One config. Your whole form stack."
   description={hero.subtitle}
 >
+  <!-- NAV -->
   <header class="nav">
-    <div class="brand"><span class="dot"></span> Dynamic Form Engine</div>
-    <nav class="links">
-      <a href="#features">Features</a>
-      <a href="#demo">Demo</a>
-      <a href="/templates">Templates</a>
-      <a href="#claude-code">Claude Code</a>
-      <a href="#compare">Compare</a>
-      <a href="#sponsor">Sponsor</a>
-      <a href={githubUrl}>GitHub</a>
-    </nav>
+    <div class="inner">
+      <a class="brand" href="/"><span class="dot"></span> Dynamic Form Engine</a>
+      <nav class="links">
+        <a href="#features">Features</a><a href="#demo">Demo</a><a href="#compare">Compare</a>
+        <a href="#claude-code">Claude Code</a><a href="#sponsor">Sponsor</a>
+      </nav>
+      <div class="right">
+        <a class="stars" href={githubUrl} target="_blank" rel="noopener">★ Star <b data-stars-count>—</b></a>
+        <button class="tg" type="button" data-theme-toggle aria-label="Toggle theme">🌙</button>
+        <a class="btn primary" href={hero.primaryCta.href}>Get started</a>
+      </div>
+    </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
+  <!-- HERO — copy on top, the real playground as the hero element -->
+  <section class="hero">
+    <div class="wrap hero-copy reveal">
       <span class="eyebrow">{hero.eyebrow}</span>
-      <h1>{hero.title}</h1>
+      <h1>One config. <span class="grad-text">Your whole form stack.</span></h1>
       <p class="sub">{hero.subtitle}</p>
       <div class="cta">
         <a class="btn primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-        {hero.secondaryCtas.map((c) => <a class="btn ghost" href={c.href}>{c.label}</a>)}
-      </div>
-      <div class="codeblock">
-        <pre><code>{`import { createFormEngine } from '@dmc--98/dfe-core'
-
-const engine = createFormEngine(fields, existingData)
-const patch  = engine.setFieldValue('role', 'admin') // only affected fields recompute
-const { success, errors } = engine.validate()         // Zod schema, auto-generated`}</code></pre>
-      </div>
-    </section>
-
-    <section id="features">
-      <h2>Built for forms that behave like systems</h2>
-      <p class="lede">Onboarding, applications, approvals, and internal tools — not just input screens.</p>
-      <div class="grid">
-        {features.map((f) => (
-          <div class="card">
-            <div class="ico">{f.icon}</div>
-            <h3>{f.title}</h3>
-            <p>{f.body}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section id="demo">
-      <h2>Build a form right here</h2>
-      <p class="lede">
-        A real playground, not a video: drag-and-drop fields, restyle it live, watch conditions and
-        validation work, copy the code — and see the <em>actual server pipeline</em> reject a tampered payload.
-      </p>
-      <Playground client:visible />
-      {demoEmbedUrl ? (
-        <p class="demo-fallback">
-          Want the full multi-step editor experience? <a href={demoEmbedUrl.replace('embed=1&', '').replace(/[?&]embed=1/, '')} target="_blank" rel="noopener">Open the StackBlitz demo →</a>
-        </p>
-      ) : null}
-    </section>
-
-    {claudeCode ? (
-      <section id="claude-code">
-        <h2>{claudeCode.heading}</h2>
-        <p class="lede">{claudeCode.body}</p>
-        <div class="codeblock">
-          <pre><code>{`${claudeCode.marketplaceCmd}\n${claudeCode.installCmd}`}</code></pre>
+        <div class="install">
+          <code data-install>npm i @dmc--98/dfe-core</code>
+          <button class="cp" type="button" data-copy aria-label="Copy install command">Copy</button>
         </div>
-        <p class="cc-cta">
-          <a class="btn ghost" href={claudeCode.docsUrl}>Plugin docs</a>
-        </p>
-      </section>
-    ) : null}
+      </div>
+      <div class="trust">
+        <a class="starbtn" href={githubUrl} target="_blank" rel="noopener">★ Star on GitHub <b data-stars-count>—</b></a>
+        <span>·</span><span>MIT</span><span>·</span><span>TypeScript-first</span>
+      </div>
+    </div>
 
-    <section id="compare">
+    <div id="demo" class="wrap wide reveal">
+      <div class="demo-frame hero-demo">
+        <div class="top">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="frame-title">DFE Playground</span>
+          <span class="frame-hint">live — powered by the published packages, not a video</span>
+        </div>
+        <div class="demo-body">
+          <div class="pg-skeleton" id="pg-skeleton" aria-hidden="true">
+            <div class="sk-col"><span class="sk sk-tabs"></span><span class="sk"></span><span class="sk"></span><span class="sk sk-tall"></span></div>
+            <div class="sk-col"><span class="sk sk-sm"></span><span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk sk-btn"></span></div>
+          </div>
+          <Playground client:load />
+        </div>
+      </div>
+      <div class="demo-under">
+        <a class="btn primary pg-open-cta" href={demoEmbedUrl ? demoEmbedUrl.replace(/[?&]embed=1/, '').replace('&file', '?file') : docsUrl} target="_blank" rel="noopener">Open the full playground →</a>
+        {demoEmbedUrl ? (
+          <p class="demo-fallback">Want the full multi-step editor? <a href={demoEmbedUrl.replace(/[?&]embed=1/, '').replace('&file', '?file')} target="_blank" rel="noopener">Open the StackBlitz demo →</a></p>
+        ) : null}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF — capability facts, not traction theater (PRD 4: no live star count as proof) -->
+  <div class="proof">
+    <div class="wrap inner reveal">
+      <div class="metric"><span>21</span> <small>field types · 1 typed contract</small></div>
+      <div class="creds">
+        <span class="badge">MIT</span><span class="badge">TypeScript-first</span><span class="badge">CI passing</span>
+        <a class="notlink" href="#compare">What DFE is <em>not</em> →</a>
+      </div>
+      <div class="logos">
+        <span>React</span><span>Vue</span><span>Svelte</span><span>Solid</span><span>Angular</span><span>Prisma</span><span>Drizzle</span><span>tRPC</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY 1 -->
+  <section id="features"><div class="wrap story reveal">
+    <div class="copy">
+      <span class="eyebrow">DAG dependencies</span>
+      <h2>Forms that behave like systems</h2>
+      <p class="lede">Fields form a graph. Change one value and only what's downstream recomputes — O(k), not O(n). Onboarding, applications, approvals, and internal tools.</p>
+    </div>
+    <div class="panel">
+      <div class="dag">
+        <span class="chip">Country</span><span class="arrow">→</span>
+        <span class="chip on">State</span><span class="arrow">→</span>
+        <span class="chip">Tax rate</span><span class="arrow">→</span>
+        <span class="chip">Total</span>
+      </div>
+      <p class="mono-note">setFieldValue('state', …) → 3 recompute, 1 skipped</p>
+    </div>
+  </div></section>
+
+  <!-- STORY 2 -->
+  <section class="alt"><div class="wrap story rev reveal">
+    <div class="copy">
+      <span class="eyebrow">Multi-step &amp; branching</span>
+      <h2>Build complex funnels from a simple diagram</h2>
+      <p class="lede">Steppers with skip conditions, per-step validation, and branch-to-step logic — control form flow without hand-wiring a state machine.</p>
+    </div>
+    <div class="panel">
+      <div class="steps">
+        <div class="step"><span class="ix">1</span> Account details</div>
+        <div class="step active"><span class="ix">2</span> Choose plan</div>
+        <div class="step branch"><span class="ix">3</span> Team seats <span class="tag">branch</span></div>
+        <div class="step"><span class="ix">4</span> Payment</div>
+        <div class="step"><span class="ix">5</span> Review &amp; submit</div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- STORY 3 -->
+  <section><div class="wrap story reveal">
+    <div class="copy">
+      <span class="eyebrow">One typed contract</span>
+      <h2>Client and server stay in sync</h2>
+      <p class="lede">Auto-generated Zod schemas mean client and server validate from one schema. The same config that renders the form rejects a tampered payload on the server.</p>
+    </div>
+    <pre class="code"><code>{`// one config → client + server validation
+const engine = createFormEngine(fields, data)
+engine.setFieldValue('role', 'admin') // only affected recompute
+const { success, errors } = engine.validate() // Zod, auto-generated`}</code></pre>
+  </div></section>
+
+  <!-- FEATURE GRID -->
+  <section class="alt"><div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Everything included</span>
+      <h2>Batteries, not lock-in</h2>
+      <p class="lede center-lede">Pure-TypeScript core with swappable UI and backend adapters.</p>
+    </div>
+    <div class="grid reveal">
+      {features.map((f) => (
+        <div class="card">
+          <span class="ico" set:html={icons[f.icon] ?? icons.check}></span>
+          <h3>{f.title}</h3>
+          <p>{f.body}</p>
+        </div>
+      ))}
+    </div>
+  </div></section>
+
+  <!-- COMPARE -->
+  <section id="compare"><div class="wrap reveal">
+    <div class="center">
+      <span class="eyebrow">Positioning</span>
       <h2>Where DFE fits</h2>
-      <p class="lede">Between lightweight React form-state libraries and hosted form platforms.</p>
-      <table class="compare">
+      <p class="lede center-lede">Between lightweight form-state libraries and hosted form platforms.</p>
+    </div>
+    <div class="compare">
+      <table>
         <thead><tr><th>Tool</th><th>Best at</th><th>Where DFE fits</th></tr></thead>
         <tbody>
-          {comparison.map((r) => (
-            <tr><td>{r.tool}</td><td>{r.bestAt}</td><td>{r.dfe}</td></tr>
-          ))}
+          {comparison.map((r) => (<tr><td>{r.tool}</td><td>{r.bestAt}</td><td>{r.dfe}</td></tr>))}
         </tbody>
       </table>
-    </section>
+    </div>
+    <p class="footnote">Comparison reflects each tool's primary focus, June 2026.</p>
+  </div></section>
 
-    <section id="sponsor" class="sponsor">
-      <h2>Sponsor Dynamic Form Engine</h2>
-      <p class="lede">MIT-licensed and independently maintained. Sponsorship funds maintenance, security, docs, and releases.</p>
-      <div class="tiers">
-        {sponsorTiers.map((t) => (
-          <div class="tier">
-            <div class="name">{t.name}</div>
-            <div class="amt">{t.amount}</div>
-            <p>{t.perk}</p>
-          </div>
-        ))}
-      </div>
-      <p class="note">Recognition and access scale with tier. Influence over correctness, security, or the project's independence is never for sale.</p>
-      <div class="cta"><a class="btn primary" href={sponsorUrl}>Become a sponsor</a></div>
-    </section>
-  </main>
+  <!-- CLAUDE CODE -->
+  {claudeCode ? (
+    <section id="claude-code"><div class="wrap reveal"><div class="cc">
+      <span class="eyebrow">Developer delight</span>
+      <h2>{claudeCode.heading}</h2>
+      <p class="lede">{claudeCode.body}</p>
+      <pre class="code"><code>{`${claudeCode.marketplaceCmd}\n${claudeCode.installCmd}`}</code></pre>
+      <p><a class="btn ghost" href={claudeCode.docsUrl}>Plugin docs</a></p>
+    </div></div></section>
+  ) : null}
 
-  <footer>
-    Dynamic Form Engine · MIT Licensed · <a href={githubUrl}>GitHub</a> · <a href={docsUrl}>Docs</a>
-  </footer>
+  <!-- SPONSOR -->
+  <section id="sponsor" class="alt"><div class="wrap reveal">
+    <div class="center">
+      <span class="eyebrow">Open source</span>
+      <h2>Sponsor the project</h2>
+      <p class="lede center-lede">MIT-licensed and independently maintained. Sponsorship funds maintenance, security, docs, and releases.</p>
+    </div>
+    <div class="tiers">
+      {sponsorTiers.map((t) => (
+        <div class="tier"><div class="name">{t.name}</div><div class="amt">{t.amount}</div><p>{t.perk}</p></div>
+      ))}
+    </div>
+    <p class="note">Influence over correctness, security, or the project's independence is never for sale.</p>
+    <div class="center" style="margin-top:26px;"><a class="btn primary" href={sponsorUrl}>Become a sponsor</a></div>
+  </div></section>
+
+  <!-- CLOSING -->
+  <section><div class="wrap reveal"><div class="closing">
+    <h2>Build a beautiful form experience.</h2>
+    <p>Start free and explore DAG dependencies, branching steps, and one typed contract across your whole stack.</p>
+    <div class="closing-cta">
+      <a class="btn primary" href={hero.primaryCta.href}>Get started →</a>
+      <a class="btn ghost" href={githubUrl}>Star on GitHub</a>
+    </div>
+  </div></div></section>
+
+  <footer>Dynamic Form Engine · MIT Licensed · <a href={githubUrl}>GitHub</a> · <a href={docsUrl}>Docs</a></footer>
 </Base>
 
 <style>
-  header.nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; max-width: var(--max); margin: 0 auto; }
-  .brand { font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 10px; }
-  .brand .dot { width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(135deg, var(--brand), var(--brand2)); }
-  nav.links a { color: var(--muted); margin-left: 22px; font-size: 14px; }
-  nav.links a:hover { color: var(--text); }
+  h1,h2,h3{letter-spacing:-.02em;line-height:1.1;margin:0;}
+  section{padding:96px 0;} section.alt{background:var(--dfe-color-surface-muted);}
+  .center{text-align:center;margin-bottom:44px;} .center-lede{margin-left:auto;margin-right:auto;}
+  .eyebrow{display:inline-block;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dfe-color-primary);background:var(--dfe-color-primary-subtle);border:1px solid var(--dfe-color-primary-border);padding:5px 12px;border-radius:var(--dfe-pill);}
+  .lede{color:var(--dfe-color-text-muted);font-size:1.15rem;max-width:60ch;}
+  .grad-text{background:var(--dfe-gradient-brand);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  h2{font-size:clamp(1.8rem,3.2vw,2.6rem);margin-bottom:14px;}
 
-  .hero { text-align: center; padding: 72px 0 56px; }
-  .eyebrow { display: inline-block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; margin-bottom: 22px; }
-  .hero h1 { font-size: clamp(34px, 6vw, 60px); line-height: 1.05; margin: 0 0 18px; letter-spacing: -0.02em; background: linear-gradient(120deg, var(--brand), var(--brand2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .hero p.sub { font-size: clamp(17px, 2.4vw, 21px); color: var(--muted); max-width: 680px; margin: 0 auto 32px; }
-  .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; border: 1px solid var(--border); }
-  .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand2)); color: #fff; border: none; }
-  .btn.ghost { background: transparent; color: var(--text); }
+  .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;padding:12px 22px;border-radius:var(--dfe-r-md);border:1px solid transparent;cursor:pointer;transition:transform .12s var(--dfe-ease-spring),box-shadow .15s var(--dfe-ease),background .15s var(--dfe-ease);text-decoration:none;}
+  .btn:active{transform:scale(.97);} .btn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--dfe-focus);}
+  .btn.primary{background:var(--dfe-gradient-brand);color:#fff;box-shadow:var(--dfe-shadow-sm);}
+  .btn.primary:hover{box-shadow:var(--dfe-shadow-md);transform:translateY(-1px);text-decoration:none;}
+  .btn.ghost{background:var(--dfe-color-surface);color:var(--dfe-color-text);border-color:var(--dfe-color-border-strong);}
+  .btn.ghost:hover{background:var(--dfe-color-surface-muted);text-decoration:none;}
 
-  .codeblock { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: left; font-size: 13.5px; overflow-x: auto; margin: 40px auto 0; max-width: 720px; }
-  .codeblock pre { margin: 0; font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; }
+  .nav{position:sticky;top:0;z-index:100;background:var(--dfe-glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--dfe-color-border);}
+  .nav .inner{max-width:1140px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--dfe-color-text);}
+  .brand:hover{text-decoration:none;} .brand .dot{width:26px;height:26px;border-radius:8px;background:var(--dfe-gradient-brand);box-shadow:var(--dfe-shadow-sm);}
+  .nav .links{display:flex;gap:22px;font-size:.92rem;color:var(--dfe-color-text-muted);}
+  .nav .links a:hover{color:var(--dfe-color-text);text-decoration:none;}
+  .nav .right{display:flex;align-items:center;gap:12px;}
+  .stars{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;border:1px solid var(--dfe-color-border-strong);border-radius:var(--dfe-pill);padding:6px 12px;color:var(--dfe-color-text-muted);}
+  .stars:hover{text-decoration:none;color:var(--dfe-color-primary);border-color:var(--dfe-color-primary-border);}
+  .tg{cursor:pointer;border:1px solid var(--dfe-color-border-strong);background:var(--dfe-color-surface);color:var(--dfe-color-text);border-radius:var(--dfe-pill);width:36px;height:36px;font-size:15px;line-height:1;transition:all .12s var(--dfe-ease);}
+  .tg:hover{background:var(--dfe-color-surface-muted);}
+  .tg:focus-visible{outline:none;box-shadow:0 0 0 3px var(--dfe-focus);}
+  @media(max-width:880px){.nav .links{display:none;}}
 
-  section { padding: 56px 0; border-top: 1px solid var(--border); }
-  section h2 { font-size: clamp(24px, 3.5vw, 34px); letter-spacing: -0.01em; margin: 0 0 8px; text-align: center; }
-  section .lede { color: var(--muted); text-align: center; max-width: 640px; margin: 0 auto 36px; }
-  .hero { border-top: none; }
+  .hero{background:var(--dfe-gradient-hero);border-bottom:1px solid var(--dfe-color-border);padding:72px 0 64px;}
+  .hero-copy{text-align:center;margin-bottom:40px;}
+  .hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);margin:18px 0 14px;}
+  .hero .sub{font-size:1.22rem;color:var(--dfe-color-text-muted);max-width:56ch;margin:0 auto;}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin:28px 0 16px;justify-content:center;align-items:center;}
+  .hero .trust{justify-content:center;}
+  .wrap.wide{max-width:1280px;}
+  .install{display:inline-flex;align-items:center;gap:10px;background:var(--dfe-color-surface-sunken);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-md);padding:8px 8px 8px 14px;font-family:var(--dfe-font-mono);font-size:.9rem;}
+  .install .cp{font-family:var(--dfe-font-sans);font-weight:600;font-size:.78rem;cursor:pointer;border:1px solid var(--dfe-color-border-strong);background:var(--dfe-color-surface);color:var(--dfe-color-text);border-radius:var(--dfe-r-sm);padding:5px 10px;transition:all .12s var(--dfe-ease);}
+  .install .cp:hover{background:var(--dfe-color-primary-subtle);color:var(--dfe-color-primary);border-color:var(--dfe-color-primary-border);}
+  .trust{display:flex;align-items:center;gap:14px;color:var(--dfe-color-text-subtle);font-size:.85rem;flex-wrap:wrap;}
+  .starbtn{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--dfe-color-text);border:1px solid var(--dfe-color-border-strong);border-radius:var(--dfe-pill);padding:6px 14px;}
+  .starbtn:hover{background:var(--dfe-color-primary-subtle);color:var(--dfe-color-primary);border-color:var(--dfe-color-primary-border);text-decoration:none;}
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-  .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
-  .card .ico { font-size: 22px; margin-bottom: 10px; }
-  .card h3 { margin: 0 0 6px; font-size: 17px; }
-  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .proof{padding:40px 0;border-bottom:1px solid var(--dfe-color-border);background:var(--dfe-color-surface);}
+  .proof .inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .metric{font-family:var(--dfe-font-mono);font-size:2.1rem;font-weight:500;letter-spacing:-.02em;}
+  .metric small{display:block;font-family:var(--dfe-font-sans);font-size:.78rem;color:var(--dfe-color-text-subtle);font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+  .creds{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .creds .badge{font-size:.75rem;font-weight:600;color:var(--dfe-color-text-muted);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-pill);padding:4px 11px;background:var(--dfe-color-canvas);}
+  .creds .notlink{font-size:.8rem;color:var(--dfe-color-primary);font-weight:600;}
+  .logos{display:flex;gap:10px;flex-wrap:wrap;}
+  .logos span{font-size:.85rem;font-weight:600;color:var(--dfe-color-text-muted);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-pill);padding:6px 14px;background:var(--dfe-color-canvas);}
 
-  .demo { width: 100%; height: 600px; border: 1px solid var(--border); border-radius: var(--radius); }
-  .demo.placeholder { display: flex; align-items: center; justify-content: center; color: var(--muted); background: var(--panel); border-style: dashed; }
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  .story.rev .copy{order:2;}
+  .story .panel{background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-xl);box-shadow:var(--dfe-shadow-lg);padding:22px;}
+  .mono-note{color:var(--dfe-color-text-subtle);font-size:.82rem;margin:16px 0 0;text-align:center;font-family:var(--dfe-font-mono);}
+  @media(max-width:860px){.story{grid-template-columns:1fr;gap:28px;}.story.rev .copy{order:0;}}
 
-  table.compare { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-  table.compare th, table.compare td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); }
-  table.compare th { color: var(--muted); font-weight: 600; }
-  table.compare td:first-child { font-weight: 600; }
+  .dag{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;}
+  .chip{padding:10px 14px;border-radius:var(--dfe-r-md);border:1px solid var(--dfe-color-border);background:var(--dfe-color-surface-muted);font-size:.85rem;font-weight:500;}
+  .chip.on{border-color:var(--dfe-color-primary);background:var(--dfe-color-primary-subtle);color:var(--dfe-color-primary);box-shadow:0 0 0 3px var(--dfe-focus);}
+  .arrow{color:var(--dfe-color-text-subtle);}
 
-  .sponsor { text-align: center; }
-  .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin: 28px 0; }
-  .tier { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
-  .tier .amt { font-size: 26px; font-weight: 700; }
-  .tier .name { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
-  .tier p { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
-  .note { font-size: 13px; color: var(--muted); max-width: 620px; margin: 0 auto 20px; }
+  .steps{display:flex;flex-direction:column;gap:10px;}
+  .step{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--dfe-r-md);border:1px solid var(--dfe-color-border);background:var(--dfe-color-surface-muted);}
+  .step .ix{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);}
+  .step.active{border-color:var(--dfe-color-primary);background:var(--dfe-color-primary-subtle);color:var(--dfe-color-primary);}
+  .step.active .ix{background:var(--dfe-gradient-brand);color:#fff;border:none;}
+  .step.branch{margin-left:28px;border-style:dashed;} .step .tag{margin-left:auto;font:600 11px var(--dfe-font-mono);color:var(--dfe-color-primary);}
 
-  .cc-cta { text-align: center; margin-top: 18px; }
-  .demo-fallback { text-align: center; font-size: 13.5px; color: var(--muted); margin-top: 10px; }
-  footer { padding: 40px 0 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; text-align: center; }
+  .code{background:var(--dfe-color-surface-sunken);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-lg);padding:18px 20px;font-family:var(--dfe-font-mono);font-size:.86rem;overflow:auto;color:var(--dfe-color-text);line-height:1.7;margin:0;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+  .card{background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-lg);padding:24px;box-shadow:var(--dfe-shadow-sm);transition:transform .2s var(--dfe-ease-spring),box-shadow .2s var(--dfe-ease);}
+  .card:hover{transform:translateY(-5px);box-shadow:var(--dfe-shadow-lg);}
+  .card .ico{width:42px;height:42px;border-radius:var(--dfe-r-md);display:grid;place-items:center;background:var(--dfe-color-primary-subtle);border:1px solid var(--dfe-color-primary-border);margin-bottom:14px;color:var(--dfe-color-primary);}
+  .card h3{font-size:1.1rem;margin-bottom:8px;} .card p{color:var(--dfe-color-text-muted);font-size:.95rem;margin:0;}
+
+  .demo-frame{background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-2xl);box-shadow:var(--dfe-shadow-xl);overflow:hidden;}
+  .demo-frame .top{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--dfe-color-border);background:var(--dfe-color-surface-muted);}
+  .demo-frame .top .dots{display:flex;gap:6px;}
+  .demo-frame .top i{width:11px;height:11px;border-radius:50%;background:var(--dfe-color-border-strong);display:inline-block;}
+  .frame-title{font-weight:600;font-size:.88rem;}
+  .frame-hint{margin-left:auto;color:var(--dfe-color-text-subtle);font-size:.78rem;font-family:var(--dfe-font-mono);}
+  .demo-body{padding:24px;position:relative;min-height:560px;}
+  .hero-demo .demo-body{padding:28px;}
+  .demo-under{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:18px;}
+  .pg-open-cta{display:none;}
+  .demo-fallback{text-align:center;color:var(--dfe-color-text-subtle);font-size:.9rem;margin:0;}
+
+  /* Skeleton while the playground island hydrates — no layout shift (PRD 4 amendment) */
+  .pg-skeleton{position:absolute;inset:28px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr);gap:20px;}
+  .pg-skeleton .sk-col{background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px;}
+  .pg-skeleton .sk{display:block;height:18px;border-radius:6px;background:linear-gradient(90deg,var(--dfe-color-surface-muted) 25%,var(--dfe-color-surface-sunken) 50%,var(--dfe-color-surface-muted) 75%);background-size:200% 100%;animation:pg-shimmer 1.4s ease infinite;}
+  .pg-skeleton .sk-tabs{height:32px;width:80%;}
+  .pg-skeleton .sk-sm{height:12px;width:45%;}
+  .pg-skeleton .sk-tall{flex:1;min-height:180px;}
+  .pg-skeleton .sk-btn{height:38px;width:120px;}
+  @keyframes pg-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  @media(prefers-reduced-motion:reduce){.pg-skeleton .sk{animation:none;}}
+
+  /* Mobile: cramped two-pane builder degrades to full-width live preview + CTA (PRD 4 amendment) */
+  @media(max-width:767px){
+    .demo-body{min-height:0;padding:16px;}
+    .hero-demo .demo-body{padding:16px;}
+    .pg-skeleton{inset:16px;grid-template-columns:1fr;}
+    .pg-skeleton .sk-col:first-child{display:none;}
+    :global(.pg-wrap){grid-template-columns:1fr !important;}
+    :global(.pg-wrap .pg-left){display:none !important;}
+    .pg-open-cta{display:inline-flex;}
+    .frame-hint{display:none;}
+  }
+
+  .compare{background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-xl);overflow:hidden;box-shadow:var(--dfe-shadow-sm);}
+  .compare table{width:100%;border-collapse:collapse;font-size:.95rem;}
+  .compare th,.compare td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--dfe-color-border);}
+  .compare th{background:var(--dfe-color-surface-muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dfe-color-text-subtle);}
+  .compare td:last-child{color:var(--dfe-color-primary);font-weight:500;} .compare tr:last-child td{border-bottom:none;}
+  .footnote{color:var(--dfe-color-text-subtle);font-size:.8rem;margin-top:14px;text-align:center;}
+
+  .cc{background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-2xl);padding:36px;box-shadow:var(--dfe-shadow-md);}
+
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media(max-width:860px){.tiers{grid-template-columns:repeat(2,1fr);}}
+  .tier{background:var(--dfe-color-surface);border:1px solid var(--dfe-color-border);border-radius:var(--dfe-r-lg);padding:22px;text-align:center;transition:transform .2s var(--dfe-ease-spring),border-color .2s;}
+  .tier:hover{transform:translateY(-4px);border-color:var(--dfe-color-primary-border);}
+  .tier .name{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dfe-color-text-subtle);font-weight:600;}
+  .tier .amt{font-family:var(--dfe-font-mono);font-size:2rem;margin:6px 0;} .tier p{color:var(--dfe-color-text-muted);font-size:.85rem;margin:0;}
+  .note{text-align:center;color:var(--dfe-color-text-subtle);font-size:.85rem;margin-top:22px;}
+
+  .closing{background:var(--dfe-gradient-brand);color:#fff;border-radius:var(--dfe-r-2xl);padding:64px 32px;text-align:center;}
+  .closing h2{color:#fff;font-size:clamp(2rem,4vw,3rem);} .closing p{color:rgba(255,255,255,.88);max-width:46ch;margin:14px auto 26px;font-size:1.1rem;}
+  .closing-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .closing .btn.primary{background:#fff;color:var(--dfe-color-primary);} .closing .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5);}
+
+  footer{padding:40px 0;border-top:1px solid var(--dfe-color-border);color:var(--dfe-color-text-subtle);font-size:.9rem;text-align:center;}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s var(--dfe-ease-spring),transform .6s var(--dfe-ease-spring);}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}}
 </style>
+
+<script>
+  // Theme toggle (light/dark) — persists to localStorage; OS preference is the default.
+  const root = document.documentElement
+  const sysDark = matchMedia('(prefers-color-scheme: dark)')
+  const effective = () => root.dataset.theme || (sysDark.matches ? 'dark' : 'light')
+  const tg = document.querySelector<HTMLButtonElement>('[data-theme-toggle]')
+  const paintTg = () => { if (tg) { tg.textContent = effective() === 'dark' ? '☀️' : '🌙'; tg.setAttribute('aria-label', `Switch to ${effective() === 'dark' ? 'light' : 'dark'} theme`) } }
+  tg?.addEventListener('click', () => {
+    const next = effective() === 'dark' ? 'light' : 'dark'
+    root.dataset.theme = next
+    try { localStorage.setItem('dfe-theme', next) } catch { /* ignore */ }
+    paintTg()
+  })
+  sysDark.addEventListener('change', paintTg)
+  paintTg()
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } }), { threshold: 0.12 })
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el))
+
+  // Copy install command
+  document.querySelectorAll('[data-copy]').forEach((btn) => btn.addEventListener('click', () => {
+    const txt = document.querySelector('[data-install]')?.textContent ?? ''
+    navigator.clipboard?.writeText(txt)
+    const o = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(() => (btn.textContent = o), 1400)
+  }))
+
+  // Live GitHub star count for the Star CTA buttons — honest, never hardcoded.
+  // (Star count is deliberately NOT shown as a proof metric — PRD 4.)
+  ;(async () => {
+    const fmt = (n: number) => (n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n))
+    try {
+      const r = await fetch('https://api.github.com/repos/dmc-98/dynamic-form-engine')
+      if (!r.ok) throw new Error('gh')
+      const { stargazers_count } = await r.json()
+      document.querySelectorAll('[data-stars-count]').forEach((el) => (el.textContent = fmt(stargazers_count)))
+    } catch {
+      document.querySelectorAll('[data-stars-count]').forEach((el) => (el.textContent = ''))
+    }
+  })()
+</script>

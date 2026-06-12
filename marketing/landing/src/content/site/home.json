@@ -1,21 +1,21 @@
 {
   "hero": {
-    "eyebrow": "Forms Are Workflows",
-    "title": "One config. Frontend, backend, and database.",
-    "subtitle": "Dynamic Form Engine is a configuration-driven, TypeScript-first engine for multi-step workflow forms — DAG dependencies, conditional logic, branching steps, and cross-step API contracts — with zero UI lock-in.",
-    "primaryCta": { "label": "Get Started", "href": "https://dmc-98.github.io/dynamic-form-engine/guide/getting-started" },
+    "eyebrow": "Forms are workflows",
+    "title": "One config. Your whole form stack.",
+    "subtitle": "Dynamic Form Engine (DFE) is a configuration-driven, TypeScript-first engine for multi-step workflow forms — DAG dependencies, conditional logic, branching steps, and cross-step API contracts — with no UI lock-in.",
+    "primaryCta": { "label": "Get started →", "href": "https://dmc-98.github.io/dynamic-form-engine/guide/getting-started" },
     "secondaryCtas": [
-      { "label": "Try the Playground", "href": "https://dmc-98.github.io/dynamic-form-engine/packages/playground" },
+      { "label": "Try the playground", "href": "https://dmc-98.github.io/dynamic-form-engine/packages/playground" },
       { "label": "Star on GitHub", "href": "https://github.com/dmc-98/dynamic-form-engine" }
     ]
   },
   "features": [
-    { "icon": "🧠", "title": "DAG dependencies", "body": "Fields form a graph. A value change recomputes only what's affected — O(k), not O(n)." },
-    { "icon": "🔀", "title": "Conditional logic", "body": "Show, hide, require, or disable fields with compiled conditions and AND/OR combinators." },
-    { "icon": "📋", "title": "Multi-step & branching", "body": "Steppers with skip conditions, per-step validation, and branch-to-step logic." },
-    { "icon": "🔌", "title": "Framework agnostic", "body": "Pure-TS core. Bind to React, Vue, Svelte, Solid, Angular, or vanilla JS." },
-    { "icon": "🗄️", "title": "Swappable adapters", "body": "Prisma ↔ Drizzle with one interface change. Express, Fastify, Hono, tRPC, GraphQL." },
-    { "icon": "✅", "title": "One typed contract", "body": "Auto-generated Zod schemas keep client and server validation from drifting." }
+    { "icon": "graph", "title": "DAG dependencies", "body": "A value change recomputes only affected fields — O(k), not O(n)." },
+    { "icon": "branch", "title": "Conditional logic", "body": "Show, hide, require, or disable fields with compiled AND/OR conditions." },
+    { "icon": "steps", "title": "Multi-step & branching", "body": "Steppers with skip conditions, per-step validation, and branch-to-step logic." },
+    { "icon": "plug", "title": "Framework-agnostic", "body": "Pure-TypeScript core. Bind React, Vue, Svelte, Solid, Angular, or vanilla JS." },
+    { "icon": "db", "title": "Swappable adapters", "body": "Prisma or Drizzle with one interface change. Express, Fastify, Hono, tRPC, GraphQL." },
+    { "icon": "check", "title": "One typed contract", "body": "Auto-generated Zod keeps client and server validation aligned." }
   ],
   "comparison": [
     { "tool": "React Hook Form / Formik", "bestAt": "Component-local form state", "dfe": "DFE adds config-driven defs, workflows, and backend orchestration" },
@@ -35,7 +35,7 @@
   "sponsorUrl": "https://github.com/sponsors/dmc-98",
   "claudeCode": {
     "heading": "Build forms with Claude Code",
-    "body": "Install the DFE plugin and let Claude Code scaffold your forms — multi-step flows, starter templates, backend wiring, validation, and migrations. Then just ask: \"build a multi-step onboarding form with a Postgres backend.\"",
+    "body": "Install the plugin and let Claude Code scaffold multi-step flows, starter templates, backend wiring, validation, and migrations. Then just ask: \"build a multi-step onboarding form with a Postgres backend.\"",
     "marketplaceCmd": "/plugin marketplace add dmc-98/dynamic-form-engine",
     "installCmd": "/plugin install dfe-scaffold@dfe",
     "docsUrl": "https://github.com/dmc-98/dynamic-form-engine/tree/main/integrations/claude-code"

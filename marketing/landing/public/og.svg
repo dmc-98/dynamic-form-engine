@@ -1,0 +1,72 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b1120"/><stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(140 120) rotate(35) scale(720 520)">
+      <stop stop-color="#14b8a6" stop-opacity="0.30"/><stop offset="1" stop-color="#14b8a6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientTransform="translate(1180 40) rotate(135) scale(640 460)">
+      <stop stop-color="#6366f1" stop-opacity="0.22"/><stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#2dd4bf"/><stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+    <style>
+      .sans { font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- brand row -->
+  <g transform="translate(80 76)">
+    <rect width="44" height="44" rx="12" fill="url(#brand)"/>
+    <path d="M14 22h16M22 14v16" stroke="#04201d" stroke-width="3" stroke-linecap="round"/>
+    <text x="60" y="30" class="sans" font-size="26" font-weight="700" fill="#f1f5f9">Dynamic Form Engine</text>
+  </g>
+
+  <!-- headline -->
+  <text x="80" y="250" class="sans" font-size="78" font-weight="700" fill="#f1f5f9" letter-spacing="-2">One config.</text>
+  <text x="80" y="338" class="sans" font-size="78" font-weight="700" letter-spacing="-2" fill="url(#brand)">Your whole form stack.</text>
+
+  <!-- subtitle -->
+  <text x="82" y="404" class="sans" font-size="28" fill="#94a3b8">TypeScript-first workflow forms — DAG dependencies, branching</text>
+  <text x="82" y="442" class="sans" font-size="28" fill="#94a3b8">steps, and one typed contract. No UI lock-in.</text>
+
+  <!-- install pill -->
+  <g transform="translate(80 492)">
+    <rect width="430" height="56" rx="12" fill="#0f172a" stroke="#334155"/>
+    <text x="22" y="36" class="mono" font-size="22" fill="#5eead4">npm i @dmc--98/dfe-core</text>
+  </g>
+  <g transform="translate(534 492)">
+    <rect width="220" height="56" rx="12" fill="none" stroke="#334155"/>
+    <text x="28" y="36" class="sans" font-size="22" font-weight="600" fill="#f1f5f9">★ Star on GitHub</text>
+  </g>
+
+  <!-- mini flow diagram (right) -->
+  <g transform="translate(800 150)" class="mono">
+    <path d="M96 56 C150 56 150 150 196 150" stroke="#334155" stroke-width="3" fill="none"/>
+    <path d="M276 150 C320 150 320 60 360 60" stroke="#0d9488" stroke-width="3" fill="none"/>
+    <path d="M276 150 C320 150 320 240 360 240" stroke="#334155" stroke-width="3" fill="none"/>
+    <g>
+      <rect x="8" y="32" width="92" height="48" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+      <text x="22" y="61" font-size="16" fill="#f1f5f9">Account</text>
+    </g>
+    <g>
+      <rect x="170" y="126" width="92" height="48" rx="10" fill="rgba(20,184,166,0.14)" stroke="#2dd4bf" stroke-width="1.5"/>
+      <text x="186" y="155" font-size="16" fill="#5eead4">Plan</text>
+    </g>
+    <g>
+      <rect x="356" y="36" width="84" height="48" rx="10" fill="rgba(20,184,166,0.14)" stroke="#2dd4bf" stroke-width="1.5"/>
+      <text x="372" y="65" font-size="16" fill="#5eead4">Team</text>
+    </g>
+    <g>
+      <rect x="356" y="216" width="84" height="48" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+      <text x="372" y="245" font-size="15" fill="#94a3b8">Personal</text>
+    </g>
+  </g>
+</svg>

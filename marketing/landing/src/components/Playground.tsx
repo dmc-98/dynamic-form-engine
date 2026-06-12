@@ -188,6 +188,11 @@ export default function Playground() {
     if (tpl) dispatch({ type: 'RESET', state: { fields: tpl.fields, steps: tpl.steps ?? [] } })
   }, [])
 
+  // Remove the hero skeleton once the island has hydrated (see index.astro).
+  useEffect(() => {
+    document.getElementById('pg-skeleton')?.remove()
+  }, [])
+
   const config = useMemo(() => toFormConfig(state), [state])
   // Rebuild the engine whenever the config changes; carry user-entered values over.
   const [values, setValues] = useState<Record<string, unknown>>({})
@@ -313,10 +318,10 @@ export default function Playground() {
 
   const t = theme
   const css: Record<string, React.CSSProperties> = {
-    wrap: { display: 'grid', gridTemplateColumns: 'minmax(0,5fr) minmax(0,4fr)', gap: 16, textAlign: 'left' },
-    panel: { background: 'var(--panel)', border: '1px solid var(--border)', borderRadius: 12, padding: 16, minWidth: 0 },
-    tabs: { display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' },
-    tabBtn: { padding: '6px 12px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: 'pointer', fontSize: 13 },
+    wrap: { display: 'grid', gridTemplateColumns: 'minmax(0,5fr) minmax(0,4fr)', gap: 20, textAlign: 'left' },
+    panel: { background: 'var(--panel)', border: '1px solid var(--border)', borderRadius: 12, padding: 20, minWidth: 0, minHeight: 500 },
+    tabs: { display: 'flex', gap: 6, marginBottom: 14, flexWrap: 'wrap' },
+    tabBtn: { padding: '7px 14px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: 'pointer', fontSize: 13.5 },
     tabOn: { background: t.accent, color: '#fff', borderColor: t.accent },
     palette: { display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 },
     chip: { border: '1px dashed var(--border)', borderRadius: 8, padding: '4px 10px', fontSize: 12, cursor: 'grab', color: 'var(--muted)' },
@@ -328,7 +333,7 @@ export default function Playground() {
     err: { color: '#e5484d', fontSize: 12, display: 'block', marginTop: 3 },
     btn: { padding: '9px 18px', borderRadius: t.radius, border: 'none', background: t.accent, color: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 600 },
     summary: { border: '1px solid #e5484d55', background: '#e5484d11', borderRadius: 10, padding: '10px 14px', marginTop: 12, fontSize: 13 },
-    pre: { background: '#14141f', color: '#e9e9f1', padding: 12, borderRadius: 10, fontSize: 11.5, overflowX: 'auto', maxHeight: 280 },
+    pre: { background: '#14141f', color: '#e9e9f1', padding: 14, borderRadius: 10, fontSize: 12.5, overflowX: 'auto', maxHeight: 340 },
     row: { display: 'flex', gap: 10, alignItems: 'center', margin: '8px 0', fontSize: 13 },
     ghost: { padding: '8px 14px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text)', cursor: 'pointer', fontSize: 13 },
     move: { cursor: 'pointer', color: 'var(--muted)', border: 'none', background: 'none', fontSize: 11, padding: '0 2px' },
@@ -338,7 +343,7 @@ export default function Playground() {
 
   return (
     <div style={css.wrap} className="pg-wrap">
-      <div style={css.panel}>
+      <div style={css.panel} className="pg-left">
         <div style={css.tabs}>
           {(['build', 'flow', 'style', 'export', 'server'] as Tab[]).map((x) => (
             <button key={x} style={tab === x ? { ...css.tabBtn, ...css.tabOn } : css.tabBtn} onClick={() => setTab(x)}>
@@ -577,8 +582,8 @@ export default function Playground() {
         )}
       </div>
 
-      <div style={{ ...css.panel, fontFamily: t.fontFamily }}>
-        <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8 }}>LIVE PREVIEW — a real dfe-core engine</div>
+      <div style={{ ...css.panel, fontFamily: t.fontFamily }} className="pg-right">
+        <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8, letterSpacing: '0.05em' }}>LIVE PREVIEW — a real dfe-core engine</div>
         {visible.map((f) => {
           const error = showErrors ? validation.errors[f.key] : undefined
           if (f.type === 'SECTION_BREAK') {
@@ -641,7 +646,7 @@ export default function Playground() {
 // Renders buildFlowModel(steps) from @dmc--98/dfe-core: step nodes in order,
 // with sequential edges and labelled conditional-branch edges.
 
-function FlowDiagram({ steps, accent, css }: { steps: FormStep[]; accent: string; css: Record<string, React.CSSProperties> }) {
+function FlowDiagram({ steps, accent }: { steps: FormStep[]; accent: string; css?: Record<string, React.CSSProperties> }) {
   const model = useMemo(() => buildFlowModel(steps), [steps])
   if (model.nodes.length === 0) {
     return (
