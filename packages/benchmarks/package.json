@@ -1,0 +1,18 @@
+{
+  "name": "@dmc--98/dfe-benchmarks",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Reproducible performance benchmark harness for Dynamic Form Engine (PRD: Core Excellence). Engine-level today; DOM + competitor lanes (rjsf, Formily, survey-core) plug into the same scenario generator.",
+  "type": "commonjs",
+  "scripts": {
+    "test": "vitest run",
+    "bench": "tsc -p . && node dist/engine-bench.js"
+  },
+  "dependencies": {
+    "@dmc--98/dfe-core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  }
+}
