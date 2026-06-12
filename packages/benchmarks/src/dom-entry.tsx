@@ -38,7 +38,9 @@ function BenchApp() {
   const engine = useFormEngine({ fields })
 
   useEffect(() => {
-    ;(async () => {
+    // flushSync is a no-op when called from the commit phase (useEffect);
+    // drive the bench from a macrotask so commits are truly synchronous.
+    const timer = setTimeout(async () => {
       try {
         // Warmup: reveal chains + let React settle.
         for (let i = 0; i < WARMUP_OPS; i += 1) {
@@ -87,7 +89,8 @@ function BenchApp() {
       } catch (error) {
         window.__BENCH_ERROR = (error as Error).message
       }
-    })()
+    }, 50)
+    return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
