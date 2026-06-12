@@ -55,12 +55,14 @@ function starterFields(): FormField[] {
     keys.add(f.key)
     return f
   }
+  // Labels carry the required indicator (*) so the live a11y audit
+  // (WCAG 3.3.2) passes on the starter config — the hero leads with a ✓.
   return [
-    mk('SHORT_TEXT', 1, { key: 'fullName', label: 'Full Name', required: true, config: { minLength: 2, placeholder: 'Ada Lovelace' } }),
-    mk('EMAIL', 2, { key: 'email', label: 'Email', required: true, config: { placeholder: 'ada@example.com' } }),
-    mk('SELECT', 3, { key: 'accountType', label: 'Account Type', required: true,
+    mk('SHORT_TEXT', 1, { key: 'fullName', label: 'Full Name *', required: true, config: { minLength: 2, placeholder: 'Ada Lovelace' } }),
+    mk('EMAIL', 2, { key: 'email', label: 'Email *', required: true, config: { placeholder: 'ada@example.com' } }),
+    mk('SELECT', 3, { key: 'accountType', label: 'Account Type *', required: true,
       config: { mode: 'static', options: [{ label: 'Personal', value: 'personal' }, { label: 'Business', value: 'business' }] } }),
-    mk('SHORT_TEXT', 4, { key: 'companyName', label: 'Company Name', required: true, config: {},
+    mk('SHORT_TEXT', 4, { key: 'companyName', label: 'Company Name *', required: true, config: {},
       conditions: { action: 'SHOW', operator: 'and', rules: [{ fieldKey: 'accountType', operator: 'eq', value: 'business' }] } }),
   ]
 }
@@ -597,7 +599,7 @@ export default function Playground() {
             ?? (f.config as { description?: string }).description ?? f.description ?? undefined
           return (
             <label key={f.key} style={{ display: 'block', margin: '10px 0' }}>
-              <span style={css.label}>{f.label}{f.required ? ' *' : ''}</span>
+              <span style={css.label}>{f.label}{f.required && !f.label.includes('*') ? ' *' : ''}</span>
               <PreviewInput field={f} value={engine.getValues()[f.key]} setValue={(v) => setValue(f.key, v)} error={!!error} css={css} accent={t.accent} />
               {help ? <span style={{ fontSize: 11.5, color: 'var(--muted)', display: 'block', marginTop: 2 }}>{help}</span> : null}
               {error ? <span style={css.err}>{error}</span> : null}
@@ -619,23 +621,41 @@ export default function Playground() {
           <div style={{ ...css.summary, borderColor: '#16a34a55', background: '#16a34a11' }}>✓ Valid — try the 🛡 Server demo tab next.</div>
         ) : null}
 
-        {/* Live accessibility audit — DFE proves a11y, doesn't just claim it */}
+        {/* Live accessibility audit — DFE proves a11y, doesn't just claim it.
+            Severity-faithful display: critical/serious block (red); moderate/minor
+            are advisories (neutral), mirroring the auditFormAccessibility() API. */}
         <div style={{ marginTop: 14, borderTop: '1px solid var(--border)', paddingTop: 12 }}>
           <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6 }}>
             ♿ ACCESSIBILITY AUDIT — <code>auditFormAccessibility()</code>, live
           </div>
-          {a11yIssues.length === 0 ? (
-            <div style={{ ...css.summary, borderColor: '#16a34a55', background: '#16a34a11', marginTop: 0 }}>
-              ✓ No accessibility issues found in this form.
-            </div>
-          ) : (
-            <div style={{ ...css.summary, marginTop: 0 }}>
-              <strong>{a11yIssues.length} issue(s):</strong>
-              {a11yIssues.slice(0, 6).map((iss, idx) => (
-                <div key={idx}>• <span style={{ textTransform: 'uppercase', fontSize: 10.5, opacity: 0.8 }}>{iss.severity}</span> — {iss.message}</div>
-              ))}
-            </div>
-          )}
+          {(() => {
+            const blocking = a11yIssues.filter((i) => i.severity === 'critical' || i.severity === 'serious')
+            const advisories = a11yIssues.filter((i) => i.severity !== 'critical' && i.severity !== 'serious')
+            return (
+              <>
+                {blocking.length === 0 ? (
+                  <div style={{ ...css.summary, borderColor: '#16a34a55', background: '#16a34a11', marginTop: 0 }} data-a11y="pass">
+                    ✓ No critical or serious accessibility issues in this form.
+                  </div>
+                ) : (
+                  <div style={{ ...css.summary, marginTop: 0 }} data-a11y="fail">
+                    <strong>{blocking.length} blocking issue(s):</strong>
+                    {blocking.slice(0, 6).map((iss, idx) => (
+                      <div key={idx}>• <span style={{ textTransform: 'uppercase', fontSize: 10.5, opacity: 0.8 }}>{iss.severity}</span> — {iss.message}</div>
+                    ))}
+                  </div>
+                )}
+                {advisories.length > 0 ? (
+                  <details style={{ fontSize: 11.5, color: 'var(--muted)', marginTop: 6 }}>
+                    <summary style={{ cursor: 'pointer' }}>{advisories.length} advisory note(s) — renderer-level checks</summary>
+                    {advisories.slice(0, 6).map((iss, idx) => (
+                      <div key={idx} style={{ margin: '4px 0 0 12px' }}>• {iss.message}</div>
+                    ))}
+                  </details>
+                ) : null}
+              </>
+            )
+          })()}
         </div>
       </div>
     </div>
