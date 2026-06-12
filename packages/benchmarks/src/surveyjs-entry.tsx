@@ -42,12 +42,27 @@ function BenchApp() {
   const model = useMemo(makeModel, [])
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setTimeout(async () => {
       try {
         for (let i = 0; i < WARMUP_OPS; i += 1) {
           flushSync(() => { model.data = { ...model.data, [`bench_${(i * 7) % FIELD_COUNT}`]: `w${i}` } })
         }
+        // survey-react-ui defers rendering past the synchronous commit
+        // (confirmed: inputs 10 -> 71 only after the next frame), so two
+        // measurements: CPU-side model commit, and value -> DOM-settled via
+        // MutationObserver (timeout-raced: ops on hidden fields may not
+        // mutate the visible DOM at all).
+        const root = document.getElementById('root')!
+        const domSettle = () =>
+          Promise.race([
+            new Promise<boolean>((resolve) => {
+              const mo = new MutationObserver(() => { mo.disconnect(); resolve(true) })
+              mo.observe(root, { childList: true, subtree: true, attributes: true, characterData: true })
+            }),
+            new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 120)),
+          ])
         const commit: number[] = []
+        const settled: number[] = []
         for (let op = 0; op < OPS; op += 1) {
           const idx = (op * 7) % FIELD_COUNT
           const value = op % 3 === 2 ? undefined : `v${op}`
@@ -55,12 +70,22 @@ function BenchApp() {
           if (value === undefined) delete next[`bench_${idx}`]
           else next[`bench_${idx}`] = value
           const t0 = performance.now()
+          const settlePromise = domSettle()
           flushSync(() => { model.data = next })
           commit.push(performance.now() - t0)
+          const mutated = await settlePromise
+          if (mutated) settled.push(performance.now() - t0)
         }
         commit.sort((a, b) => a - b)
+        settled.sort((a, b) => a - b)
+        // Explicit probe: fill bench_0, check immediately AND after paint.
+        flushSync(() => { model.data = { ...model.data, bench_0: 'probe' } })
+        const inputsImmediate = document.querySelectorAll('input').length
+        await new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())))
         const inputsRendered = document.querySelectorAll('input').length
+        ;(window as any).__DBG2 = { inputsImmediate, inputsAfterPaint: inputsRendered }
         ;(window as any).__DBG = {
+          probeAfterFill: { q1Visible: model.getQuestionByName('bench_1')?.isVisible, inputs: document.querySelectorAll('input').length },
           q1Visible: model.getQuestionByName('bench_1')?.isVisible,
           bench0Value: model.getValue('bench_0'),
           state: model.state,
@@ -71,14 +96,24 @@ function BenchApp() {
           inputsRendered,
           chainHeads: FIELD_COUNT / CHAIN_DEPTH,
           workloadValid: inputsRendered > FIELD_COUNT / CHAIN_DEPTH,
-          domCommit: {
+          modelCommit: {
             ops: OPS,
             p50: percentile(commit, 50),
             p95: percentile(commit, 95),
             p99: percentile(commit, 99),
             max: commit[commit.length - 1],
-            note: 'input → settled DOM (flushSync); survey-core Model.setValue with visibleIf expressions',
+            note: 'CPU-side: value set + survey-core condition evaluation (render NOT included — survey-react-ui defers it)',
           },
+          domSettled: settled.length
+            ? {
+                ops: settled.length,
+                p50: percentile(settled, 50),
+                p95: percentile(settled, 95),
+                p99: percentile(settled, 99),
+                max: settled[settled.length - 1],
+                note: 'value → first DOM mutation (MutationObserver). Includes SurveyJS deferred-render frame; headless vsync ~30Hz inflates absolute values vs a 60Hz desktop.',
+              }
+            : null,
         }
       } catch (error) {
         window.__BENCH_ERROR = (error as Error).message
