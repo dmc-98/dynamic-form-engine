@@ -17,8 +17,10 @@ declare global {
   }
 }
 
-const FIELD_COUNT = 100
-const CHAIN_DEPTH = 10
+// Scenario via query string: ?fields=500&depth=25 (defaults 100/10)
+const __params = new URLSearchParams(window.location.search)
+const FIELD_COUNT = Number(__params.get('fields') ?? 100)
+const CHAIN_DEPTH = Number(__params.get('depth') ?? 10)
 const WARMUP_OPS = 30
 const OPS = 250
 
