@@ -6,7 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "test": "vitest run",
-    "bench": "tsc -p . && node dist/engine-bench.js"
+    "bench:dom:build": "esbuild src/dom-entry.tsx --bundle --outfile=dom-dist/bundle.js --alias:@dmc--98/dfe-react=../react/src/index.ts --alias:@dmc--98/dfe-core=../core/src/index.ts --jsx=automatic --define:process.env.NODE_ENV='\"production\"' --minify",
+    "bench:engine": "DFE_BENCH=1 vitest run test/engine-bench.test.ts"
   },
   "dependencies": {
     "@dmc--98/dfe-core": "workspace:*"
