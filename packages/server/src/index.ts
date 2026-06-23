@@ -9,6 +9,17 @@ export type {
   FormSubmissionRecord,
 } from './adapters'
 
+// ─── Adapter Certification Kit ───────────────────────────────────────────────
+export {
+  runDatabaseAdapterConformance,
+  CONFORMANCE_SEED,
+} from './adapter-conformance'
+export type {
+  ConformanceSeedData,
+  ConformanceCaseResult,
+  ConformanceReport,
+} from './adapter-conformance'
+
 // ─── Step Submission Pipeline ────────────────────────────────────────────────
 export {
   executeStepSubmit,
