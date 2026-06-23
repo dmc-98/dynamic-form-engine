@@ -116,6 +116,73 @@ jobs:
           path: output/playwright
           if-no-files-found: ignore
 
+  engine-bench:
+    name: Engine Benchmark (budget gate)
+    runs-on: ubuntu-latest
+    needs: verify
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run engine benchmark (P95 < 4 ms budget gate)
+        run: pnpm --filter @dmc--98/dfe-benchmarks bench:engine
+
+      - name: Upload benchmark report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine-bench-report
+          path: .pm/benchmarks/
+          if-no-files-found: ignore
+
+  dom-bench:
+    name: DOM Benchmark (budget gate)
+    runs-on: ubuntu-latest
+    needs: verify
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages (required by bench script)
+        run: pnpm build
+
+      - name: Run DOM benchmark (engine P95 < 4 ms + SSR P95 < 12 ms)
+        run: pnpm bench:dom:ci
+
+      - name: Upload benchmark report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dom-bench-report
+          path: .pm/benchmarks/
+          if-no-files-found: ignore
+
   node-compat:
     name: Node Compatibility (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
