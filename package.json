@@ -26,6 +26,7 @@
     "github:configure": "node scripts/configure-github-repo.mjs",
     "sync:package-readmes": "node scripts/sync-package-readmes.mjs",
     "benchmark": "pnpm --filter @dmc--98/dfe-core build && node scripts/benchmark.mjs",
+    "bench:dom:ci": "node scripts/bench-dom-ci.mjs",
     "lint:plugin": "node scripts/lint-plugin-manifests.mjs"
   },
   "devDependencies": {
