@@ -1,8 +1,8 @@
 {
   "hero": {
     "eyebrow": "Forms are workflows",
-    "title": "One config. Your whole form stack.",
-    "subtitle": "Dynamic Form Engine (DFE) is a configuration-driven, TypeScript-first engine for multi-step workflow forms — DAG dependencies, conditional logic, branching steps, and cross-step API contracts — with no UI lock-in.",
+    "title": "One typed schema. Your whole form stack.",
+    "subtitle": "Rendered in React, validated with Zod, persisted to Postgres via Prisma or Drizzle. Forms that don't stop at the frontend.",
     "primaryCta": { "label": "Get started →", "href": "https://dmc-98.github.io/dynamic-form-engine/guide/getting-started" },
     "secondaryCtas": [
       { "label": "Try the playground", "href": "https://dmc-98.github.io/dynamic-form-engine/packages/playground" },
@@ -13,7 +13,7 @@
     { "icon": "graph", "title": "DAG dependencies", "body": "A value change recomputes only affected fields — O(k), not O(n)." },
     { "icon": "branch", "title": "Conditional logic", "body": "Show, hide, require, or disable fields with compiled AND/OR conditions." },
     { "icon": "steps", "title": "Multi-step & branching", "body": "Steppers with skip conditions, per-step validation, and branch-to-step logic." },
-    { "icon": "plug", "title": "Framework-agnostic", "body": "Pure-TypeScript core. Bind React, Vue, Svelte, Solid, Angular, or vanilla JS." },
+    { "icon": "plug", "title": "Framework-agnostic core", "body": "Pure-TypeScript engine. React bindings are stable today; Vue, Svelte, Solid, and Angular adapters are planned." },
     { "icon": "db", "title": "Swappable adapters", "body": "Prisma or Drizzle with one interface change. Express, Fastify, Hono, tRPC, GraphQL." },
     { "icon": "check", "title": "One typed contract", "body": "Auto-generated Zod keeps client and server validation aligned." }
   ],
