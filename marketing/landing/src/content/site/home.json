@@ -1,8 +1,8 @@
 {
   "hero": {
-    "eyebrow": "Forms are workflows",
-    "title": "One typed schema. Your whole form stack.",
-    "subtitle": "Rendered in React, validated with Zod, persisted to Postgres via Prisma or Drizzle. Forms that don't stop at the frontend.",
+    "eyebrow": "The full-stack form engine",
+    "title": "Forms that don't stop at the frontend.",
+    "subtitle": "One typed schema renders in React, validates with Zod, and persists to Postgres via Prisma or Drizzle — no separate backend to bolt on. It's already in the config.",
     "primaryCta": { "label": "Get started →", "href": "https://dmc-98.github.io/dynamic-form-engine/guide/getting-started" },
     "secondaryCtas": [
       { "label": "Try the playground", "href": "https://dmc-98.github.io/dynamic-form-engine/packages/playground" },
