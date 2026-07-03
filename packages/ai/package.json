@@ -1,0 +1,52 @@
+{
+  "name": "@dmc--98/dfe-ai",
+  "version": "0.1.0",
+  "description": "AI provider adapters for Dynamic Form Engine — prompt→form, doc→form, option-gen (S1+S2)",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "@dmc--98/dfe-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@dmc--98/dfe-core": "workspace:*",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [
+    "form",
+    "dynamic-form",
+    "ai",
+    "llm",
+    "openai",
+    "anthropic",
+    "prompt-to-form"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmc-98/dynamic-form-engine",
+    "directory": "packages/ai"
+  }
+}

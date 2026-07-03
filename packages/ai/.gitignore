@@ -1,0 +1,4 @@
+# vitest config timestamp cache
+vitest.config.ts.timestamp-*
+dist/
+node_modules/
