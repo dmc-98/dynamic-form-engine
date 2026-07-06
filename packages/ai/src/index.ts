@@ -21,6 +21,9 @@ export { createOpenAiProvider, createAnthropicProvider } from './provider.js'
 export type { ParsePromptOptions, ParsePromptResult } from './parse-prompt.js'
 export { parsePromptToSchema } from './parse-prompt.js'
 
+export type { ParseDocOptions, ParseDocResult } from './doc-to-form.js'
+export { parseDocToSchema } from './doc-to-form.js'
+
 export type {
   ValidationIssue,
   AiOutputValidationResult,
