@@ -22,4 +22,4 @@ This is the public Now / Next / Later view. Have a feature request? [Open an iss
 
 ## Shipped
 
-Conditional logic & branching steps, computed fields, repeatable groups, async validation, autosave/undo, i18n, form versioning, visual builder, JSON Schema import/export, AI form generation, UI kits (MUI/AntD/Chakra), webhooks, plugin system, multi-tenant support, offline support, observability, and more — see [CHANGELOG.md](./CHANGELOG.md).
+Conditional logic & branching steps, computed fields, repeatable groups, async validation, autosave/undo, i18n, form versioning, visual builder, JSON Schema import/export, AI form generation, UI kits (MUI/AntD/Chakra), webhooks, plugin system, multi-tenant support, offline support, observability, comprehensive E2E test suite (12 suites / 324 tests, `pnpm run e2e`), and more — see [CHANGELOG.md](./CHANGELOG.md).
