@@ -2,10 +2,14 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { validateFormConfig } from '@dmc--98/dfe-cli/src/commands/validate'
 import { writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
+import { tmpdir } from 'node:os'
 import { getTemplate } from '@dmc--98/dfe-core'
 
 describe('CLI Commands', () => {
-  const tmpDir = join(__dirname, '.tmp-cli-test')
+  // Use os.tmpdir() rather than __dirname so afterEach cleanup works on every
+  // platform and inside sandboxed environments where the project mount is
+  // read-only for unlink.  process.pid isolates parallel test workers.
+  const tmpDir = join(tmpdir(), `dfe-cli-test-${process.pid}`)
 
   beforeEach(() => {
     mkdirSync(tmpDir, { recursive: true })

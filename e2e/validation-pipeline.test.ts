@@ -502,7 +502,10 @@ describe('Validation Pipeline E2E Tests', () => {
 
       const schema = generateStepZodSchema(fields)
       expect(schema).toBeDefined()
-      expect(schema instanceof z.ZodSchema).toBe(true)
+      // Avoid instanceof check — ESM/CJS dual-load means z.ZodSchema !== core's ZodSchema class.
+      // Verify behaviorally: a real Zod schema always exposes parse + safeParse.
+      expect(typeof schema.parse).toBe('function')
+      expect(typeof schema.safeParse).toBe('function')
     })
 
     it('should reject unknown keys in strict submission schema', async () => {

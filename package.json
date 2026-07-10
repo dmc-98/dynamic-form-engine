@@ -10,6 +10,7 @@
     "test:coverage:stable": "node scripts/test-stable-coverage.mjs",
     "test:smoke:artifacts": "node scripts/smoke-built-artifacts.mjs",
     "test:smoke:wrappers": "node scripts/smoke-wrapper-packages.mjs",
+    "e2e": "vitest run --config e2e/vitest.config.ts",
     "test:e2e:example": "playwright test --config e2e/playwright.config.ts",
     "test:e2e:playground": "playwright test --config e2e/playwright.playground.config.ts",
     "test:e2e:serverless": "playwright test --config e2e/playwright.serverless.config.ts",

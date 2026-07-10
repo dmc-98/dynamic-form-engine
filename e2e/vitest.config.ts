@@ -5,7 +5,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['**/*.test.ts'],
+    // Scope to e2e/ only — prevent the project-root **/*.test.ts glob from
+    // crawling into packages/*/src/__tests__ when vitest root is the monorepo root.
+    include: [path.resolve(__dirname, '*.test.ts')],
     testTimeout: 30000,
     pool: 'threads',
   },
