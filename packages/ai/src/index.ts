@@ -24,6 +24,9 @@ export { parsePromptToSchema } from './parse-prompt.js'
 export type { ParseDocOptions, ParseDocResult, DocumentType } from './doc-to-form.js'
 export { parseDocToSchema } from './doc-to-form.js'
 
+export type { ParseTranscriptOptions, ParseTranscriptResult } from './audio-to-form.js'
+export { parseTranscriptToSchema } from './audio-to-form.js'
+
 export type {
   ValidationIssue,
   AiOutputValidationResult,

@@ -14,7 +14,7 @@ This is the public Now / Next / Later view. Have a feature request? [Open an iss
 
 - Performance budgets and published benchmarks (render P95, bundle size)
 - Accessibility hardening toward WCAG 2.2 AA
-- Expanded AI features: provider-agnostic adapters, document/audio-to-form
+- Expanded AI features: ~~provider-agnostic adapters~~ ✓, ~~document-to-form~~ ✓, ~~audio/transcript-to-form~~ ✓
 
 ## Later
 
