@@ -1,0 +1,65 @@
+{
+  "name": "@dmc--98/dfe-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Dynamic Form Engine — expose DFE form generation and querying as AI-agent tools",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "dfe-mcp": "./dist/bin/dfe-mcp.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts src/bin/dfe-mcp.ts --format esm --dts --clean",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@dmc--98/dfe-ai": "workspace:*",
+    "@dmc--98/dfe-server": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@modelcontextprotocol/sdk": {
+      "optional": false
+    },
+    "@dmc--98/dfe-server": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@dmc--98/dfe-ai": "workspace:*",
+    "@dmc--98/dfe-server": "workspace:*",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [
+    "form",
+    "dynamic-form",
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "agent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmc-98/dynamic-form-engine",
+    "directory": "packages/mcp"
+  }
+}
